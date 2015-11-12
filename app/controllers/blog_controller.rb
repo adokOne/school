@@ -10,7 +10,7 @@ class BlogController < ApplicationController
   def category
     @item    = Category.find_by_seo(params[:seo_name].split("/"))
     @similar = Page.limit(3).where("category_id != ?",@item.id).order(id: :desc)
-    if @item.parent
+    if @item.parent.present?
       only_photos = @item.parent.only_photos
     else
       only_photos = @item.only_photos
