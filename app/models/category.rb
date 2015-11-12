@@ -28,15 +28,7 @@ class Category < ActiveRecord::Base
   end
 
   def pages_for_blog
-    pages = self.pages.limit(BLOG_LIMIT).order(created_at: :desc)
-    if pages.count < BLOG_LIMIT && self.childrens.any?
-      self.all_pages[0..3].each do |page|
-        if pages < BLOG_LIMIT
-          pages << page
-        end
-      end
-    end
-    pages
+    self.all_pages[0..3]
   end
   def all_pages
     (self.childrens.map(&:pages) + self.pages).flatten
