@@ -4,7 +4,7 @@ class BlogController < ApplicationController
 
   def index
     @similar = Page.limit(3).order(id: :desc)
-    @items   = Category.all
+    @items   = Category.where(parent_id:0).all
   end
 
   def category
