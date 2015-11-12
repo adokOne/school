@@ -1,0 +1,45 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:settings_addresses_path,"ng-click"=>"$root.setRoute('#{settings_addresses_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      Адреси
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};",:"data-url"=>settings_addresses_path,"data-back-url"=>settings_addresses_path}
+    .row
+      .col
+        .panel
+          .panel-heading
+            %h3.panel-title Керування адресою
+          = form_tag settings_addresses_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .row
+                .col-md-8
+                  .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}"}
+                    = label_tag :title, t("b1_admin.title"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :title,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.title"
+                    = label_tag :name, t("b1_admin.address"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.email.$invalid && itemForm.$submitted}"}
+                    = label_tag :email, t("b1_admin.email"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :email,"" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.email"
+                  .form-group{"ng-class" => "{'has-error': itemForm.phones.$invalid && itemForm.$submitted}"}
+                    = label_tag :phones, "Телефони(ЧЕРЕЗ КОМУ!!)", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :phones,"" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.phones"
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                    = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
+                  .form-group{"ng-class" => "{'has-error': itemForm.is_main.$invalid && itemForm.$submitted}"}
+                    = label_tag :is_main, "Головна адреса?", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"is_main", "ng-model"=>"editedItem.is_main"}
+
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

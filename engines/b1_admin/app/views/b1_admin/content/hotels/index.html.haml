@@ -1,0 +1,118 @@
+- if current_admin.is_partner?
+  :css
+    .mainnav-lg #content-container {
+      padding-left: 250px !important;
+    }
+    .mainnav-sm #content-container {
+      padding-left: 60px !important;
+    }
+#content-container{:"ng-controller"=>"HotelsController",:"data-url"=>content_hotels_path,:"data-delete-text"=>t("b1_admin.delete_faq_confirm"), :"ng-init"=>"cities=#{@cities.to_json};countries=#{@countries.to_json};types=#{@types.to_json}",:"data-city-url"=>geo_cities_path}
+  #page-title
+    %h1.page-header.text-overflow
+      =t("b1_admin.hotels")
+  #page-content
+    .row
+      .col-md-12#items
+        .panel
+          .panel-heading
+            .panel-control
+              %button.btn.btn-default{:name => "refresh", :title => "Refresh", :type => "button","ng-click"=>"itemsTable.reload()"}
+                %i.fa.fa-refresh.icon-refresh
+              %a.btn.btn-primary{href:new_content_hotel_path,"ng-click"=>"$root.setRoute('#{new_content_hotel_path}')"}=t("b1_admin.add")
+            %h3.panel-title=t("b1_admin.list")
+
+          .panel-body
+            %div{style:"margin-top: 30px;"}
+            %div{"cg-busy" => "{'promise': itemsPromise,'backdrop': true,'message': '#{t('b1_admin.loading')}'}"}
+              %table.table.table-hover.table-striped.table-vcenter#itemsTable{"ng-table"=>"itemsTable"}
+                %tr{"ng-repeat" => "item in data"}
+                  %td{"data-title" => "'#{t('b1_admin.title')}'"}
+                    {{item.name}}
+                  %td{"data-title" => "'#{t('b1_admin.logo')}'"}
+                    %img.img-circle.img-sm{"ng-src" => "{{item.logo}}"}/
+                  %td{"data-title" => "'#{t('b1_admin.country')}'"}
+                    {{item.country}}
+                  %td{"data-title" => "'#{t('b1_admin.city')}'"}
+                    {{item.city}}
+                  %td{"data-title" => "'#{t('b1_admin.hotel_type')}'"}
+                    {{item.type}}
+                  - unless current_admin.is_partner?
+                    %td{"data-title" => "'booking_com_id'"}
+                      {{item.booking_com_id}}
+                    %td{"data-title" => "'content_inn_id'"}
+                      {{item.content_inn_id}}
+                    %td{"data-title" => "'ostrovok_id'"}
+                      {{item.ostrovok_id}}
+                    %td{"data-title" => "'#{t('b1_admin.seo_link')}'"}
+                      {{item.seo_name}}
+
+                  %td{"data-title" => "'#{t('b1_admin.active')}'"}
+                    %span.label.text-lg{"ng-class"=>"{'label-danger':!item.status,'label-success': item.status }"}
+                      %span{"ng-switch" => "", :on => "item.status"}
+                        %span{"ng-switch-when" => "true"}
+                          =t('b1_admin._true')
+                        %span{"ng-switch-default" => ""}=t('b1_admin._false')
+                  - unless current_admin.is_partner?
+                    %td{"data-title" => "'#{t('b1_admin.moderate')}'"}
+                      %span.label.text-lg{"ng-class"=>"{'label-danger':!item.moderate,'label-success': item.moderate }"}
+                        %span{"ng-switch" => "", :on => "item.moderate"}
+                          %span{"ng-switch-when" => "true"}
+                            =t('b1_admin._true')
+                          %span{"ng-switch-default" => ""}=t('b1_admin._false')
+
+                  %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
+                    %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-bar-chart.add-tooltip{"tooltip" => t("b1_admin.tariff_map"),href:"#{content_tariffs_path}/{{item.id}}","ng-click"=>"$root.setRoute('#{content_tariffs_path}/' + item.id)",style:"margin-right: 15px;"}
+                    - if user_can?(:edit)
+                      %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{content_hotels_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{content_hotels_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}
+                    - if user_can?(:destroy)
+                      %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)"}
+
+  - content_for :aside do
+    .hidden
+  - unless current_admin.is_partner?
+    %aside#aside-container
+      #aside
+        .panel
+          .panel-heading
+            %h3.panel-title
+              %i.fa.fa-lg.fa-navicon.filter-toggler
+              %span=t("b1_admin.filter")
+          = form_tag geo_cities_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .col-sm-12
+                .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                  = label_tag :active, t("b1_admin.active"), class:"control-label"
+                  %select.form-control{"ng-model" => "filters.active", "ng-options" => "k as v for (k, v) in ['Нет','Да']"}
+                .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                  = label_tag :own, t("b1_admin.own"), class:"control-label"
+                  %select.form-control{"ng-model" => "filters.own", "ng-options" => "k as v for (k, v) in ['Нет','Да']"}
+                .form-group{"ng-class" => "{'has-error': itemForm.moderate.$invalid && itemForm.$submitted}"}
+                  = label_tag :moderate, t("b1_admin.moderate"), class:"control-label"
+                  %select.form-control{"ng-model" => "filters.moderate", "ng-options" => "k as v for (k, v) in ['Нет','Да']"}
+                .form-group{"ng-class" => "{'has-error': itemForm.controller.$invalid && itemForm.$submitted}"}
+                  = label_tag :type_id, t("b1_admin.hotel_type"), class:"control-label"
+                  %select.form-control{"ng-model" => "filters.type_id", "ng-options" => "type.id as type.name for type in types"}
+                .form-group{"ng-class" => "{'has-error': itemForm.country_id.$invalid && itemForm.$submitted}"}
+                  = label_tag :country_id, t("b1_admin.country"), class:"control-label"
+                  %select.form-control{"ng-model" => "filters.country_id", "ng-options" => "country.id as country.name for country in countries"}
+                .form-group{"ng-class" => "{'has-error': itemForm.city_id.$invalid && itemForm.$submitted}"}
+                  / = label_tag :city_id, t("b1_admin.city"), class:"control-label"
+                  / %select.form-control{"ng-model" => "filters.city_id", "ng-options" => "city.id as city.name for city in searchCities"}
+                  = label_tag :city_id, t("b1_admin.city"), class:"control-label"
+                  .col-sm-10
+                    %ui-select{"ng-disabled" => "disabled", "ng-model" => "filters.city_id", :style => "min-width: 100%;", :theme => "select2"}
+                      %ui-select-match{:placeholder => t("b1_admin.enter_city")}
+                        {{$select.selected.name}}
+                      %ui-select-choices{:repeat => "city in searchCities", :'refresh' => 'searchCity($select.search)', 'refresh-delay' => '300'}
+                        %div{'ng-bind-html' => "city.name | highlight: $select.search"}
+
+                .form-group{"ng-class" => "{'has-error': itemForm.hotel_name.$invalid && itemForm.$submitted}"}
+                  = label_tag :hotel_name, t("b1_admin.title"), class:"control-label"
+                  = text_field_tag :hotel_name,"" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"filters.hotel_name","placeholder"=>'Astoria'
+
+                / .form-group{"ng-class" => "{'has-error': itemForm.ip.$invalid && itemForm.$submitted}"}
+                /   = label_tag :user_id, t("b1_admin.user"), class:"control-label"
+                /   %angucomplete#members{:datafield => "users", :descriptionfield => "email",:inputclass => "form-control form-control-small", :pause => "200", :placeholder => "Search users", :selectedobject => "testObj", :titlefield => "name", :url => "#{logs_systems_users_path}?term="}
+            .panel-footer.text-right
+              %a.btn.btn-success{"ng-click"=>"filter()"}=t("b1_admin.do_filter")
+              %a.btn.btn-warning{"ng-click"=>"reset()"}=t("b1_admin.reset_filter")

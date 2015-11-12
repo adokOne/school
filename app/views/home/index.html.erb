@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie9"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head lang="ru">
+  <meta charset="utf-8" />
+
+  <title></title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+  <%= javascript_include_tag @js_manifest.present? ? @js_manifest : 'application'%>
+  <%= csrf_meta_tags %>
+
+</head>
+<body>
+
+  <div class="greeting">
+    <div class="owl"></div>
+    <a href="<%= url("blog") %>" class="blog-link"><%= t("school.blog") %></a>
+    <div class="section js-mask_left">
+      <div class="text">
+        <h1>Школа Американської Англійської</h1>
+        <p>Для тих, хто хоче вивчити англійську</p>
+        <a href="<%= url("school") %>"><%= t("school.learn_more") %></a>
+      </div>
+    </div>
+    <div class="section js-mask_right">
+      <div class="text">
+        <h1>Розмовний Клуб Американської Англійської</h1>
+        <p>Для тих, хто вчив англійську і не хоче її забувати</p>
+        <a href="<%= url("club") %>"><%= t("school.learn_more") %></a>
+      </div>
+    </div>
+    <div class="baloon-big">
+      <%= image_tag "baloon.svg" %>
+    </div>
+    <div class="section js-content_left active"></div>
+    <div class="section js-content_right active"></div>
+  </div>
+
+  <script>
+    $(document).ready(function(){
+      runBaloon();
+      runOwl();
+    });
+
+    $('.js-mask_left').hover(function(){
+      $('.js-content_left').toggleClass('active');
+      $('.js-content_right').toggleClass('opacity');
+      $('.js-mask_right').toggleClass('opacity');
+    });
+
+    $('.js-mask_right').hover(function(){
+      $('.js-content_right').toggleClass('active');
+      $('.js-content_left').toggleClass('opacity');
+      $('.js-mask_left').toggleClass('opacity');
+    });
+
+    function runBaloon() {
+        $('.baloon-big')
+          .animate({"top":"-30px"},2000)
+          .animate({"top":"0px"},2000, runBaloon);
+     }
+
+     function runOwl() {
+        $('.owl')
+          .animate({"bottom":"42%"},1500)
+          .animate({"bottom":"44%"},1500, runOwl);
+     }
+
+  </script>
+</body>
+</html>

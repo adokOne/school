@@ -1,0 +1,173 @@
+!!!
+%html{lang: I18n.locale,:"ng-app"=>"B1Admin"}
+  %head
+    %meta{charset: "utf-8"}
+    %meta{content: "width=device-width, initial-scale=1", name: "viewport"}
+    %title=::B1Config.get_const.title
+    %link{href:"http://fonts.googleapis.com/css?family=Roboto:400,700,300,500", rel:"stylesheet", type: "text/css"}
+    = stylesheet_link_tag    "b1_admin/application", media: "all"
+    = javascript_include_tag "b1_admin/application"
+    %base{href:"/#{namespace}"}
+  %body
+    = render "shared/error_alert"
+    = render "shared/info_alert"
+    = render "shared/modal_confirm"
+    #container.effect.mainnav-lg{class: content_for?(:aside) ? "aside-in aside-left aside-bright" : "" }
+      / NAVBAR
+      / ===================================================
+      %header#navbar
+        #navbar-container.boxed
+          / Brand logo & name
+          / ================================
+          .navbar-header
+            %a.navbar-brand{href:root_path}
+              = image_tag "b1_admin/logo.png", class: "brand-icon", alt: ::B1Config.get_const.company_name
+              .brand-title
+                %span.brand-text=::B1Config.get_const.company_name
+          / ================================
+          / End brand logo & name
+          / Navbar Dropdown
+          / ================================
+          .navbar-content.clearfix
+            %ul.nav.navbar-top-links.pull-left
+              / Navigation toogle button
+              / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              %li.tgl-menu-btn
+                %a.mainnav-toggle{href:"#"}
+                  %i.fa.fa-navicon.fa-lg
+              / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              / End Navigation toogle button
+              / Messages Dropdown
+              / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              %li.dropdown
+                / %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                /   %i.fa.fa-envelope.fa-lg
+                /   %span.badge.badge-header.badge-warning=current_admin.unread_messages_count
+                / Message dropdown menu
+                .dropdown-menu.dropdown-menu-md.with-arrow
+                  .pad-all.bord-btm
+                    %p.text-lg.text-muted.text-thin.mar-no You have 3 messages.
+                  .nano.scrollable
+                    .nano-content
+                      %ul.head-list
+                        - current_admin.messages.each do |message|
+                          / Dropdown list
+                          %li
+                            %a.media{href:"#"}
+                              .media-left
+                                %img.img-circle.img-sm{src:message.sender.avatar}/
+                              .media-body
+                                .text-nowrap=message.sender.name
+                                %small.text-muted=message.time
+
+            %ul.nav.navbar-top-links.pull-right
+              / Language selector
+              / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              / %li.dropdown
+              /   %a#demo-lang-switch.lang-selector.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              /     %span.lang-selected
+              /       = image_tag "b1_admin/flags/#{I18n.locale}.png" ,class:"lang-flag" ,alt:t("b1_admin.languages.#{I18n.locale}")
+              /       %span.lang-id=I18n.locale.upcase
+              /       %span.lang-name=t("b1_admin.languages.#{I18n.locale}")
+              /   / Language selector menu
+              /   %ul.head-list.dropdown-menu.with-arrow
+              /     - B1Admin::LANGS.each do |l|
+              /       %li
+              /         = link_to "##{l}", class: I18n.locale == l ? "active" : "" do
+              /           = image_tag "b1_admin/flags/#{l}.png" ,class:"lang-flag" ,alt:t("b1_admin.languages.#{l}")
+              /           %span.lang-id=l.upcase
+              /           %span.lang-name=t("b1_admin.languages.#{l}")
+              / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              / End language selector
+              / User dropdown
+              / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              %li#dropdown-user.dropdown
+                %a.dropdown-toggle.text-right{"data-toggle" => "dropdown", :href => "#"}
+                  %span.pull-right
+                    %img.img-circle.img-user.media-object{src:current_admin.avatar}
+                  .username.hidden-xs=current_admin.name
+                .dropdown-menu.dropdown-menu-md.dropdown-menu-right.with-arrow.panel-default
+                  / User dropdown menu
+                  %ul.head-list
+                    / %li
+                    /   = link_to profile_path do
+                    /     %i.fa.fa-user.fa-fw.fa-lg
+                    /     =t("b1_admin.profile")
+                    / %li
+                    /   = link_to messages_path do
+                    /     - if current_admin.unread_messages_count > 0
+                    /       %span.badge.badge-danger.pull-right=current_admin.unread_messages_count
+                    /     %i.fa.fa-envelope.fa-fw.fa-lg
+                    /     =t("b1_admin.messages")
+                  / Dropdown footer
+                  .pad-all.text-right
+                    %button.btn.btn-primary#logout{"onclick"=>"window.location.href = '#{logout_path}'", "data-href"=>logout_path }
+                      %i.fa.fa-sign-out.fa-fw
+                      =t("b1_admin.logout")
+              / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+              / End user dropdown
+          / ================================
+          / End Navbar Dropdown
+      / ===================================================
+      / END NAVBAR
+      .boxed
+        %nav#mainnav-container
+          #mainnav
+            #mainnav-menu-wrap
+              .nano
+                .nano-content{:"ng-controller"=>"LeftPanelController"}
+                  - cache current_admin do
+                    %ul#mainnav-menu.list-group
+                      / Category name
+                      / Menu list item
+                      - current_admin.modules.each do |mod|
+                        %li{:"ng-class"=>"{'active': modules[#{mod.id}]}"}
+                          - if mod.child_modules.any? && 1 == mod.child_modules.select{|m| m.show_in_list && current_admin.can_access_to_module?(m)}.count
+                            - m = mod.child_modules.select{|m| m.show_in_list && current_admin.can_access_to_module?(m)}.first
+                            = link_to send("#{mod.controller}_#{m.controller.pluralize}_path") ,:"ng-click"=>"$root.setRoute('#{send("#{mod.controller}_#{m.controller.pluralize}_path")}');selectedTab = '#{m.controller.pluralize}'" do
+                              %i{class:"fa #{mod.ico}"}
+                              %span.menu-title
+                                %strong{ :"ng-click"=>"toogle(#{mod.id})"}=m.name
+                          - else
+                            = link_to "#", :"ng-click"=>"toogle(#{mod.id})",class: mod.is_active?(params[:controller]) ? "active-sub" : "" do
+                              %i{class:"fa #{mod.ico}"}
+                              %span.menu-title{ :"ng-click"=>"toogle(#{mod.id})"}
+                                %strong{ :"ng-click"=>"toogle(#{mod.id})"}=mod.name
+                              - if mod.child_modules.any?
+                                %i.fa.arrow{ :"ng-click"=>"toogle(#{mod.id})"}
+                            - if mod.child_modules.any?
+                              %ul.collapse{:"ng-class"=>"{'in': modules[#{mod.id}]}"}
+                                - mod.child_modules.each do |m|
+                                  - if current_admin.can_access_to_module?(m) && m.show_in_list
+                                    %li{"ng-class"=>"{'active-link':selectedTab === '#{m.controller.pluralize}'}"}
+                                      =link_to m.name , send("#{mod.controller}_#{m.controller.pluralize}_path") ,:"ng-click"=>"$root.setRoute('#{send("#{mod.controller}_#{m.controller.pluralize}_path")}');selectedTab = '#{m.controller.pluralize}'"
+            / ================================
+            / End menu
+
+      .boxed#main_content
+
+        = yield
+
+        / ASIDE
+        / ===================================================
+        = yield :aside
+        / ===================================================
+        / END ASIDE
+      / FOOTER
+      / ===================================================
+      %footer#footer
+        / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        .hide-fixed.pull-right.pad-rgt="Version #{B1Admin::VERSION}"
+        / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        / Remove the class name "show-fixed" and "hide-fixed" to make the content always appears.
+        / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        %p.pad-lft="© 2015 “#{::B1Config.get_const.title}“"
+      / ===================================================
+      / END FOOTER
+      / SCROLL TOP BUTTON
+      / ===================================================
+      %button#scroll-top.btn
+        %i.fa.fa-chevron-up
+      / ===================================================
+    / ===================================================
+    / END OF CONTAINER

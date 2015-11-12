@@ -1,0 +1,21 @@
+<div class="teachers-block">
+  <div class="container">
+    <h2><%= t("school.teachers")%></h2>
+    <div class="cycle-slideshow" data-cycle-fx="fade" data-cycle-timeout="0">
+        <!-- prev/next links -->
+        <span class="cycle-prev"></span>
+        <span class="cycle-next"></span>
+        <% @teachers.each do |teacher|%>
+          <div class="s-item">
+            <div class="container_small">
+              <div class="mask">
+                <img src="<%= teacher.logo(:medium) %>" alt="<%= teacher.name %>">
+              </div>
+              <h4><%= teacher.name %></h4>
+            </div>
+          </div>
+        <% end %>
+    </div>
+    <div class="sub"><%= t("school.teachers_about")%></div class="sub">
+  </div>
+</div>

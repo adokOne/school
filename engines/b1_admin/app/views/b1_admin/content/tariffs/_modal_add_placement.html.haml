@@ -1,0 +1,32 @@
+%script{id: 'modal_add_placement.html', type: 'text/ng-template'}
+  .modal-header{'ng-init' => "placement_url='#{content_placements_path}'"}
+    %button.bootbox-close-button.close{'ng-click' => 'cancel()', style: 'margin-top: -10px;'} ×
+  .modal-body
+    %form{name:'itemForm'}
+      .row
+        .col-md-6{'ng-init' => "place_names=#{Hotel::Room::Place::Name.all.map{|name| {id: name.id.to_s, name: name.name}}.to_json};"}
+          .form-group{"ng-class" => "{'has-error': itemForm.name_id.$invalid && itemForm.$submitted}"}
+            %label=t('b1_admin.placement.name')
+            %select.form-control{'ng-model' => 'item.name_id',
+                                 required: true,
+                                 name: 'name_id',
+                                 'ng-options' => "name.id as name.name for name in place_names"}
+        .col-md-6
+          .form-group{"ng-class" => "{'has-error': itemForm.adults_count.$invalid && itemForm.$submitted}"}
+            %label=t('b1_admin.placement.adults_count')
+            %select.form-control{'ng-model' => 'item.adults_count',
+                                 name: 'adults_count',
+                                 'ng-options' => "adult as adult for adult in #{(1..10).to_a.to_json}",
+                                 'ng-init' => 'item.adults_count = 1;'}
+      -#.row
+      -#  .col-md-6
+      -#    .form-group{"ng-class" => "{'has-error': itemForm.rooms_count.$invalid && itemForm.$submitted}"}
+      -#      %label=t('b1_admin.placement.rooms_count')
+      -#      %input.form-control{'ng-model' => 'item.rooms_count',
+      -#                           type: 'number',
+      -#                           min: 0,
+      -#                           name: 'rooms_count',
+      -#                           required: true}
+  .modal-footer
+    %button.btn.btn-primary{'ng-click' => 'save()'}=t('b1_admin.save')
+    %button.btn.btn-default{'ng-click' => 'cancel()'}=t('b1_admin.cancel')

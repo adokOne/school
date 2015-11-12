@@ -1,0 +1,34 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:blog_pages_path,"ng-click"=>"$root.setRoute('#{blog_pages_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      Блог
+  #page-content{:"ng-controller"=>"FaqCatController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}; categories=#{[{ title: t("b1_admin.is_parent"), id: 0}].concat(@categories).to_json}",:"data-url"=>blog_categories_path,"data-back-url"=>blog_pages_path}
+    .row
+      .col
+        .panel
+          .panel-heading
+            .panel-control
+            %h3.panel-title=t("b1_admin.faq_cat_manage")
+          = form_tag blog_categories_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}",class: "lang"  }
+                = label_tag :"title", t("b1_admin.title"), class:"col-sm-1 control-label"
+                .col-sm-5
+                  = text_field_tag :"title","" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.title"
+              .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang lang" }
+                = label_tag :"desc", t("b1_admin.desc"), class:"col-sm-1 control-label"
+                .col-sm-10
+                  = text_area_tag :"desc","" ,class:"form-control",required: true, "ng-model"=>"editedItem.desc"
+              .form-group{"ng-class" => "{'has-error': itemForm.only_photos.$invalid && itemForm.$submitted}"}
+                = label_tag :only_photos, "Тільки фото", class:"col-sm-1 control-label"
+                .col-sm-7
+                  %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"only_photos", "ng-model"=>"editedItem.only_photos"}
+              .form-group{"ng-class" => "{'has-error': itemForm.parent_id.$invalid && itemForm.$submitted}"}
+                = label_tag :parent_id, t("b1_admin.parent_cat"), class:"col-sm-1 control-label"
+                .col-sm-7
+                  %select.form-control{"ng-model" => "editedItem.parent_id", "ng-options" => "continent.id as continent.title for continent in categories",required: true}
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

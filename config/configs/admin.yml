@@ -1,0 +1,19 @@
+defaults: &defaults
+  admin_namespase: admin
+  title: "B1 Dev"
+  max_password_attempts: 5
+  block_time: 21600
+  sign_in_expiration: 3600
+  default_lang: "ru"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+
+deployment:
+  <<: *defaults

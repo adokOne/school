@@ -1,0 +1,43 @@
+/**************************
+      Bookings module
+ *************************/
+.room_block .form-group:first-child, .room_block .form-group:nth-child(2) {
+  margin-top: 15px;
+}
+
+.room_block .well {
+  height: 324px;
+}
+
+
+input.price {
+    padding-right: 60px;
+}
+
+.badge {
+    position: absolute;
+    right: 20px;
+    top: 28px;
+}
+
+.cost .badge {
+  top: 7px;
+}
+
+.modal-body.short_info .form-group label, .modal-body.show_booking_modal .form-group label {
+  text-align: end;
+}
+
+ul.table-settings li {
+  text-align: center;
+}
+
+.calendar-icon {
+  pointer-events: none;
+  position: absolute;
+  z-index: 2;
+  bottom: 10px;
+  right: 10px;
+  top: auto;
+  cursor: pointer;
+}

@@ -1,0 +1,22 @@
+<div class="photo-gallery">
+  <div class="wave one"></div>
+  <div class="wave two"></div>
+  <div class="container">
+    <div class="ship"></div>
+    <h2><%= t("school.galery")%></h2>
+    <div class="cycle-slideshow" data-cycle-fx="scrollHorz" data-cycle-timeout="0">
+        <!-- prev/next links -->
+        <span class="cycle-prev"></span>
+        <span class="cycle-next"></span>
+      <% @photos.in_groups_of(3,false).each do |photo_group|%>
+        <div class="s-item">
+          <div class="container_medium">
+            <% photo_group.each do |photo|%>
+              <a href="<%= photo.logo(:original)%>" title="<%= photo.name%>" class="image-link"><img src="<%= photo.logo(:medium) %>" alt="<%= photo.name%>"></a>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

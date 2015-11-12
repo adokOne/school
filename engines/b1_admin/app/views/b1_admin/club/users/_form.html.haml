@@ -1,0 +1,42 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:club_users_path,"ng-click"=>"$root.setRoute('#{club_users_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      Користувачі
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};editedItem.club_subscribe=true", :"data-url"=>club_users_path}
+    .row
+      .col
+        .panel
+          .panel-heading
+            %h3.panel-title Створення/редагування користувача
+          = form_tag club_users_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .row
+                .col-md-8
+                  .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
+                    = hidden_field_tag :club_subscribe, true, "ng-model" => "editedItem.club_subscribe"
+                    = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
+                  .form-group{"ng-class" => "{'has-error': itemForm.email.$invalid && itemForm.$submitted}"}
+                    = label_tag :email, t("b1_admin.email"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :email,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.email"
+                  .form-group{"ng-class" => "{'has-error': itemForm.phone.$invalid && itemForm.$submitted}"}
+                    = label_tag :phone, t("b1_admin.phone"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :phone,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.phone"
+                  .form-group{"ng-class" => "{'has-error': itemForm.course_id.$invalid && itemForm.$submitted}"}
+                    = label_tag :course_id, "Курс", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %select.form-control{"ng-model" => "editedItem.course_id", "ng-options" => "item.id as item.name for item in #{@courses.to_json}",required: true}
+
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                    = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

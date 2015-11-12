@@ -1,0 +1,35 @@
+<div data-ctrl="Blog">
+  <div class="themes-block">
+    <div class="container">
+      <div class="blog-themes open vocabulary">
+        <h2><%= @item.title%></h2>
+
+        <ul class="subcategories">
+          <% @item.childrens.each do |sub|%>
+            <li><a href="<%= url("blog/category/#{sub.seos.join("/")}") %>"><%= sub.title%></a></li>
+          <% end %>
+        </ul>
+        <div class="clear"></div>
+
+        <div class="follow">
+          <ul>
+            <li><% t("school.follow_us") %></li>
+            <li><a target="_blank" href="<%= Settings.send("#{@links_type}_links")["pint_link"]%>" class="pin"></a></li>
+            <li><a target="_blank" href="<%= Settings.send("#{@links_type}_links")["inst_link"]%>" class="inst"></a></li>
+          </ul>
+        </div>
+        <div class="clear"></div>
+
+        <div class="gallery">
+          <% @item.all_pages.each do |page| %>
+          <div class="item">
+            <a href="<%= page.logo(:original)%>" class="image-link" title="<%= page.title%>"><img src="<%= page.logo(:medium)%>" alt="<%= page.title%>" title="<%= page.title%>" ></a>
+          </div>
+          <% end %>
+        </div>
+
+        <a href="<%= url("blog") %>" class="more"><%=t("school.back_to_blog")%></a>
+      </div>
+    </div>
+  </div>
+</div>

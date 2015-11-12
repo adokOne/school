@@ -1,0 +1,58 @@
+<div data-ctrl="Blog">
+  <div class="search-block">
+    <div class="container">
+      <div class="baloon">
+        <%= image_tag "baloon-3.png"%>
+        <p class="bobble-green"><%=t("school.subscribe_for_news")%></p>
+      </div>
+      <div class="birds"><%= image_tag "birds.png"%></div>
+      <div class="birds two"><%= image_tag "birds-2.png"%></div>
+      <div class="form">
+        <form name="search" id="search" action="<%=url("blog/search")%>" method="get">
+          <div class="search-input">
+            <input type="text" name="search" class="txtinput" placeholder="пошук статтей" required="required">
+            <a href="#" class="search-icon js-submit"></a>
+          </div>
+        </form>
+        <form name="subscribe" id="subscribe" action="<%=url("subscribe")%>">
+          <div class="email-input">
+            <input type="hidden" name="subscribe[blog_subscribe]" value="true"  />
+            <input type="email" name="subscribe[email]" class="txtinput" placeholder="ваш e-mail" required="required"/>
+  <!--           <input type="checkbox">
+            <label for=""><%=t("school.subscribe_for_news_label")%></label> -->
+          </div>
+          <a href="#" class="subscribe js-submit"><%=t("school.subscribe_for_news_btn")%></a>
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="themes-block">
+    <div class="container">
+      <% @items.each do |category|%>
+        <div class="blog-themes" id="<%= category.seo_name%>">
+          <h2><%= category.title%></h2>
+          <% category.pages_for_blog.each do |page|%>
+            <div class="theme-item">
+              <div class="image-block">
+                <img src="<%= page.logo(:medium)%>" alt="<%= page.title%>">
+              </div>
+              <% unless category.only_photos %>
+                <div class="text">
+                  <h5><%= page.title%></h5>
+                  <p><%= truncate(page.anons, length: 150,omission: '...') %> <a href="<%= url("blog/item/#{page.seos.join('/')}")%>"><%=t("school.show_more")%></a></p>
+                </div>
+              <% end%>
+            </div>
+          <% end %>
+          <a href="<%= url("blog/category/#{category.seo_name}") %>" class="more"><%=t("school.read_all")%></a>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <% if @similar.any? %>
+    <%= render partial: "shared/similar", locals:{similar: @similar} %>
+  <% end %>
+</div>

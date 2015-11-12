@@ -1,0 +1,76 @@
+<div class="courses-block">
+  <div class="container">
+    <div class="courses-list">
+      <h2><%= t("school.tematic_courses")%></h2>
+      <p>У Клубі діє сім тематичних груп. Вибирай групи по інтересах, <a href="#" class="reg"><%= t("school.reg_and_go")%></a></p>
+
+      <% courses.in_groups_of(3,false).each do |group|%>
+        <div class="row">
+          <% group.each do |course|%>
+          <div class="item">
+            <a href="#">
+              <div class="icon">
+                <img src="<%= course.logo(:medium) %>" alt="<%= course.name %>">
+              </div>
+              <div class="title">
+                <p><%= course.name %></p>
+              </div>
+            </a>
+          </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+<div class="course-description">
+  <div class="container">
+    <a href="#" class="close"></a>
+    <div class="clear"></div>
+      <div class="cycle-slideshow" data-cycle-fx="fade" data-cycle-timeout="0">
+        <!-- prev/next links -->
+        <span class="cycle-prev"></span>
+        <span class="cycle-next"></span>
+        <% courses.each do |course| %>
+          <div class="s-item <%= course.seo %>">
+            <div class="container_small">
+              <h2><%= course.title %></h2>
+              <p><%= course.desc %></p>
+              <a href="#" class="schedule"><%= t("school.month_schedule")%></a>
+            </div>
+            <a href="#" class="subscribe"><%= t("school.subscribe_to_earning")%></a>
+          </div>
+        <% end %>
+    </div>
+  </div>
+</div>
+<div class="calendar-block">
+  <div class="container">
+    <h2><%= t("school.calendar")%></h2>
+    <div class="group-select">
+      <select>
+        <option disabled ><%= t("school.choose_group")%></option>
+        <%= courses.each do |course| %>
+          <option value="<%= course.id%>" ><%= course.name %></option>
+        <% end %>
+      </select>
+    </div>
+    <div class="owl">
+      <p class="bobble"><%= t("school.choose_your_course")%></p>
+    </div>
+    <div class="custom-calendar-wrap custom-calendar-full">
+      <div class="custom-header clearfix">
+        <h3 class="custom-month-year">
+          <span id="custom-month" class="custom-month"></span>
+          <nav>
+            <span id="custom-prev" class="custom-prev"></span>
+            <span id="custom-next" class="custom-next"></span>
+            <span id="custom-current" class="custom-current" title="Got to current date"></span>
+          </nav>
+        </h3>
+      </div>
+      <div id="calendar" class="fc-calendar-container"></div>
+    </div>
+    <div class="clear"></div>
+  </div>
+</div>

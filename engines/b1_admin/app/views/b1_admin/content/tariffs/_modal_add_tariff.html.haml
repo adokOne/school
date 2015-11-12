@@ -1,0 +1,71 @@
+%script{id: 'modal_add_tariff.html', type: 'text/ng-template'}
+  .modal-header{'ng-init' => "tariff_url='#{content_tariffs_path}'"}
+    %button.bootbox-close-button.close{'ng-click' => 'cancel()', style: 'margin-top: -10px;'} ×
+  .modal-body
+    %form{name:'itemForm'}
+      .row
+        .col-md-6
+          .form-group{"ng-class" => "{'has-error': itemForm.tarif_type.$invalid && itemForm.$submitted}"}
+            %label=t('b1_admin.tariffs')
+            %select.form-control{'ng-model' => 'item.tarif_type',
+                                 'ng-options' => 'type.id as type.name for type in tariff_types',
+                                 name: 'tarif_type',
+                                 'ng-disabled' => 'disabled_type',
+                                 required: true}
+      .row
+        .col-md-6
+          .form-group{"ng-class" => "{'has-error': itemForm.price.$invalid && itemForm.$submitted}"}
+            %label=t('b1_admin.tariff.price')
+            %input.form-control{'ng-model' => 'item.price',
+                                 name: 'price',
+                                 'ng-pattern' => 'price_regexp',
+                                 min: 1,
+                                 required: true}
+        .col-md-6
+          .form-group{"ng-class" => "{'has-error': itemForm.currency.$invalid && itemForm.$submitted}"}
+            %label=t('b1_admin.tariff.currency')
+            %select.form-control{'ng-model' => 'item.currency',
+                                 name: 'currency',
+                                 'ng-options' => "currency as currency for currency in #{Settings.hotelier_currency.to_json}",
+                                 'ng-init' => "item.currency= 'UAH';",
+                                 disabled: true,
+                                 required: true}
+      .row
+        .col-md-6
+          .form-group
+            .col-md-3
+              %label=t('b1_admin.tariff.breakfast')
+            .col-md-3
+              %input.js-switch{"ui-switch" => "true", type: "checkbox", "ng-model"=>"item.breakfast"}
+      .row
+        .col-md-12.well{'ng-hide' => 'item.tarif_type === "non_refundable"'}
+          .form-group
+            %h3
+              %label=t('b1_admin.tariff.cancelation_block')
+          .col-md-6
+            .form-group{"ng-class" => "{'has-error': itemForm.canceled_date_count.$invalid && itemForm.$submitted}"}
+              %label=t('b1_admin.tariff.canceled_date_count')
+              %input.form-control{'ng-model' => 'item.canceled_date_count', name: 'canceled_date_count'}
+          -#.col-md-6
+          -#  .form-group{"ng-class" => "{'has-error': itemForm.canceled_price.$invalid && itemForm.$submitted}"}
+          -#    %label=t('b1_admin.tariff.canceled_price')
+          -#    %input.form-control{'ng-model' => 'item.canceled_price', name: 'canceled_price'}
+          .col-md-6
+            .form-group{"ng-class" => "{'has-error': itemForm.canceled_nights_count.$invalid && itemForm.$submitted}"}
+              %label=t('b1_admin.tariff.canceled_nights_count')
+              %select.form-control{'ng-model' => 'item.canceled_nights_count',
+                                   'ng-options' => "night as night for night in #{([0.5] + (1..10).to_a).to_json}",
+                                   name: 'canceled_nights_count'}
+          -#.col-md-6
+          -#  .form-group{"ng-class" => "{'has-error': itemForm.canceled_currency.$invalid && itemForm.$submitted}"}
+          -#    %label=t('b1_admin.tariff.canceled_currency')
+          -#    %select.form-control{'ng-model' => 'item.canceled_currency',
+          -#                         name: 'canceled_currency',
+          -#                         'ng-options' => "currency as currency for currency in #{Settings.hotelier_currency.to_json}",
+          -#                         'ng-init' => "item.canceled_currency= 'UAH';",
+          -#                         disabled: true,
+          -#                         required: true}
+
+  .modal-footer
+    %button.btn.btn-primary{'ng-click' => 'save()'}=t('b1_admin.save')
+    %button.btn.btn-default{'ng-click' => 'cancel()'}=t('b1_admin.cancel')

@@ -1,0 +1,38 @@
+defaults: &defaults
+
+  school_links:
+    fb_link: https://www.facebook.com/when.I.speak.I.learn/
+    vk_link: https://vk.com/english_club_speak
+    gp_link: https://plus.google.com/u/0/103669647100792791796/posts
+    pint_link: https://www.pinterest.com/englishspea0490/
+    inst_link: https://instagram.com/speak_english_lviv
+  club_links:
+    fb_link: https://www.facebook.com/pages/Школа-Англійської-Мови-Speak/1400772563573220
+    vk_link: http://vk.com/club88836095
+    gp_link: https://plus.google.com/u/0/103669647100792791796/posts
+    pint_link: https://www.pinterest.com/englishspea0490/
+    inst_link: https://instagram.com/speak_english_lviv
+
+  domain: "http://0.0.0.0:4000"
+  fb_token: CAACEdEose0cBAKQp1PAZA7PHwzXhoKe9uGdAIgHH6TkQ0ZBgiyZBTtXQ6VVJx23IWrxhxQpregJwzguFgKyzQHCVsrBbR1kpfKHsciEE9S8gBdxMsdXFhUDOEt5T67LwAqAnb8oCiWFkP8AEpXCX9wakjyLS3BVquA3UxsW0d8jKEJ92KyhcB1MoNXzshOHjXQsO0AyPgZDZD
+  hotelier_langs:
+    - en
+    - ru
+    - ua
+  currency:
+    - UAH
+    - EUR
+    - USD
+    - RUR
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  domain: "http://193.84.22.53"
+
+staging:
+  <<: *defaults

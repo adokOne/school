@@ -1,0 +1,132 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:settings_admins_path,"ng-click"=>"$root.setRoute('#{settings_admins_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      =t("b1_admin.admins")
+  #page-content{:"ng-controller"=>"AdminsController","ng-init"=>"roles=#{@roles.to_json}; editedItem=#{@item.serializable_hash.to_json}",:"data-url"=>settings_admins_path,:"data-history-url"=>settings_admins_history_path,:"data-delete-text"=>t("b1_admin.delete_admins_confirm")}
+    .row
+      .col-lg-6
+        .panel
+          .panel-heading
+            %h3.panel-title=t("b1_admin.admins_manage")
+          = form_tag settings_admins_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
+                = label_tag :name, t("b1_admin.title"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.name"
+              .form-group{"ng-class" => "{'has-error': itemForm.email.$invalid && itemForm.$submitted}"}
+                = label_tag :email, t("b1_admin.email"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :email,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.email",type: :email
+              .form-group{"ng-class" => "{'has-error': itemForm.phone.$invalid && itemForm.$submitted}"}
+                = label_tag :phone, t("b1_admin.phone"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :phone,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.phone"
+              .form-group{"ng-class" => "{'has-error': itemForm.position.$invalid && itemForm.$submitted}"}
+                = label_tag :position, t("b1_admin.position"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :position,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.position"
+              .form-group{"ng-class" => "{'has-error': itemForm.password.$invalid && itemForm.$submitted}"}
+                = label_tag :password, t("b1_admin.password"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :password,"" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.password"
+              .form-group{"ng-class" => "{'has-error': itemForm.password_confirmation.$invalid && itemForm.$submitted}"}
+                = label_tag :password_confirmation, t("b1_admin.password_confirmation"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :password_confirmation,"" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.password_confirmation", "pw-check"=>"password"
+              .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                = label_tag :active, t("b1_admin.active"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
+              .form-group{"ng-class" => "{'has-error': itemForm.blocked.$invalid && itemForm.$submitted}"}
+                = label_tag :active, t("b1_admin.blocked"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.blocked"}
+              .form-group
+                .panel-heading
+                  .panel-control
+                    %a.btn.btn-default{href:"#","ng-click"=>"uncheckAll()"}
+                      =t("b1_admin.uncheck_all")
+                      %i.fa.fa-circle-o
+                    %a.btn.btn-default{href:"#","ng-click"=>"checkAll()"}
+                      =t("b1_admin.check_all")
+                      %i.fa.fa-check
+                  %h3.pad-all.bord-btm.text-thin=t("b1_admin.roles")
+              .form-group
+                - @roles.in_groups_of( (@roles.count.to_f/2).ceil, false).each do |role_group|
+                  .col-sm-6
+                    - role_group.each do |role|
+                      = label_tag :"role_#{role[:id]}", role[:name], class:"col-sm-9 "
+                      .col-sm-3
+                        %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"role_#{role[:id]}", "ng-model"=>"editedItem.roles[#{role[:id]}]"}
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")
+                %a.btn.btn-trans.btn-icon.fa.fa-camera.add-tooltip.fileinput{"tooltip" => t("b1_admin.add_photo"), :href => "#"}
+          %form#file-dropzone.dropzone{action: settings_admins_upload_path}
+            %input{type: :hidden,name: :id, value: @item.id}
+
+      .col-lg-6
+        .panel
+          .panel-heading
+            %h3.panel-title=t("b1_admin.admins_history")
+          .panel-body
+            %table.table.table-hover.table-striped.table-vcenter#subitemsTable{"ng-table"=>"subitemsTable"}
+              %tr{"ng-repeat" => "item in subData"}
+                %td{"data-title" => "'#{t('b1_admin.module')}'"}
+                  {{item.module}}
+                %td{"data-title" => "'#{t('b1_admin.action')}'"}
+                  {{item.action_title}}
+                %td{"data-title" => "'#{t('b1_admin.created_at')}'"}
+                  {{item.time | asDate | date:'dd.MM.yyyy HH:mm '}}
+                %td{"data-title" => "'#{t('b1_admin.status')}'"}
+                  %span.label.text-lg{style:"background-color:{{statusColors[item.status]}}"}
+                    %span{"ng-switch" => "", :on => "item.status"}
+                      %span{"ng-switch-when" => "1"}=t('b1_admin.statuses._1')
+                      %span{"ng-switch-when" => "2"}=t('b1_admin.statuses._2')
+                      %span{"ng-switch-when" => "3"}=t('b1_admin.statuses._3')
+                      %span{"ng-switch-when" => "4"}=t('b1_admin.statuses._4')
+- content_for :aside do
+  .hidden
+
+%aside#aside-container
+  #aside
+    .nano.has-scrollbar
+      .nano-content{:style => "right: -15px;", :tabindex => "0"}
+        / Simple profile
+        .text-center.pad-all
+          .pad-ver
+            %img.img-md.img-border.img-circle{alt:@item.name, src: @item.avatar}
+          %h4.text-lg.text-overflow.mar-no=@item.name
+          %p.text-sm=@item.position
+          - if @item.id
+            .pad-ver.btn-group
+              %a.btn.btn-icon.btn-hover-mint.fa.fa-envelope.icon-lg{:href => "#"}
+        %hr
+          %ul.list-group.bg-trans
+            / Profile Details
+            %li.list-group-item.list-item-sm
+              %i.fa.fa-phone.fa-fw
+              =@item.phone
+            %li.list-group-item.list-item-sm
+              %i.fa.fa-envelope-o.fa-fw
+              =@item.email
+            %li.list-group-item.list-item-sm
+              %i.fa.fa-clock-o.fa-fw
+              =l(@item.created_at, format: :long) if @item.created_at
+          %hr
+            .pad-hor
+              %h5.text-thin=t("b1_admin.admin_permissions")
+              - @item.permissions.each do |perm|
+                %small.text-thin=perm
+                %br
+            %hr
+              .text-center.clearfix
+                .col-xs-6
+                  %p.h3.text-thin=@item.signins_count
+                  %small.text-muted=t("b1_admin.signins_count")
+                .col-xs-6
+                  %p.h3.text-thin=@item.messages_count
+                  %small.text-muted=t("b1_admin.sended_messages")

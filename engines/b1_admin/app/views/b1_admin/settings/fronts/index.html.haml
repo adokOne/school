@@ -1,0 +1,27 @@
+#content-container
+  #page-title
+    %h1.page-header.text-overflow
+      =t("b1_admin.front_settings")
+  #page-content{:"ng-controller"=>"FrontsSettingsController",:"data-url"=>settings_fronts_path,:"data-delete-text"=>t("b1_admin.delete_admins_confirm")}    
+    .row
+      .panel
+        .panel-heading
+          %h3.panel-title=t("b1_admin.front_settings_list")
+        .panel-body
+          %table.table.table-hover.table-striped.table-vcenter#itemsTable
+            %tr
+              %th.min-w-td=t('b1_admin.title')
+              %th.min-w-td=t('b1_admin.user_actions')
+
+            %tr
+              %td.min-w-td Меню футера
+
+              %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
+                - if user_can?(:edit)
+                  %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{settings_fronts_path}/foter/edit/","ng-click"=>"$root.setRoute('#{settings_fronts_path}/footer/edit/')",style:"margin-right: 15px;"}
+            %tr
+              %td.min-w-td Бекграунд
+
+              %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
+                - if user_can?(:edit)
+                  %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{settings_fronts_path}/backround/edit/","ng-click"=>"$root.setRoute('#{settings_fronts_path}/backround/edit/')",style:"margin-right: 15px;"}

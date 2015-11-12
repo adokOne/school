@@ -1,0 +1,17 @@
+<div class="container">
+  <div class="partners">
+    <h2><%= t("school.our_partners")%></h2>
+    <p><%= t("school.partners_desc").html_safe %></p>
+
+    <div class="row">
+      <% @partners.each do |partner| %>
+        <div class="col-4">
+          <div class="image-item">
+            <img src="<%= partner.logo(:medium)%>" alt="<%= partner.name%>" title="<%= partner.name%>">
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>

@@ -1,0 +1,99 @@
+:javascript
+  moment.locale("#{I18n.default_locale}")
+.row.tarif-grid__wrapper
+  .col-md-2
+  .col-md-10.tarif-grid__chess
+    %table.table.tariff_header_month
+      %tr
+        %td{'ng-repeat' => 'month in calendar.header_months', 'ng-click' => 'set_month(month.moment);'}
+          .cell
+            %strong {{month.year}}
+            %br
+            {{month.month}}
+.row.tarif-grid__wrapper
+  .col-md-2.tarif-grid__sibebar
+    %table.table.rooms
+      %tr
+        %td
+          %div.cell-hidden
+            %strong
+              =t('b1_admin.tariffs')
+      %tr{ng_repeat: 'item in left_menu'}
+        %td
+          -# class: .room | .tariff
+          %div{class:'{{item.type}}'}
+            .item__text
+              %span{'ng-show' => 'item.type == "placement"'}
+                %i.fa.fa-user{'ng-repeat' => 'h in placement_range(item.adults_count)'}
+              %span
+                {{item.name | limitTo: 20}}
+              %span{'ng-show' => 'item.type == "tariff"'}
+                {{item.currency}}
+            .item__controls
+              - if user_can?(:create)
+                %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-plus-circle.add-tooltip{tooltip: t('b1_admin.add_tariff'),
+                                                                                                         'ng-show' => 'item.type == "placement"',
+                                                                                                         'ng-click' => 'show_modal_add_tariff(item)'}
+                %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-plus-circle.add-tooltip{tooltip: t('b1_admin.add_placement'),
+                                                                                                         'ng-show' => 'item.type == "room"',
+                                                                                                         'ng-click' => 'show_modal_add_placement(item)'}
+              - if user_can?(:edit)
+                %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-edit.add-tooltip{tooltip: t('b1_admin.edit_tariff'),
+                                                                                                         'ng-show' => 'item.type == "tariff"',
+                                                                                                         'ng-click' => 'show_modal_edit_tariff(item)'}
+                %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-edit.add-tooltip{tooltip: t('b1_admin.edit_placement'),
+                                                                                                         'ng-show' => 'item.type == "placement"',
+                                                                                                         'ng-click' => 'show_modal_edit_placement(item)'}
+              - if user_can?(:destroy)
+                %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-minus-circle.add-tooltip{tooltip: t('b1_admin.destroy_tariff'),
+                                                                                                         'ng-show' => 'item.type == "tariff"',
+                                                                                                         'ng-click' => 'destroy_tariff(item)'}
+                %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-minus-circle.add-tooltip{tooltip: t('b1_admin.destroy_placement'),
+                                                                                                         'ng-show' => 'item.type == "placement" && item.tariffs.length == 0',
+                                                                                                         'ng-click' => 'destroy_placement(item)'}
+  .col-md-10.tarif-grid__chess
+    .tariff_arrows.tariff_arrows__left{'ng-click' => 'scroll_left();'}
+      .fa.fa-arrow-left.fa-lg
+    .tariff_map_container{style: 'width: 100%'}
+      / .table-cell{'ng-repeat' => 'month in calendar.months', 'ng-style' => '{width: (100 / calendar.months.length) + "%"}'}
+      / .table-cell{'ng-repeat' => 'month in calendar.months', 'ng-style' => '{month.days.length}'}
+      .table-cell{'ng-repeat' => 'month in calendar.months'}
+        %table.table.tariffs
+          %thead
+            %tr
+              %td.month{colspan:'{{month.days.length}}'}
+                .cell-hidden
+                  %strong
+                    {{month.moment.format('MMM, YYYY')}}
+            %tr
+              %td{ng_repeat: 'day in month.days', 'ng-class' => '{weekend: is_weekend(day)}'}
+                .cell
+                  {{day.format('D')}}
+                  %br
+                  {{day.format('ddd')}}
+          %tbody
+            %tr{ng_repeat: 'item in left_menu'}
+              %td{ng_repeat: 'day in month.days',
+                 'ng-init' => 'curr_day=day.format("YYYY-MM-DD"); price=detect_price_by_day(item, curr_day); quota=detect_quota_by_day(item, curr_day);',
+                 'ng-class' => '{weekend: is_weekend(day), quota_not_eq_room_quota: quota.quota_not_eq_room}'}
+                .tariff.cell{ng_if: 'item.type === "tariff"',
+                               'data-item' =>  '{{item}}',
+                               'data-price' =>  '{{price}}',
+                               'data-date' => '{{day.format("YYYY-MM-DD")}}',
+                               ng_mousedown:"#{user_can?(:create) ? 'mousedown($event, day)' : ''};",
+                               ng_mouseover:'mouseover($event);'}
+                  %div{'ng-class' => '{"text-bold": price.is_diapason}'}
+                    %div
+                      {{price.price}}
+                .cell{ng_if: 'item.type === "room"'}
+                  %div
+                    %i.fa.fa-user
+                    {{quota.quota}}
+                .cell{ng_if: 'item.type === "placement"'}
+    .clearfix
+    .tariff_arrows.tariff_arrows__right{'ng-click' => 'scroll_right();'}
+      .fa.fa-arrow-right.fa-lg
+
+= render 'modal_add_diapason'
+= render 'modal_add_tariff'
+= render 'modal_add_placement'

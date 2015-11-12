@@ -1,0 +1,26 @@
+<div data-ctrl="Blog">
+  <div class="themes-block">
+    <div class="container">
+      <div class="blog-themes open" id="<%= @item.seo_name%>">
+        <h2><%= @item.title%></h2>
+        <% @item.pages.each do |page|%>
+          <div class="theme-item">
+            <div class="image-block">
+              <img src="<%= page.logo(:medium)%>" alt="<%= page.title%>">
+            </div>
+
+            <div class="text">
+              <h5><%= page.title%></h5>
+              <p><%= truncate(page.anons, length: 150,omission: '...') %> <a href="<%= url("blog/item/#{page.seos.join('/')}")%>"><%=t("school.show_more")%></a></p>
+            </div>
+          </div>
+        <% end %>
+        <a href="<%= url("blog") %>" class="more"><%=t("school.back_to_blog")%></a>
+      </div>
+    </div>
+  </div>
+
+  <% if @similar.any? %>
+    <%= render partial: "shared/similar", locals:{similar: @similar} %>
+  <% end %>
+</div>

@@ -1,0 +1,186 @@
+$div_height: 40px;
+$font_size: 15px;
+
+.tariff_map_container {
+  display: table;
+  .table-cell {
+    display: table-cell;
+    float: none;
+    vertical-align: top;
+  }
+  table {
+    &.rooms {
+      font-size: $font_size;
+      margin-top: 38px;
+      td {
+        .placement {
+          margin-left: 15px
+        }
+        .tariff {
+          margin-left: 30px
+        }
+        div {
+          min-height: $div_height;
+          width: 200px;
+          white-space: nowrap;
+        }
+      }
+    }
+    &.tariffs {
+      font-size: 12px;
+
+      td {
+
+        &.weekend .cell{
+          background-color: rgba(214, 69, 65,0.1);
+          &:hover{
+            background-color: rgba(214, 69, 65,0.3);
+          }
+        }
+        &.quota_not_eq_room_quota .cell{
+          background-color: #C66D6D;
+          &:hover{
+            background-color: #DD9292;
+          }
+        }
+        &.selected {
+          //border: 3px solid blue;
+          background-color: #1ba9e4;
+        }
+        &.price {
+          padding: 5px;
+          border: 1px solid black;
+        }
+        &.odd {
+          background-color: red;
+        }
+        &.green {
+          background-color: green;
+        }
+        
+      }
+    }
+  }
+}
+
+#container{
+  table{
+   td,th{
+    padding: 2px;
+    border: none
+  }
+}
+}
+.tarif-grid__wrapper{
+  $arrow-w: 35px;
+  .tarif-grid__chess{
+    position: relative;
+    padding-left: $arrow-w;
+    padding-right: $arrow-w;
+    .tariff_arrows{
+      position: absolute;
+      width: $arrow-w; 
+      height: 100%;
+      top: 0;
+      text-align: center;
+      &:hover{
+        background-color: rgba(0,0,0,0.03);
+        cursor: pointer;
+      }
+      .fa{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin:-6px 0 0 -6px
+      }
+    }
+    .tariff_arrows__left{left: 0px}
+    .tariff_arrows__right{right: 0px}
+  }
+
+  table.tariff_header_month {
+    td {
+      border-top: none;
+      cursor: pointer;
+      padding: 2px;
+      &:hover .cell{
+        background-color: rgba(0,0,0,0.1);
+      }
+    }
+  }
+}
+
+div {
+  &.cell-hidden{
+    min-width: 35px;
+    min-height: $div_height - 15px;
+  }
+  &.cell {
+    min-width: 55px;
+    min-height: $div_height;
+    padding: 2px;
+    margin: auto;
+    background-color: rgba(0,0,0,0.03);
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 2px;
+    text-align: center;
+    &:hover{
+      background: rgba(0,0,0,0.1);
+    }
+  }
+  &.tariff {
+    white-space: nowrap;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+  }
+}
+.tarif-grid__sibebar{
+  padding-right: 0;
+  .item__text{
+    float: left;
+  }
+  .item__controls{
+    float: right;
+    .btn{
+      margin: 0 0 0 5px
+    }
+  }
+  #container{
+    table{
+     td,th{
+        padding: 2px 0;
+        border: none
+      }
+    }
+  }
+  .table.rooms{
+    margin-top: 45px;
+  }
+  .tariff,
+  .room,
+  .placement{
+    width: 100%;
+    min-height: $div_height;
+    padding: 5px 0;
+    border: 1px solid transparent;
+    box-sizing: border-box;
+    >span{
+      display: inline-block;
+      padding-top: 5px;
+    }
+    &:after{
+      content:'';
+      display: table;
+      clear: both;
+    }
+  }
+  .placement {
+     padding-left: 15px
+  }
+  .tariff {
+     padding-left: 30px
+  }
+}

@@ -1,0 +1,61 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:blog_pages_path,"ng-click"=>"$root.setRoute('#{blog_pages_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      Блог
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}; categories=#{@categories.to_json}",:"data-url"=>blog_pages_path,"data-back-url"=>blog_pages_path}
+    .row
+      .col
+        .panel
+          .panel-heading
+            %h3.panel-title=t("b1_admin.faq_manage")
+          = form_tag blog_pages_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}",class: "lang lang" }
+                = label_tag :"title", t("b1_admin.title"), class:"col-sm-1 control-label"
+                .col-sm-5
+                  = text_field_tag :"title","" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.title"
+              .form-group{"ng-class" => "{'has-error': itemForm.author.$invalid && itemForm.$submitted}",class: "lang lang" }
+                = label_tag :"author", "Автор", class:"col-sm-1 control-label"
+                .col-sm-5
+                  = text_field_tag :"author","" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.author"
+              .form-group{"ng-class" => "{'has-error': itemForm.category_id.$invalid && itemForm.$submitted}"}
+                = label_tag :category_id, t("b1_admin.category"), class:"col-sm-1 control-label"
+                .col-sm-7
+                  %select.form-control{"ng-model" => "editedItem.category_id", "ng-options" => "continent.id as continent.title for continent in categories",required: true}
+              .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                = label_tag :active, t("b1_admin.active"), class:"col-sm-1 control-label"
+                .col-sm-7
+                  %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
+              .form-group{"ng-class" => "{'has-error': itemForm.anons.$invalid && itemForm.$submitted}",class: "lang lang" }
+                = label_tag :"anons", t("b1_admin.desc"), class:"col-sm-1 control-label"
+                .col-sm-10
+                  = text_area_tag :"anons","" ,class:"form-control",required: true, "ng-model"=>"editedItem.anons"
+              .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang lang" }
+                = label_tag :"desc", t("b1_admin.desc"), class:"col-sm-1 control-label"
+                .col-sm-10
+                  .summernote{class: "summernote lang lang",:"data-lang"=>"uk"}
+                  = text_area_tag :"desc","" ,class:"form-control hidden",required: true, "ng-model"=>"editedItem.desc"
+              .form-group
+                = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-3 control-label"
+                .col-md-7
+                  .ng-scope{:"flow-name"=>"logo", :"flow-file-added" => "!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]", :"flow-init" => "{singleFile:true,target:'#{namespace}/blog/pages/'+editedItem.id + '/upload',testChunks:false}" ,:"flow-files-submitted"=>"$flow.upload()",:"ng-show" => "editedItem.id"}
+                    .thumbnail{"ng-show" => "!$flow.files.length"}
+                      %img{:"ng-src" => "{{editedItem.logo_file_name && ('/system/pages/' + editedItem.id + '/medium.png') || 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image'}}"}/
+                    .thumbnail.ng-hide{:"ng-show" => "$flow.files.length"}
+                      %img{"flow-img" => "$flow.files[0]"}/
+                    %div
+                      %span.btn.btn-primary{:"flow-btn" => "", :"ng-show" => "!$flow.files.length"}
+                        Выбрать
+                        %input{:style => "visibility: hidden; position: absolute;", :type => "file"}/
+                      %span.btn.btn-info.ng-hide{:"flow-btn" => "", :"ng-show" => "$flow.files.length"}
+                        Изменить
+                        %input{:style => "visibility: hidden; position: absolute;", :type => "file"}/
+                      %span.btn.btn-danger.ng-hide{:"ng-click" => "$flow.cancel()", :"ng-show" => "$flow.files.length"}
+                        Удалить
+
+
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

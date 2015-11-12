@@ -1,0 +1,28 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:step_edit_content_hotel_path(params[:hotel_id], step_id: 6),"ng-click"=>"$root.setRoute('#{step_edit_content_hotel_path(params[:hotel_id], step_id: 6)}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      =t("b1_admin.hotel_rooms")
+  .panel{:"ng-controller"=>"HotelRoomsController","ng-init"=>"step_id='#{@step_id}'; editedItem=#{@item.serializable_hash.to_json};hotel_id='#{params[:hotel_id]}'",:"data-url"=>content_hotel_rooms_path,"data-back-url"=>content_hotel_rooms_path,:"data-name-url"=>content_room_type_names_path}
+    .panel-body
+      #page-content
+        .row
+          %ul.wz-nav-off.wz-icon-inline.wz-classic
+            - @steps.each do |step_id, step|
+              - edit = /edit/ =~ params[:action]
+              %li.col-xs-4.bg-purple{ng_class:"{active: step_id == '#{step_id}'}"}
+                %a{style: ('cursor: pointer !important;' if edit), "aria-expanded" => ('true' if edit), "data-toggle" => ('tab' if edit), :ng_click => ("$root.setRoute('#{step_edit_content_hotel_room_path(id: @item.id, hotel_id: @item.hotel_id, step_id: step_id)}')" if edit)}
+                  %span.icon-wrap.icon-wrap-xs.bg-trans-dark
+                    %i.fa.fa-info
+                  = step[:title]
+          .progress.progress-sm.progress-striped.active
+            .progress-bar.progress-bar-pink{:style => "width: #{33.33 * @step_id.to_f}%;"}
+        .row
+          = form_tag content_hotel_rooms_path(hotel_id: params[:hotel_id]) ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            = render file: @step_tpl
+
+    .panel-footer
+      .mar-top.clearfix
+        %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+          %i.fa.fa-pencil.fa-fw
+          = @step_id == '3' ? t("b1_admin.save") : t("b1_admin.next")

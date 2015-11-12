@@ -1,0 +1,26 @@
+  <div class="themes-block" data-ctrl="Blog">
+    <div class="container_small">
+      <div class="open-topic">
+        <ul class="publish-date">
+          <li><a href="<%= url("blog/category/#{@item.category_seo_name}") %>"><%= @item.category_title%></a></li>
+          <li class="date"><%= l(@item.created_at,format: :blog) %> 17.01/2015</li>
+        </ul>
+        <h2><%= @item.title%></h2>
+        <div class="author"><%= t("school.page_author") %> <%= @item.author%></div>
+
+        <div class="text">
+          <div class="image-block">
+            <img src="<%= @item.logo(:big)%>" alt="<%= @item.title%>">
+          </div>
+          <p><%= @item.desc.html_safe%></p>
+        </div>
+
+        <div class="social-buttons">
+          <a href="<%= url("blog/item/#{@item.seos.join('/')}") %>" class="fb-like" onclick="TShare.facebook(this,event,'','<%= URI.escape @item.title %>')">Like</a>
+          <a href="<%= url("blog/item/#{@item.seos.join('/')}") %>" class="gp-like" onclick="TShare.googleplus(this,event,'','<%= URI.escape @item.title %>')">Like</a>
+          <a href="<%= url("blog/item/#{@item.seos.join('/')}") %>" class="vk-like" onclick="TShare.vkontakte(this,event,'','<%= URI.escape @item.title %>')">Like</a>
+        </div>
+        <a href="<%= url("blog/category/#{@item.category_seo_name}") %>" class="more"><%= t("school.back_to_all_category",title: @item.category_title) %></a>
+      </div>
+    </div>
+  </div>

@@ -1,0 +1,31 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:content_vacancies_path,"ng-click"=>"$root.setRoute('#{content_vacancies_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      Вакансії
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};",:"data-url"=>content_vacancies_path,"data-back-url"=>content_vacancies_path}
+    .row
+      .col
+        .panel
+          .panel-heading
+            %h3.panel-title Керування вакансіею
+          = form_tag content_vacancies_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .row
+                .col-md-8
+                  .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
+                    = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
+                  .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
+                    = label_tag :desc, t("b1_admin.desc"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_area_tag :desc,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.desc"
+                  .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                    = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

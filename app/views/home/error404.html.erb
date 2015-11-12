@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="ie8"> <![endif]-->
+<!--[if IE 9]><html class="ie9"><![endif]-->
+<!--[if gt IE 9]><!--><html><!--<![endif]-->
+<head lang="ru">
+  <meta charset="utf-8" />
+
+  <title></title>
+  <%= stylesheet_link_tag    'application', media: 'all' %>
+</head>
+<body>
+
+  <div class="overlay"></div>
+
+  <div class="owl success not-found" style="display: block;">
+    <div style="border:none!important" class="bobble error">
+      <%= image_tag "alert.png"%>
+      <span>404</span>
+      <p>Ой-ой, сталася помилка!</p>
+      <a href="<%= url("/")%>">Повернутися</a>
+    </div>
+  </div>
+
+</body>
+</html>

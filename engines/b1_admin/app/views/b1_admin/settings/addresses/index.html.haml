@@ -1,0 +1,43 @@
+#content-container{:"ng-controller"=>"CrudController",:"data-url"=>settings_addresses_path,:"data-delete-text"=>t("b1_admin.delete_role_confirm")}
+  #page-title
+    %h1.page-header.text-overflow
+      Адреси
+  #page-content
+    .row
+      .panel
+        .panel-heading
+          .panel-control
+            %button.btn.btn-default{:name => "refresh", :title => "Refresh", :type => "button","ng-click"=>"itemsTable.reload()"}
+              %i.fa.fa-refresh.icon-refresh
+            %a.btn.btn-primary{href:new_settings_address_path,"ng-click"=>"$root.setRoute('#{new_settings_address_path}')"}=t("b1_admin.add")
+          %h3.panel-title Список адрес
+
+        .panel-body
+          %div{"cg-busy" => "{'promise': itemsPromise,'backdrop': true,'message': '#{t('b1_admin.loading')}'}"}
+            %table.table.table-striped#itemsTable{"ng-table"=>"itemsTable"}
+              %tr{"ng-repeat" => "item in data"}
+                %td{"data-title" => "'#{t('b1_admin.title')}'"}
+                  {{item.title}}
+                %td{"data-title" => "'#{t('b1_admin.address')}'"}
+                  {{item.name}}
+                %td{"data-title" => "'#{t('b1_admin.email')}'"}
+                  {{item.email}}
+                %td{"data-title" => "'#{t('b1_admin.phone')}'"}
+                  {{item.phones}}
+                %td{"data-title" => "'#{t('b1_admin.active')}'"}
+                  %span.label.text-lg{"ng-class"=>"{'label-danger':!item.active,'label-success': item.active }"}
+                    %span{"ng-switch" => "", :on => "item.active"}
+                      %span{"ng-switch-when" => "true"}
+                        =t('b1_admin._true')
+                      %span{"ng-switch-default" => ""}=t('b1_admin._false')
+                %td{"data-title" => "'Головна адреса?'"}
+                  %span.label.text-lg{"ng-class"=>"{'label-danger':!item.is_main,'label-success': item.is_main }"}
+                    %span{"ng-switch" => "", :on => "item.is_main"}
+                      %span{"ng-switch-when" => "true"}
+                        =t('b1_admin._true')
+                      %span{"ng-switch-default" => ""}=t('b1_admin._false')
+                %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
+                  - if user_can?(:destroy)
+                    %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)"}
+                  - if user_can?(:edit)
+                    %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{settings_addresses_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{settings_addresses_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}

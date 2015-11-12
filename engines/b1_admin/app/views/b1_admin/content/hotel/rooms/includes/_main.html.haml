@@ -1,0 +1,53 @@
+.panel-body
+  .row
+    .col-md-12
+      %legend
+        %label=t("b1_admin.general")
+      .row
+        .col-md-4{'tooltip-placement' => "top", tooltip: t('tooltips.room.type'), "ng-class" => "{'has-error': itemForm.type_id.$invalid && itemForm.$submitted}"}
+          = label_tag :type_id, t("b1_admin.room_type"), class:"control-label"
+          %select.form-control{name: 'type_id', "ng-model" => "editedItem.type_id", "ng-options" => "item.id as item.name for item in #{@types.to_json}",required: true}
+        .col-md-4{'tooltip-placement' => "top", tooltip: t('tooltips.room.category'), "ng-class" => "{'has-error': itemForm.name_id.$invalid && itemForm.$submitted}"}
+          = label_tag :name_id, t("b1_admin.room_name"), class:"control-label"
+          %select.form-control{name: 'name_id', "ng-model" => "editedItem.name_id", "ng-options" => "item.id as item.name for item in names",required: true}
+        .col-md-4{'tooltip-placement' => "top", tooltip: t('tooltips.room.rooms_this_type_count'), "ng-class" => "{'has-error': itemForm.count.$invalid && itemForm.$submitted}"}
+          = label_tag :count, t("b1_admin.total_rooms"), class:"control-label"
+          %select.form-control{name: 'count', "ng-model" => "editedItem.count", "ng-options" => "item as item for item in #{(1..2000).to_a.to_json}",required: true}
+      .row
+        .col-md-4{"ng-class" => "{'has-error': itemForm.max_adults_count.$invalid && itemForm.$submitted}"}
+          = label_tag :max_adults_count, t("b1_admin.max_adults_count"), class:"control-label"
+          %select.form-control{name:'max_adults_count', "ng-model" => "editedItem.max_adults_count", "ng-options" => "item as item for item in #{(1..15).to_a.to_json}",required: true}
+        .col-md-4{'tooltip-placement' => "top", tooltip: t('tooltips.room.number_bedspace_children'), "ng-class" => "{'has-error': itemForm.max_child_count.$invalid && itemForm.$submitted}"}
+          = label_tag :max_child_count, t("b1_admin.max_child_count"), class:"control-label"
+          %select.form-control{name:'max_child_count', "ng-model" => "editedItem.max_child_count", "ng-options" => "item as item for item in #{(0..15).to_a.to_json}",required: true}
+        .col-md-4{'tooltip-placement' => "top", tooltip: t('tooltips.room.rooms_count'), "ng-class" => "{'has-error': itemForm.total_apartmants.$invalid && itemForm.$submitted}"}
+          = label_tag :total_apartments, @show_beds_tooltip ? t('b1_admin.total_beds') : t("b1_admin.total_apartments"), class:"control-label"
+          %select.form-control{name:'total_apartments', "ng-model" => "editedItem.total_apartments", "ng-options" => "item as item for item in #{(1..6).to_a.to_json}",required: true}
+      .row
+        .col-md-4{'tooltip-placement' => "top", tooltip: t('tooltips.room.area'), "ng-class" => "{'has-error': itemForm.square.$invalid && itemForm.$submitted}"}
+          = label_tag :square, t("b1_admin.square").html_safe, class:"control-label"
+          %select.form-control{name: 'square', "ng-model" => "editedItem.square", "ng-options" => "item as item for item in #{(1..150).to_a.to_json}",required: true}
+        .col-md-4{'tooltip-placement' => "top", tooltip: t('tooltips.room.smoke'), "ng-class" => "{'has-error': itemForm.smoking.$invalid && itemForm.$submitted}"}
+          = label_tag :smoking, t("b1_admin.smoking"), class:"control-label"
+          %select.form-control{name: 'smoking', "ng-model" => "editedItem.smoking", "ng-options" => "item.id as item.name for item in trueFalseArr",required: true}
+        .col-md-4{'tooltip-placement' => "top", tooltip: t('tooltips.room.price')}
+          = label_tag :price, t("b1_admin.room_base_price"), class:"control-label"
+          .row
+            .col-md-8{"ng-class" => "{'has-error': itemForm.price.$invalid && itemForm.$submitted}"}
+              = text_field_tag :price,"" ,class:"form-control ",required: true, "ng-model"=>"editedItem.price"
+            .col-md-4{"ng-class" => "{'has-error': itemForm.currency.$invalid && itemForm.$submitted}"}
+              %select.form-control{name: 'currency', "ng-model" => "editedItem.currency", "ng-options" => "currency as currency for currency in #{@currencies.to_json}", required: true, disabled: true}
+      .row
+        .col-md-4{"ng-class" => "{'has-error': itemForm.quota.$invalid && itemForm.$submitted}"}
+          = label_tag :quota, t("b1_admin.room_quota"), class:"control-label"
+          %select.form-control{name: 'quota', "ng-model" => "editedItem.quota", "ng-options" => "item.id as item.name for item in roomQuota",required: true}
+      .row
+        .col-md-4
+          = label_tag :description, t("b1_admin.room_description"), class:"control-label"
+          %textarea{"ng-model" => "editedItem.description", "class" => "col-md-12", "rows" => "5"}
+        / .col-md-4
+        /   - I18n.available_locales.each do |l|
+        /     .form-group{"ng-class" => "{'has-error': itemForm.name_translations.#{l}.$invalid && itemForm.$submitted}"}
+        /       = label_tag :"name_translations.#{l}", "#{t("b1_admin.title")} #{l.to_s.upcase}", class:"col-sm-3 control-label"
+        /       .col-sm-8
+        /         = text_field_tag :"name_translations.#{l}","" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.name_translations.#{l}"

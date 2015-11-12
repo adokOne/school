@@ -1,0 +1,14 @@
+.langs-dropdown.dropdown{style:"display: inline;", ng_init: "$root.changeLang('#{I18n.locale}');"}
+  %a.lang-selector.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+    %span.lang-selected
+      = image_tag "b1_admin/flags/#{I18n.locale}.png" , class:"lang-flag" , alt:t("b1_admin.languages.#{I18n.locale}")
+      %span.lang-id=I18n.locale.upcase
+      %span.lang-name=t("b1_admin.languages.#{I18n.locale}")
+  / Language selector menu
+  %ul.head-list.dropdown-menu.with-arrow
+    - I18n.available_locales.each do |l|
+      %li{class: "lang-li-#{l}", data:{src: "/assets/b1_admin/flags/#{l}.png", name: t("b1_admin.languages.#{l}"), id: l.upcase}}
+        = link_to "##{l}", class: "lang_sel #{I18n.default_locale.to_s == l.to_s ? '' : ''}"  , "ng-click"=>"$root.changeLang('#{l}')" do
+          = image_tag "b1_admin/flags/#{l}.png", class:"lang-flag", alt:t("b1_admin.languages.#{l}")
+          %span.lang-id=l.upcase
+          %span.lang-name=t("b1_admin.languages.#{l}")

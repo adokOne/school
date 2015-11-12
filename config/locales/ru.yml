@@ -1,0 +1,8 @@
+ru:
+  activemodel:
+    errors:
+      models:
+        search_request:
+          attributes:
+            check_out:
+              after: Дата заезда должна быть раньше даты выезда

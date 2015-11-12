@@ -1,0 +1,456 @@
+en:
+  b1_admin:
+    contract_owners: "Владельцы контрактов"
+    continents: "Континенты"
+    continent_manage: "Создание/редактирование континета"
+    continent_list: "Список континентов"
+    countries: "Страны"
+    from: "От"
+    to: "До"
+    loading: "Загрузка"
+    period: "Период"
+    reset_filter: Сбросить
+    params: "Параметры"
+    filter: "Фильтр"
+    ip: "IP адресс"
+    status: "Статус"
+    server: "Сервер"
+    do_filter: "Филтровать"
+    type: "Тип"
+    more: "Подробнее"
+    show: "Просмотреть"
+    user: "Пользователь"
+    admin_logs: Логи админ панели
+    signins_count: "Входов"
+    admin_permissions: "Возможности"
+    admins_history: "История действий"
+    sended_messages: "Отправленых сообщений"
+    add_photo: "Установить фото"
+    password: "Пароль"
+    password_confirmation: "Подтверждение пароля"
+    _true: "Да"
+    _false: "Нет"
+    code: "Код"
+    old_code: "Старый код"
+    currency: "Валюта"
+    created_at: "Дата создания"
+    active: "Активен?"
+    own: "Собственный?"
+    blocked: "Заблокирован?"
+    email: "Email"
+    phone: "Телефон"
+    position: "Позиция"
+    admins: "Администраторы"
+    admins_list: "Список администраторов"
+    country_list: "Список стран"
+    delete: "Удалить"
+    edit: "Редактировать"
+    choose_modules_and_permissions: "Укажите к каким модулям имеет доступ роль,и какие права доступа в нем ей доступны"
+    uncheck_all: "Отключить все"
+    check_all: "Включить все"
+    desc: "Описание"
+    role_manage: "Создание/редактирование роли доступа"
+    admins_manage: "Создание/редактирование администратора"
+    back_to_list: "Вернуться к списку"
+    roles_list: "Список ролей доступа"
+    info: "Инфо"
+    user_actions: "Действия"
+    roles: "Роли Доступа"
+    success_destroy: "Запись успешно удалена, со всеми связаніми записями"
+    delete_permission_confirm:  "Вы уверены что хотите удалить право доступа "
+    delete_role_confirm: "Вы уверены что хотите Роль доступа "
+    delete_modules_confirm: "Вы уверены что хотите модуль "
+    delete_admins_confirm: "Вы уверены что хотите удалить администратора "
+    delete_country_confirm: "Вы уверены что хотите удалить страну "
+    OK: "OK"
+    cancel: "Отмена"
+    module: "Модуль"
+    action: "Действие"
+    new_permission: "Новый доступ"
+    permissions: "Права доступа"
+    success: "Успешно!"
+    success_saved: "Успешно сохранено"
+    success_mail_sent: "Письмо отправлено"
+    fail_mail_sent: "Не отправлен"
+    save: "Сохранить"
+    next: "Далее"
+    is_parent: "Нету(Это модуль родитель)"
+    parent_controller: "Модуль родитель"
+    title: "Название"
+    ico: "Класс иконки"
+    controller: "Контроллер"
+    new_module: "Новый модуль"
+    update_positions: "Обновить позиции"
+    revert_positions: "Сбросить позиции"
+    add: "Добавить"
+    uncollapse: "Развернуть все"
+    collapse: "Свернуть все"
+    modules: "Модули"
+    view_details: "Подробнее"
+    server_status: "Статус сервера"
+    allowed_modules: "Доступные модули"
+    messages: Сообщения
+    profile: Профиль
+    languages:
+      ru: Русский
+      en: English
+    error: "Ошибка"
+    admin: "Admin"
+    logout: "Выйти"
+    sign_in: "Вход в административную панель"
+    login_plc: "Ваш email"
+    password_plc: "Пароль"
+    remember_me: "Запомнить меня"
+    submit_login: "Войти"
+    forgot_pass: "Забыли пароль?"
+    errors:
+      e_1: "Невозможно загрузить файл конфигурации"
+      e_2: "Конфигурация для %{meth} отсутсвует"
+      e_3: "Конфигурация для окружения %{env} отсуствует"
+      e_4: "Данный модуль является родителем, у него нету действий"
+      e_5: "Параметр %{name} передан неверно: <%{param}>"
+      e_6: "Параметр %{name} ожидался %{type}, был передан как %{is_type}"
+      e_7: "%{text}"
+      e_8: "Данный модуль <%{name}> являеться родителем и не имеет действий"
+
+
+
+    statuses:
+      _1: "Успешно"
+      _2: "Предупреждение"
+      _3: "Ошибка"
+      _4: "Исключение"
+    signed_in: "Вы успешно авторизованы"
+    signed_out: "Вы успешно деавторизованы"
+    last_signin: "Время последней авторизации"
+    admin_not_active: "Вход запрещен"
+    admin_blocked: "Пользователь заблокирован"
+    admin_blocked_until:  " до %s"
+    wrong_password: "Неверный пароль."
+    attempts_left: " Попыток до блокировки: %s"
+    wrong_credentials: "Неверный логин и/или пароль"
+    no_access: "У Вас нет доступа к этому действию"
+    reset_pass: "Восстановить пароль"
+    back_to_login: "Вернуться к авторизации"
+    hotel_internet_service: "%{type}. %{place}. %{availability}"
+    internet_service_not_available: "%{not_exist}"
+    hotel_parking_service: "%{type}. %{place}. %{availability}"
+    parking_service_not_available: "%{not_exist}"
+    hotel_breakfast_service: "%{type}"
+    bookings:
+      title: "Бронирование"
+      table_title: "Бронирования"
+      table_settings: "Настройка колонок таблицы"
+      table_columns:
+        first_column: "1 колонка"
+        second_column: "2 колонка"
+        third_column: "3 колонка"
+        fourth_column: "4 колонка"
+        fifth_column: "5 колонка"
+        sixth_column: "6 колонка"
+        seventh_column: "7 колонка"
+        eigth_column: "8 колонка"
+      show_hide: "показать/скрыть"
+      column_settings: "Настройка таблицы"
+      history_changeset: "Изменения бронирования"
+      history_changeset_table_headers:
+        author: "Автор"
+        changes: "Изменения"
+        edited_at: "Время"
+      table_headers:
+        country: "Страна"
+        city: "Город"
+        hotel_name: "Отель"
+        id: "ID брони"
+        order_id: "#ID"
+        provider_locator: "локатор провайдера"
+        provider_name: "Провайдер"
+        status: "Статус"
+        created_at: "Время создания"
+        refundable_until: "Время бесплатной отмены"
+        depot: "Торговая точка"
+        comment: "Комментарий"
+        user: "Email пользователя"
+        guests: "Гости"
+        cost: "Стоимость"
+        nights_quantity: "Кол-во ночей"
+        guests_quantity: "Кол-во гостей"
+        room_type: "Тип номера"
+      rooms:
+        title: "Комнаты"
+        food_plan: "План питания"
+      guest_block: "Гость"
+      date_from: "от"
+      date_till: "до"
+      index_title: "Список бронирований"
+      show: "Посмотреть бронирование"
+      book_block_title: "Информация о брони"
+      select: "Выбрать"
+      edit: "Редактировать"
+      info: "Краткая информация"
+      change_status: "Изменить статус"
+      download_voucher: "Загрузить ваучер"
+      send_user_email_voucher: "Отправить подтверждение"
+      locator: "Локатор"
+      created_at: "Время бронирования"
+      status: "Статус"
+      all_statuses: "Все статусы"
+      statuses:
+        hotelier_pending:
+          title: "Новое"
+          description: "бронирование, которое не было просмотрено отельером в развернутом виде"
+        hotelier_canceled:
+          title: "Отмена"
+          description: "бронирование, которое было отменено со стороны провайдера"
+        hotelier_edited:
+          title: "Запрос на изменения"
+          description: "бронирование, по которому отправлен нотификейшн о изменениях"
+        completed:
+          title: "Подтвержденный"
+          description: "the booking is confirmed and OK"
+        cancelled:
+          title: "Отменен"
+        payment_required:
+          title: "Требуется оплата"
+          description: "the booking is confirmed but should be paid in future"
+        on_request:
+          title: "Не подтверждено"
+          description: "usually this is either still not confirmed booking or to be confirmed manually"
+        partly_ok:
+          title: "Частично в обработке"
+          description: "for example, the booking is on three rooms – 2 from them are OK and one is OnRequest"
+        rejected:
+          title: "Отклонено провайдером"
+          description: "booking is rejected by a provider"
+        cancelation_pending:
+          title: "Аннулирование в обработке"
+          description: "the request to cancel was sent but still cancellation was not confirmed"
+        cancelation_required:
+          title: "Требуется отмена"
+        refund:
+          title: "Возврат"
+        failed:
+          title: "Не создан"
+        noshow:
+          title: "Не заезд"
+      provider_name: "Имя провайдера"
+      city_country: "Город, страна"
+      hotel_name: "Отель"
+      check_in: "Дата заезда"
+      check_out: "Дата выезда"
+      check_in_check_out: "Дата заезда/выезда"
+      rooms_count: "Кол-во номеров"
+      adults_count: "Кол-во взрослых"
+      provider_hotel_id: "Идентификатор отеля (от провайдера)"
+      hotel_id: "ID отеля (наша БД)"
+      refundable_until: "Время аннулирования"
+      depot: "Депот"
+      node: "Нод"
+      prices: "Цена в валютах сайта с конвертацией"
+      currency: "Валюта отеля"
+      cost: "Цена в валюте отеля"
+      user_info: "Контактные данные пользователя"
+      guest: "ФИО гостя"
+      room:
+        title: "Комната"
+        type: "Тип номера"
+        id: "ID провайдера"
+        site_prices: "Цены в валютах сайта"
+        refundable_until: "Условия отмены"
+        payment_policy: "Описание условий оплаты"
+      guests:
+        title: "Данные о гостях"
+        first_name: "Имя"
+        last_name: "Фамилия"
+        full_name: "Фамилия Имя"
+        phone: "Телефон"
+        email: "E-mail"
+        gender: "Пол"
+        birth_date: "Дата рождения"
+        nationality: "Национальность"
+        age: "Возраст"
+      filters:
+        status_default_option: "Выберите статус"
+        provider_name_default_option: "Выберите провайдера"
+        agent_default_option: "Выберите торговую точку"
+      filter_by: "Фильтровать по"
+      room_types: "Категория номера"
+      all_room_types: "Все категории"
+      all_providers: "Все провайдеры"
+      booking_period: "Период создания бронирования"
+      search: "Поиск бронирований"
+      short_info:
+        id: "Номер бронирования"
+        order_id: "Локатор провайдера"
+        provider_name: "Провайдер"
+        guest_block_title: "Контактные данные пользователя"
+        payment_block_title: "Оплата"
+        payment_type: "Тип оплаты"
+        payment_by: "Способ оплаты"
+        payment_by_credit_card: "Credit card"
+      show_modal:
+        cost_block_title: "Цена"
+        guests_info_block: "Контактные данные пользователя"
+        rooms_info_block: "Информация о номерах"
+
+    voucher:
+      payment_hotel: "You'll pay for your booking on arrival"
+      payment_now: "Booking created, paid, and confirmed"
+      _1: "Is available"
+      _0: "Is not available"
+      total_cost: "Total:"
+      total_cost_with_nds: "Including VAT:"
+      title: "Voucher"
+      sub_title: "Booking confirmation"
+      book_created_at: "Booking date:"
+      confirmation_id: "Confirmation ID:"
+      nights: "nights"
+      room: "room"
+      owner: "Booking owner"
+      age: "years old"
+      max_occupancy: "Guest quantity"
+      address: "Address:"
+      phone: "Phone:"
+      fax: "Fax:"
+      email: "E-mail:"
+      book_info: "Booking information"
+      book_id: "Booking ID"
+      your_book: "Your booking"
+      check_in_registration: "Checkin registration"
+      check_out_registration: "Checkout registration"
+      price: "Cost"
+      tariff: "Tariff"
+      service_payment: "Service fee"
+      total_price: "Total cost"
+      facilities_cost_warning: "Be aware that additional facilities (e.g., additional bed) are not included in total price."
+      hotel_on_map: "Hotel on map"
+      gps_coordinates: "GPS coordinate:"
+      depot_phone: "Phone:"
+      depot_email: "E-mail:"
+      room_info: "Room information"
+      guests: "Guests"
+      children: "Children"
+      room_max_occupancy: Maximum %s guest."
+      meal: "Meal plan"
+      with_meal: "Meal included."
+      without_meal: "Meal not icluded."
+      cancellation_policy: "Booking cancellation procedure"
+      cancellation_price: "Cancelation cost"
+      cancellation_policy_to: "To %{date} 23:59 %{currency} %{amount}"
+      cancellation_policy_from: "From %{date} 0:00 %{currency} %{amount}"
+      booking_policy: "Booking conditions"
+      parking: "Parking"
+      internet: "Internet"
+      special_request: "Special wishes"
+      footer_title: "Booking confirmed and guaranteed"
+      footer_info:
+        li_1:
+          sub_1: "Booking created, paid and confirmed, including standard taxes of each country (VAT and the like)."
+          sub_2: "Mandatory local taxes for certain destinations are not included and must be paid in person upon arrival."
+        li_2: "Only additional service fee is charged."
+        li_3: "Prepaid hotel voucher."
+      important_info:
+        title: "Important information. "
+        sub: "Important information. Dear Customer, please familiarize yourself with the information below:"
+        row_1:
+          title: "I. Before the trip"
+          sub_row_1:
+            title: "1. Voucher"
+            content_1: >
+                          Upon confirming your reservation, you receive the separate prepaid voucher that
+                          confirms your 100% payment for the reservation and includes the details of the hotel
+                          and your stay (number of rooms booked, number of guests, type of room, dates of stay,
+                          and type of meal). Please don't forget to take the voucher with you.
+            content_2: >
+                          Note that most hotels may require payment at their own rates or may reject accommodation if you
+                          don't show the valid voucher for all the guests who have arrived.
+          sub_row_2:
+            title: "2. Time of Check-In/Check-Out"
+            check_in: "Check-in time"
+            check_out: "Check-out time"
+            content: "These rules are applicable to most hotels; however, they may vary depending on the inner rules of each hotel."
+            sub_paragraph_1:
+              title: "Early check-in."
+              content: >
+                        If you intend to check in before the standard time, you should contact your travel manager for confirmation.
+                        Most hotels guarantee the early check-in only on condition of the full payment for the day preceding the check-in.
+            sub_paragraph_2:
+              title: "Late check-in."
+              content: >
+                        If you intend to check in after 18:00, you should contact your travel manager and tell the approximate time of your check-in.
+                        If you don't inform the manager, the hotel has right to rent out the room to another guest and refuse accommodation upon your arrival.
+            sub_paragraph_3:
+              title: "Early check-out."
+              content: "If you decide to leave the hotel earlier, please familiarize yourself with condition 10."
+            sub_paragraph_4:
+              title: "Late check-out."
+              content: >
+                        If you intend to check out after the standard time, you should contact your travel manager for confirmation.
+                          Most hotels guarantee the late check-out only on condition of the full payment for the day following the check-out.
+          sub_row_3:
+            title: "3. Changes and Cancellation"
+            content: >
+                      If you need to make changes to the confirmed reservation (date, type of room, number of guests, type of meal, etc.),
+                      you should contact your travel manager. If you need to cancel the reservation, please familiarize yourself with the
+                      cancellation conditions on page1 of the voucher and contact your travel manager. Note that the hotels don't consider the
+                      requests sent to them directly.
+        row_2:
+          title: "II. After Arrival"
+          sub_row_1:
+            title: "4. Check-in"
+            content: >
+                      During check-in you must show the valid voucher for all the guests who have arrived together with their IDs.
+                      The spelling of names in the IDs and vouchers must be the identical.
+          sub_row_2:
+            title: "5. Complaints"
+            content_1: >
+                        If during check-in or stay you have any complaints or claims, please contact your service provider or travel manager
+                        via a telephone number of urgent support indicated in the voucher. Those telephones are working 24/7.
+            content_2: >
+                        Note that all the claims and complaints should be immediately submitted to your service provider or travel manager.
+                        Your travel manager is not liable for any compensation for inconveniences if you haven't informed your service provider
+                        or travel manager immediately after appearance of such complaints.
+          sub_row_3:
+            title: "6. Local taxes"
+            content_1: >
+                        The sums you paid include standard taxes of each country (VAT and the like). Local taxes are not included, and
+                        they must be paid at the hotel upon check-in.
+            content_2: >
+                        Note that some hotels may not provide any information on the size of a local tax via email or telephone,
+                        and your travel manager may not be able to provide the precise amount due. On average, the tax is €1.5–€3 per day for each guest.
+                        Nonetheless, the sum may vary depending on the country.
+          sub_row_4:
+            title: "7. Additional services"
+            content_1: >
+                        The vouchers you received include only those services listed therein. Any additional service, such as telephone call, laundry,
+                        or cleaning of room, is optional and is paid during your stay at the hotel.
+            content_2: >
+                        Note that the charges for additional services cannot be included in the total bill presented by your travel manager.
+          sub_row_5:
+            title: "8. Security"
+            content_1: >
+                        During check-in some hotels may require a security to guarantee payment for additional services (with cash or credit/debit card).
+                        The security amount varies depending on the inner policy of the hotel.
+            content_2: >
+                        Note that you have right to refuse the security if you don't plan receiving additional services from the hotel. If you don't
+                        agree to provide the security, the hotel may require that you pay for all the services, with cash or credit/debit card,
+                        on a pay-as-you-go basis.
+          sub_row_6:
+            title: "9. Changes"
+            content_1: >
+                        If you need to make changes (date, number of guests, type of meal, etc.) during your stay, you should check such
+                        a possibility at the reception desk upon arrival. If you wish to include the price of changes (if any) in the total
+                        bill presented by your travel manager, you should contact him/her or pay for the changes (if any) at the hotel.
+            content_2: >
+                        Note that if you have paid for the changes at the hotel, your travel manager won't be able to refund the cost and reissue
+                        the bill with such payment included.
+          sub_row_7:
+            title: "10. Early check-out"
+            content_1: >
+                        If you need to leave the hotel earlier than planned, your travel manager won't be able to refund the non-use of the days left
+                        unless you show the original of the document confirming the refund for the days canceled.
+            content_2: >
+                        Note that during check-out you must contact the senior accommodation manager and ask him/her for an official form letter where
+                        following details must be indicated: date of check-out; hotel's confirmation of the refund for the days canceled; date, full name,
+                        and position of the hotel employee; hotel's seal. Upon refund, please forward the letter to your travel manager.
+
