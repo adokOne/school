@@ -48,8 +48,9 @@
   <div class="container">
     <h2><%= t("school.calendar")%></h2>
     <div class="group-select">
-      <select>
+      <select name="course" id="course">
         <option disabled ><%= t("school.choose_group")%></option>
+        <option value="0" ><%= t("school.all_groups")%></option>
         <%= courses.each do |course| %>
           <option value="<%= course.id%>" ><%= course.name %></option>
         <% end %>

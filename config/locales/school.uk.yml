@@ -1,5 +1,6 @@
 uk:
   school:
+    all_groups: "Всі групи"
     choose_file: Вибрати файл
     add_cv_file: завантажте файл з Вашим резюме
     vavancy_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ:"

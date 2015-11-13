@@ -14,13 +14,16 @@ $.Controller "Main",
         navigateByImgClick: true
 
   init_calendar: ->
-    self = @
+    lessons = {}
+    Object.keys(@lessons).map((key) ->
+      $.extend(lessons,@lessons[key])
+    )
     @calendar = @element.find('#calendar').calendario(
       onDayClick: ($el, $contentEl, dateProperties) ->
         for key of dateProperties
           console.log key + ' = ' + dateProperties[key]
         return
-      caldata: self.lessons
+      caldata: lessons
       weeks: I18n.weeks
       weekabbrs: I18n.weekabbrs
       months: I18n.months
@@ -57,3 +60,16 @@ $.Controller "Main",
     ev.preventDefault()
     @blog_subscribe = $("#vavancy_subscribe_popup").controller()
     @blog_subscribe.open()
+
+  "#course -> change": (ev) ->
+    id = $(ev.target).val()
+    if 0 == Number(id)
+      data = {}
+      Object.keys(@lessons).map((key) ->
+        $.extend(data,@lessons[key])
+      )
+    else
+      data = @lessons[id]
+      data = if data then data else {}
+    @calendar.setData(data,data)
+
