@@ -8,6 +8,7 @@ class HomeController < ApplicationController
     @courses   = ::Course.active.for_school
     @teachers  = ::Teacher.for_school
     @photos    = ::Photo.for_school
+    @lessons   = ::Lesson.for_school
   end
 
   def club
@@ -15,6 +16,7 @@ class HomeController < ApplicationController
     @courses   = ::Course.active.for_club
     @teachers  = ::Teacher.for_club
     @photos    = ::Photo.for_club
+    @lessons   = ::Lesson.for_club
   end
 
   def partners

@@ -109,5 +109,12 @@
   </div>
   <%= render partial: "shared/blog_subscribe_form" %>
   <%= render partial: "shared/vacancy_subscribe_form" %>
+  <script type="text/javascript">
+
+    var lessons = {};
+    <% @lessons.each do |lesson| %>
+      lessons['<%= lesson.formated_date %>'] = '<%= lesson.formated_html.html_safe %>';
+    <% end %>
+  </script>
 </body>
 </html>

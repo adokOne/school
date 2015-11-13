@@ -18,5 +18,6 @@ class ApplicationController < ActionController::Base
   def set_link_type_ands_subscriber
     @links_type = "school"
     @subscriber = Subscriber.new
+    @lessons = []
   end
 end

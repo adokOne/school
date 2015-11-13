@@ -28,6 +28,7 @@
 //= require jquery.validate
 //= require ./protos
 //= require ./inflector
+//= require ./i18n
 //= require validation_rules
 //= require ./controllers/jquery.mvc
 //= require_tree ./controllers
