@@ -30,12 +30,14 @@ B1Admin::Engine.routes.draw do
   namespace :school do
     resources :groups
     resources :users
+    resources :lessons
   	resources :courses do
       post "upload", on: :member
     end
   end
   namespace :club do
     resources :users
+    resources :lessons
     resources :courses do
       post "upload", on: :member
     end

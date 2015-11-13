@@ -1,0 +1,27 @@
+<div data-ctrl="Form" style="display:none" id="blog_subscribe_popup">
+  <div class="overlay"></div>
+    <!-- підписка на новини -->
+  <div class="form-block">
+    <a href="#" class="close"></a>
+    <h2><%= t("school.news_subscribe_popup_header")%></h2>
+    <%= form_for @subscriber, url: blog_subscribe_path do |f|%>
+       <%=f.hidden_field :blog_subscribe, value: true  %>
+      <div class="user-data">
+        <div class="form-row">
+          <%=f.text_field :name, class:"txtinput fl", placeholder: t('school.name_plc'), required: true  %>
+          <%=f.email_field :email, class:"txtinput fr", placeholder: t('school.email_plc'), required: true  %>
+        </div>
+<!--         <div class="form-row">
+          <%= f.check_box :active, required: true, checked: true  %>
+          <%= f.label :active, "Я хочу отримувати новини від SPEAK на скриньку"  %>
+        </div> -->
+      </div>
+
+      <a href="#" class="subscribe js-submit"><%= t("school.subscribe_for_news")%></a>
+    <% end%>
+
+    <div class="owl error" style="display:none">
+      <p class="bobble"><%= t("school.fields_wit_errors_text").html_safe%></p>
+    </div>
+  </div>
+</div>

@@ -1,5 +1,15 @@
 uk:
   school:
+    choose_file: Вибрати файл
+    add_cv_file: завантажте файл з Вашим резюме
+    vavancy_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ:"
+    email_plc: вкажіть ваш e-mail
+    name_plc: ваше ім”я
+    phone_plc: ваш телефон
+    fields_wit_errors_text: "<span>БУДЬТЕ УВАЖНІ!</span> Ви не заповнили всі поля"
+    subscribe_for_news: підписатись на новини
+    subscribe_for_vacancy: надiслати резюме
+    news_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ ДЛЯ ПІДПИСКИ НА НОВИНИ:"
     follow_us: Слідкуй за нами в
     finded_results: "ЗНАЙДЕНО результатів %{count} "
     learn_more: Дізнатись більше

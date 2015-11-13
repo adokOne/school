@@ -16,15 +16,7 @@
   <meta property="og:image" content="<%= Settings.domain%>/<%= asset_path 'logo.png' %>" />
   <meta property="og:site_name" content="<%= Settings.domain%>" />
 </head>
-<body>
-<!-- <div id="fb-root"></div> -->
-<!--<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) return;
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/uk_UA/sdk.js#xfbml=1&version=v2.4";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>-->
+<body data-ctrl="Main">
 
   <div class="header">
     <div class="container">
@@ -77,12 +69,12 @@
     <div class="container">
       <div class="row">
         <div class="col-3">
-          <a href="#" class="subscribe"><%= t("school.subscribe")%></a>
+          <a href="#" class="subscribe" id="blog_subscribe"><%= t("school.subscribe")%></a>
           <% if vacancies.any? %>
             <ul class="vacancy">
               <li><h3><%= t("school.vacancies")%></h3></li>
               <% vacancies.each do |vacancy| %>
-                <li><a href="#"><%= vacancy.name %></a></li>
+                <li><a href="#" class="vacancy_subscribe"><%= vacancy.name %></a></li>
               <% end %>
             </ul>
           <% end %>
@@ -115,5 +107,7 @@
 
     </div>
   </div>
+  <%= render partial: "shared/blog_subscribe_form" %>
+  <%= render partial: "shared/vacancy_subscribe_form" %>
 </body>
 </html>

@@ -2,11 +2,22 @@ $.Controller "Main",
   init: ->
     @init_slideshow();
     @init_calendar();
+
+    console.log(@blog_subscribe )
     $('.courses-list a').click ->
       $('.course-description').show()
       $('html, body').scrollTop $('.course-description').offset().top
       false
 
+  "#blog_subscribe -> click": (ev) ->
+    ev.preventDefault()
+    @blog_subscribe = $("#blog_subscribe_popup").controller()
+    @blog_subscribe.open()
+
+  ".vacancy_subscribe -> click": (ev) ->
+    ev.preventDefault()
+    @blog_subscribe = $("#vavancy_subscribe_popup").controller()
+    @blog_subscribe.open()
 
   init_slideshow: ->
     $('.cycle-slideshow').cycle slides: '.s-item'

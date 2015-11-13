@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151112200158) do
+ActiveRecord::Schema.define(version: 20151113105507) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "",    null: false
@@ -146,6 +146,17 @@ ActiveRecord::Schema.define(version: 20151112200158) do
   end
 
   add_index "groups", ["group_type"], name: "index_groups_on_group_type", using: :btree
+
+  create_table "lessons", force: :cascade do |t|
+    t.string   "date",       limit: 255, default: "",   null: false
+    t.string   "time",       limit: 255, default: "",   null: false
+    t.integer  "course_id",  limit: 4,   default: 0,    null: false
+    t.boolean  "active",     limit: 1,   default: true, null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lessons", ["course_id"], name: "index_lessons_on_course_id", using: :btree
 
   create_table "pages", force: :cascade do |t|
     t.integer  "category_id",       limit: 4,          default: 0,   null: false

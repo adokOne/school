@@ -1,0 +1,18 @@
+%script{id: 'modal_add_diapason.html', type: 'text/ng-template'}
+  .modal-header{'ng-init' => "url='#{club_lessons_path}';"}
+    %button.bootbox-close-button.close{'ng-click' => 'cancel()', style: 'margin-top: -10px;'} ×
+    %h4.modal-title {{editedItem.course_name}}
+  .modal-body
+    %form{name:'itemForm'}
+      .row
+        .col-md-6
+          .form-group{"ng-class" => "{'has-error': itemForm.date_start.$invalid && itemForm.$submitted}"}
+            = text_field_tag :date,"" ,class:"form-control", "ng-model"=>"editedItem.date", disabled:true
+        .col-md-6
+          .form-group{"ng-class" => "{'has-error': itemForm.time.$invalid && itemForm.$submitted}"}
+            %select.form-control{'id' => 'time', 'ng-model' => 'editedItem.time'}
+              -(0..23).each do |i|
+                %option{'value' => "#{i.to_s.rjust(2, '0')}:00"}="#{i.to_s.rjust(2, '0')}:00"
+  .modal-footer
+    %button.btn.btn-primary{'ng-click' => 'save()'}=t('b1_admin.save')
+    %button.btn.btn-default{'ng-click' => 'cancel()'}=t('b1_admin.cancel')

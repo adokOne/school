@@ -4,7 +4,7 @@
       <h2><%= t("school.tematic_courses")%></h2>
       <p>У Клубі діє сім тематичних груп. Вибирай групи по інтересах, <a href="#" class="reg"><%= t("school.reg_and_go")%></a></p>
 
-      <% courses.in_groups_of(3,false).each do |group|%>
+      <% courses.in_groups_of(4,false).each do |group|%>
         <div class="row">
           <% group.each do |course|%>
           <div class="item">
