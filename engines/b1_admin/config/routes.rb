@@ -59,6 +59,9 @@ B1Admin::Engine.routes.draw do
     resources :photos do
       post "upload", on: :member
     end
+    resources :cvs do
+      post "upload", on: :member
+    end
     resources :partners do
       post "upload", on: :member
     end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115120319) do
+ActiveRecord::Schema.define(version: 20151115141154) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "",    null: false
@@ -136,6 +136,16 @@ ActiveRecord::Schema.define(version: 20151115120319) do
   end
 
   add_index "courses", ["course_type"], name: "index_courses_on_course_type", using: :btree
+
+  create_table "cvs", force: :cascade do |t|
+    t.string   "name",                  limit: 255, default: ""
+    t.string   "email",                 limit: 255, default: ""
+    t.string   "phone",                 limit: 255, default: ""
+    t.string   "document_file_name",    limit: 255
+    t.string   "document_content_type", limit: 255
+    t.integer  "document_file_size",    limit: 4
+    t.datetime "document_updated_at"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "",   null: false
