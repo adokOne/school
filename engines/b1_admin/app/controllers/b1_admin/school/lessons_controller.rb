@@ -1,5 +1,5 @@
 module B1Admin
-  module Club
+  module School
     class LessonsController < B1Admin::ApplicationController
 
       def allowed_params
@@ -24,7 +24,7 @@ module B1Admin
       end
 
       # Set data for CRUD module
-      @model = ::Lesson.for_club
+      @model = ::Lesson.for_school
       # Include CRUD module
       include B1Admin::Concerns::Crud
     end

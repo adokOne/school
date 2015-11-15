@@ -1,0 +1,11 @@
+%div{"ng-controller" => "LessonsController", 'data-url' => school_lessons_path, 'data-courses-url' => school_lessons_path, "ng-init" => "", 'ng_mouseup' => 'mouseup($event);', :'data-delete-text'=>t('b1_admin.delete_confirm'),}
+  #content-container
+    #page-title
+      %h1.page-header.text-overflow
+        Заняття
+    #page-content
+      .row
+        .col-md-12#items
+          .panel
+            .panel-body
+              = render 'tariffs_map'

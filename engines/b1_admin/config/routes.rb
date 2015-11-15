@@ -28,7 +28,7 @@ B1Admin::Engine.routes.draw do
   end
 
   namespace :school do
-    resources :groups
+    resources :lessons
     resources :users
     resources :lessons
   	resources :courses do

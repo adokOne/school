@@ -16,16 +16,22 @@
                   .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
                     = hidden_field_tag :course_type, Course::SCHOOL_TYPE, "ng-model" => "editedItem.course_type"
                     = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
-                    .col-sm-8
+                    .col-sm-7
                       = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
                     = label_tag :title, "Повна назва", class:"col-sm-3 control-label"
-                    .col-sm-8
+                    .col-sm-7
                       = text_field_tag :title,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.title"
-
-
                     = label_tag :seo, "Ідентифкатор фонової картинки", class:"col-sm-3 control-label"
-                    .col-sm-8
+                    .col-sm-7
                       = text_field_tag :seo,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.seo"
+                  .form-group{"ng-class" => "{'has-error': itemForm.date_end.$invalid && itemForm.$submitted}"}
+                    = label_tag :name,"Дата початку", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      .input-group
+                        %input.form-control{"ng-focus"=>"status.opened = true",'close-text' => 'Close', 'type' => 'date', 'datepicker-popup' => '{{format}}', 'datepicker-options' => 'dateOptions', 'is-open' => 'status.opened', 'min-date' => 'today','max-date' => 'end_year', name: 'date_start', 'ng-model' => 'editedItem.date_start', type: 'text', required: true, "show-weeks"=>'false'}
+                        %span.input-group-btn
+                          %button.btn.btn-default{'ng-click' => 'open($event)', :type => 'button'}
+                            %i.glyphicon.glyphicon-calendar
                   .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
                     = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
                     .col-sm-7
@@ -51,3 +57,14 @@
                 %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
                   %i.fa.fa-pencil.fa-fw
                   =t("b1_admin.save")
+
+
+              / %input.form-control{'close-text' => 'Close',
+              /                     'type' => 'date',
+              /                     'datepicker-popup' => '{{format}}',
+              /                     'datepicker-options' => 'dateOptions',
+              /                     'is-open' => 'end_opened',
+              /                     'min-date' => 'item.date_start',
+              /                     'max-date' => 'end_year',
+              /                     name: 'date_end',
+              /                     'ng-model' => 'item.date_end', type: 'text', required: true}

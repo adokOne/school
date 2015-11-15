@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   end
 
   def school
-    @courses   = ::Course.active.for_school
+    @courses   = ::Course.active.for_school.order(date_start: :asc)
     @teachers  = ::Teacher.for_school
     @photos    = ::Photo.for_school
     @lessons   = ::Lesson.for_school

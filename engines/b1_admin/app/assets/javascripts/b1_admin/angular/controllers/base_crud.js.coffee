@@ -22,6 +22,24 @@ angular.module("B1Admin").controller "CrudController", [
       3: "#D85C28"
       4: "#FF0101"
 
+    $scope.today = new Date();
+    $scope.end_year = moment().add(1, 'year');
+    $scope.dateOptions =
+      formatYear: 'yy',
+      startingDay: 1
+
+
+    $scope.status =
+      opened: false
+    $scope.format = 'dd.MM.yyyy'
+
+    $scope.open = ($event)->
+      $event.preventDefault(); $event.stopPropagation();
+      $scope.status.opened = true
+
+
+
+
     $scope.Item = $resource("#{$element.data("url")}/:id.json",{},{query:{isArray:false},update:{ method:'PUT' }})
     if angular.element("#itemsTable").length
       $scope.itemsTable = new ngTableParams(

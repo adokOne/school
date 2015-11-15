@@ -1,0 +1,59 @@
+:javascript
+  moment.locale("#{I18n.default_locale}")
+.row.tarif-grid__wrapper
+  .col-md-2
+  .col-md-10.tarif-grid__chess
+    %table.table.tariff_header_month
+      %tr
+        %td{'ng-repeat' => 'month in calendar.header_months', 'ng-click' => 'set_month(month.moment);'}
+          .cell
+            %strong {{month.year}}
+            %br
+            {{month.month}}
+.row.tarif-grid__wrapper
+  .col-md-2.tarif-grid__sibebar
+    %table.table.rooms
+      %tr
+        %td
+          %div.cell-hidden
+            %strong
+              Курси
+      %tr{ng_repeat: 'item in courses'}
+        %td{height:40,valign:"middle",style:"vertical-align:middle"}
+          %div
+            .item__text
+              %span.text-bold
+                {{item.name | limitTo: 20}}
+
+  .col-md-10.tarif-grid__chess
+    .tariff_arrows.tariff_arrows__left{'ng-click' => 'scroll_left();'}
+      .fa.fa-arrow-left.fa-lg
+    .tariff_map_container{style: 'width: 100%'}
+      .table-cell{'ng-repeat' => 'month in calendar.months'}
+        %table.table.tariffs
+          %thead
+            %tr
+              %td.month{colspan:'{{month.days.length}}'}
+                .cell-hidden
+                  %strong
+                    {{month.moment.format('MMM, YYYY')}}
+            %tr
+              %td{ng_repeat: 'day in month.days', 'ng-class' => '{weekend: is_weekend(day)}'}
+                .cell
+                  {{day.format('D')}}
+                  %br
+                  {{day.format('ddd')}}
+          %tbody
+            %tr{ng_repeat: 'item in courses'}
+              %td{ng_repeat: 'day in month.days', 'ng-init' => 'curr_day=day.format("<%= Lesson::JS_DATE_FORMAT%>");lesson=lesson_for_day_and_course(curr_day, item)', 'ng-class' => '{weekend: is_weekend(day)}'}
+                .tariff.cell{'data-item' =>  '{{lesson}}',ng_mousedown: "#{user_can?(:create) ? 'mousedown($event, day)' : ''};",ng_mouseover: 'mouseover($event);'}
+                  %div{'ng-class' => '{"text-bold": lesson.id}'}
+                    {{lesson.id && lesson.time || ""}}
+
+
+
+    .clearfix
+    .tariff_arrows.tariff_arrows__right{'ng-click' => 'scroll_right();'}
+      .fa.fa-arrow-right.fa-lg
+
+= render 'modal_add_diapason'

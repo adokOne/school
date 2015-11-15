@@ -6,6 +6,7 @@
 //= require angular-route
 //= require angular-ui-bootstrap
 //= require angular-ui-bootstrap-tpls
+//= require ./angular-locale_uk-ua
 //= require ./vendor/moment-with-locales
 //= require ./vendor/moment-range
 //= require ./vendor/pace.min

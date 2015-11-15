@@ -1,8 +1,8 @@
 module B1Admin
   module School
-    module Course
+    module Lesson
       class ItemSerializer < ::B1Admin::BaseSerializer
-        attributes :name, :active, :logo_file_name,:id, :seo, :title, :date_start
+        attributes :date,:active,:course_id, :time, :id
       end
     end
   end
