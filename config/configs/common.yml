@@ -14,7 +14,7 @@ defaults: &defaults
     inst_link: https://instagram.com/speak_english_lviv
 
   domain: "http://0.0.0.0:4000"
-  fb_token: CAACEdEose0cBAKQp1PAZA7PHwzXhoKe9uGdAIgHH6TkQ0ZBgiyZBTtXQ6VVJx23IWrxhxQpregJwzguFgKyzQHCVsrBbR1kpfKHsciEE9S8gBdxMsdXFhUDOEt5T67LwAqAnb8oCiWFkP8AEpXCX9wakjyLS3BVquA3UxsW0d8jKEJ92KyhcB1MoNXzshOHjXQsO0AyPgZDZD
+  fb_token: CAACEdEose0cBAJKMZCJOSOBvZA42GZCgHd5zCP4UZAw5kzBZCEY2fshrsZCLjVbohuG0Mx4QoE1HSk4jBtWClPXzRAeZAJZBGzPsydvjG8rMMasluBZBbYZADvdODkmqXbNGqK22v2cgZAp1eJbZBXPAer7MW3fjZCnvg3LTZBnPk4GzGIcLzi7i9UrW0iZAgMpZCLS7S2W9ldzDek8yDwZDZD
   hotelier_langs:
     - en
     - ru

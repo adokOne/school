@@ -19,6 +19,7 @@ class HomeController < ApplicationController
     @photos    = ::Photo.for_club
     @lessons   = ::Lesson.for_club
     @top_menu  = I18n.t("school.club_top_links")
+    @reviews   = fb_manager.get_club_posts
   end
 
   def partners
@@ -62,6 +63,10 @@ class HomeController < ApplicationController
 
   def cv_allowed_params
     params.require(:cv).permit(:name,:email,:phone)
+  end
+
+  def fb_manager
+    @fb ||= Fb.new
   end
 
 end

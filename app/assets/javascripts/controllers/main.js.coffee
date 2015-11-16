@@ -59,7 +59,7 @@ $.Controller "Main",
   ".courses-list a -> click": (ev) ->
     ev.preventDefault()
     @element.find('.course-description').show()
-    $('html, body').scrollTop $('.course-description').offset().top
+    $('html, body').animate({scrollTop: $('.course-description').offset().top}, 800);
 
     idx = 0
     @element.find('.cycle-slideshow').cycle(idx);
@@ -93,6 +93,7 @@ $.Controller "Main",
   ".course-description .close -> click": (ev) ->
     ev.preventDefault()
     @element.find('.course-description').hide()
+    $('html, body').animate({scrollTop: $('.courses-block').offset().top}, 800);
 
 
   "#course -> change": (ev) ->
