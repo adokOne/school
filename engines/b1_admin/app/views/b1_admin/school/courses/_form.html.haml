@@ -39,7 +39,7 @@
                   .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang lang" }
                     = label_tag :"desc", t("b1_admin.desc"), class:"col-sm-3 control-label"
                     .col-sm-7
-                      .summernote{class: "summernote lang lang",:"data-lang"=>"uk"}
+                      .summernote{class: "summernote lang",:"data-lang"=>"uk"}
                       = text_area_tag :"desc","" ,class:"form-control hidden",required: true, "ng-model"=>"editedItem.desc"
 
 

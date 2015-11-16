@@ -101,7 +101,7 @@ angular.module("B1Admin").controller "CrudController", [
       setFromEditor()
       $scope.beforeSave()
       $scope.itemForm.$setSubmitted()
-
+      console.log($scope.itemForm)
       if $scope.itemForm.$valid
         $rootScope.showLoader()
 
@@ -136,6 +136,8 @@ angular.module("B1Admin").controller "CrudController", [
           else
             $scope.editedItem["#{text_area_name}_#{item.data("lang")}"] = item.code()
         else
+          console.log("wefwe")
+          console.log(text_area_name,$scope.editedItem[text_area_name])
           $scope.editedItem[text_area_name] = item.code()
       )
     setToEditor = ->
