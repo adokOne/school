@@ -9,6 +9,7 @@ class HomeController < ApplicationController
     @teachers  = ::Teacher.for_school
     @photos    = ::Photo.for_school
     @lessons   = ::Lesson.for_school
+    @top_menu  = I18n.t("school.school_top_links")
   end
 
   def club
@@ -17,6 +18,7 @@ class HomeController < ApplicationController
     @teachers  = ::Teacher.for_club
     @photos    = ::Photo.for_club
     @lessons   = ::Lesson.for_club
+    @top_menu  = I18n.t("school.club_top_links")
   end
 
   def partners

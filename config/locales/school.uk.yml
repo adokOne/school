@@ -1,5 +1,18 @@
 uk:
   school:
+    school_top_links:
+      about: ПРО ШКОЛУ
+      courses: ТЕМАТИЧНІ ГРУПИ
+      teachers: ВИКЛАДАЧІ
+      calendar_block: КАЛЕНДАР
+      gallery:  ГАЛЕРЕЯ
+    club_top_links:
+      about: ПРО КЛУБ
+      courses: ТЕМАТИЧНІ ГРУПИ
+      teachers: ВИКЛАДАЧІ
+      calendar_block: КАЛЕНДАР
+      gallery:  ГАЛЕРЕЯ
+
     subscribe_for_lesson: записатись на заняття
     all_groups: "Всі групи"
     choose_file: Вибрати файл

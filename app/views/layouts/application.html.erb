@@ -43,22 +43,20 @@
           <%= link_to t("school.menu.contacts"), url("contacts"), class: url_is_current?("contacts") %>
         </li>
       </ul>
-
-      <div class="menu-toggle">
-        <a href="#" class="burger">
-          <span></span>
-          <span></span>
-          <span></span>
-        </a>
-
-        <ul class="open-menu">
-          <li><a href="#">про клуб</a></li>
-          <li><a href="#">тематичні групи</a></li>
-          <li><a href="#">викладачі</a></li>
-          <li><a href="#">календар</a></li>
-          <li><a href="#">галерея</a></li>
-        </ul>
-      </div>
+      <% if @top_menu.any?%>
+        <div class="menu-toggle">
+          <a href="#" class="burger">
+            <span></span>
+            <span></span>
+            <span></span>
+          </a>
+          <ul class="open-menu">
+            <% @top_menu.each_pair do |link, text|%>
+              <li><a href="#<%= link %>"><%= text %></a></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
       <div class="clear"></div>
     </div>
 

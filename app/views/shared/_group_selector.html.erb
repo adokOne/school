@@ -1,8 +1,0 @@
-<div class="group-select">
-  <select>
-    <option disabled ><%= t("school.choose_group")%></option>
-    <%= @groups.each do |group| %>
-      <option value="<%= group.id%>" ><%= group.name %></option>
-    <% end %>
-  </select>
-</div>

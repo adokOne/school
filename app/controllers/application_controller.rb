@@ -20,5 +20,6 @@ class ApplicationController < ActionController::Base
     @subscriber = Subscriber.new
     @cv = Cv.new
     @lessons = []
+    @top_menu = {}
   end
 end
