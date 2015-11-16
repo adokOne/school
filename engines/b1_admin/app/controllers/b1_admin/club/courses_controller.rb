@@ -3,7 +3,7 @@ module B1Admin
     class CoursesController < B1Admin::ApplicationController
 
       def allowed_params
-        params.require(:item).permit(:active,:name,:course_type,:seo,:title)
+        params.require(:item).permit(:active,:name,:course_type,:seo,:title,:desc)
       end
 
       # Set data for CRUD module
