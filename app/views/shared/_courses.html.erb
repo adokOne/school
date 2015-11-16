@@ -36,7 +36,7 @@
           <div class="s-item <%= course.seo %>">
             <div class="container_small">
               <h2><%= course.name %></h2>
-              <p><%= course.desc.html_safe %></p>
+              <p><%= course.desc.to_s.html_safe %></p>
               <a data-id="<%= course.id %>" href="#" class="schedule"><%= t("school.month_schedule")%></a>
             </div>
             <a href="#" data-id="<%= course.id %>" class="subscribe course_subscribe"><%= t("school.subscribe_to_earning")%></a>
