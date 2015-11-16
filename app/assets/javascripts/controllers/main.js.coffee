@@ -58,10 +58,14 @@ $.Controller "Main",
 
   ".courses-list a -> click": (ev) ->
     ev.preventDefault()
+    el = $(ev.target)
+    el = if el.hasClass("js-link") then el else el.parents(".js-link")
+    cls = el.data("cls")
     @element.find('.course-description').show()
     $('html, body').animate({scrollTop: $('.course-description').offset().top}, 800);
-
-    idx = 0
+    idx = @element.find('.cycle-slideshow .s-item').index(@element.find(".cycle-slideshow .#{cls}"))
+    console.log(".cycle-slideshow .#{cls}")
+    console.log(idx)
     @element.find('.cycle-slideshow').cycle(idx);
 
 

@@ -8,8 +8,8 @@
         <div class="row">
           <% group.each_with_index do |course,idx|%>
           <% cls = idx == 0 && group.count == 3 ? "offset" : idx == 0 && group.count == 2 ? "offset-3" : idx == 0 && group.count == 1 ? "offset-4" : ""  %>
-          <div class="item <%= cls%>">
-            <a href="#" class="<%= course.seo%>">
+          <div class="item <%= cls%>" >
+            <a href="#" class="<%= course.seo%> js-link" data-cls="<%= course.seo%>">
               <div class="icon">
                 <img src="<%= course.logo(:original) %>" alt="<%= course.name %>">
               </div>
