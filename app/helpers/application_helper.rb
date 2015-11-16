@@ -10,7 +10,7 @@ module ApplicationHelper
   end
 
   def url_is_current?( url, cls = "active" )
-    /#{params[:action]}/ =~ url ? "active" : ""
+    /#{params[:action]}/ =~ url || /#{params[:controller]}/ =~ url ? "active" : ""
   end
 
 end

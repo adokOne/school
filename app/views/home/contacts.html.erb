@@ -2,8 +2,8 @@
   <div class="contacts-block">
     <h2><%= t("school.our_addresses")%></h2>
     <div class="col-6">
-      <div class="map">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2572.7579476243427!2d24.026615265824013!3d49.84700546644472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473add0cd987b19f%3A0x9548d76e18e1786d!2z0LLRg9C7LiDQnNGD0LvRj9GA0YHRjNC60LAsIDLQkCwg0JvRjNCy0ZbQsiwg0JvRjNCy0ZbQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1sru!2sua!4v1447077365230" width="454" height="370" frameborder="0" style="border:0" allowfullscreen></iframe>
+      <div class="map" id="addresses_map" style="height:370px">
+<!--         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2572.7579476243427!2d24.026615265824013!3d49.84700546644472!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x473add0cd987b19f%3A0x9548d76e18e1786d!2z0LLRg9C7LiDQnNGD0LvRj9GA0YHRjNC60LAsIDLQkCwg0JvRjNCy0ZbQsiwg0JvRjNCy0ZbQstGB0YzQutCwINC-0LHQu9Cw0YHRgtGM!5e0!3m2!1sru!2sua!4v1447077365230" width="454" height="370" frameborder="0" style="border:0" allowfullscreen></iframe> -->
       </div>
     </div>
     <div class="col-6">
@@ -29,3 +29,84 @@
   </div>
   <div class="clear"></div>
 </div>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+<script type="text/javascript">
+
+
+        var map;
+
+
+        function initialize()
+        {
+
+          var mapOptions = {
+              zoom: 15,
+              center: new google.maps.LatLng(49.8432195,24.029885),
+              scrollwheel: false,
+              mapTypeControlOptions: {
+                  mapTypeIds: ['map_style']
+                }
+            };
+
+          map = new google.maps.Map(document.getElementById('addresses_map'),
+              mapOptions);
+
+
+          var styles = [
+                {
+                    "stylers": [
+                      { "saturation": -100 },
+                      { "lightness": -8 },
+                      { "gamma": 1.18 }
+                    ]
+                }
+              ];
+          var styledMap = new google.maps.StyledMapType(styles, {name: "Styled Map"});
+
+          map.mapTypes.set('map_style', styledMap);
+          map.setMapTypeId('map_style');
+
+
+                        var myLatLng = new google.maps.LatLng(49.8432195,24.0304548);
+              var image = {
+                  url: '/img/spot2.png',
+                  // This marker is 20 pixels wide by 32 pixels tall.
+                  size: new google.maps.Size(32, 32),
+                  // The origin for this image is 0,0.
+                  origin: new google.maps.Point(0,0),
+                  // The anchor for this image is the base of the flagpole at 0,32.
+                  anchor: new google.maps.Point(7, 9)
+                };
+
+              var marker = new google.maps.Marker({
+                  position: myLatLng,
+                  map: map,
+                  icon: image,
+              });
+
+                          var myLatLng = new google.maps.LatLng(49.84671,24.02765);
+              var image = {
+                  url: '/img/spot.png',
+                  // This marker is 20 pixels wide by 32 pixels tall.
+                  size: new google.maps.Size(32, 32),
+                  // The origin for this image is 0,0.
+                  origin: new google.maps.Point(0,0),
+                  // The anchor for this image is the base of the flagpole at 0,32.
+                  anchor: new google.maps.Point(7, 9)
+                };
+
+              var marker = new google.maps.Marker({
+                  position: myLatLng,
+                  map: map,
+                  icon: image,
+              });
+
+
+        }
+
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+
+
+
+</script>

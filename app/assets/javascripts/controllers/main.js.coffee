@@ -1,6 +1,6 @@
 $.Controller "Main",
   init: ->
-    @is_blog = @element.find(".search-block").size() > 0
+    @is_blog = @element.find(".calendar-block").size() < 1
     @lessons = if typeof lessons == "undefined" then {} else lessons
     @init_slideshow();
     @init_calendar();
