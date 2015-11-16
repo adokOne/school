@@ -1,15 +1,15 @@
 #content-container
   #page-title
-    %a.btn.btn-success.pull-right{href:club_users_path,"ng-click"=>"$root.setRoute('#{club_users_path}')"}=t("b1_admin.back_to_list")
+    %a.btn.btn-success.pull-right{href:blog_users_path,"ng-click"=>"$root.setRoute('#{blog_users_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
-      Користувачі
-  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};editedItem.club_subscribe=true", :"data-url"=>club_users_path}
+      Підписники
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};editedItem.club_subscribe=true", :"data-url"=>blog_users_path}
     .row
       .col
         .panel
           .panel-heading
-            %h3.panel-title Створення/редагування користувача
-          = form_tag club_users_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            %h3.panel-title Створення/редагування підписника
+          = form_tag blog_users_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .row
                 .col-md-8

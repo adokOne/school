@@ -10,7 +10,6 @@
             .panel-control
               %button.btn.btn-default{:name => "refresh", :title => "Refresh", :type => "button","ng-click"=>"itemsTable.reload()"}
                 %i.fa.fa-refresh.icon-refresh
-              %a.btn.btn-primary{href:new_content_cv_path,"ng-click"=>"$root.setRoute('#{new_content_cv_path}')"}=t("b1_admin.add")
             %h3.panel-title Список резюме
 
           .panel-body
@@ -18,7 +17,7 @@
             %div{"cg-busy" => "{'promise': itemsPromise,'backdrop': true,'message': '#{t('b1_admin.loading')}'}"}
               %table.table.table-hover.table-striped.table-vcenter#itemsTable{"ng-table"=>"itemsTable"}
                 %tr{"ng-repeat" => "item in data"}
-                  %td{"data-title" => "'#{t('b1_admin.name')}'"}
+                  %td{"data-title" => "'Імя'"}
                     {{item.name}}
                   %td{"data-title" => "'#{t('b1_admin.email')}'"}
                     {{item.email}}
@@ -26,10 +25,7 @@
                     {{item.phone}}
 
                   %td{"data-title" => "'Файл з резюме'"}
-                    {{#item.cv_exist}}
-                      %a{target:"_blank", href: "'/system/photos/' + editedItem.id + '/document_file_name'"}
-                    {{/item.cv_exist}}
-
+                    %a{:"ng-show"=>"item.cv_exist",target:"_blank", href: "'/system/photos/' + editedItem.id + '/document_file_name'"}
                   %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
                     - if user_can?(:destroy)
                       %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)"}
