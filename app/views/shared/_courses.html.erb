@@ -34,7 +34,7 @@
         <% courses.each do |course| %>
           <div class="s-item <%= course.seo %>">
             <div class="container_small">
-              <h2><%= course.title %></h2>
+              <h2><%= course.name %></h2>
               <p><%= course.desc %></p>
               <a data-id="<%= course.id %>" href="#" class="schedule"><%= t("school.month_schedule")%></a>
             </div>

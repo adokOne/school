@@ -18,9 +18,9 @@
                     = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
                     .col-sm-7
                       = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
-                    = label_tag :title, "Повна назва", class:"col-sm-3 control-label"
-                    .col-sm-7
-                      = text_field_tag :title,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.title"
+                    / = label_tag :title, "Повна назва", class:"col-sm-3 control-label"
+                    / .col-sm-7
+                    /   = text_field_tag :title,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.title"
                     = label_tag :seo, "Ідентифкатор фонової картинки", class:"col-sm-3 control-label"
                     .col-sm-7
                       = text_field_tag :seo,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.seo"
