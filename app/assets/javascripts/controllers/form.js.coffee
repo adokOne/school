@@ -22,6 +22,7 @@ $.Controller "Form",
           #$(el).removeClass e_cls
           self.error_owl.hide()
         errorPlacement: (err, el) ->
+          self.error_owl.show()
         onkeyup: false
         onfocusout: false
         focusCleanup: true
