@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def vacancies
-    Vacancy.all
+    Vacancy.where(active: true).all
   end
 
   def set_link_type_ands_subscriber
