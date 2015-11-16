@@ -22,6 +22,7 @@ require 'capistrano/deploy'
   require 'capistrano/rails/assets'
   require 'capistrano/rails/migrations'
   require "whenever/capistrano"
+  require 'capistrano/rails/collection'
   # require 'capistrano/passenger'
   require 'capistrano/puma'
   require 'capistrano/puma/workers' #if you want to control the workers (in cluster mode)

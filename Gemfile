@@ -45,7 +45,7 @@ gem 'angularjs-rails-resource', '~> 1.1.1'
 
 gem 'validates_email_format_of'
 gem 'active_model_serializers'
-
+gem 'capistrano-rails-collection'
 
 
 
