@@ -14,15 +14,23 @@
             <a href="#" class="search-icon js-submit"></a>
           </div>
         </form>
-        <form name="subscribe" id="subscribe" action="<%=url("subscribe")%>">
+
+
+      <%= form_for @subscriber, url: blog_subscribe_path do |f|%>
+        <%=f.hidden_field :blog_subscribe, value: true  %>
           <div class="email-input">
-            <input type="hidden" name="subscribe[blog_subscribe]" value="true"  />
-            <input type="email" name="subscribe[email]" class="txtinput" placeholder="ваш e-mail" required="required"/>
-  <!--           <input type="checkbox">
-            <label for=""><%=t("school.subscribe_for_news_label")%></label> -->
+          <%=f.email_field :email, class:"txtinput fr", placeholder: t('school.email_plc'), required: true  %>
+          <a href="#" class="search-icon js-submit"></a>
           </div>
-          <a href="#" class="subscribe js-submit"><%=t("school.subscribe_for_news_btn")%></a>
-        </form>
+<!--         <div class="form-row">
+          <%= f.check_box :active, required: true, checked: true  %>
+          <%= f.label :active, "Я хочу отримувати новини від SPEAK на скриньку"  %>
+        </div> -->
+
+      <a href="#" class="subscribe js-submit"><%=t("school.subscribe_for_news_btn")%></a>
+    <% end%>
+
+
 
       </div>
     </div>

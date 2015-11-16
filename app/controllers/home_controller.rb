@@ -31,4 +31,35 @@ class HomeController < ApplicationController
     render status: :not_found,layout: false
   end
 
+  def subscribe
+    item = Subscriber.check!(allowed_params)
+    if item.valid?
+      json = { success: true }
+    else
+      json = { success: false, errors: item.errors }
+    end
+    render json: json
+  end
+
+  def add_cv
+    item = Cv.new(cv_allowed_params)
+    if item.valid?
+      item.save
+      json = { success: true }
+    else
+      json = { success: false, errors: item.errors }
+    end
+    render json: json
+  end
+
+  private
+
+  def allowed_params
+    params.require(:subscriber).permit(:name,:email,:school_subscribe,:club_subscribe,:course_id,:phone)
+  end
+
+  def cv_allowed_params
+    params.require(:cv).permit(:name,:email,:phone)
+  end
+
 end

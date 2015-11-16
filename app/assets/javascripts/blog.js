@@ -16,6 +16,7 @@
 //= require jquery-1.7.2.min
 //= require jquery-ui-1.10.4.custom.min
 //= require icheck
+//= require ./i18n
 //= require jquery.parseparams
 //= require jquery.selectbox-0.2.min
 //= require jquery.validate

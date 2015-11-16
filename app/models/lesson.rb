@@ -21,7 +21,7 @@ class Lesson < ActiveRecord::Base
   end
 
   def formated_html
-    "<p data-course-id=\"#{self.course_id}\ data-id=\"#{self.id}\">#{self.course_name}</p> <b>#{self.time}</b>"
+    "<p class=\"lesson_box\" data-course-id=\"#{self.course_id}\" data-id=\"#{self.id}\">#{self.course_name}</p> <b>#{self.time}</b>"
   end
 
 end

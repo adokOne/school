@@ -2,13 +2,13 @@
   <div class="container">
     <div class="courses-list">
       <h2><%= t("school.tematic_courses")%></h2>
-      <p>У Клубі діє сім тематичних груп. Вибирай групи по інтересах, <a href="#" class="reg"><%= t("school.reg_and_go")%></a></p>
+      <p>У Клубі діє сім тематичних груп. Вибирай групи по інтересах, <a href="#" class="reg course_subscribe"><%= t("school.reg_and_go")%></a></p>
 
       <% courses.in_groups_of(4,false).each do |group|%>
         <div class="row">
           <% group.each do |course|%>
           <div class="item">
-            <a href="#">
+            <a href="#" class="<%= course.seo%>">
               <div class="icon">
                 <img src="<%= course.logo(:medium) %>" alt="<%= course.name %>">
               </div>
@@ -36,9 +36,9 @@
             <div class="container_small">
               <h2><%= course.title %></h2>
               <p><%= course.desc %></p>
-              <a href="#" class="schedule"><%= t("school.month_schedule")%></a>
+              <a data-id="<%= course.id %>" href="#" class="schedule"><%= t("school.month_schedule")%></a>
             </div>
-            <a href="#" class="subscribe"><%= t("school.subscribe_to_earning")%></a>
+            <a href="#" data-id="<%= course.id %>" class="subscribe course_subscribe"><%= t("school.subscribe_to_earning")%></a>
           </div>
         <% end %>
     </div>

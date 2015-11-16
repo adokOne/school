@@ -34,10 +34,25 @@ class BlogController < ApplicationController
     @items.compact!
   end
 
+  def subscribe
+    item = Subscriber.check!(allowed_params)
+    if item.valid?
+      json = { success: true }
+    else
+      json = { success: false, errors: item.errors }
+    end
+    render json: json
+  end
+
   private
 
   def set_manifest
     @js_manifest = "blog"
+  end
+
+  def allowed_params
+    params.require(:subscriber).permit(:name,:email,:blog_subscribe)
+
   end
 
 

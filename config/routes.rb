@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get "blog/search", to: "blog#search"
   post "blog/subscribe", to: "blog#subscribe"
   post "send_cv", to: "home#add_cv"
-  post "subscribe", to: "hone#subscribe"
+  post "subscribe", to: "home#subscribe"
 
   match "/404" => "home#error404", via: [ :get, :post, :patch, :delete ]
 end

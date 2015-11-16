@@ -1,8 +1,10 @@
 $.Controller "Main",
   init: ->
+    @is_blog = @element.find(".search-block").size() > 0
     @lessons = if typeof lessons == "undefined" then {} else lessons
     @init_slideshow();
     @init_calendar();
+
 
   init_slideshow: ->
     @element.find('.cycle-slideshow').cycle slides: '.s-item'
@@ -14,15 +16,16 @@ $.Controller "Main",
         navigateByImgClick: true
 
   init_calendar: ->
+    return if @is_blog
     lessons = {}
     Object.keys(@lessons).map((key) ->
       $.extend(lessons,@lessons[key])
     )
     @calendar = @element.find('#calendar').calendario(
       onDayClick: ($el, $contentEl, dateProperties) ->
-        for key of dateProperties
-          console.log key + ' = ' + dateProperties[key]
-        return
+        lesson = $el.find(".lesson_box")
+        if lesson.size()
+          id = lesson.data("course-id")
       caldata: lessons
       weeks: I18n.weeks
       weekabbrs: I18n.weekabbrs
@@ -33,6 +36,13 @@ $.Controller "Main",
 
   updateMonthYear: ->
     @month.html @calendar.getMonthName()
+
+  updateCourse: (id) ->
+    el = @element.find("#course")
+    el.selectbox("detach")
+    el.val(id)
+    el.change()
+    el.selectbox("attach")
 
   '#custom-next -> click': (ev) ->
     ev.preventDefault()
@@ -60,6 +70,26 @@ $.Controller "Main",
     ev.preventDefault()
     @blog_subscribe = $("#vavancy_subscribe_popup").controller()
     @blog_subscribe.open()
+
+  ".course_subscribe -> click": (ev) ->
+    id = $(ev.target).data("id")
+    id = if typeof id == "undefined" then 0 else Number(id)
+    ev.preventDefault()
+    @course_subscribe = $("#lesson_subscribe_popup").controller()
+    @course_subscribe.open()
+    @course_subscribe.element.find("#subscriber_course_id").val(id).change()
+
+
+  "a.schedule -> click": (ev) ->
+    ev.preventDefault()
+    id = $(ev.target).data("id")
+    @updateCourse(id)
+    @calendar.gotoNow @updateMonthYear
+
+  ".course-description .close -> click": (ev) ->
+    ev.preventDefault()
+    @element.find('.course-description').hide()
+
 
   "#course -> change": (ev) ->
     id = $(ev.target).val()

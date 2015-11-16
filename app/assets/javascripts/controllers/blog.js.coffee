@@ -1,5 +1,6 @@
 $.Controller "Blog",
   init: ->
+    @success_popup = $("#success_popup")
     @init_validation()
     @init_photo_category()
   init_photo_category: ->
@@ -27,6 +28,26 @@ $.Controller "Blog",
     ev.preventDefault();
     form = $(ev.target).parents("form")
     if form.valid()
-      form.submit()
+      @submit_form( form )
     else
 
+  show_success_owl: ->
+    self = @
+
+    self.success_popup.show()
+    $('html, body').scrollTop self.success_popup.offset().top
+    setTimeout (->
+      self.success_popup.hide()
+      return
+    ), 2000
+
+  submit_form:(form) ->
+    self = @
+    $.ajax
+      type: "POST"
+      url: form.attr("action")
+      data: form.serialize()
+      success: (resp) ->
+        if resp.success
+          self.show_success_owl()
+      error: (resp) ->

@@ -1,9 +1,11 @@
 uk:
   school:
+    subscribe_for_lesson: записатись на заняття
     all_groups: "Всі групи"
     choose_file: Вибрати файл
     add_cv_file: завантажте файл з Вашим резюме
     vavancy_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ:"
+    lesson_subscribe_popup_header: "КАЖІТЬ ВАШІ ДАНІ ДЛЯ ЗАПИСУ НА ЗАНЯТТЯ:"
     email_plc: вкажіть ваш e-mail
     name_plc: ваше ім”я
     phone_plc: ваш телефон

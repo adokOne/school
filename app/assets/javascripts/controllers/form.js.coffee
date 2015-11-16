@@ -2,6 +2,7 @@ $.Controller "Form",
   init: ->
     @init_validation()
     @error_owl = @element.find(".owl.error")
+    @success_popup = $("#success_popup")
   open: ->
     @element.show()
     $('html, body').scrollTop(@element.find(".form-block").offset().top);
@@ -31,9 +32,30 @@ $.Controller "Form",
     ev.preventDefault();
     form = $(ev.target).parents("form")
     if form.valid()
-      form.submit()
+      @submit_form( form )
     else
 
   ".close -> click": (ev) ->
     ev.preventDefault();
     @close()
+
+  show_success_owl: ->
+    self = @
+    self.success_popup.show()
+    setTimeout (->
+      self.success_popup.hide()
+      return
+    ), 2000
+
+  submit_form:(form) ->
+    self = @
+    $.ajax
+      type: "POST"
+      url: form.attr("action")
+      data: form.serialize()
+      success: (resp) ->
+        if resp.success
+          self.close()
+          self.show_success_owl()
+      error: (resp) ->
+
