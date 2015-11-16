@@ -6,7 +6,7 @@
     %form{name:'itemForm'}
       .row
         .col-md-6
-          .form-group{"ng-class" => "{'has-error': itemForm.date_start.$invalid && itemForm.$submitted}"}
+          .form-group{"ng-class" => "{'has-error': itemForm.date.$invalid && itemForm.$submitted}"}
             = text_field_tag :date,"" ,class:"form-control", "ng-model"=>"editedItem.date", disabled:true
         .col-md-6
           .form-group{"ng-class" => "{'has-error': itemForm.time.$invalid && itemForm.$submitted}"}

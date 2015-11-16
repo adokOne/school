@@ -61,6 +61,10 @@ $.Controller "Main",
     @element.find('.course-description').show()
     $('html, body').scrollTop $('.course-description').offset().top
 
+    idx = 0
+    @element.find('.cycle-slideshow').cycle(idx);
+
+
   "#blog_subscribe -> click": (ev) ->
     ev.preventDefault()
     @blog_subscribe = $("#blog_subscribe_popup").controller()

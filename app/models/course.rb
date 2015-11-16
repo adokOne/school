@@ -8,7 +8,7 @@ class Course < ActiveRecord::Base
   SCHOOL_TYPE = "school"
 
   validates :name,:course_type, presence: true
-  validates :name,     length: { in: 5..255 }, format: {with:/\A^[^0-9`!@#\$%\^&*+_=]+\z/i}
+  validates :name,     length: { in: 5..255 }#, format: {with:/\A^[^0-9`!@#\$%\^&*+_=]+\z/i}
   validates :course_type,    inclusion:{ in: ALLWOED_TYPES }
   validates :active, inclusion:{ in: [true,false] }
 
