@@ -18,7 +18,7 @@
                     .col-sm-8
                       = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
                   .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
-                    = label_tag :active, 'Відобрадати в школі?', class:"col-sm-3 control-label"
+                    = label_tag :active, 'Аквтиний?', class:"col-sm-3 control-label"
                     .col-sm-7
                       %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
                   .form-group
