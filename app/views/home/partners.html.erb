@@ -8,6 +8,12 @@
         <div class="col-4">
           <div class="image-item">
             <img src="<%= partner.logo(:medium)%>" alt="<%= partner.name%>" title="<%= partner.name%>">
+            <div class="description">
+              <h6><%= partner.first_desc_line %></h6>
+              <% if partner.second_desc_line.present? %>
+                <p><%= partner.second_desc_line %></p>
+              <% end %>
+            </div>
           </div>
         </div>
       <% end %>

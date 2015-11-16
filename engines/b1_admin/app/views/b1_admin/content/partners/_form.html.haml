@@ -17,6 +17,14 @@
                     = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
                     .col-sm-8
                       = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
+                  .form-group{"ng-class" => "{'has-error': itemForm.first_desc_line.$invalid && itemForm.$submitted}"}
+                    = label_tag :first_desc_line, "Опис 1", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :first_desc_line,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.first_desc_line"
+                  .form-group{"ng-class" => "{'has-error': itemForm.second_desc_line.$invalid && itemForm.$submitted}"}
+                    = label_tag :second_desc_line, "Опис 2", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :second_desc_line,"" ,class:"form-control", "ng-maxlength"=>255, "ng-model"=>"editedItem.second_desc_line"
                   .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
                     = label_tag :active, 'Аквтиний?', class:"col-sm-3 control-label"
                     .col-sm-7

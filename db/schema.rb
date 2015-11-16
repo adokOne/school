@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151115141154) do
+ActiveRecord::Schema.define(version: 20151116171309) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "",    null: false
@@ -199,6 +199,8 @@ ActiveRecord::Schema.define(version: 20151115141154) do
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
+    t.string   "first_desc_line",   limit: 255, default: ""
+    t.string   "second_desc_line",  limit: 255, default: ""
   end
 
   add_index "partners", ["active"], name: "index_partners_on_active", using: :btree
