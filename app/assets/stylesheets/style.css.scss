@@ -552,7 +552,7 @@ label {
   background: #fff;
 }
 .header .menu-toggle .open-menu {
-  display: none;
+  display: block;
   position: absolute;
   top: 39px;
   min-width: 163px;
@@ -1097,7 +1097,7 @@ label {
   }
   .icheckbox_minimal {
     margin-left: 20px;
-  } 
+  }
 }
 .form-block .close {
   position: absolute;
@@ -1596,7 +1596,7 @@ label {
   }
 }
 
-.publish-date 
+.publish-date
 .author {
   text-align: center;
   text-transform: uppercase;

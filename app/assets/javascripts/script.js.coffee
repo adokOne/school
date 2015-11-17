@@ -69,3 +69,22 @@ $(document).ready ->
   $('.burger').click ->
     $(this).toggleClass('active').next('.open-menu').slideToggle()
     false
+
+  #Firefox
+  $(document).bind 'DOMMouseScroll', (e) ->
+    if e.originalEvent.detail > 0
+      if $('.burger').hasClass("active")
+        $('.burger').toggleClass('active').next('.open-menu').slideToggle()
+    else
+      #scroll up
+    #prevent page fom scrolling
+
+  #IE, Opera, Safari
+  $(document).bind 'mousewheel', (e) ->
+    if e.originalEvent.wheelDelta < 0
+      if $('.burger').hasClass("active")
+        $('.burger').toggleClass('active').next('.open-menu').slideToggle()
+    else
+      #scroll up
+
+
