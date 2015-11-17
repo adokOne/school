@@ -2,7 +2,7 @@
   <div class="container">
     <div class="courses-list">
       <h2><%= t("school.tematic_courses")%></h2>
-      <p>У Клубі діє сім тематичних груп. Вибирай групи по інтересах, <a href="#" class="reg course_subscribe"><%= t("school.reg_and_go")%></a></p>
+      <p>у школі англійської мови speak можна вивчити як загальний курс англійської мови<br> відповідно до вашого рівня, так і навчальні програми по напрямках.</p>
 
       <% courses.in_groups_of(4,false).each do |group|%>
         <div class="row">
@@ -15,6 +15,9 @@
               </div>
               <div class="title">
                 <p><%= course.name %></p>
+                <ul class="publish-date">
+                  <li class="date">01.01.2001</li>
+                </ul>
               </div>
             </a>
           </div>

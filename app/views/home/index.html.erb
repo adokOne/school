@@ -11,7 +11,7 @@
   <%= csrf_meta_tags %>
 
 </head>
-<body>
+<body class="homepage">
 
   <div class="greeting">
     <div class="owl"></div>
@@ -55,17 +55,17 @@
       $('.js-mask_left').toggleClass('opacity');
     });
 
-    function runBaloon() {
-        $('.baloon-big')
-          .animate({"top":"-30px"},2000)
-          .animate({"top":"0px"},2000, runBaloon);
-     }
+    // function runBaloon() {
+    //     $('.baloon-big')
+    //       .animate({"top":"-30px"},2000)
+    //       .animate({"top":"0px"},2000, runBaloon);
+    //  }
 
-     function runOwl() {
-        $('.owl')
-          .animate({"bottom":"42%"},1500)
-          .animate({"bottom":"44%"},1500, runOwl);
-     }
+    //  function runOwl() {
+    //     $('.owl')
+    //       .animate({"bottom":"42%"},1500)
+    //       .animate({"bottom":"44%"},1500, runOwl);
+    //  }
 
   </script>
 </body>

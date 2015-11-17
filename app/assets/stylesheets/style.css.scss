@@ -240,7 +240,10 @@ body {
   font-family: 'robotoregular';
   font-size: 14px;
   min-height: 100%;
- // color: ;
+  margin-top: 70px;
+  &.homepage {
+    margin: 0;
+  }
 }
 a {
   text-decoration: none;
@@ -318,9 +321,8 @@ strong {
 }
 .baloon {
   position: absolute;
-  top: -50%;
+  top: -55%;
   left: -16%;
-  z-index: -1;
 }
 .baloon .bobble-green {
   position: absolute;
@@ -351,7 +353,7 @@ strong {
   width: 222px;
   height: 63px;
   position: absolute;
-  top: 60%;
+  top: 43%;
   right: -7%;
 }
 .birds.two {
@@ -419,8 +421,10 @@ h2 {
 }
 .subscribe {
   display: inline-block;
-  padding: 13px 33px;
+  width: 335px;
+  padding: 13px 0;
   color: #13514f;
+  text-align: center;
   text-transform: uppercase;
   font-size: 16px;
   font-family: 'robotobold';
@@ -444,10 +448,11 @@ h2 {
   right: 0;
   background-color: #00aa92;
   opacity: .6;
+  z-index: 200;
 }
 .list li {
   padding-left: 17px;
-  background-image: image-url('dot.png');
+  background-image: image-url('dot-yellow.png');
   background-repeat:  no-repeat;
   background-position:  0 2px;
 }
@@ -475,8 +480,12 @@ label {
 }
 /* Header */
 .header {
+  position: fixed;
+  top: 0;
+  width: 100%;
   height: 45px;
   background: #69c2be;
+  z-index: 200;
 }
 .header .logo {
   float: left;
@@ -569,8 +578,8 @@ label {
 }
 .about {
   position: relative;
-  margin-top: 40px;
-  height: 550px;
+  //height: 550px;
+  padding-bottom: 100px;
 }
 .about .text {
   width: 460px;
@@ -594,58 +603,83 @@ label {
 }
 .steps-block {
   position: relative;
+  padding-top: 15px;
   font-family: 'robotobold';
   background: #00aa92;
+  h2 {
+    color: #f7eb13;
+  }
+  .steps {
+    margin-left: -10px;
+    margin-right: -10px;
+    clear: both;
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    text-align: center;
+    &:after {
+      display: block;
+      clear: both;
+      overflow: hidden;
+      content: '';
+    }
+    .step {
+      padding-left: 10px;
+      padding-right: 10px;
+      width: 33.33333333%;
+      float: left;
+      min-height: 1px;
+      position: relative;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      box-sizing: border-box;
+      padding-top: 15px;
+      padding-bottom: 25px;
+      font-size: 16px;
+      text-transform: uppercase;
+      color: #f7eb13;
+      background-image: image-url('steps-arrow.png');
+      background-position:  100%;
+      background-repeat:  no-repeat;
+      &:last-child {
+        background: none;
+      }
+       p {
+        margin-top: 10px;
+      }
+      span {
+        display: block;
+        width: 60px;
+        height: 60px;
+        margin: 0 auto;
+        background-image: image-url('steps.png');
+        background-repeat:  no-repeat;
+      }
+    }
+    &.steps_five {
+      .step {
+        width: 20%;
+        background-image: none;
+        & span.one, & span.two {
+          margin-top: 0
+        }
+        & span.three {
+          width: 60px;
+          height: 60px;
+          background-position: 0 -199px;
+        }
+        & span.four {
+          background-position: 0 -263px;
+        }
+        & span.five {
+          background-position: 0 -327px;
+        }
+      }
+    }
+  }
 }
-.steps-block .steps {
-  margin-left: -10px;
-  margin-right: -10px;
-  clear: both;
-  display: block;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  text-align: center;
-}
-.steps-block .steps:after {
-  display: block;
-  clear: both;
-  overflow: hidden;
-  content: '';
-}
-.steps-block .steps .step {
-  padding-left: 10px;
-  padding-right: 10px;
-  width: 33.33333333%;
-  float: left;
-  min-height: 1px;
-  position: relative;
-  -webkit-box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  padding-top: 15px;
-  padding-bottom: 25px;
-  font-size: 16px;
-  text-transform: uppercase;
-  color: #f7eb13;
-  background-image: image-url('steps-arrow.png');
-  background-position:  100%;
-  background-repeat:  no-repeat;
-}
-.steps-block .steps .step:last-child {
-  background: none;
-}
-.steps-block .steps .step p {
-  margin-top: 10px;
-}
-.steps-block .steps .step span {
-  display: block;
-  width: 59px;
-  height: 59px;
-  margin: 0 auto;
-  background-image: image-url('steps.png');
-  background-repeat:  no-repeat;
-}
+
 .steps-block .steps .step span.one {
   margin-top: 8px;
   background-position: 0 0;
@@ -716,7 +750,7 @@ label {
 }
 .course-description .s-item {
   width: 100%;
-  min-height: 500px;
+  min-height: 610px;
   text-align: center;
   line-height: 1.5;
   color: #fff;
@@ -743,10 +777,12 @@ label {
   background: image-url('cook.png') no-repeat 100% 100%;
 }
 .course-description .s-item.common {
-  background: image-url('common.png') no-repeat 100% 100%;
+  background-image: image-url('common.png'), image-url('owl-with-flag.png');
+  background-repeat: no-repeat;
+  background-position: 100% 100%, 100% 100%;
 }
 .course-description .s-item.accent {
-  background: image-url('accent.png') no-repeat 100% 100%;
+  background: image-url('accent-2.png') no-repeat 100% 102%;
 }
 .course-description .s-item.intensive {
   background: image-url('intensive.png') no-repeat 100% 100%;
@@ -777,9 +813,11 @@ label {
 }
 .course-description .s-item .subscribe {
   position: absolute;
-  bottom: 1%;
+  bottom: 4.4%;
   left: 50%;
+  width: auto;
   margin-left: -143px;
+  padding: 13px 33px;
 }
 .course-description .s-item .list {
   margin: 10px 0;
@@ -961,6 +999,7 @@ label {
   background-repeat: no-repeat;
 }
 .footer .subscribe {
+  width: auto;
   padding: 13px 8px;
 }
 .footer h3 {
@@ -1032,6 +1071,33 @@ label {
   text-align: center;
   background: #fff;
   border-radius: 12px;
+  z-index: 200;
+  .sbHolder {
+    float: right;
+    margin: 0;
+    background-color: #00aa92;
+    color: #fff;
+  }
+  .sbSelector {
+    color: #fff;
+  }
+  .sbOptions {
+    width: 346px;
+    left: 6px;
+    background: #69c2be;
+    border: none;
+    border-radius: 0 0 15px 15px;
+    a {
+      color: #fff;
+      &:hover {
+        text-decoration: underline;
+        background: none;
+      }
+    }
+  }
+  .icheckbox_minimal {
+    margin-left: 20px;
+  } 
 }
 .form-block .close {
   position: absolute;
@@ -1056,11 +1122,16 @@ label {
 .form-block .txtinput {
   width: 360px;
 }
+.form-block .subscribe.test {
+  width: auto;
+  padding: 12px 33px;
+  margin-left: 20px;
+}
 .form-block .subscribe .hover {
   display: none;
 }
 .form-block .subscribe:hover {
-  padding: 13px 66px;
+  //padding: 13px 66px;
 }
 .form-block .subscribe:hover .hover {
   display: block;
@@ -1155,7 +1226,17 @@ label {
 }
 .skool .owl {
   right: 0%;
-  bottom: 30%;
+  bottom: 5%;
+  width: 200px;
+  color: #fff;
+  height: 166px;
+  .bobble {
+    width: 105px;
+    height: 63px;
+    color: #fff;
+    background: url(/assets/bobble-green-right.png);
+    padding: 25px 12px;
+  }
 }
 .skool .slogan {
   text-transform: uppercase;
@@ -1243,6 +1324,10 @@ label {
 .search-block .form {
   width: 370px;
   margin: 30px auto;
+  .subscribe {
+      width: auto;
+      padding: 13px 33px;
+    }
 }
 .search-block .email-input {
   margin: 50px 0 30px 0;
@@ -1492,18 +1577,26 @@ label {
 .publish-date {
   text-align: center;
   margin-bottom: 20px;
+  li {
+    display: inline-block;
+    margin-right: 5px;
+    font-family: 'robotoregular';
+    font-size: 16px;
+    color: #6ac2bf;
+  }
+  a {
+    color: #6ac2bf;
+    font-size: 16px;
+    text-decoration: underline;
+    text-transform: uppercase;
+  }
+  .date {
+    padding: 3px 0 2px 25px;
+    background: image-url('calendar-icon.png') no-repeat;
+  }
 }
-.publish-date li {
-  display: inline-block;
-  font-size: 16px;
-  color: #6ac2bf;
-}
-.publish-date a {
-  color: #6ac2bf;
-  font-size: 16px;
-  text-decoration: underline;
-  text-transform: uppercase;
-}
+
+.publish-date 
 .author {
   text-align: center;
   text-transform: uppercase;
@@ -1798,7 +1891,7 @@ p.load {
 .greeting .owl {
   position: absolute;
   bottom: 44%;
-  left: 34%;
+  left: 27%;
   z-index: 4;
 }
 .baloon-big {
@@ -1885,3 +1978,35 @@ p.load {
 }
 
 
+@media screen and (max-width: 1366px) {
+  .birds {
+    &.two {
+      top: 60%;
+      left: -8%
+    }
+  }
+}
+
+.advertising {
+  text-align: center;
+  height: 180px;
+  background: #00aa92;
+  width: 70%;
+  float: right;
+  position: relative;
+  top: -25px;
+  overflow: hidden;
+  .container_small {
+    h1 {
+      float: left;
+      margin-top: 50px;
+      text-transform: uppercase;
+      font-size: 32px;
+      color: #13514f;
+      font-family: 'robotobold';
+    }
+    .image-holder {
+      float: left;
+    }
+  }
+}
