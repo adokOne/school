@@ -22,8 +22,7 @@ class HomeController < ApplicationController
     @reviews   = Rails.cache.fetch("reviews", expire: 12.hours) do
       fb_manager.get_club_posts
     end
-
-    p @reviews
+     @reviews = []
   end
 
   def partners
