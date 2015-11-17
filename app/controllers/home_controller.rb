@@ -19,7 +19,11 @@ class HomeController < ApplicationController
     @photos    = ::Photo.for_club
     @lessons   = ::Lesson.for_club
     @top_menu  = I18n.t("school.club_top_links")
-    @reviews   = fb_manager.get_club_posts
+    @reviews   = Rails.cache.fetch("reviews", expire: 12.hours) do
+      fb_manager.get_club_posts
+    end
+
+    p @reviews
   end
 
   def partners

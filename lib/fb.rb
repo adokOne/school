@@ -10,12 +10,11 @@ class Fb
   def get_club_posts
     begin
       @client.get_connection("when.I.speak.I.learn","posts").map do |item|
-        p  item['message']
-        if item['message'] =~ /#speaking_club_speak‬/
+        #if item['message'] =~ /speaking_club_speak‬/
           item
-        else
-          nil
-        end
+        #else
+        #  nil
+       # end
       end.compact
     rescue Exception => e
       []
