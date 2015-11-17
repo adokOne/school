@@ -15,9 +15,11 @@
               </div>
               <div class="title">
                 <p><%= course.name %></p>
-                <ul class="publish-date">
-                  <li class="date"><%= l(course.date_start, format: "%d.%m.%Y") %></li>
-                </ul>
+                <% if @links_type =="school"%>
+                  <ul class="publish-date">
+                    <li class="date"><%= l(course.date_start, format: "%d.%m.%Y") %></li>
+                  </ul>
+                <% end%>
               </div>
             </a>
           </div>
