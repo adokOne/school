@@ -1,0 +1,4 @@
+<% if !with_badges || (with_badges && surveys_count(survey_type) > 0) %>
+  <%= link_to test_surveys_path,  class: "label label-survey" do %>
+  <% end %>
+<% end %>

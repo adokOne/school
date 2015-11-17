@@ -14,13 +14,19 @@ $.Controller "Form",
     self = @
     @element.find("form").each (idx,form) ->
       $(form).validate
+        debug: true
         ignore: ""
         highlight: (el, e_cls) ->
           self.error_owl.show()
-          #$(el).addClass e_cls
+          $(el).addClass e_cls
+          if $(el).parents(".table").size() > 0
+            $(el).parents(".table").find("p").addClass e_cls
         unhighlight: (el, e_cls) ->
-          #$(el).removeClass e_cls
+          $(el).removeClass e_cls
           self.error_owl.hide()
+          if $(el).parents(".table").size() > 0
+            $(el).parents(".table").find("p").removeClass e_cls
+
         errorPlacement: (err, el) ->
           self.error_owl.show()
         onkeyup: false
@@ -33,8 +39,11 @@ $.Controller "Form",
     ev.preventDefault();
     form = $(ev.target).parents("form")
     if form.valid()
-      @submit_form( form )
-    else
+      if $(ev.target).hasClass("not-ajax")
+        console.log(form)
+        form[0].submit()
+      else
+        @submit_form( form )
 
   ".close -> click": (ev) ->
     ev.preventDefault();

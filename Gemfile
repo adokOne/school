@@ -40,7 +40,7 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # gem 'debugger', group: [:development, :test]
 
 gem 'angularjs-rails-resource', '~> 1.1.1'
-
+gem "survey"
 
 
 gem 'validates_email_format_of'

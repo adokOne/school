@@ -1,0 +1,48 @@
+<div data-ctrl="Form">
+  <%= form_for(@attempt, :url => attempt_scope(@attempt)) do |f| %>
+    <div class="search-block" style="height: 170px;">
+      <div class="form">
+        <div class="email-input">
+          <%=email_field_tag :email,"", class:"txtinput fr", placeholder: t('school.email_plc'), required: true  %>
+          <%=text_field_tag :name,"", class:"txtinput fr", placeholder: t('school.name_plc'), required: true  %>
+          <%=text_field_tag :phone,"", class:"txtinput fr", placeholder: t('school.phone_plc')  %>
+        </div>
+      </div>
+    </div>
+
+
+    <%= f.fields_for :answers do |builder| %>
+      <ul>
+        <% @survey.questions.each_with_index do |question, index| %>
+          <li>
+            <div class="table">
+              <p class="question"><%= question.text %></p>
+              <ul>
+                <%= hidden_field_tag "survey_attempt[answers_attributes][#{index}][question_id]", question.id %>
+                <% question.options.each_with_index do |option,idx| %>
+                  <li class="answer_option">
+                    <%= radio_button_tag "survey_attempt[answers_attributes][#{index}][option_id][]", option.id, false , required: idx.zero? %>
+                    <%= option.text %> <br/ >
+                  </li>
+                <% end -%>
+              </ul>
+            </div>
+          </li>
+        <% end -%>
+      </ul>
+    <% end -%>
+    <div class="clear"></div>
+    <div class="min_empty"></div>
+    <a href="#" class="subscribe js-submit not-ajax" id="test_subscribe"><%= t("school.complete_test")%></a>
+
+  <% end -%>
+</div>
+
+
+
+
+
+
+
+
+

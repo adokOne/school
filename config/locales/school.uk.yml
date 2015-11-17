@@ -13,6 +13,10 @@ uk:
       calendar_block: КАЛЕНДАР
       gallery:  ГАЛЕРЕЯ
 
+    level_test: "Тестування"
+    test_completed: "Дякуемо! Ваш тест завершено з результатом: %{count} балів.<p>Ваш рівень англійської мови ви можете визначити за табличкою нижче:</p><ul class='correct_answers'><li>0 - 20 = Beginner</li><li>21 - 40 = Elementary</li><li>41 - 60 = Pre-Intermediate</li><li>61 - 75 = Intermediate</li><li>76 - 99 = Higher Intermediate</li></ul><p>Якщо ви хочете підвищити ваш рівень англійської, ми завжди будемо раді вам допомогти :)</p><div class='clear'></div>"
+    complete_test: "Завершити тест"
+    level_test_desc: "Цей тест допоможе визначити ваш рівень англійської мови."
     reviews: Відгуки
     subscribe_for_lesson: записатись на заняття
     all_groups: "Всі групи"

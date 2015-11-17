@@ -1,0 +1,18 @@
+
+
+<div class="container">
+  <div class="partners">
+    <h2><%= t("school.level_test")%></h2>
+    <p><%= t("school.level_test_desc") %></p>
+
+    <div class="row">
+      <% if flash[:alert].present? %>
+        <p><%= flash[:alert].html_safe %></p>
+      <% else %>
+        <%= render 'form' %>
+      <% end %>
+    </div>
+  </div>
+  <div class="clear"></div>
+</div>
+<div class="min_empty"></div>

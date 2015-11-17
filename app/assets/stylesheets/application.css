@@ -20,6 +20,23 @@
 .hidden{
   display: none;
 }
-input.error{
+input.error, p.error{
   border: 1px solid red!important;
+}
+.answer_option{
+  float:left;
+}
+.table {
+  display: table;   /* Allow the centering to work */
+  margin: 0 auto;
+}
+.question {
+  margin-bottom: 10px;
+}
+.min_empty {
+    height: 50px;
+}
+.correct_answers{
+  display: table;
+  margin: 0 auto;
 }

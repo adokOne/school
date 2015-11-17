@@ -14,5 +14,16 @@ Rails.application.routes.draw do
   post "subscribe", to: "home#subscribe"
 
   match "/404" => "home#error404", via: [ :get, :post, :patch, :delete ]
+
+
+  namespace :test do
+    resources 'surveys'
+    resources 'attempts'
+    resources 'users', only: [:create]
+
+    delete 'attempts/:survey_id/:user_id' => 'attempts#delete_user_attempts', as: :delete_user_attempts
+    post 'user/:id/change_name' => 'users#change_name', as: :change_user_name
+  end
+
 end
 
