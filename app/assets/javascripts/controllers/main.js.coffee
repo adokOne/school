@@ -93,6 +93,7 @@ $.Controller "Main",
     id = $(ev.target).data("id")
     @updateCourse(id)
     @calendar.gotoNow @updateMonthYear
+    $('html, body').animate({scrollTop: $('.calendar-block').offset().top}, 800);
 
   ".course-description .close -> click": (ev) ->
     ev.preventDefault()
