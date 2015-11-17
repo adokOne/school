@@ -1,4 +1,13 @@
 <div class="about skool">
+  <div class="advertising">
+    <div class="container_small">
+      <h1>рекламний <br>банер!!!</h1>
+      <div class="image-holder">
+        <%= image_tag "one.png" %>
+      </div>
+      <div class="clear"></div> 
+    </div>
+  </div>
   <div class="container">
     <div class="baloon">
       <%= image_tag "baloon-2.png" %>
@@ -17,18 +26,38 @@
       <%= t("school.school_about_desc").html_safe%>
     </div>
     <%= image_tag "complex.png" %>
-    <div class="owl">
-      <p class="bobble"><%= t("school.easy_with_us")%></p>
-    </div>
+    <a href="#" class="owl">
+      <p class="bobble"><%= t("school.pass_test")%></p>
+    </a>
   </div>
 </div>
 
 <div class="steps-block">
+  <h2>наші переваги:</h2>
   <div class="wave one"></div>
   <div class="wave two"></div>
   <div class="container">
-    <div class="btn-block">
-      <a href="#" class="subscribe course_subscribe"><%= t("school.subscribe_to_earning")%></a>
+    <div class="steps steps_five">
+      <div class="step">
+        <span class="one"></span>
+        <p><%= t("school.step_1_alt")%></p>
+      </div>
+      <div class="step">
+        <span class="two"></span>
+        <p><%= t("school.step_2_alt")%></p>
+      </div>
+      <div class="step">
+        <span class="three"></span>
+        <p><%= t("school.step_3_alt")%></p>
+      </div>
+      <div class="step">
+        <span class="four"></span>
+        <p><%= t("school.step_4_alt")%></p>
+      </div>
+      <div class="step">
+        <span class="five"></span>
+        <p><%= t("school.step_5_alt")%></p>
+      </div>
     </div>
   </div>
 </div>
@@ -42,6 +71,4 @@
 <%if @photos.any? %>
   <%= render partial: "shared/galery", locals:{photos: @photos} %>
 <% end %>
-<%if @reviews.any? %>
-  <%= render partial: "shared/reviews", locals:{reviews: @reviews} %>
-<% end %>
+

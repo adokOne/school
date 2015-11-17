@@ -10,10 +10,24 @@
       <div class="user-data">
         <div class="form-row">
           <%=f.text_field :name, class:"txtinput fl", placeholder: t('school.name_plc'), required: true  %>
-          <%=f.text_field :phone, class:"txtinput fr", placeholder: t('school.phone_plc'), required: true  %>
+          <select>
+            <option>ваш рівень англійської</option>
+            <option>starter</option>
+            <option>elementary</option>
+            <option>pre-intermediate</option>
+            <option>intermediate</option>
+            <option>upper-intermediate</option>
+            <option>advanced</option>
+          </select>
         </div>
         <div class="form-row">
           <%=f.email_field :email, class:"txtinput fl", placeholder: t('school.email_plc'), required: true  %>
+          <a href="#" class="subscribe test"><%= t("school.subscribe_for_lesson")%></a>
+        </div>
+        <div class="form-row">
+          <%=f.text_field :phone, class:"txtinput fl", placeholder: t('school.phone_plc'), required: true  %>
+          <input type="checkbox">
+          <label>Я хочу отримувати новини від SPEAK на скриньку</label>
         </div>
       </div>
 

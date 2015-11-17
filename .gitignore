@@ -15,4 +15,5 @@
 /log/*.log
 /tmp
 /public/system
+/vendor/bundle
 config/database.yml
