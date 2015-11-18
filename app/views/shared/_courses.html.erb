@@ -1,3 +1,6 @@
+<script type="text/javascript">
+  var courses   = <%= raw courses.map{|c|  {id: c.id, name: c.name} }.to_json%>;
+</script>
 <div class="courses-block" id="courses">
   <div class="container">
     <div class="courses-list">

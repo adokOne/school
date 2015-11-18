@@ -40,3 +40,11 @@ input.error, p.error{
   display: table;
   margin: 0 auto;
 }
+.group-selector .sbHolder {
+  width: 310px;
+  margin: 5px 0;
+}
+
+.group-selector  .sbOptions {
+  width: 305px;
+}

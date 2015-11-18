@@ -4,6 +4,7 @@ $.Controller "Main",
     @lessons = if typeof lessons == "undefined" then {} else lessons
     @init_slideshow();
     @init_calendar();
+    @init_datepicker()
 
 
   init_slideshow: ->
@@ -125,3 +126,28 @@ $.Controller "Main",
       data = if data then data else {}
     @calendar.setData(data,data)
 
+  init_datepicker: ->
+    self = @
+    @element.find('#subscriber_date').datepicker
+      dateFormat: 'dd.mm.yy'
+      onChangeMonthYear: ->
+        self.regenerate_datepicker(10)
+      beforeShow: ->
+        self.regenerate_datepicker(100)
+
+
+
+  regenerate_datepicker: (timeout) ->
+    self = @
+    setTimeout (->
+      self.generate_courses_options()
+      $('#group-selector').selectbox()
+    ), timeout
+
+  generate_courses_options: ->
+    $.each courses, (index, obj) ->
+      console.log(obj,$('#group-selector'))
+      $('#group-selector').append $('<option/>',
+        value: obj.id
+        text: obj.name)
+      return
