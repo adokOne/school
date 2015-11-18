@@ -3,7 +3,7 @@ module B1Admin
     class CvsController < B1Admin::ApplicationController
 
         # Set data for CRUD module
-        @model            = ::Cv
+        @model            = ::Cv.order(id: :desc)
         # Include CRUD module
         include B1Admin::Concerns::Crud
     end

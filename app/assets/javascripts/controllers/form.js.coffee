@@ -8,7 +8,9 @@ $.Controller "Form",
     $('html, body').scrollTop(@element.find(".form-block").offset().top);
   close: ->
     @error_owl.hide()
-    @element.find("form")[0].reset()
+    form = @element.find("form")[0]
+    if form
+      form.reset()
     @element.hide()
   init_validation: ->
     self = @
@@ -17,41 +19,73 @@ $.Controller "Form",
         debug: true
         ignore: ""
         highlight: (el, e_cls) ->
-          self.error_owl.show()
-          $(el).addClass e_cls
+          self.error_owl.removeClass("hidden")
+          # $(el).addClass e_cls
           if $(el).parents(".table").size() > 0
             $(el).parents(".table").find("p").addClass e_cls
         unhighlight: (el, e_cls) ->
-          $(el).removeClass e_cls
-          self.error_owl.hide()
+          # $(el).removeClass e_cls
           if $(el).parents(".table").size() > 0
             $(el).parents(".table").find("p").removeClass e_cls
 
         errorPlacement: (err, el) ->
-          self.error_owl.show()
-        onkeyup: false
+          self.error_owl.removeClass("hidden")
+
+        invalidHandler: (event, validator) ->
+          self.error_owl.removeClass("hidden")
+
+        onkeyup:  ->
+          self.error_owl.addClass("hidden")
         onfocusout: false
         focusCleanup: true
         focusInvalid: false
         minlength: 3
+
+
+
+  ".close -> click": (ev) ->
+    ev.preventDefault();
+    @close()
+
+  ".js-submit-with-file -> click": (ev) ->
+    self = @
+    ev.preventDefault()
+    form = $(ev.target).parents("form")
+    if form.valid()
+      formData = new FormData(form[0])
+      $.ajax
+        url: form.attr("action")
+        type: 'POST'
+        success: (resp) ->
+          if resp.success
+            self.close()
+            self.show_success_owl()
+        error: (resp) ->
+          console.log(resp)
+        data: formData
+        cache: false
+        contentType: false
+        processData: false
 
   ".js-submit -> click": (ev) ->
     ev.preventDefault();
     form = $(ev.target).parents("form")
     if form.valid()
       if $(ev.target).hasClass("not-ajax")
-        console.log(form)
         form[0].submit()
       else
         @submit_form( form )
 
-  ".close -> click": (ev) ->
+  ".show-cv-form -> click": (ev) ->
     ev.preventDefault();
     @close()
+    @cv_form = $("#vavancy_subscribe_popup").controller()
+    @cv_form.open()
 
   show_success_owl: ->
     self = @
     self.success_popup.show()
+    $('html, body').scrollTop($("#success_popup").offset().top - 200);
     setTimeout (->
       self.success_popup.hide()
       return
@@ -68,4 +102,3 @@ $.Controller "Form",
           self.close()
           self.show_success_owl()
       error: (resp) ->
-

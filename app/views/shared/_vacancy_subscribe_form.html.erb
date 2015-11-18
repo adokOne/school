@@ -17,15 +17,15 @@
           <p class="load"><%= t("school.add_cv_file")%></p>
           <div class="choose-file">
             <p><%= t("school.choose_file")%></p>
-            <input type="file">
+            <%=f.file_field :document, required: true  %>
           </div>
         </div>
       </div>
 
-      <a href="#" class="subscribe js-submit"><%= t("school.subscribe_for_vacancy")%></a>
+      <a href="#" class="subscribe js-submit-with-file"><%= t("school.subscribe_for_vacancy")%></a>
     <% end%>
 
-    <div class="owl error" style="display:none">
+    <div class="owl error hidden">
       <p class="bobble"><%= t("school.fields_wit_errors_text").html_safe%></p>
     </div>
   </div>

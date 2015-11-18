@@ -1,0 +1,12 @@
+<div data-ctrl="Form" style="display:none" id="vacancy_desc_popup">
+  <div class="overlay"></div>
+  <div class="form-block">
+    <a href="#" class="close"></a>
+    <h2><%= @vacancy.name %></h2>
+    <div>
+      <%= @vacancy.desc.html_safe %>
+    </div>
+    <h4 style="margin-top: 25px;text-transform: uppercase;font-family: 'robotobold';font-size: 16px;margin-bottom: 15px;"><%= t("school.vacancy_title_2")%></h4>
+    <a href="#" class="subscribe show-cv-form"><%= t("school.subscribe_for_vacancy")%></a>
+  </div>
+</div>

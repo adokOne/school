@@ -76,8 +76,17 @@ $.Controller "Main",
 
   ".vacancy_subscribe -> click": (ev) ->
     ev.preventDefault()
-    @blog_subscribe = $("#vavancy_subscribe_popup").controller()
-    @blog_subscribe.open()
+    self = @
+    $.ajax
+      type: "get"
+      url: "/show_vacancy"
+      data: {id: $(ev.target).data("id")}
+      success: (resp) ->
+        if resp.success
+          $("body").append(resp.html)
+          ctrl = $("#vacancy_desc_popup").attachForm().controller()
+          ctrl.open()
+      error: (resp) ->
 
   ".course_subscribe -> click": (ev) ->
     id = $(ev.target).data("id")

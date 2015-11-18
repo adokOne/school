@@ -72,7 +72,7 @@
             <ul class="vacancy">
               <li><h3><%= t("school.vacancies")%></h3></li>
               <% vacancies.each do |vacancy| %>
-                <li><a href="#" class="vacancy_subscribe"><%= vacancy.name %></a></li>
+                <li><a href="#" data-id="<%= vacancy.id %>" class="vacancy_subscribe"><%= vacancy.name %></a></li>
               <% end %>
             </ul>
           <% end %>

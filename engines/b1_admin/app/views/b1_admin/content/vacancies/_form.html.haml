@@ -17,14 +17,16 @@
                     = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
                     .col-sm-8
                       = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
-                  .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
-                    = label_tag :desc, t("b1_admin.desc"), class:"col-sm-3 control-label"
-                    .col-sm-8
-                      = text_area_tag :desc,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.desc"
                   .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
                     = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
-                    .col-sm-7
+                    .col-sm-8
                       %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
+                  .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang" }
+                    = label_tag :"desc", t("b1_admin.desc"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      .summernote{class: "summernote lang",:"data-lang"=>"uk"}
+                      = text_area_tag :"desc","" ,class:"form-control hidden",required: true, "ng-model"=>"editedItem.desc",style: "display:none"
+
               .mar-top.clearfix
                 %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
                   %i.fa.fa-pencil.fa-fw

@@ -5,7 +5,14 @@ class Cv < ActiveRecord::Base
   validates :email,    length: { in: 6..50 }, format:{with:/\A^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
   validates :phone,    length: { in: 6..20 }#, numericality:true
 
-  has_attached_file :document
+  has_attached_file :document,
+    path: ":rails_root/public/system/:class/:id/:basename.:extension",
+    url:  "/system/:class/:id/:upload_title.:extension"
+
   validates_attachment :document, :content_type => {:content_type => %w(image/jpeg image/jpg image/png application/pdf application/msword application/vnd.openxmlformats-officedocument.wordprocessingml.document)}
+
+
+
+
 
 end

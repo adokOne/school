@@ -25,7 +25,8 @@
                     {{item.phone}}
 
                   %td{"data-title" => "'Файл з резюме'"}
-                    %a{:"ng-show"=>"item.cv_exist",target:"_blank", href: "'/system/photos/' + editedItem.id + '/document_file_name'"}
+                    %a{:"ng-show"=>"item.cv_exist",target:"_blank", href: "/system/cvs/{{item.id}}/{{item.document_file_name}}"}
+                      Резюме
                   %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
                     - if user_can?(:destroy)
                       %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)"}

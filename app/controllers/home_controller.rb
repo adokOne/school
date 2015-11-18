@@ -25,6 +25,16 @@ class HomeController < ApplicationController
      @reviews = []
   end
 
+  def show_vacancy
+    @vacancy = Vacancy.find_by_id(params[:id])
+    if @vacancy
+      json = {success: true, html: render_to_string("shared/_vacancy_desc",layout: false) }
+    else
+      json = {success: false}
+    end
+    render json: json
+  end
+
   def partners
     @partners = Partner.active
   end
@@ -65,7 +75,7 @@ class HomeController < ApplicationController
   end
 
   def cv_allowed_params
-    params.require(:cv).permit(:name,:email,:phone)
+    params.require(:cv).permit(:name,:email,:phone,:document)
   end
 
   def fb_manager
