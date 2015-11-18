@@ -15,6 +15,7 @@ uk:
 
 
     choose_your_level: "ваш рівень англійської"
+    date_group_plc: "оберіть дату та групу"
     levels:
       starter: starter
       elementary: elementary
