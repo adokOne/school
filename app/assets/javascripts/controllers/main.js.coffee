@@ -130,14 +130,22 @@ $.Controller "Main",
   "#group-selector -> change":(ev) ->
     ev.preventDefault()
     id = Number($(ev.target).val())
+    @element.find("#subscriber_course_id").val(id).change()
     @curse_dates = Object.keys(@lessons[id])
     @element.find('#subscriber_date').datepicker('refresh');
+
+  "#subscriber_date -> change": (ev) ->
+    old = $(ev.target).val()
+    $(ev.target).val("#{old}, #{$('#group-selector option:selected').text()}")
 
   init_datepicker: ->
     self = @
     dateToday = new Date();
     @element.find('#subscriber_date').datepicker
       dateFormat: 'dd.mm.yy'
+      onSelect: (date) ->
+        $("#subscriber_date").change()
+        self.curse_dates = []
       beforeShowDay: (date) ->
         return self.unavailable(date)
       minDate: dateToday,

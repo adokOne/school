@@ -48,7 +48,9 @@ class HomeController < ApplicationController
   end
 
   def subscribe
-    item = Subscriber.check!(allowed_params)
+    params_to_create = allowed_params.dup
+    params_to_create[:date] = params_to_create[:date].split(",").first
+    item = Subscriber.check!(params_to_create)
     if item.valid?
       json = { success: true }
     else
@@ -71,7 +73,7 @@ class HomeController < ApplicationController
   private
 
   def allowed_params
-    params.require(:subscriber).permit(:name,:email,:school_subscribe,:club_subscribe,:course_id,:phone,:blog_subscribe,:level)
+    params.require(:subscriber).permit(:name,:email,:school_subscribe,:club_subscribe,:course_id,:phone,:blog_subscribe,:level,:date)
   end
 
   def cv_allowed_params
