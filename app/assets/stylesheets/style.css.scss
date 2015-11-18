@@ -612,7 +612,7 @@ label {
   color: #db6627;
   text-transform: uppercase;
   font-size: 14px;
-  text-align: left; 
+  text-align: left;
 }
 .about .text ul li {
   margin-bottom: 15px;
@@ -785,7 +785,7 @@ label {
         text-decoration: none;
       }
     }
-  } 
+  }
 }
 .course-description .s-item {
   width: 100%;
@@ -2092,6 +2092,31 @@ p.load {
       display: inline-block;
       margin: 6px 0;
     }
+    .ui-state-disabled {
+      span{
+        display: block;
+        width: 34px;
+        border: 2px solid #fff;
+        padding: 10px 0;
+        margin: 0 auto 6px;
+        color: #fff;
+        -webkit-border-radius: 2px;
+        -moz-border-radius: 2px;
+             border-radius: 2px;
+      }
+    }
+    td.yellow {
+      a{
+        color: #00aa92;
+        border-color: #f7eb13;
+        background: #f7eb13;
+        &.ui-state-hover {
+          color: #f7eb13;
+          border-color: #ee3624;
+          background: #ee3624;
+        }
+      }
+    }
     a {
       display: block;
       width: 34px;
@@ -2106,12 +2131,12 @@ p.load {
         text-decoration: none;
       }
       &.yellow {
-        color: #f7eb13;
+        color: #00aa92;
         border-color: #f7eb13;
         background: #f7eb13;
       }
-      &.red {
-        color: #f7eb13;
+      &.ui-state-hover {
+        color: #00aa92;
         border-color: #ee3624;
         background: #ee3624;
       }

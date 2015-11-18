@@ -1,5 +1,6 @@
 $.Controller "Main",
   init: ->
+    @curse_dates = []
     @is_blog = @element.find(".calendar-block").size() < 1
     @lessons = if typeof lessons == "undefined" then {} else lessons
     @init_slideshow();
@@ -126,10 +127,20 @@ $.Controller "Main",
       data = if data then data else {}
     @calendar.setData(data,data)
 
+  "#group-selector -> change":(ev) ->
+    ev.preventDefault()
+    id = Number($(ev.target).val())
+    @curse_dates = Object.keys(@lessons[id])
+    @element.find('#subscriber_date').datepicker('refresh');
+
   init_datepicker: ->
     self = @
+    dateToday = new Date();
     @element.find('#subscriber_date').datepicker
       dateFormat: 'dd.mm.yy'
+      beforeShowDay: (date) ->
+        return self.unavailable(date)
+      minDate: dateToday,
       onChangeMonthYear: ->
         self.regenerate_datepicker(10)
       beforeShow: ->
@@ -146,8 +157,14 @@ $.Controller "Main",
 
   generate_courses_options: ->
     $.each courses, (index, obj) ->
-      console.log(obj,$('#group-selector'))
       $('#group-selector').append $('<option/>',
         value: obj.id
         text: obj.name)
       return
+
+  unavailable: (date) ->
+    dmy = ("0" + (date.getMonth() + 1)).slice(-2)  + '-' + ("0" + date.getDate()).slice(-2)  + '-' + date.getFullYear()
+    if @curse_dates.length != 0 && !($.inArray(dmy, @curse_dates) < 0)
+      return [true,"yellow",""]
+    else
+      return [false,"",""]
