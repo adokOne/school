@@ -13,6 +13,7 @@ uk:
       calendar_block: КАЛЕНДАР
       gallery:  ГАЛЕРЕЯ
 
+    fb_course_link: 'Ми тісніше спілкуємось у нашій групі на <a target="_blank" href="%{link}">Facebook</a>. Долучайтесь!'
     level_test: "Тестування"
     test_completed: "Дякуемо! Ваш тест завершено з результатом: %{count} балів.<p>Ваш рівень англійської мови ви можете визначити за табличкою нижче:</p><ul class='correct_answers'><li>0 - 20 = Beginner</li><li>21 - 40 = Elementary</li><li>41 - 60 = Pre-Intermediate</li><li>61 - 75 = Intermediate</li><li>76 - 99 = Higher Intermediate</li></ul><p>Якщо ви хочете підвищити ваш рівень англійської, ми завжди будемо раді вам допомогти :)</p><div class='clear'></div>"
     complete_test: "Завершити тест"

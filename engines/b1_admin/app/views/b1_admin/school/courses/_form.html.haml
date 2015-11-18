@@ -24,6 +24,9 @@
                     = label_tag :seo, "Ідентифкатор фонової картинки", class:"col-sm-3 control-label"
                     .col-sm-7
                       = text_field_tag :seo,"" ,class:"form-control",required: true,"ng-minlength"=>2,"ng-maxlength"=>255, "ng-model"=>"editedItem.seo"
+                    = label_tag :fb_link, "Ссилка на групу у Faceebook", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :fb_link,"" ,class:"form-control","ng-maxlength"=>255, "ng-model"=>"editedItem.fb_link"
                   .form-group{"ng-class" => "{'has-error': itemForm.date_end.$invalid && itemForm.$submitted}"}
                     = label_tag :name,"Дата початку", class:"col-sm-3 control-label"
                     .col-sm-7

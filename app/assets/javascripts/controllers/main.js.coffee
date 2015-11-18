@@ -100,6 +100,9 @@ $.Controller "Main",
     @element.find('.course-description').hide()
     $('html, body').animate({scrollTop: $('.courses-block').offset().top}, 800);
 
+  ".advertising .close -> click": (ev) ->
+    ev.preventDefault()
+    @element.find(".advertising").remove()
 
   "#course -> change": (ev) ->
     id = $(ev.target).val()

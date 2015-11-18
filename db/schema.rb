@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117202150) do
+ActiveRecord::Schema.define(version: 20151118172851) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "",    null: false
@@ -139,6 +139,7 @@ ActiveRecord::Schema.define(version: 20151117202150) do
     t.string   "title",             limit: 255
     t.text     "desc",              limit: 65535
     t.date     "date_start"
+    t.string   "fb_link",           limit: 255
   end
 
   add_index "courses", ["course_type"], name: "index_courses_on_course_type", using: :btree
