@@ -55,7 +55,7 @@ module B1Admin
         #Check if @model is defined in controller
         raise "You must set @model before include this module" if self.model.nil?
 
-        order    = self.model < ActiveRecord::Base ? [{id: :asc}] : :id.asc
+        order    = self.model < ActiveRecord::Base ? [{id: :desc}] : :id.asc
 
         # This methods must be public in controller, they set to private in this module
         %w(set_data).each do |method|

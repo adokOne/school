@@ -26,12 +26,12 @@
                     {{item.phone}}
                   %td{"data-title" => "'Курс'"}
                     {{item.course_name}}
-                  %td{"data-title" => "'#{t('b1_admin.active')}'"}
-                    %span.label.text-lg{"ng-class"=>"{'label-danger':!item.active,'label-success': item.active }"}
-                      %span{"ng-switch" => "", :on => "item.active"}
-                        %span{"ng-switch-when" => "true"}
-                          =t('b1_admin._true')
-                        %span{"ng-switch-default" => ""}=t('b1_admin._false')
+                  / %td{"data-title" => "'#{t('b1_admin.active')}'"}
+                  /   %span.label.text-lg{"ng-class"=>"{'label-danger':!item.active,'label-success': item.active }"}
+                  /     %span{"ng-switch" => "", :on => "item.active"}
+                  /       %span{"ng-switch-when" => "true"}
+                  /         =t('b1_admin._true')
+                  /       %span{"ng-switch-default" => ""}=t('b1_admin._false')
                   %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
                     - if user_can?(:edit)
                       %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{club_users_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{club_users_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}

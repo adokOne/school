@@ -107,8 +107,12 @@
   </div>
   <%= render partial: "shared/blog_subscribe_form" %>
   <%= render partial: "shared/vacancy_subscribe_form" %>
-  <%= render partial: "shared/lesson_subscribe_form" %>
 
+  <% if @links_type == "school" %>
+    <%= render partial: "shared/school_subscribe_form" %>
+  <% else %>
+    <%= render partial: "shared/club_subscribe_form" %>
+  <% end %>
 
   <!-- успішно заповнена форма -->
   <div id="success_popup" class="owl success" style="display: none;">

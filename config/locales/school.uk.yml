@@ -13,6 +13,17 @@ uk:
       calendar_block: КАЛЕНДАР
       gallery:  ГАЛЕРЕЯ
 
+
+    choose_your_level: "ваш рівень англійської"
+    levels:
+      starter: starter
+      elementary: elementary
+      pre-intermediate: pre-intermediate
+      intermediate: intermediate
+      upper-intermediate: upper-intermediate
+      advanced: advanced
+
+    check_your_level: "Визначити мій рівень англійскої"
     vacancy_title_2: Якщо ви підходите на дану вакансію ми з радістю розглянемо Ваше резюме
     fb_course_link: 'Ми тісніше спілкуємось у нашій групі на <a target="_blank" href="%{link}">Facebook</a>. Долучайтесь!'
     level_test: "Тестування"

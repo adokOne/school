@@ -71,7 +71,7 @@ class HomeController < ApplicationController
   private
 
   def allowed_params
-    params.require(:subscriber).permit(:name,:email,:school_subscribe,:club_subscribe,:course_id,:phone)
+    params.require(:subscriber).permit(:name,:email,:school_subscribe,:club_subscribe,:course_id,:phone,:blog_subscribe,:level)
   end
 
   def cv_allowed_params
