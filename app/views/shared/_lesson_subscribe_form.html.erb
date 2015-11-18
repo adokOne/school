@@ -29,6 +29,9 @@
           <input type="checkbox">
           <label>Я хочу отримувати новини від SPEAK на скриньку</label>
         </div>
+        <div class="form-row">
+          <input type="text" class="txtinput" id="form-calendar" placeholder="оберіть дату та групу">
+        </div>
       </div>
 
       <a href="#" class="subscribe js-submit"><%= t("school.subscribe_for_lesson")%></a>
@@ -39,3 +42,17 @@
     </div>
   </div>
 </div>
+
+<script>
+  $('#form-calendar').datepicker({
+    changeYear: true,
+     /*beforeShow: function() {
+      setTimeout(function() {
+        $("#ui-datepicker-div").find("select").selectbox();
+      }, 10);*/
+  });
+
+  $("#form-calendar").blur(function() {
+    $(this).datepicker("hide");
+  });
+</script>

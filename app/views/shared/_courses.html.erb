@@ -1,9 +1,15 @@
 <div class="courses-block" id="courses">
   <div class="container">
     <div class="courses-list">
+    <% if @links_type == "school" %>
       <h2><%= t("school.tematic_courses")%></h2>
-      <p>у школі англійської мови speak можна вивчити як загальний курс англійської мови<br> відповідно до вашого рівня, так і навчальні програми по напрямках.</p>
-
+      <p><%= t("school.courses_desc").html_safe%></p>
+    <% end %>
+    <% if @links_type == "club" %>
+      <h2><%= t("school.tematic_groups")%></h2>
+      <p class="courses-desc"><%= t("school.club_courses_desc").html_safe %></p>
+      <p class="attention"><%= t("school.payment_variant").html_safe %></p>
+    <% end %>
       <% courses.in_groups_of(4,false).each do |group|%>
         <div class="row">
           <% group.each_with_index do |course,idx|%>
@@ -45,6 +51,7 @@
               <a data-id="<%= course.id %>" href="#" class="schedule"><%= t("school.month_schedule")%></a>
             </div>
             <a href="#" data-id="<%= course.id %>" class="subscribe course_subscribe"><%= t("school.subscribe_to_earning")%></a>
+            <div class="fb-group">Ми тісніше спілкуємось у нашій групі на <a href="#">Facebook</a>. Долучайтесь!</div>
           </div>
         <% end %>
     </div>
@@ -62,7 +69,7 @@
         <% end %>
       </select>
     </div>
-    <div class="owl">
+    <div class="owl alternative">
       <p class="bobble"><%= t("school.choose_your_course")%></p>
     </div>
     <div class="custom-calendar-wrap custom-calendar-full">

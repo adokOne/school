@@ -301,6 +301,9 @@ strong {
   background-image: image-url("owl.png");
   background-repeat:  no-repeat;
   background-position:  100% 100%;
+  &.alternative {
+    background-image: image-url("owl_alt.png");
+  }
 }
 .owl .bobble {
   width: 122px;
@@ -348,6 +351,10 @@ strong {
   position: absolute;
   right: -30px;
   z-index: -1;
+  &.two {
+    left: -24%;
+    bottom: 31%;
+  }
 }
 .birds {
   width: 222px;
@@ -379,7 +386,7 @@ strong {
   width: 137px;
   height: 134px;
   position: absolute;
-  top: -100%;
+  top: -110%;
   right: 0;
   background-image: image-url('boat.png');
   background-repeat:  no-repeat;
@@ -387,7 +394,7 @@ strong {
 }
 .shark {
   position: absolute;
-  top: -45px;
+  top: -61px;
   left: 9%;
   width: 45px;
   height: 45px;
@@ -580,11 +587,19 @@ label {
   position: relative;
   //height: 550px;
   padding-bottom: 100px;
+  .owl {
+    right: 5%; bottom:6%;
+    .bobble-green {
+      width: 105px;
+      height: 73px;
+      padding: 20px 12px;
+    }
+  }
 }
 .about .text {
   width: 460px;
   margin: auto;
-  text-align: justify;
+  text-align: center;
   color: #13514f;
   font-size: 16px;
 }
@@ -597,9 +612,10 @@ label {
   color: #db6627;
   text-transform: uppercase;
   font-size: 14px;
+  text-align: left; 
 }
 .about .text ul li {
-  margin-bottom: 7px;
+  margin-bottom: 15px;
 }
 .steps-block {
   position: relative;
@@ -703,6 +719,14 @@ label {
   color: #13514f;
   font-size: 16px;
   text-align: center;
+  .courses-desc {
+    text-transform: none;
+    line-height: 1.5;
+  }
+  .attention {
+    margin-top: 10px;
+    color: #f47a20;
+  }
 }
 .courses-block .courses-list .reg {
   font-size: 16px;
@@ -745,8 +769,23 @@ label {
 .course-description {
   display: none;
   padding-top: 30px;
-  border-bottom: 47px solid #2c9596;
   background: #00aa92;
+  border-bottom: 73px solid #2c9596;
+  .fb-group {
+    position: absolute;
+    bottom: -9%;
+    margin: 0 0 0 124px;
+    padding: 10px 55px;
+    color: #13514f;
+    background: url(/assets/fb-icon.png) no-repeat;
+    a {
+      color: #5cb7b5;
+      text-decoration: underline;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  } 
 }
 .course-description .s-item {
   width: 100%;
@@ -961,7 +1000,7 @@ label {
   color: #fff;
 }
 .photo-gallery .ship {
-  top: -75%;
+  top: -74%;
   left: -3%;
 }
 .photo-gallery .s-item {
@@ -1061,10 +1100,10 @@ label {
   color: #fff;
 }
 .form-block {
-  position: absolute;
+  position: fixed;
   left: 50%;
   top: 50%;
-  margin: -156px 0 0 -430px;
+  margin: -216px 0 0 -430px;
   width: 780px;
   padding: 30px 40px;
   color: #13514f;
@@ -1084,17 +1123,18 @@ label {
   .sbOptions {
     width: 346px;
     left: 6px;
-    background: #69c2be;
-    border: none;
-    border-radius: 0 0 15px 15px;
-    a {
-      color: #fff;
-      &:hover {
-        text-decoration: underline;
-        background: none;
-      }
-    }
   }
+    // background: #69c2be;
+    // border: none;
+    // border-radius: 0 0 15px 15px;
+  //   a {
+  //     color: #fff;
+  //     &:hover {
+  //       text-decoration: underline;
+  //       background: none;
+  //     }
+  //   }
+  // }
   .icheckbox_minimal {
     margin-left: 20px;
   }
@@ -1105,11 +1145,13 @@ label {
   right: 15px;
 }
 .form-block .user-data {
+  position: relative;
   width: 740px;
   margin: 26px auto 60px;
   text-align: left;
 }
 .form-block .form-row {
+  position: relative;
   margin-bottom: 20px;
 }
 .form-block .form-row:after {
@@ -1515,7 +1557,7 @@ label {
 }
 .other-topics .ship {
   left: -14%;
-  top: -42%;
+  top: -73%;
 }
 .other-topics h2 {
   margin-bottom: 40px;
@@ -1977,16 +2019,6 @@ p.load {
   display: none;
 }
 
-
-@media screen and (max-width: 1366px) {
-  .birds {
-    &.two {
-      top: 60%;
-      left: -8%
-    }
-  }
-}
-
 .advertising {
   text-align: center;
   height: 180px;
@@ -1996,6 +2028,12 @@ p.load {
   position: relative;
   top: -25px;
   overflow: hidden;
+  .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+  }
   .container_small {
     h1 {
       float: left;
@@ -2007,6 +2045,94 @@ p.load {
     }
     .image-holder {
       float: left;
+    }
+  }
+}
+
+.ui-datepicker {
+  width: 310px;
+  left: 555px !important;
+  padding: 20px;
+  background: #69c2be;
+  color: #fff;
+  .ui-datepicker-header {
+    padding: 4px 0;
+    color: #13514f;
+    text-align: center;
+    text-transform: uppercase;
+    font-family: 'robotobold';
+    font-size: 14px;
+    background: #f7eb13;
+    -webkit-border-radius: 5px;
+       -moz-border-radius: 5px;
+            border-radius: 5px;
+    span.ui-icon {
+      display: none;
+    }
+  }
+  .ui-datepicker-prev, .ui-datepicker-next {
+    display: block;
+    width: 20px;
+    height: 20px;
+    background: image-url('datepicker-arrows.png') no-repeat;
+  }
+  .ui-datepicker-prev {
+    float: left;
+    background-position: 5px 1px;
+  }
+  .ui-datepicker-next {
+    float: right;
+    background-position: 5px -22px;
+  }
+  .ui-datepicker-calendar {
+    width: 100%;
+    text-align: center;
+    text-transform: uppercase;
+    thead span {
+      display: inline-block;
+      margin: 6px 0;
+    }
+    a {
+      display: block;
+      width: 34px;
+      border: 2px solid #fff;
+      padding: 10px 0;
+      margin: 0 auto 6px;
+      color: #fff;
+      -webkit-border-radius: 2px;
+      -moz-border-radius: 2px;
+           border-radius: 2px;
+      &:hover {
+        text-decoration: none;
+      }
+      &.yellow {
+        color: #f7eb13;
+        border-color: #f7eb13;
+        background: #f7eb13;
+      }
+      &.red {
+        color: #f7eb13;
+        border-color: #ee3624;
+        background: #ee3624;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .birds {
+    &.two {
+      top: 60%;
+      left: -8%
+    }
+  }
+}
+
+@media screen and (max-width: 1366px) {
+  .advertising {
+    width: 80%;
+    .container_small {
+      float: right;
     }
   }
 }

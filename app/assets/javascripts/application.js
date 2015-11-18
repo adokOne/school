@@ -23,6 +23,7 @@
 //= require jquery.calendario.min
 //= require magnific-popup
 //= require jquery.cycle2.min
+//= require datepicker-ua
 
 
 //= require jquery.validate
