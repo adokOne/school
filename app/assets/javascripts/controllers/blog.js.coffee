@@ -28,8 +28,10 @@ $.Controller "Blog",
     ev.preventDefault();
     form = $(ev.target).parents("form")
     if form.valid()
-      @submit_form( form )
-    else
+      if $(ev.target).hasClass("not-ajax")
+        form[0].submit()
+      else
+        @submit_form( form )
 
   show_success_owl: ->
     @success_popup = $("#success_popup").controller()
