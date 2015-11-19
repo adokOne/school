@@ -324,7 +324,7 @@ strong {
 }
 .baloon {
   position: absolute;
-  top: -55%;
+  top: -50%;
   left: -16%;
 }
 .baloon .bobble-green {
@@ -386,7 +386,7 @@ strong {
   width: 137px;
   height: 134px;
   position: absolute;
-  top: -110%;
+  top: -111%;
   right: 0;
   background-image: image-url('boat.png');
   background-repeat:  no-repeat;
@@ -424,7 +424,7 @@ h2 {
   border-radius: 6px;
 }
 .close:hover {
-  background-color: #fff;
+ // background-color: #fff;
 }
 .subscribe {
   display: inline-block;
@@ -652,7 +652,7 @@ label {
       box-sizing: border-box;
       padding-top: 15px;
       padding-bottom: 25px;
-      font-size: 16px;
+      font-size: 14px;
       text-transform: uppercase;
       color: #f7eb13;
       background-image: image-url('steps-arrow.png');
@@ -770,15 +770,15 @@ label {
   display: none;
   padding-top: 30px;
   background: #00aa92;
-  border-bottom: 73px solid #2c9596;
+  border-bottom: 66px solid #2c9596;
   .fb-group {
     position: absolute;
-    bottom: -9%;
+    bottom: -13%;
+    line-height: 42px;
     margin: 0 0 0 124px;
         cursor: pointer;
     padding: 10px 55px;
     color: #13514f;
-    background-image: image-url("fb-icon.png");
     background-repeat:  no-repeat;
     a {
       color: #5cb7b5;
@@ -786,6 +786,11 @@ label {
       &:hover {
         text-decoration: none;
       }
+    }
+    .social-icon {
+      display: block;
+      float: left;
+      margin-right: 15px;
     }
   }
 }
@@ -823,7 +828,7 @@ label {
   background-position: 100% 100%, 100% 100%;
 }
 .course-description .s-item.accent {
-  background: image-url('accent-2.png') no-repeat 100% 102%;
+  background: image-url('accent.png') no-repeat 100% 100%;
 }
 .course-description .s-item.intensive {
   background: image-url('intensive.png') no-repeat 100% 100%;
@@ -1559,7 +1564,7 @@ label {
 }
 .other-topics .ship {
   left: -14%;
-  top: -73%;
+  top: -176px;
 }
 .other-topics h2 {
   margin-bottom: 40px;

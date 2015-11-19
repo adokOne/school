@@ -92,6 +92,9 @@
 .fc-calendar .fc-row > div.fc-content {
 	cursor: pointer;
 	border-color: #f7eb13;
+	&:hover {
+		border-color: #ee3624;
+	}
 }
 
 .fc-calendar .fc-row > div.fc-content b {
