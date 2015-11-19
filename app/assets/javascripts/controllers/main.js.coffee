@@ -116,6 +116,14 @@ $.Controller "Main",
     ev.preventDefault()
     @element.find(".advertising").remove()
 
+  ".fc-calendar-event -> click":(ev) ->
+    ev.preventDefault();
+    el = if $(ev.target).hasClass("fc-calendar-event") then $(ev.target) else $(ev.target).parents(".fc-calendar-event")
+    @selected_course_id =  el.find(".lesson_box").data("course-id")
+    console.log(el.find(".fc-starttime"))
+    date = el.find(".fc-starttime").attr("datetime").split("T")[0]
+    console.log(date)
+
   "#course -> change": (ev) ->
     id = $(ev.target).val()
     if 0 == Number(id)
