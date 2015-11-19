@@ -74,6 +74,15 @@ $(document).ready ->
     if $('.burger').hasClass("active")
       $('.burger').toggleClass('active').next('.open-menu').slideToggle()
 
+  $(document).click (e) ->
+    target = e.target
+    if $(target).hasClass('ui-corner-all') or $(target).parent().hasClass('ui-corner-all')
+      return
+    if !$(target).hasClass('hasDatepicker') && !$(target).parents('.ui-datepicker').size() && $('#ui-datepicker-div').is(':visible')
+      $('.hasDatepicker').datepicker 'hide'
+    return
+
+
   # #Firefox
   # $(document).bind 'DOMMouseScroll', (e) ->
   #   if e.originalEvent.detail > 0

@@ -6,6 +6,7 @@ $.Controller "Main",
     @init_slideshow();
     @init_calendar();
     @init_datepicker()
+    @selected_course_id = 0;
 
 
   init_slideshow: ->
@@ -130,6 +131,7 @@ $.Controller "Main",
   "#group-selector -> change":(ev) ->
     ev.preventDefault()
     id = Number($(ev.target).val())
+    @selected_course_id = id
     @element.find("#subscriber_course_id").val(id).change()
     @curse_dates = Object.keys(@lessons[id])
     @element.find('#subscriber_date').datepicker('refresh');
@@ -145,7 +147,7 @@ $.Controller "Main",
       dateFormat: 'dd.mm.yy'
       onSelect: (date) ->
         $("#subscriber_date").change()
-        self.curse_dates = []
+        #self.curse_dates = []
       beforeShowDay: (date) ->
         return self.unavailable(date)
       minDate: dateToday,
@@ -168,7 +170,8 @@ $.Controller "Main",
       $('#group-selector').append $('<option/>',
         value: obj.id
         text: obj.name)
-      return
+    $("#group-selector option[value=#{@selected_course_id}]").attr('selected','selected');
+    return
 
   unavailable: (date) ->
     dmy = ("0" + (date.getMonth() + 1)).slice(-2)  + '-' + ("0" + date.getDate()).slice(-2)  + '-' + date.getFullYear()
