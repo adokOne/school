@@ -37,10 +37,6 @@ $.Controller "Blog",
 
     self.success_popup.open()
     $('html, body').scrollTop self.success_popup.element.offset().top
-    setTimeout (->
-      self.success_popup.hide()
-      return
-    ), 2000
 
   submit_form:(form) ->
     self = @
