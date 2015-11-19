@@ -20,7 +20,9 @@ class BlogController < ApplicationController
   end
 
   def item
+
     @item = Page.find_by_seo(params[:seo_name].split("/"))
+    @similar = Page.limit(3).where("category_id != ?",@item.category_id).order(id: :desc)
   end
 
   def search

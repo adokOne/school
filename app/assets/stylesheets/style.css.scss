@@ -775,9 +775,11 @@ label {
     position: absolute;
     bottom: -9%;
     margin: 0 0 0 124px;
+        cursor: pointer;
     padding: 10px 55px;
     color: #13514f;
-    background: url(/assets/fb-icon.png) no-repeat;
+    background-image: image-url("fb-icon.png");
+    background-repeat:  no-repeat;
     a {
       color: #5cb7b5;
       text-decoration: underline;

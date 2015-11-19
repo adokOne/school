@@ -3,14 +3,14 @@ uk:
     school_top_links:
       about: ПРО ШКОЛУ
       courses: ТЕМАТИЧНІ ГРУПИ
-      teachers: ВИКЛАДАЧІ
       calendar_block: КАЛЕНДАР
+      teachers: ВИКЛАДАЧІ
       gallery:  ГАЛЕРЕЯ
     club_top_links:
       about: ПРО КЛУБ
       courses: ТЕМАТИЧНІ ГРУПИ
-      teachers: ВИКЛАДАЧІ
       calendar_block: КАЛЕНДАР
+      teachers: ВИКЛАДАЧІ
       gallery:  ГАЛЕРЕЯ
 
 
@@ -38,7 +38,7 @@ uk:
     add_cv_file: завантажте файл з Вашим резюме
     vavancy_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ:"
     lesson_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ ДЛЯ ЗАПИСУ НА ЗАНЯТТЯ:"
-    email_plc: вкажіть ваш e-mail
+    email_plc: ваш e-mail
     name_plc: ваше ім”я
     phone_plc: ваш телефон
     fields_wit_errors_text: "<span>БУДЬТЕ УВАЖНІ!</span> Ви не заповнили всі поля"

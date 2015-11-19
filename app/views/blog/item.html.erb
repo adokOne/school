@@ -24,3 +24,6 @@
       </div>
     </div>
   </div>
+  <% if @similar.any? %>
+    <%= render partial: "shared/similar", locals:{similar: @similar} %>
+  <% end %>
