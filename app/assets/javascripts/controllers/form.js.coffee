@@ -2,7 +2,7 @@ $.Controller "Form",
   init: ->
     @init_validation()
     @error_owl = @element.find(".owl.error")
-    @success_popup = $("#success_popup")
+    @success_popup = $("#success_popup").controller()
   open: ->
     @element.show()
     $('html, body').scrollTop(@element.find(".form-block").offset().top);
@@ -84,12 +84,12 @@ $.Controller "Form",
 
   show_success_owl: ->
     self = @
-    self.success_popup.show()
+    self.success_popup.open()
     $('html, body').scrollTop($("#success_popup").offset().top - 200);
-    setTimeout (->
-      self.success_popup.hide()
-      return
-    ), 2000
+    # setTimeout (->
+    #   self.success_popup.hide()
+    #   return
+    # ), 2000
 
   submit_form:(form) ->
     self = @

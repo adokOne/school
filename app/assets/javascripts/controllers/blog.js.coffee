@@ -1,6 +1,6 @@
 $.Controller "Blog",
   init: ->
-    @success_popup = $("#success_popup")
+
     @init_validation()
     @init_photo_category()
   init_photo_category: ->
@@ -32,10 +32,11 @@ $.Controller "Blog",
     else
 
   show_success_owl: ->
+    @success_popup = $("#success_popup").controller()
     self = @
 
-    self.success_popup.show()
-    $('html, body').scrollTop self.success_popup.offset().top
+    self.success_popup.open()
+    $('html, body').scrollTop self.success_popup.element.offset().top
     setTimeout (->
       self.success_popup.hide()
       return

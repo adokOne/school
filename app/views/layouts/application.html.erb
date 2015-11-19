@@ -134,6 +134,7 @@
 
     </div>
   </div>
+  <%= render partial: "shared/success_form" %>
   <%= render partial: "shared/blog_subscribe_form" %>
   <%= render partial: "shared/vacancy_subscribe_form" %>
 
@@ -142,12 +143,6 @@
   <% else %>
     <%= render partial: "shared/club_subscribe_form" %>
   <% end %>
-
-  <!-- успішно заповнена форма -->
-  <div id="success_popup" class="owl success" style="display: none;">
-    <div class="bobble"><span>ВІТАЄМО!</span> ваше резюме успішно відправлено</div>
-  </div>
-
 
   <script type="text/javascript">
 

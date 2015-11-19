@@ -49,7 +49,7 @@ class HomeController < ApplicationController
 
   def subscribe
     params_to_create = allowed_params.dup
-    params_to_create[:date] = params_to_create[:date].split(",").first
+    params_to_create[:date] = params_to_create[:date].to_s.split(",").first
     item = Subscriber.check!(params_to_create)
     if item.valid?
       json = { success: true }
