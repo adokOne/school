@@ -120,10 +120,12 @@ $.Controller "Main",
     ev.preventDefault();
     el = if $(ev.target).hasClass("fc-calendar-event") then $(ev.target) else $(ev.target).parents(".fc-calendar-event")
     @selected_course_id =  el.find(".lesson_box").data("course-id")
-    console.log(el.find(".fc-starttime"))
-    date = el.find(".fc-starttime").attr("datetime").split("T")[0]
-    console.log(date)
-
+    @curse_dates = Object.keys(@lessons[@selected_course_id])
+    date = el.find(".lesson_box").data("date")
+    @selected_date = date;
+    @course_subscribe = $("#lesson_subscribe_popup").controller()
+    @course_subscribe.open()
+    $("#subscriber_date").change()
   "#course -> change": (ev) ->
     id = $(ev.target).val()
     if 0 == Number(id)
@@ -145,8 +147,8 @@ $.Controller "Main",
     @element.find('#subscriber_date').datepicker('refresh');
 
   "#subscriber_date -> change": (ev) ->
-    old = $(ev.target).val()
-    $(ev.target).val("#{old}, #{$('#group-selector option:selected').text()}")
+    old = @selected_date#$(ev.target).val()
+    $(ev.target).val("#{old}, #{courses_names[@selected_course_id]}")
 
   init_datepicker: ->
     self = @
@@ -154,6 +156,7 @@ $.Controller "Main",
     @element.find('#subscriber_date').datepicker
       dateFormat: 'dd.mm.yy'
       onSelect: (date) ->
+        self.selected_date = date
         $("#subscriber_date").change()
         #self.curse_dates = []
       beforeShowDay: (date) ->

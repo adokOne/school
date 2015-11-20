@@ -1,5 +1,6 @@
 <script type="text/javascript">
   var courses   = <%= raw courses.map{|c|  {id: c.id, name: c.name} }.to_json%>;
+  var courses_names   = <%= raw courses.inject({}){|hash,c|  hash[c.id] = c.name; hash  }.to_json%>;
 </script>
 <div class="courses-block" id="courses">
   <div class="container">
