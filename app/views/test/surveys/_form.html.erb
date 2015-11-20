@@ -49,6 +49,7 @@
     $(link).prev("input[type=hidden]").val("true");
     tag = $(link).closest("li")
     tag.hide("fade in").addClass("deleted");
+    return false;
   }
 
   // add attachment field
@@ -57,5 +58,6 @@
     var regexp = new RegExp("new_" + association, "g");
     var html = $(content.replace(regexp, new_id)).hide();
     html.appendTo($(link).closest("div.field").find("ul").first()).slideDown("slow");
+    return false;
   }
 </script>
