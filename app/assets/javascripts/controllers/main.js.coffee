@@ -186,6 +186,7 @@ $.Controller "Main",
 
   unavailable: (date) ->
     dmy = ("0" + (date.getMonth() + 1)).slice(-2)  + '-' + ("0" + date.getDate()).slice(-2)  + '-' + date.getFullYear()
+    console.log @curse_dates
     if @curse_dates.length != 0 && !($.inArray(dmy, @curse_dates) < 0)
       return [true,"yellow",""]
     else
