@@ -2058,12 +2058,14 @@ p.load {
 
 .ui-datepicker {
   width: 310px;
-  left: 555px !important;
+  //left: 555px !important;
   padding: 20px;
+  margin-left: 5px;
   background: #69c2be;
   color: #fff;
   .ui-datepicker-header {
-    padding: 4px 0;
+    height: 23px;
+    line-height: 23px;
     color: #13514f;
     text-align: center;
     text-transform: uppercase;
@@ -2081,6 +2083,7 @@ p.load {
     display: block;
     width: 20px;
     height: 20px;
+    margin-top: 2px;
     background: image-url('datepicker-arrows.png') no-repeat;
   }
   .ui-datepicker-prev {
