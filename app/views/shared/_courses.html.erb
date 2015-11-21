@@ -55,7 +55,7 @@
               <a data-id="<%= course.id %>" href="#" class="schedule"><%= t("school.month_schedule")%></a>
             </div>
             <a href="#" data-id="<%= course.id %>" class="subscribe course_subscribe"><%= t("school.subscribe_to_earning")%></a>
-            <% if course.fb_link.present? || true %>
+            <% if course.fb_link.present? %>
               <div class="fb-group">
               <a href="#" class="social-icon"><%= image_tag "fb-icon.png" %></a>
               <%= t("school.fb_course_link",link: course.fb_link).html_safe%>
