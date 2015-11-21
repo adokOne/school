@@ -3,6 +3,7 @@ $.Controller "Form",
     @init_validation()
     @error_owl = @element.find(".owl.error")
     @success_popup = $("#success_popup").controller()
+    @type = @element.data("type")
   open: ->
     @element.show()
     $('html, body').scrollTop(@element.find(".form-block").offset().top);
@@ -84,8 +85,10 @@ $.Controller "Form",
 
   show_success_owl: ->
     self = @
+    html= I18n["#{@type}_reg"]
+    self.success_popup.element.find(".bobble").html(html)
     self.success_popup.open()
-    $('html, body').scrollTop($("#success_popup").offset().top - 200);
+    $('html, body').scrollTop($("#success_popup").find(".form-block").offset().top - 200);
     # setTimeout (->
     #   self.success_popup.hide()
     #   return

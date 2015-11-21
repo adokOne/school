@@ -64,7 +64,7 @@ $(document).ready ->
 
   $('.open-menu a').click ->
     el = $(this).attr('href')
-    $('body').animate { scrollTop: $(el).offset().top }, 1500
+    $('body').animate { scrollTop: $(el).offset().top - 50 }, 1500
     false
   $('.burger').click ->
     $(this).toggleClass('active').next('.open-menu').slideToggle()
