@@ -1084,6 +1084,9 @@ label {
 .footer .social li a.pin {
   background-position: 0 0;
 }
+.footer .social li a:hover {
+  margin-top: -5px;
+}
 .footer .social li a.gp {
   background-position: -44px 0;
 }
