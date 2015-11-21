@@ -16,7 +16,7 @@
         <% @survey.questions.each_with_index do |question, index| %>
           <li>
             <div class="table">
-              <p class="question"><%= question.text %></p>
+              <p class="question"><%= index + 1 %> )<%= question.text %></p>
               <ul>
                 <%= hidden_field_tag "survey_attempt[answers_attributes][#{index}][question_id]", question.id %>
                 <% question.options.each_with_index do |option,idx| %>
