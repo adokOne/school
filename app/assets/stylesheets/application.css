@@ -28,10 +28,10 @@ input.error, p.error{
 }
 .table {
   display: table;   /* Allow the centering to work */
-  margin: 0 auto;
+  /*margin: 0 auto;*/
 }
 .question {
-  margin-bottom: 10px;
+  margin: 10px 0;
 }
 .min_empty {
     height: 50px;
