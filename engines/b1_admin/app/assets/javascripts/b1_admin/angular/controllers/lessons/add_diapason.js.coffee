@@ -21,6 +21,15 @@ angular.module("B1Admin").controller 'ModalAddDiapasonController', [
     $scope.cancel = ->
       $modalInstance.dismiss "cancel"
 
+    $scope.destroy = (item) ->
+      data =
+        id: item.id
+        title: "Точно видалити заняття?"
+      $rootScope.confirm(data).result.then ((result) ->
+        $rootScope.showLoader()
+        $scope.Item.delete {id:item.id}, (resp) ->
+          $modalInstance.close() if resp.success
+      )
 
     $scope.save = ->
 

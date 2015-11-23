@@ -14,5 +14,6 @@
               -(0..23).each do |i|
                 %option{'value' => "#{i.to_s.rjust(2, '0')}:00"}="#{i.to_s.rjust(2, '0')}:00"
   .modal-footer
+    %button.btn.btn-danger{'ng-click' => 'destroy(editedItem)', "ng-show"=>"editedItem.id"} Видалити
     %button.btn.btn-primary{'ng-click' => 'save()'}=t('b1_admin.save')
     %button.btn.btn-default{'ng-click' => 'cancel()'}=t('b1_admin.cancel')
