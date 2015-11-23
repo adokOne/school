@@ -77,6 +77,11 @@ $.Controller "Main",
     @blog_subscribe = $("#blog_subscribe_popup").controller()
     @blog_subscribe.open()
 
+  "#call_back -> click": (ev) ->
+    ev.preventDefault()
+    @blog_subscribe = $("#call_subscribe_popup").controller()
+    @blog_subscribe.open()
+
   ".vacancy_subscribe -> click": (ev) ->
     ev.preventDefault()
     self = @

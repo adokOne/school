@@ -1,5 +1,5 @@
 defaults: &defaults
-
+  notification_mail: "eng.speak.club@gmail.com"
   school_links:
     fb_link: https://www.facebook.com/pages/Школа-Англійської-Мови-Speak/1400772563573220
     vk_link: http://vk.com/club88836095

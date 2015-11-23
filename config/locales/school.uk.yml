@@ -33,7 +33,7 @@ uk:
         text: ГАЛЕРЕЯ
         offset: 30
 
-
+    call_subscribe_popup_header: "Замовити зворотній дзвінок"
     choose_your_level: "ваш рівень англійської"
     date_group_plc: "оберіть дату та групу"
     levels:

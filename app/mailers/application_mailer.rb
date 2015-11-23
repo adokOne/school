@@ -14,6 +14,13 @@ class ApplicationMailer < ActionMailer::Base
     end
 
   end
+
+  def call_mail( to, name , phone )
+    @name = name
+    @phone = phone
+    mail(:to => to, :subject => "Нове замовлення дзвінка")
+  end
+
   private
 
   def _prepare_template( template , vars)
@@ -22,6 +29,8 @@ class ApplicationMailer < ActionMailer::Base
     end
     template
   end
+
+
 end
 
 

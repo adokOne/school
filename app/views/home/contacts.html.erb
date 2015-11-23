@@ -22,7 +22,7 @@
       </div>
 
       <div class="buttons">
-        <a href="#"><%= t("school.call_back")%></a>
+        <a href="#" id="call_back"><%= t("school.call_back")%></a>
         <a href="mailto:<%=  @addresses.map(&:email).compact.first  %>"><%= t("school.send_mail")%></a>
       </div>
     </div>

@@ -43,6 +43,11 @@ class HomeController < ApplicationController
     @addresses = Address.active.order(is_main: :desc)
   end
 
+  def call
+    ApplicationMailer.call_mail(Settings.notification_mail, allowed_params[:name], allowed_params[:phone] ).deliver_later
+    render json: {success: true}
+  end
+
   def error404
     render status: :not_found,layout: false
   end
