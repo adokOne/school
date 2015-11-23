@@ -11,7 +11,6 @@ class EmailTemplate < ActiveRecord::Base
     :EMAIL,
     :PHONE,
     :TEST_RESULT_COUNT,
-    :VACANCY_NAME,
     :GROUP_NAME,
     :GROUP_DATE,
   ]

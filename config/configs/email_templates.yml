@@ -1,29 +1,11 @@
 defaults: &defaults
   email_templates:
     add_cv: "add_cv"
-    partner_application: "partner_application"
+    school_registration: "school_registration"
+    club_registration: "club_registration"
+    test_results: "test_results"
+    blog_subscribe: "blog_subscribe"
 
-    password_restore: "password_restore"
-
-    booking_payment_required: ""
-    booking_on_request: "booking_created"
-    booking_completed: "booking_completed"
-    booking_partly_ok: ""
-    booking_rejected: "booking_cancelled"
-    booking_cancelled: "booking_cancelled"
-    booking_cancelation_pending: "cancelation_pending"
-    booking_cancelation_required: "cancelation_pending"
-    booking_failed: ""
-    booking_refund: "booking_refund"
-    booking_noshow: ""
-
-    booking_10: "booking_cancelled"
-    booking_0: "booking_completed"
-    booking_2: "booking_created"
-    booking_5: "cancelation_pending"
-    booking_4: "booking_cancelled"
-    booking_6: "cancelation_pending"
-    booking_7: "booking_refund"
 
 
 
