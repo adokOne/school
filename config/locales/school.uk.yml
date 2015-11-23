@@ -1,17 +1,37 @@
 uk:
   school:
     school_top_links:
-      about: ПРО ШКОЛУ
-      courses: ТЕМАТИЧНІ ГРУПИ
-      calendar_block: КАЛЕНДАР
-      teachers: ВИКЛАДАЧІ
-      gallery:  ГАЛЕРЕЯ
+      about:
+        text: ПРО ШКОЛУ
+        offset: 30
+      courses:
+        text: ТЕМАТИЧНІ КУРСИ
+        offset: 70
+      calendar_block:
+        text: КАЛЕНДАР
+        offset: 45
+      teachers:
+        text: ВИКЛАДАЧІ
+        offset: 30
+      gallery:
+        text: ГАЛЕРЕЯ
+        offset: 30
     club_top_links:
-      about: ПРО КЛУБ
-      courses: ТЕМАТИЧНІ ГРУПИ
-      calendar_block: КАЛЕНДАР
-      teachers: ВИКЛАДАЧІ
-      gallery:  ГАЛЕРЕЯ
+      about:
+        text: ПРО КЛУБ
+        offset: 30
+      courses:
+        text: ТЕМАТИЧНІ ГРУПИ
+        offset: 70
+      calendar_block:
+        text: КАЛЕНДАР
+        offset: 45
+      teachers:
+        text: ВИКЛАДАЧІ
+        offset: 30
+      gallery:
+        text: ГАЛЕРЕЯ
+        offset: 30
 
 
     choose_your_level: "ваш рівень англійської"

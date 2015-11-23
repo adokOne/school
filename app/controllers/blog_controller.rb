@@ -5,7 +5,7 @@ class BlogController < ApplicationController
   def index
     @similar = Page.limit(3).order(id: :desc)
     @items   = Category.where(parent_id:0).all
-    @top_menu = @items.inject({}){|hash, item| hash[item.seo_name] = item.title; hash }
+    @top_menu = @items.inject({}){|hash, item| hash[item.seo_name] = {text: item.title}; hash }
   end
 
   def category

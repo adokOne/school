@@ -51,8 +51,8 @@
             <span></span>
           </a>
           <ul class="open-menu">
-            <% @top_menu.each_pair do |link, text|%>
-              <li><a href="#<%= link %>"><%= text %></a></li>
+            <% @top_menu.each_pair do |link, element|%>
+              <li><a href="#<%= link %>" data-offset="<%= element[:offset] %>"><%= element[:text] %></a></li>
             <% end %>
           </ul>
         </div>
