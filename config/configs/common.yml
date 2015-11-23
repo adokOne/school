@@ -32,7 +32,7 @@ test:
 
 production:
   <<: *defaults
-  domain: "http://193.84.22.53"
+  domain: "http://speakclub.com.ua"
 
 staging:
   <<: *defaults

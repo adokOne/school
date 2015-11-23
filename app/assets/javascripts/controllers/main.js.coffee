@@ -86,6 +86,7 @@ $.Controller "Main",
       data: {id: $(ev.target).data("id")}
       success: (resp) ->
         if resp.success
+          $("body").find("#vacancy_desc_popup").remove()
           $("body").append(resp.html)
           ctrl = $("#vacancy_desc_popup").attachForm().controller()
           ctrl.open()
