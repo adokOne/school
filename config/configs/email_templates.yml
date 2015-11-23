@@ -1,6 +1,6 @@
 defaults: &defaults
   email_templates:
-    partner_registration: "partner_registration"
+    add_cv: "add_cv"
     partner_application: "partner_application"
 
     password_restore: "password_restore"

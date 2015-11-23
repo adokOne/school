@@ -1,17 +1,26 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "info@example.ua"
+  default from: "info@speakclub.com.ua"
 
-  def send_mail( template, to_email, attachments, from_email )
+  def send_mail( template, to_email, vars = {} )
+    template = EmailTemplate.find_by_seo_name(template)
     mail_options = {
       to: to_email,
       subject: template.subject
     }
-    mail_options.merge!(from: from_email) if from_email.present?
+    html = _prepare_template(template.desc, vars)
 
-    attachments.each{ |k,v| self.attachments[k] = v } if attachments.kind_of? Hash
     mail(mail_options) do |format|
-      format.html {render html: template.text.html_safe}
+      format.html {render html: html.html_safe}
     end
+
+  end
+  private
+
+  def _prepare_template( template , vars)
+    vars.each_pair do |key,text|
+      template.gsub!("%#{key.to_s.upcase}%",text)
+    end
+    template
   end
 end
 

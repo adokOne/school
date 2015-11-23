@@ -62,6 +62,7 @@ class HomeController < ApplicationController
   def add_cv
     item = Cv.new(cv_allowed_params)
     if item.valid?
+      ApplicationMailer.send_mail(Settings.email_templates['add_cv'], item.email, {:EMAIL => item.email, :NAME=> item.name, :PHONE => item.phone }  ).deliver_later
       item.save
       json = { success: true }
     else
