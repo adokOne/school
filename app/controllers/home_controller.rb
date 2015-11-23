@@ -53,7 +53,9 @@ class HomeController < ApplicationController
     item = Subscriber.check!(params_to_create)
     if item.valid?
       type = item.school_subscribe ?  "school_registration" : "club_registration"
-      ApplicationMailer.send_mail(Settings.email_templates[type], item.email, {:EMAIL => item.email, :USERNAME=> item.name, :PHONE => item.phone, :GROUP_NAME => item.course.try(:name), :GROUP_DATE => item.date }  ).deliver_later
+      [item.email, Settings.notification_mail].each do |mail|
+        ApplicationMailer.send_mail(Settings.email_templates[type], mail, {:EMAIL => item.email, :USERNAME=> item.name, :PHONE => item.phone, :GROUP_NAME => item.course.try(:name), :GROUP_DATE => item.date }  ).deliver_later
+      end
       json = { success: true }
     else
       json = { success: false, errors: item.errors }
@@ -64,7 +66,9 @@ class HomeController < ApplicationController
   def add_cv
     item = Cv.new(cv_allowed_params)
     if item.valid?
-      ApplicationMailer.send_mail(Settings.email_templates['add_cv'], item.email, {:EMAIL => item.email, :USERNAME=> item.name, :PHONE => item.phone }  ).deliver_later
+      [item.email, Settings.notification_mail].each do |mail|
+        ApplicationMailer.send_mail(Settings.email_templates['add_cv'], mail, {:EMAIL => item.email, :USERNAME=> item.name, :PHONE => item.phone }  ).deliver_later
+      end
       item.save
       json = { success: true }
     else

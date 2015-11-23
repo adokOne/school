@@ -40,7 +40,9 @@ class BlogController < ApplicationController
   def subscribe
     item = Subscriber.check!(allowed_params)
     if item.valid?
-      ApplicationMailer.send_mail(Settings.email_templates['blog_subscribe'], item.email, {:EMAIL => item.email, :USERNAME=> item.name, :PHONE => item.phone }  ).deliver_later
+      [item.email, Settings.notification_mail].each do |mail|
+        ApplicationMailer.send_mail(Settings.email_templates['blog_subscribe'], mail , {:EMAIL => item.email, :USERNAME=> item.name, :PHONE => item.phone }  ).deliver_later
+      end
       json = { success: true }
     else
       json = { success: false, errors: item.errors }
