@@ -6,8 +6,8 @@ class HomeController < ApplicationController
 
   def refresh_fb_reviews
 
-    Rails.cache.write("_school_reviews",fb_manager.get_school_posts( params[:token] ),  expire: 12.month)
-    Rails.cache.write("_club_reviews",fb_manager.get_club_posts( params[:token] ),  expire: 12.month)
+    Rails.cache.write("_school_reviews",fb_manager(params[:token]).get_school_posts,  expire: 12.month)
+    Rails.cache.write("_club_reviews",fb_manager( params[:token] ).get_club_posts,  expire: 12.month)
     render text: "refreshed"
   end
 
@@ -18,7 +18,7 @@ class HomeController < ApplicationController
     @lessons   = ::Lesson.for_school
     @top_menu  = I18n.t("school.school_top_links")
     @reviews   = Rails.cache.fetch("_school_reviews", expire: 12.month) do
-      fb_manager.get_school_posts( Settings.fb_token )
+      fb_manager( Settings.fb_token ).get_school_posts
     end
   end
 
@@ -30,7 +30,7 @@ class HomeController < ApplicationController
     @lessons   = ::Lesson.for_club
     @top_menu  = I18n.t("school.club_top_links")
     @reviews   = Rails.cache.fetch("_club_reviews", expire: 12.month) do
-      fb_manager.get_club_posts( Settings.fb_token )
+      fb_manager( Settings.fb_token ).get_club_posts
     end
   end
 
