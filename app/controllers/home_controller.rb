@@ -4,12 +4,22 @@ class HomeController < ApplicationController
     render layout: false
   end
 
+  def refresh_fb_reviews
+
+    Rails.cache.write("_school_reviews",fb_manager.get_school_posts( params[:token] ),  expire: 12.month)
+    Rails.cache.write("_club_reviews",fb_manager.get_club_posts( params[:token] ),  expire: 12.month)
+    render text: "refreshed"
+  end
+
   def school
     @courses   = ::Course.active.for_school.order(date_start: :asc)
     @teachers  = ::Teacher.for_school
     @photos    = ::Photo.for_school
     @lessons   = ::Lesson.for_school
     @top_menu  = I18n.t("school.school_top_links")
+    @reviews   = Rails.cache.fetch("_school_reviews", expire: 12.month) do
+      fb_manager.get_school_posts( Settings.fb_token )
+    end
   end
 
   def club
@@ -19,10 +29,9 @@ class HomeController < ApplicationController
     @photos    = ::Photo.for_club
     @lessons   = ::Lesson.for_club
     @top_menu  = I18n.t("school.club_top_links")
-    @reviews   = Rails.cache.fetch("reviews", expire: 12.hours) do
-      fb_manager.get_club_posts
+    @reviews   = Rails.cache.fetch("_club_reviews", expire: 12.month) do
+      fb_manager.get_club_posts( Settings.fb_token )
     end
-     @reviews = []
   end
 
   def show_vacancy
@@ -93,8 +102,8 @@ class HomeController < ApplicationController
     params.require(:cv).permit(:name,:email,:phone,:document)
   end
 
-  def fb_manager
-    @fb ||= Fb.new
+  def fb_manager( token )
+    @fb ||= Fb.new(token)
   end
 
 end

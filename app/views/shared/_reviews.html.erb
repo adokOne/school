@@ -11,17 +11,16 @@
           <div class="container_medium">
             <div class="row">
               <div class="image-holder">
-                <img src="img/ava.jpg" alt=".">
+                <%= image_tag fb_avatar( item["reviewer"]["id"] )%>
               </div>
 
               <div class="text">
-                <h6><a href="#">olena fedorova</a></h6>
+                <h6><a href="<%= item["link"]%>"><%= item["reviewer"]["name"] %></a></h6>
                 <ul class="publish-date">
-                  <li class="date">17.01/2015</li>
+                  <li class="date"><%= fb_date(item["created_time"]) %></li>
                 </ul>
 
-                <p>Дякую, дякую, дякую за чудові і дуже цікаві програми!!!!! Ви молодці так тримати!!!!!!!! мені дуже подобаються ці уроки вони дуже креативні та цікаві! З вами легко і дуже цікаво!</p>
-                <p>Ви молодці так тримати!!!!!!!! мені дуже подобаються ці уроки вони дуже креативні та цікаві! З вами легко і дуже цікаво! <a href="#">Показати більше...</a>
+                <p><%= truncate(item["review_text"], length: 70) %><a href="<%= item["link"]%>">Показати більше...</a>
                 </p>
               </div>
             </div>
