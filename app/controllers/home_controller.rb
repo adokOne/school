@@ -73,6 +73,7 @@ class HomeController < ApplicationController
     render json: json
   end
 
+
   private
 
   def allowed_params
