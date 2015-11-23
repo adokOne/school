@@ -16,8 +16,8 @@
                     = label_tag :"subject", t("b1_admin.title"), class:"col-sm-1 control-label"
                     .col-sm-10
                       = text_field_tag :"subject","" ,class:"form-control", ng_required: "true","ng-minlength"=>3, "ng-model"=>"editedItem.subject"
-                  .form-group{"ng-class" => "{'has-error': itemForm.seo_name.$invalid && itemForm.$submitted}"}
-                    = label_tag :seo_name, t("b1_admin.seo_name"), class:"col-sm-1 control-label"
+                  / .form-group{"ng-class" => "{'has-error': itemForm.seo_name.$invalid && itemForm.$submitted}"}
+                  /   = label_tag :seo_name, t("b1_admin.seo_name"), class:"col-sm-1 control-label"
                     .col-sm-10
                       = text_field_tag :seo_name,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.seo_name"
                   .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}", class: "lang" }
