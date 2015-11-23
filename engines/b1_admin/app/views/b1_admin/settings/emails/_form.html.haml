@@ -2,55 +2,30 @@
   #page-title
     %h1.page-header.text-overflow
       =t("b1_admin.email_teplates")
-  #page-content{:"ng-controller"=>"EmailsController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}",:"data-url"=>settings_emails_path,:"data-delete-text"=>t("b1_admin.delete_permission_confirm")}
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}",:"data-url"=>settings_emails_path,:"data-delete-text"=>t("b1_admin.delete_permission_confirm")}
     .row
       .col
         .panel
           .panel-heading
-            .panel-control
-              = render "shared/lang_selector"
             %h3.panel-title=t("b1_admin.manage")
           = form_tag settings_emails_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .row
                 .col-md-12
-                  .form-group{"ng-class" => "{'has-error': itemForm.agent_id.$invalid && itemForm.$submitted}"}
-                    = label_tag :agent_id, t("b1_admin.agent"), class:"col-sm-1 control-label"
-                    .col-sm-7
-                      %select.form-control{"ng-model" => "editedItem.agent_id", "ng-options" => "item.id as item.name for item in #{@agents.to_json}",required: true}
-                  - I18n.available_locales.each do |l|
-                    .form-group{"ng-class" => "{'has-error': itemForm.subject_translations.#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(I18n.default_locale.to_s == l.to_s ? '' : 'display:none')}" }
-                      = label_tag :"subject_translations.#{l}", t("b1_admin.title"), class:"col-sm-1 control-label"
-                      .col-sm-10
-                        = text_field_tag :"subject_translations.#{l}","" ,class:"form-control", ng_required: "$root.required.langs.#{l}","ng-minlength"=>3, "ng-model"=>"editedItem.subject_translations.#{l}"
+                  .form-group{"ng-class" => "{'has-error': itemForm.subject.$invalid && itemForm.$submitted}",class: "lang lang" }
+                    = label_tag :"subject", t("b1_admin.title"), class:"col-sm-1 control-label"
+                    .col-sm-10
+                      = text_field_tag :"subject","" ,class:"form-control", ng_required: "true","ng-minlength"=>3, "ng-model"=>"editedItem.subject"
                   .form-group{"ng-class" => "{'has-error': itemForm.seo_name.$invalid && itemForm.$submitted}"}
                     = label_tag :seo_name, t("b1_admin.seo_name"), class:"col-sm-1 control-label"
                     .col-sm-10
                       = text_field_tag :seo_name,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.seo_name"
+                  .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}", class: "lang" }
+                    = label_tag :desc, "Текст", class: "col-sm-1 control-label"
+                    .col-sm-10
+                      .summernote{class: "summernote lang", :"data-lang"=>"uk"}
+                      = text_area_tag :desc,"" ,class:"form-control hidden", ng_required: "true", "ng-model"=>"editedItem.desc"
 
-                  - I18n.available_locales.each do |l|
-                    .form-group{"ng-class" => "{'has-error': itemForm.text_translations['#{l}'].$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(I18n.default_locale.to_s == l.to_s ? '' : 'display:none')}"}
-                      = label_tag :"text_translations[#{l}]", t("b1_admin.email_text"), class:"col-sm-1 control-label"
-                      .col-sm-10
-                        .summernote{class: "summernote_#{l} lang lang_#{l}",style: "#{(I18n.default_locale.to_s == l.to_s ? '' : 'display:none')}",:"data-lang"=>l}
-                        = text_area_tag :"text_translations.#{l}","" ,class:"form-control hidden", ng_required: "$root.required.langs.#{l}", "ng-model"=>"editedItem.text_translations.#{l}"
-
-              - if user_can?(:add_tags)
-                .row
-                  .panel
-                    .panel-heading
-                      %h3.panel-title=t("b1_admin.available_variables")
-                    .panel-body
-                      - EmailTemplate::TAGS.in_groups_of(2, false).each do |group|
-                        .col-md-6
-                          .panel.panel-default
-                            .panel-body
-                              %ul
-                                - group.each do |tag|
-                                  %li
-                                    %label= "#{tag} (#{t("emails.tags.#{tag.to_s.downcase}")})"
-                                    .pull-right
-                                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"perm_#{tag}", "ng-model"=>"editedItem.tags['#{tag}']"}
           - if user_can?(:create) || user_can?(:update)
             .panel-footer.text-right
               = link_to t("b1_admin.save"),"#", class:"btn btn-info","ng-click" => "save()"
@@ -62,10 +37,10 @@
       .panel
         .panel-heading
           %h3.panel-title=t("b1_admin.available_variables")
-        = form_tag geo_cities_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+        = form_tag settings_emails_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
           .panel-body
             .col-sm-12
-              - @item.available_tags.each do |tag|
+              - @available_tags.each do |tag|
                 .form-group
                   = label_tag tag, t("emails.tags.#{tag.to_s.downcase}"), class:"control-label"
                   %b="%#{tag}%"

@@ -20,8 +20,6 @@
                   {{item.subject}}
                 %td{"data-title" => "'#{t('b1_admin.seo_name')}'"}
                   {{item.seo_name}}
-                %td{"data-title" => "'#{t('b1_admin.seo_name')}'"}
-                  {{item.agent}}
                 %td{"data-title" => "'#{t('b1_admin.active')}'"}
                   %span.label.text-lg{"ng-class"=>"{'label-danger':!item.active,'label-success': item.active }"}
                     %span{"ng-switch" => "", :on => "item.active"}
@@ -34,27 +32,3 @@
                     %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)"}
                   - if user_can?(:edit)
                     %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{settings_emails_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{settings_emails_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}
-
-
-  - content_for :aside do
-    .hidden
-  %aside#aside-container
-    #aside
-      .panel
-        .panel-heading
-          %h3.panel-title
-            %i.fa.fa-lg.fa-navicon.filter-toggler
-            %span=t("b1_admin.filter")
-        = form_tag settings_emails_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
-          .panel-body
-            .col-sm-12
-              .form-group{"ng-class" => "{'has-error': itemForm.agent_id.$invalid && itemForm.$submitted}"}
-                = label_tag :agent_id, t("b1_admin.agent"), class:"control-label"
-                %select.form-control{"ng-model" => "filters.agent_id", "ng-options" => "o.id as o.name for o in #{@agents.to_json}"}
-              .form-group{"ng-class" => "{'has-error': itemForm.seo_name.$invalid && itemForm.$submitted}"}
-                = label_tag :seo_name, t("b1_admin.seo_name"), class:"control-label"
-                = text_field_tag :seo_name,"" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"filters.seo_name"
-
-          .panel-footer.text-right
-            %a.btn.btn-success{"ng-click"=>"filter()"}=t("b1_admin.do_filter")
-            %a.btn.btn-warning{"ng-click"=>"reset()"}=t("b1_admin.reset_filter")
