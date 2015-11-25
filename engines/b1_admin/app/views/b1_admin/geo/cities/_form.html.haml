@@ -1,0 +1,64 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:geo_cities_path,"ng-click"=>"$root.setRoute('#{geo_cities_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      =t("b1_admin.cities")
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}; countries=#{@countries.to_json}; continents=#{@continents.to_json}; time_zones=#{@time_zones.to_json}",:"data-url"=>geo_cities_path}
+    .row
+      .col
+        .panel
+          .panel-heading
+            .panel-control
+              = render "shared/lang_selector"
+            %h3.panel-title=t("b1_admin.city_manage")
+          = form_tag geo_cities_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .row
+                .col-md-3
+                  - I18n.available_locales.each do |l|
+                    .form-group{"ng-class" => "{'has-error': itemForm.name_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}" }
+                      = label_tag :"name_#{l}", t("b1_admin.title"), class:"col-sm-3 control-label"
+                      .col-sm-8
+                        = text_field_tag :"name_#{l}","" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.name_#{l}"
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.code.$invalid && itemForm.$submitted}"}
+                    = label_tag :code, t("b1_admin.code"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :code,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>3, "ng-model"=>"editedItem.code"
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.country_id.$invalid && itemForm.$submitted}"}
+                    = label_tag :country_id, t("b1_admin.country"), class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %select.form-control{"ng-model" => "editedItem.country_id", "ng-options" => "country.id as country.name for country in countries",required: true}
+                  .form-group{"ng-class" => "{'has-error': itemForm.continent_id.$invalid && itemForm.$submitted}"}
+                    = label_tag :continent_id, t("b1_admin.continent"), class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %select.form-control{"ng-model" => "editedItem.continent_id", "ng-options" => "continent.id as continent.name for continent in continents",required: true}
+                  .form-group{"ng-class" => "{'has-error': itemForm.show_as_popular.$invalid && itemForm.$submitted}"}
+                    = label_tag :meta_is_generated, t("b1_admin.meta_is_generated"), class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"meta_is_generated", "ng-model"=>"editedItem.meta_is_generated"}
+                .col-md-9
+                  - I18n.available_locales.each do |l|
+                    .form-group{"ng-class" => "{'has-error': itemForm.meta_title.$invalid && itemForm.$submitted}",class: "lang lang_#{l}",style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}"}
+                      = label_tag :"meta_title_#{l}", t("b1_admin.meta_title"), class:"col-sm-1 control-label"
+                      .col-sm-10
+                        = text_field_tag :"meta_title_#{l}","" ,class:"form-control", "ng-model"=>"editedItem.meta_title_ru"
+                    .form-group{"ng-class" => "{'has-error': itemForm.meta_desc_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}"}
+                      = label_tag :"meta_desc_#{l}", t("b1_admin.meta_desc"), class:"col-sm-1 control-label"
+                      .col-sm-10
+                        = text_area_tag :"meta_desc_#{l}","" ,class:"form-control", "ng-model"=>"editedItem.meta_desc_#{l}"
+                    .form-group{"ng-class" => "{'has-error': itemForm.meta_keys_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}"}
+                      = label_tag :"meta_keys_#{l}", t("b1_admin.meta_keys"), class:"col-sm-1 control-label"
+                      .col-sm-10
+                        = text_area_tag :"meta_keys_#{l}","" ,class:"form-control", "ng-model"=>"editedItem.meta_keys_#{l}"
+
+                    .form-group{"ng-class" => "{'has-error': itemForm.desc_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}"}
+                      = label_tag :"desc_#{l}", t("b1_admin.desc"), class:"col-sm-1 control-label"
+                      .col-sm-10
+                        .summernote{class: "summernote_#{l} lang lang_#{l}",style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}",:"data-lang"=>l}
+                        = text_area_tag :"desc_#{l}","" ,class:"form-control hidden",required: true, "ng-model"=>"editedItem.desc_#{l}"
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

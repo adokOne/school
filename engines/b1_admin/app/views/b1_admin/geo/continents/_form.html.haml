@@ -1,0 +1,29 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:geo_continents_path,"ng-click"=>"$root.setRoute('#{geo_continents_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      =t("b1_admin.continents")
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}",:"data-url"=>geo_continents_path,:"data-delete-text"=>t("b1_admin.delete_admins_confirm")}
+    .row
+      .col
+        .panel
+          .panel-heading
+            .panel-control
+              = render "shared/lang_selector"
+            %h3.panel-title=t("b1_admin.continent_manage")
+          = form_tag geo_continents_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              - I18n.available_locales.each do |l|
+                .form-group{"ng-class" => "{'has-error': itemForm.name_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}" }
+                  = label_tag :"name_#{l}", t("b1_admin.title"), class:"col-sm-1 control-label"
+                  .col-sm-5
+                    = text_field_tag :"name_#{l}","" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.name_#{l}"
+                .form-group{"ng-class" => "{'has-error': itemForm.desc_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}"}
+                  = label_tag :"desc_#{l}", t("b1_admin.desc"), class:"col-sm-1 control-label"
+                  .col-sm-10
+                    .summernote{class: "summernote_#{l} lang lang_#{l}",style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}",:"data-lang"=>l}
+                    = text_area_tag :"desc_#{l}","" ,class:"form-control hidden",required: true, "ng-model"=>"editedItem.desc_#{l}"
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

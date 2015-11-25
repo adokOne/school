@@ -12,7 +12,7 @@ angular.module("B1Admin").controller "PermissionsController", [
     $scope.items   = []
     $scope.modules = []
     Item = $resource("#{$element.data("url")}/:id.json",{},{query:{isArray:false},update:{ method:'PUT' }})
-    
+
     loadItems = ->
       Item.query().$promise.then (data) ->
         $scope.items = data.items
@@ -37,7 +37,7 @@ angular.module("B1Admin").controller "PermissionsController", [
 
     getModuleId = ->
       $scope.editedItem.module_id
-    
+
     getModuleActions = ->
       $http.post($element.data("actionsUrl"), {id: getModuleId()}).success (resp) ->
         setActions(resp.actions) if resp.success
@@ -51,7 +51,7 @@ angular.module("B1Admin").controller "PermissionsController", [
       if resp.success
         $scope.itemForm.$setPristine();
         $scope.itemForm.$setUntouched();
-        setItem({}) 
+        setItem({})
         loadItems()
         setActions([])
         $rootScope.info(alertSelector,resp.msg)
@@ -85,7 +85,7 @@ angular.module("B1Admin").controller "PermissionsController", [
       , ->
         $rootScope.error(alertSelector,$rootScope.server_error)
 
-  
+
     $scope.save = ->
       $scope.itemForm.$setSubmitted()
       if $scope.itemForm.$valid
@@ -107,5 +107,5 @@ angular.module("B1Admin").controller "PermissionsController", [
 
     setActions([])
     loadItems()
-    setItem({module_id:3})
+    setItem({module_id:2})
 ]

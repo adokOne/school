@@ -26,7 +26,14 @@ B1Admin::Engine.routes.draw do
       post :history
     end
   end
-
+  namespace :geo do
+    resources :continents
+    resources :countries
+    resources :cities
+    resources :airports
+    match "cities/upload/:id", to: "cities#upload", via:[:post]
+    match "countries/upload/:id", to: "countries#upload", via:[:post]
+  end
   namespace :school do
     resources :lessons
     resources :users

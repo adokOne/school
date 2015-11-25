@@ -2,13 +2,13 @@
   #page-title
     %a.btn.btn-success.pull-right{href:content_teachers_path,"ng-click"=>"$root.setRoute('#{content_teachers_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
-      Викладачі
+      Наша команда
   #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}", :"data-url"=>content_teachers_path}
     .row
       .col
         .panel
           .panel-heading
-            %h3.panel-title Створення/редагування викладача
+            %h3.panel-title Создание/редактирование
           = form_tag content_teachers_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .row
@@ -21,14 +21,6 @@
                     = label_tag :desc, t("b1_admin.desc"), class:"col-sm-3 control-label"
                     .col-sm-8
                       = text_area_tag :desc,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.desc"
-                  .form-group{"ng-class" => "{'has-error': itemForm.is_in_school.$invalid && itemForm.$submitted}"}
-                    = label_tag :is_in_school, 'Відобрадати в школі?', class:"col-sm-3 control-label"
-                    .col-sm-7
-                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"is_in_school", "ng-model"=>"editedItem.is_in_school"}
-                  .form-group{"ng-class" => "{'has-error': itemForm.is_in_club.$invalid && itemForm.$submitted}"}
-                    = label_tag :is_in_club, 'Відобрадати в клубі?', class:"col-sm-3 control-label"
-                    .col-sm-7
-                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"is_in_club", "ng-model"=>"editedItem.is_in_club"}
                   .form-group
                     = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-3 control-label"
                     .col-md-7

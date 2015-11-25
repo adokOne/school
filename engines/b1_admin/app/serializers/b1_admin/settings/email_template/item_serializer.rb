@@ -4,7 +4,7 @@ module B1Admin
       class ItemSerializer < ::B1Admin::BaseSerializer
 
         attributes :id, :active, :seo_name, :subject_translations, :text_translations, :available_tags
-        attributes :is_mongoid_localize, :text_area_name, :tags, :agent_id
+        attributes :is_mongoid_localize, :text_area_name, :tags
 
         def is_mongoid_localize
           true

@@ -29,7 +29,7 @@ Gem::Specification.new do |s|
   s.add_dependency "bcrypt"
   s.add_dependency "will_paginate", '~> 3.0.6'
   s.add_dependency "active_model_serializers"
-  s.add_dependency "mongoid", "~> 4.0.0"
+  s.add_dependency "mongoid"
   s.add_dependency "mongo_mysql_relations"
   s.add_dependency "will_paginate_mongoid"
   s.add_dependency "underscore-rails"

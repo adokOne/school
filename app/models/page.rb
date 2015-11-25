@@ -1,19 +1,22 @@
 class Page < ActiveRecord::Base
   before_validation :generate_seo
-
+  self.per_page = 1
   belongs_to :category
   has_paper_trail on: [:update, :destroy]
 
   has_attached_file :logo,
-                    styles: { medium: "470x325#",thumb: "100x100#", big: "710x475#" },
+                    styles: { home: "760x270#",thumb: "100x100#", big: "800x300#" },
                     default_url: "/img/page-logo-missing.png",
-                    path:        ":rails_root/public/system/:class/:id/:style.png",
-                    url:         "/system/:class/:id/:style.png"
+                    path:        ":rails_root/public/system/:class/:id/:style.:extension",
+                    url:         "/system/:class/:id/:style.:extension"
 
-  validates_attachment_file_name :logo, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/]
+  validates_attachment_content_type :logo, :content_type => /\Aimage/
 
   delegate :title, to: :category, prefix: true, allow_nil: true
   delegate :seo_name, to: :category, prefix: true, allow_nil: true
+
+  scope :published, -> { }
+  scope :by_rating, -> { order('created_at DESC') }
 
   def seos
     [self.category.seos,self.seo_name].flatten

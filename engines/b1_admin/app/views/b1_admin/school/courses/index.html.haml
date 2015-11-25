@@ -2,7 +2,7 @@
   #content-container
     #page-title
       %h1.page-header.text-overflow
-        Курси
+        Услуги
     #page-content
       .row
         .panel
@@ -11,7 +11,7 @@
               %button.btn.btn-default{:name => "refresh", :title => "Refresh", :type => "button","ng-click"=>"itemsTable.reload()"}
                 %i.fa.fa-refresh.icon-refresh
               %a.btn.btn-primary{href:new_school_course_path,"ng-click"=>"$root.setRoute('#{new_school_course_path}')"}=t("b1_admin.add")
-            %h3.panel-title Список курсов
+            %h3.panel-title Список услуг
 
           .panel-body
             %div{style:"margin-top: 30px;"}

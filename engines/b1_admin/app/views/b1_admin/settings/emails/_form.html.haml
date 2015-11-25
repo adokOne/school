@@ -14,10 +14,6 @@
             .panel-body
               .row
                 .col-md-12
-                  .form-group{"ng-class" => "{'has-error': itemForm.agent_id.$invalid && itemForm.$submitted}"}
-                    = label_tag :agent_id, t("b1_admin.agent"), class:"col-sm-1 control-label"
-                    .col-sm-7
-                      %select.form-control{"ng-model" => "editedItem.agent_id", "ng-options" => "item.id as item.name for item in #{@agents.to_json}",required: true}
                   - I18n.available_locales.each do |l|
                     .form-group{"ng-class" => "{'has-error': itemForm.subject_translations.#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(I18n.default_locale.to_s == l.to_s ? '' : 'display:none')}" }
                       = label_tag :"subject_translations.#{l}", t("b1_admin.title"), class:"col-sm-1 control-label"
@@ -62,7 +58,7 @@
       .panel
         .panel-heading
           %h3.panel-title=t("b1_admin.available_variables")
-        = form_tag geo_cities_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+        = form_tag settings_emails_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
           .panel-body
             .col-sm-12
               - @item.available_tags.each do |tag|

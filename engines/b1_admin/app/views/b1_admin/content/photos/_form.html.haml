@@ -19,14 +19,6 @@
                     = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
                     .col-sm-8
                       = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
-                  .form-group{"ng-class" => "{'has-error': itemForm.is_in_school.$invalid && itemForm.$submitted}"}
-                    = label_tag :is_in_school, 'Відображати в школі?', class:"col-sm-3 control-label"
-                    .col-sm-7
-                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"is_in_school", "ng-model"=>"editedItem.is_in_school"}
-                  .form-group{"ng-class" => "{'has-error': itemForm.is_in_club.$invalid && itemForm.$submitted}"}
-                    = label_tag :is_in_club, 'Відображати в клубі?', class:"col-sm-3 control-label"
-                    .col-sm-7
-                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"is_in_club", "ng-model"=>"editedItem.is_in_club"}
                   .form-group
                     = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-3 control-label"
                     .col-md-7

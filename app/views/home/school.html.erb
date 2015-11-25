@@ -42,3 +42,6 @@
 <%if @photos.any? %>
   <%= render partial: "shared/galery", locals:{photos: @photos} %>
 <% end %>
+<%if @reviews.any? %>
+  <%= render partial: "shared/reviews", locals:{reviews: @reviews} %>
+<% end %>

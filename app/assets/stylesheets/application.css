@@ -11,15 +11,5 @@
  * file per style scope.
  *
  *= require_self
- *= require reset.css
- *= require magnific-popup
- *= require calendar
- *= require jquery.selectbox
- *= require style
+ *= require_tree ./theme
  */
-.hidden{
-  display: none;
-}
-input.error{
-  border: 1px solid red!important;
-}

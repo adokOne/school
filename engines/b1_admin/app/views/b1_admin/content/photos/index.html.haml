@@ -22,18 +22,6 @@
                     {{item.name}}
                   %td{"data-title" => "'#{t('b1_admin.logo')}'"}
                     %img.img-circle.img-sm{"ng-src" => "{{item.logo}}"}/
-                  %td{"data-title" => "'Відображати в клубі?'"}
-                    %span.label.text-lg{"ng-class"=>"{'label-danger':!item.is_in_school,'label-success': item.is_in_school }"}
-                      %span{"ng-switch" => "", :on => "item.is_in_school"}
-                        %span{"ng-switch-when" => "true"}
-                          =t('b1_admin._true')
-                        %span{"ng-switch-default" => ""}=t('b1_admin._false')
-                  %td{"data-title" => "'Відображати в школі?'"}
-                    %span.label.text-lg{"ng-class"=>"{'label-danger':!item.is_in_club,'label-success': item.is_in_club }"}
-                      %span{"ng-switch" => "", :on => "item.is_in_club"}
-                        %span{"ng-switch-when" => "true"}
-                          =t('b1_admin._true')
-                        %span{"ng-switch-default" => ""}=t('b1_admin._false')
                   %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
                     - if user_can?(:edit)
                       %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{content_photos_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{content_photos_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}

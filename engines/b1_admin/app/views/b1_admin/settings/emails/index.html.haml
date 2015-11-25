@@ -20,8 +20,6 @@
                   {{item.subject}}
                 %td{"data-title" => "'#{t('b1_admin.seo_name')}'"}
                   {{item.seo_name}}
-                %td{"data-title" => "'#{t('b1_admin.seo_name')}'"}
-                  {{item.agent}}
                 %td{"data-title" => "'#{t('b1_admin.active')}'"}
                   %span.label.text-lg{"ng-class"=>"{'label-danger':!item.active,'label-success': item.active }"}
                     %span{"ng-switch" => "", :on => "item.active"}
@@ -48,9 +46,6 @@
         = form_tag settings_emails_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
           .panel-body
             .col-sm-12
-              .form-group{"ng-class" => "{'has-error': itemForm.agent_id.$invalid && itemForm.$submitted}"}
-                = label_tag :agent_id, t("b1_admin.agent"), class:"control-label"
-                %select.form-control{"ng-model" => "filters.agent_id", "ng-options" => "o.id as o.name for o in #{@agents.to_json}"}
               .form-group{"ng-class" => "{'has-error': itemForm.seo_name.$invalid && itemForm.$submitted}"}
                 = label_tag :seo_name, t("b1_admin.seo_name"), class:"control-label"
                 = text_field_tag :seo_name,"" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"filters.seo_name"

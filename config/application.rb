@@ -25,7 +25,7 @@ module Core
     # config.i18n.default_locale = :de
     config.i18n.available_locales = [:en, :uk ]
     # config.i18n.available_locales = %w(en en-GB en-AU de zh-CN ru tr en-CA en-NZ en-IE en-SG en-IN es fr it th)
-    config.i18n.default_locale = :uk
+    config.i18n.default_locale = :ru
     config.i18n.fallbacks = true
 
     config.generators do |g|
