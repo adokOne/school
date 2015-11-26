@@ -1,15 +1,15 @@
 #content-container
   #page-title
-    %a.btn.btn-success.pull-right{href:content_teachers_path,"ng-click"=>"$root.setRoute('#{content_teachers_path}')"}=t("b1_admin.back_to_list")
+    %a.btn.btn-success.pull-right{href:content_members_path,"ng-click"=>"$root.setRoute('#{content_members_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
       Наша команда
-  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}", :"data-url"=>content_teachers_path}
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}", :"data-url"=>content_members_path}
     .row
       .col
         .panel
           .panel-heading
             %h3.panel-title Создание/редактирование
-          = form_tag content_teachers_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+          = form_tag content_members_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .row
                 .col-md-8
@@ -24,9 +24,9 @@
                   .form-group
                     = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-3 control-label"
                     .col-md-7
-                      .ng-scope{:"flow-name"=>"logo", :"flow-file-added" => "!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]", :"flow-init" => "{singleFile:true,target:'#{namespace}/content/teachers/'+editedItem.id + '/upload',testChunks:false}" ,:"flow-files-submitted"=>"$flow.upload()",:"ng-show" => "editedItem.id"}
+                      .ng-scope{:"flow-name"=>"logo", :"flow-file-added" => "!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]", :"flow-init" => "{singleFile:true,target:'#{namespace}/content/members/'+editedItem.id + '/upload',testChunks:false}" ,:"flow-files-submitted"=>"$flow.upload()",:"ng-show" => "editedItem.id"}
                         .thumbnail{"ng-show" => "!$flow.files.length"}
-                          %img{:"ng-src" => "{{editedItem.logo_file_name && ('/system/teachers/' + editedItem.id + '/medium.png') || 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image'}}"}/
+                          %img{:"ng-src" => "{{editedItem.logo_file_name && ('/system/members/' + editedItem.id + '/medium.png') || 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image'}}"}/
                         .thumbnail.ng-hide{:"ng-show" => "$flow.files.length"}
                           %img{"flow-img" => "$flow.files[0]"}/
                         %div

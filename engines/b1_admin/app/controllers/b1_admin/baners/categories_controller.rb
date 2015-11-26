@@ -15,11 +15,11 @@ module B1Admin
       end
 
       def allowed_params
-        params.require(:item).permit(:desc,:id,:parent_id,:title, :only_photos)
+        params.require(:item).permit(:desc,:id,:parent_id,:title)
       end
 
       def set_data
-        @categories = ::Category.where(parent_id:0,only_photos:true).all.map{|c| {title: c.title,id: c.id} }
+        @categories = ::Category.where(parent_id:0).all.map{|c| {title: c.title,id: c.id} }
       end
 
       # Set data for CRUD module

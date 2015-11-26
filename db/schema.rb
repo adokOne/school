@@ -11,13 +11,13 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126192858) do
+ActiveRecord::Schema.define(version: 20151126193658) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
     t.integer  "parent_id",    limit: 4,  default: 0,         null: false
     t.string   "name_uk",      limit: 50,                     null: false
-    t.string   "desc_ru",      limit: 50,                     null: false
+    t.string   "name_ru",      limit: 50,                     null: false
     t.string   "controller",   limit: 50,                     null: false
     t.datetime "created_at"
     t.datetime "updated_at"

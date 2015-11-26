@@ -1,5 +1,5 @@
 module B1Admin
-  module Products
+  module Baners
     module Subscriber
       class ItemSerializer < ::B1Admin::BaseSerializer
         attributes :name,:active, :email, :phone,:id

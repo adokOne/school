@@ -1,3 +1,3 @@
 module B1Admin
-  LANGS = %w{uk en}
+  LANGS = %w{uk ru}
 end

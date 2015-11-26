@@ -1,4 +1,4 @@
-%div{:"ng-controller"=>"CrudController",:"data-url"=>content_teachers_path,:"data-delete-text"=>t("b1_admin.delete_confirm")}
+%div{:"ng-controller"=>"CrudController",:"data-url"=>content_members_path,:"data-delete-text"=>t("b1_admin.delete_confirm")}
   #content-container
     #page-title
       %h1.page-header.text-overflow
@@ -10,7 +10,7 @@
             .panel-control
               %button.btn.btn-default{:name => "refresh", :title => "Refresh", :type => "button","ng-click"=>"itemsTable.reload()"}
                 %i.fa.fa-refresh.icon-refresh
-              %a.btn.btn-primary{href:new_content_teacher_path,"ng-click"=>"$root.setRoute('#{new_content_teacher_path}')"}=t("b1_admin.add")
+              %a.btn.btn-primary{href:new_content_member_path,"ng-click"=>"$root.setRoute('#{new_content_member_path}')"}=t("b1_admin.add")
             %h3.panel-title Список
 
           .panel-body
@@ -24,6 +24,6 @@
                     %img.img-circle.img-sm{"ng-src" => "{{item.logo}}"}/
                   %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
                     - if user_can?(:edit)
-                      %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{content_teachers_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{content_teachers_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}
+                      %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{content_members_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{content_members_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}
                     - if user_can?(:destroy)
                       %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)"}

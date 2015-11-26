@@ -1,15 +1,15 @@
 #content-container
   #page-title
-    %a.btn.btn-success.pull-right{href:blog_pages_path,"ng-click"=>"$root.setRoute('#{blog_pages_path}')"}=t("b1_admin.back_to_list")
+    %a.btn.btn-success.pull-right{href:baners_pages_path,"ng-click"=>"$root.setRoute('#{baners_pages_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
       Страницы
-  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}; categories=#{@categories.to_json}",:"data-url"=>blog_pages_path,"data-back-url"=>blog_pages_path}
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}; categories=#{@categories.to_json}",:"data-url"=>baners_pages_path,"data-back-url"=>baners_pages_path}
     .row
       .col
         .panel
           .panel-heading
             %h3.panel-title=t("b1_admin.faq_manage")
-          = form_tag blog_pages_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+          = form_tag baners_pages_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}",class: "lang lang" }
                 = label_tag :"title", t("b1_admin.title"), class:"col-sm-1 control-label"

@@ -34,24 +34,20 @@ B1Admin::Engine.routes.draw do
     match "cities/upload/:id", to: "cities#upload", via:[:post]
     match "countries/upload/:id", to: "countries#upload", via:[:post]
   end
-  namespace :school do
-    resources :lessons
-    resources :users
-    resources :lessons
-  	resources :courses do
+  namespace :products do
+    resources :orders
+    resources :transactions
+  	resources :products do
       post "upload", on: :member
     end
   end
-  namespace :club do
-    resources :users
-    resources :lessons
-    resources :courses do
-      post "upload", on: :member
-    end
-  end
-  namespace :blog do
+
+  namespace :baners do
     resources :users
     resources :pages do
+      post "upload", on: :member
+    end
+    resources :blogs do
       post "upload", on: :member
     end
     resources :uploads
@@ -64,16 +60,14 @@ B1Admin::Engine.routes.draw do
   namespace :content do
     resources :vacancies
     resources :uploads
+    resources :feedbacks
     resources :photos do
-      post "upload", on: :member
-    end
-    resources :cvs do
       post "upload", on: :member
     end
     resources :partners do
       post "upload", on: :member
     end
-    resources :teachers do
+    resources :members do
       post "upload", on: :member
     end
   end

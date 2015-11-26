@@ -4,7 +4,7 @@
       Страницы
   #page-content
     .row
-      .col-md-5{:"ng-controller"=>"FaqCatController","ng-init"=>"editedItem=#{@item.to_json}; categories=#{@categories.to_json}",:"data-url"=>blog_categories_path,"data-back-url"=>blog_pages_path,:"data-delete-text"=>t("b1_admin.delete_faqcat_confirm")}
+      .col-md-5{:"ng-controller"=>"FaqCatController","ng-init"=>"editedItem=#{@item.to_json}; categories=#{@categories.to_json}",:"data-url"=>baners_categories_path,"data-back-url"=>baners_pages_path,:"data-delete-text"=>t("b1_admin.delete_faqcat_confirm")}
         .panel
           .panel-heading
             .panel-title
@@ -14,7 +14,7 @@
                 .btn.btn-success{"ng-click"=>"updatePositions()"}=t("b1_admin.update_positions")
                 .btn.btn-info{"ng-click"=>"revert()"}=t("b1_admin.revert_positions")
               - if user_can?(:new)
-                %a.btn.btn-primary{href:new_blog_category_path,"ng-click"=>"$root.setRoute('#{new_blog_category_path}')"}=t("b1_admin.add")
+                %a.btn.btn-primary{href:new_baners_category_path,"ng-click"=>"$root.setRoute('#{new_baners_category_path}')"}=t("b1_admin.add")
           .panel-body
             %div#tree-root{"ui-tree" => ""}
               %ol{"ng-model" => "items", "ui-tree-nodes" => ""}
@@ -26,7 +26,7 @@
                     - if user_can?(:destroy)
                       %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)","data-nodrag" => true}
                     - if user_can?(:edit)
-                      %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{blog_categories_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{blog_categories_path}/' + item.id + '/edit/')",style:"margin-right: 15px;","data-nodrag" => true}
+                      %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{baners_categories_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{baners_categories_path}/' + item.id + '/edit/')",style:"margin-right: 15px;","data-nodrag" => true}
                       %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-primary.fa.fa-plus-circle.add-tooltip{"tooltip" => t("b1_admin.show"), :href => "#","ng-click" => "show(item)","data-nodrag" => true}
                   %ol{"ng-class" => "{hidden: collapsed}", "ng-model" => "item.childs", "ui-tree-nodes" => ""}
                     %li{ "ng-repeat" => "item in item.childs", "ui-tree-node" => ""}
@@ -35,15 +35,15 @@
                         - if user_can?(:destroy)
                           %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)","data-nodrag" => true}
                         - if user_can?(:edit)
-                          %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{blog_categories_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{blog_categories_path}/' + item.id + '/edit/')",style:"margin-right: 15px;","data-nodrag" => true}
+                          %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{baners_categories_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{baners_categories_path}/' + item.id + '/edit/')",style:"margin-right: 15px;","data-nodrag" => true}
                         %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-primary.fa.fa-plus-circle.add-tooltip{"tooltip" => t("b1_admin.show"), :href => "#","ng-click" => "show(item)","data-nodrag" => true}
-      .col-md-7#items{:"ng-controller"=>"CrudController",:"data-url"=>blog_pages_path,:"data-delete-text"=>t("b1_admin.delete_faq_confirm")}
+      .col-md-7#items{:"ng-controller"=>"CrudController",:"data-url"=>baners_pages_path,:"data-delete-text"=>t("b1_admin.delete_faq_confirm")}
         .panel
           .panel-heading
             .panel-control
               %button.btn.btn-default{:name => "refresh", :title => "Refresh", :type => "button","ng-click"=>"itemsTable.reload()"}
                 %i.fa.fa-refresh.icon-refresh
-              %a.btn.btn-primary{href:new_blog_page_path,"ng-click"=>"$root.setRoute('#{new_blog_page_path}')"}=t("b1_admin.add")
+              %a.btn.btn-primary{href:new_baners_page_path,"ng-click"=>"$root.setRoute('#{new_baners_page_path}')"}=t("b1_admin.add")
             %h3.panel-title=t("b1_admin.faq_list")
 
           .panel-body
@@ -63,7 +63,7 @@
                         %span{"ng-switch-default" => ""}=t('b1_admin._false')
                   %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
                     - if user_can?(:edit)
-                      %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{blog_pages_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{blog_pages_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}
+                      %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{baners_pages_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{baners_pages_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}
                     - if user_can?(:destroy)
                       %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)"}
 

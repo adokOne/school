@@ -1,15 +1,15 @@
 #content-container
   #page-title
-    %a.btn.btn-success.pull-right{href:school_courses_path,"ng-click"=>"$root.setRoute('#{school_courses_path}')"}=t("b1_admin.back_to_list")
+    %a.btn.btn-success.pull-right{href:products_products_path,"ng-click"=>"$root.setRoute('#{products_products_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
       Услуги
-  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};editedItem.course_type='#{Course::SCHOOL_TYPE}'", :"data-url"=>school_courses_path}
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};editedItem.course_type='#{Course::SCHOOL_TYPE}'", :"data-url"=>products_products_path}
     .row
       .col
         .panel
           .panel-heading
             %h3.panel-title СОздание/редактирование
-          = form_tag school_courses_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+          = form_tag products_products_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .row
                 .col-md-8
