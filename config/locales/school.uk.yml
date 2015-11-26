@@ -34,7 +34,7 @@ uk:
         offset: 30
 
     call_subscribe_popup_header: "Замовити зворотній дзвінок"
-    choose_your_level: "ваш рівень англійської"
+    choose_your_level: "Ваш рівень англійської"
     date_group_plc: "оберіть дату та групу"
     levels:
       starter: starter
@@ -58,9 +58,9 @@ uk:
     add_cv_file: завантажте файл з Вашим резюме
     vavancy_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ:"
     lesson_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ ДЛЯ ЗАПИСУ НА ЗАНЯТТЯ:"
-    email_plc: ваш e-mail
-    name_plc: ваше ім”я
-    phone_plc: ваш телефон
+    email_plc: Ваш e-mail
+    name_plc: Ваше ім”я
+    phone_plc: Ваш телефон
     fields_wit_errors_text: "<span>БУДЬТЕ УВАЖНІ!</span> Ви не заповнили всі поля"
     subscribe_for_news: підписатись на новини
     subscribe_for_vacancy: надiслати резюме
