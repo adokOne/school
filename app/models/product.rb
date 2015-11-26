@@ -13,5 +13,11 @@ class Product < ActiveRecord::Base
   validates_attachment_file_name :logo, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/]
 
   scope :active, -> { where(active: true) }
+  scope :for_top, -> { where(show_in_top: true) }
+  scope :for_table, -> { where(show_in_top: false) }
 
+
+  def self.covert_to_uah( amount )
+    (amount * 24.9).to_i
+  end
 end

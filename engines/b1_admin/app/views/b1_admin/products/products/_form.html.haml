@@ -3,24 +3,66 @@
     %a.btn.btn-success.pull-right{href:products_products_path,"ng-click"=>"$root.setRoute('#{products_products_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
       Услуги
-  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};editedItem.course_type='#{Course::SCHOOL_TYPE}'", :"data-url"=>products_products_path}
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};", :"data-url"=>products_products_path}
     .row
       .col
         .panel
           .panel-heading
-            %h3.panel-title СОздание/редактирование
+            %h3.panel-title Создание/редактирование
           = form_tag products_products_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .row
                 .col-md-8
                   .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
-                    = hidden_field_tag :course_type, Course::SCHOOL_TYPE, "ng-model" => "editedItem.course_type"
                     = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
                     .col-sm-7
                       = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
-                    / = label_tag :title, "Повна назва", class:"col-sm-3 control-label"
-                    / .col-sm-7
-                    /   = text_field_tag :title,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.title"
+                  .form-group{"ng-class" => "{'has-error': itemForm.show_in_top.$invalid && itemForm.$submitted}"}
+                    = label_tag :show_in_top, "Пакет, отображать сверху", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"show_in_top", "ng-model"=>"editedItem.show_in_top"}
+                  .form-group{"ng-class" => "{'has-error': itemForm.price.$invalid && itemForm.$submitted}"}
+                    = label_tag :price, "Цена $", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      = text_field_tag :price, "" ,class:"form-control",required: true, "ng-maxlength"=>6, "ng-model"=>"editedItem.price"
+                  .form-group{"ng-class" => "{'has-error': itemForm.has_sale.$invalid && itemForm.$submitted}"}
+                    = label_tag :has_sale, "Есть скидка?", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"has_sale", "ng-model"=>"editedItem.has_sale"}
+                  .form-group{"ng-show"=>"editedItem.has_sale", "ng-class" => "{'has-error': itemForm.sale_price.$invalid && itemForm.$submitted}"}
+                    = label_tag :sale_price, "Цена со скидкой $", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      = text_field_tag :sale_price, "" ,class:"form-control", "ng-maxlength"=>6, "ng-model"=>"editedItem.sale_price"
+
+                  .form-group{"ng-show"=>"!editedItem.show_in_top","ng-class" => "{'has-error': itemForm.is_one_time.$invalid && itemForm.$submitted}"}
+                    = label_tag :is_one_time, "Одноразовая услуга?", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"is_one_time", "ng-model"=>"editedItem.is_one_time"}
+
+                  .form-group{"ng-show"=>"!editedItem.show_in_top && !editedItem.is_one_time","ng-class" => "{'has-error': itemForm.has_second_price.$invalid && itemForm.$submitted}"}
+                    = label_tag :has_second_price, "Есть цена за два месяца?", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"has_second_price", "ng-model"=>"editedItem.has_second_price"}
+                  .form-group{"ng-show"=>"!editedItem.show_in_top && editedItem.has_second_price", "ng-class" => "{'has-error': itemForm.second_price.$invalid && itemForm.$submitted}"}
+                    = label_tag :second_price, "Цена за два месяца $", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      = text_field_tag :second_price, "" ,class:"form-control", "ng-maxlength"=>6, "ng-model"=>"editedItem.second_price"
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.period.$invalid && itemForm.$submitted}"}
+                    = label_tag :period, "Период выполнения", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      = text_field_tag :period,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.period"
+
+
+
+
+
+
+
+
+
+
+
                   .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
                     = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
                     .col-sm-7
@@ -35,9 +77,9 @@
                   .form-group
                     = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-3 control-label"
                     .col-md-7
-                      .ng-scope{:"flow-name"=>"logo", :"flow-file-added" => "!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]", :"flow-init" => "{singleFile:true,target:'#{namespace}/school/courses/'+editedItem.id + '/upload',testChunks:false}" ,:"flow-files-submitted"=>"$flow.upload()",:"ng-show" => "editedItem.id"}
+                      .ng-scope{:"flow-name"=>"logo", :"flow-file-added" => "!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]", :"flow-init" => "{singleFile:true,target:'#{namespace}/products/products/'+editedItem.id + '/upload',testChunks:false}" ,:"flow-files-submitted"=>"$flow.upload()",:"ng-show" => "editedItem.id"}
                         .thumbnail{"ng-show" => "!$flow.files.length"}
-                          %img{:"ng-src" => "{{editedItem.logo_file_name && ('/system/courses/' + editedItem.id + '/medium.png') || 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image'}}"}/
+                          %img{:"ng-src" => "{{editedItem.logo_file_name && editedItem.logo || 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image'}}"}/
                         .thumbnail.ng-hide{:"ng-show" => "$flow.files.length"}
                           %img{"flow-img" => "$flow.files[0]"}/
                         %div

@@ -19,6 +19,28 @@
 .filter-item span{
 	margin: 7px 0px 0px 16px;
 }
+
+
+.table.products tr{
+	    border-bottom: 1px solid #00bbd3;
+}
+
+.table.products tr.white-block{
+	    border-bottom: none;
+		color: #8ac249;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.table.products i{
+    color: #fec006;
+    font-size: 20px;
+}
+
+.table.products a:hover i{
+    color: #00bbd3;
+}
+
 div.wpcf7 {
 	margin: 0;
 	padding: 0;

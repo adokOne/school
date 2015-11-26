@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126193658) do
+ActiveRecord::Schema.define(version: 20151126205306) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -269,8 +269,8 @@ ActiveRecord::Schema.define(version: 20151126193658) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "name",              limit: 255,   default: "",   null: false
-    t.boolean  "active",            limit: 1,     default: true, null: false
+    t.string   "name",              limit: 255,   default: "",    null: false
+    t.boolean  "active",            limit: 1,     default: true,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "logo_file_name",    limit: 255
@@ -279,6 +279,14 @@ ActiveRecord::Schema.define(version: 20151126193658) do
     t.datetime "logo_updated_at"
     t.string   "title",             limit: 255
     t.text     "desc",              limit: 65535
+    t.boolean  "show_in_top",       limit: 1,     default: false
+    t.boolean  "has_sale",          limit: 1,     default: false
+    t.boolean  "has_second_price",  limit: 1,     default: false
+    t.boolean  "is_one_time",       limit: 1,     default: false
+    t.float    "price",             limit: 24,    default: 0.0
+    t.float    "second_price",      limit: 24,    default: 0.0
+    t.float    "sale_price",        limit: 24,    default: 0.0
+    t.string   "period",            limit: 255
   end
 
   create_table "signins", force: :cascade do |t|

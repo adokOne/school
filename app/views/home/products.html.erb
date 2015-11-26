@@ -13,7 +13,7 @@
                        <div class="cherry-services services_1 boxed-layout">
                           <div class="row">
                              <div class="services-listing">
-                                <% @products.each_with_index do |item,idx|%>
+                                <% @products_for_top.each_with_index do |item,idx|%>
                                 <div style="text-align: inherit;" class="cherry-services_item item-<%= idx+1%> clearfix odd col-xs-12 clear-col-xs col-sm-12 clear-col-sm col-md-4 <%= idx.zero? ? "clear-col-md clear-col-lg" : ""%>  col-lg-4 ">
                                    <div class="services-inner">
                                       <h3 class="cherry-services_title">
@@ -39,34 +39,116 @@
 
 
 
-<div class="row row-edge  ">
-   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box_3">
-      <div class="cherry-box  ">
-         <div class="inner" style="background-color:#ffffff;">
-            <div class="row row-edge  ">
-               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                  <h2>About our medical diagnostic center</h2>
-               </div>
-               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                  <p>For many years, Diagnostic Laboratory has been making sustainable progress possible and driving positive change on every continent. With 2014 sales and revenues of $56 billion, Diagnostic Laboratory is the world’s leading manufacturer of various products.&nbsp;The company principally operates through its three product segments.</p>
-               </div>
-               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                  <div class="cherry-list font-icon cherry-list_3001   ">
-                     <ul>
-                        <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">High-quality, cost-effective service and clinical expertise</a></li>
-                        <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">Tests used for a wide range of disorders</a></li>
-                        <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">Secure online storage of your health information</a></li>
-                     </ul>
-                  </div>
-               </div>
-               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                  <a class="cherry-btn cherry-btn-primary cherry-btn-extra-large cherry-btn-inline cherry-btn-fade  " target="_self" href="http://livedemo00.template-help.com/wordpress_55766/genetics/impact-the-heart-of-business/">Read more</a>
-               </div>
-            </div>
-         </div>
-      </div>
-   </div>
-</div>
+                <div class="row row-edge  ">
+                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box_3">
+                      <div class="cherry-box  ">
+                         <div class="inner" style="background-color:#ffffff;">
+                            <div class="row row-edge  ">
+
+
+                            <table class="table products">
+                               <tbody>
+                                  <tr class="white-block">
+                                     <td>Вид услуги</td>
+                                     <td>Срок выполнения</td>
+                                     <td colspan="3">Стоимость услуги</td>
+                                  </tr>
+                                  <tr >
+                                     <td colspan="2"></td>
+                                     <td>Разово</td>
+                                     <td>Месяц</td>
+                                     <td>2 Месяца</td>
+                                  </tr>
+                                  <% @products.each do |item|%>
+                                  <tr>
+                                    <td class="prod_name">
+                                    <span class="material-design-verification24 list-icon" style="color: #00bbd3;"></span>
+                                      <b><%= item.name %></b>
+                                    </td>
+                                    <td><%= item.period %></td>
+                                    <% if item.is_one_time %>
+                                      <td>
+                                        <b><%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH</b>
+                                        <br/>
+                                        <a href="#">
+                                          <%= t("uex.do_order")%>
+                                          <i class="fa fa-shopping-cart"></i>
+                                        </a>
+                                      </td>
+                                    <% else %>
+                                      <td>—</td>
+                                    <% end %>
+
+
+                                    <% if !item.is_one_time %>
+                                      <td>
+                                        <b><%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH</b>
+                                        <br/>
+                                        <a href="#">
+                                          <%= t("uex.do_order")%>
+                                          <i class="fa fa-shopping-cart"></i>
+                                        </a>
+                                      </td>
+                                    <% else %>
+                                      <td>—</td>
+                                    <% end %>
+
+
+                                    <% if !item.is_one_time && item.has_second_price %>
+                                      <td>
+                                        <b><%= item.second_price.to_i %> $ / <%= Product.covert_to_uah(item.second_price)  %> UAH</b>
+                                        <br/>
+                                        <a href="#">
+                                          <%= t("uex.do_order")%>
+                                          <i class="fa fa-shopping-cart"></i>
+                                        </a>
+                                      </td>
+                                    <% else %>
+                                      <td>—</td>
+                                    <% end %>
+
+
+                                  </tr>
+                                  <% end %>
+                               </tbody>
+                            </table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                  <h2>About our medical diagnostic center</h2>
+                               </div>
+                               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                  <p>For many years, Diagnostic Laboratory has been making sustainable progress possible and driving positive change on every continent. With 2014 sales and revenues of $56 billion, Diagnostic Laboratory is the world’s leading manufacturer of various products.&nbsp;The company principally operates through its three product segments.</p>
+                               </div>
+                               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                  <div class="cherry-list font-icon cherry-list_3001   ">
+                                     <ul>
+                                        <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">High-quality, cost-effective service and clinical expertise</a></li>
+                                        <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">Tests used for a wide range of disorders</a></li>
+                                        <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">Secure online storage of your health information</a></li>
+                                     </ul>
+                                  </div>
+                               </div>
+                               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                  <a class="cherry-btn cherry-btn-primary cherry-btn-extra-large cherry-btn-inline cherry-btn-fade  " target="_self" href="http://livedemo00.template-help.com/wordpress_55766/genetics/impact-the-heart-of-business/">Read more</a>
+                               </div> -->
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
 
 
 

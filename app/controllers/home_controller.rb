@@ -10,7 +10,8 @@ class HomeController < ApplicationController
   end
 
   def products
-    @products = Product.limit(3).all
+    @products_for_top = Product.active.for_top
+    @products = Product.active.for_table
   end
 
   def category
