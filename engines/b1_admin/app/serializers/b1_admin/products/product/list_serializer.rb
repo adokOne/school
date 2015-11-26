@@ -1,8 +1,8 @@
 module B1Admin
-  module Content
-    module Photo
+  module Products
+    module Product
       class ListSerializer < ::ActiveModel::Serializer
-        attributes :name, :id, :logo
+        attributes :name,:logo,:active,:id
       end
     end
   end

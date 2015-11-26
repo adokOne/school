@@ -3,7 +3,7 @@ module B1Admin
     class PhotosController < B1Admin::ApplicationController
 
         def allowed_params
-          params.require(:item).permit(:is_in_school,:is_in_club,:name,:id)
+          params.require(:item).permit(:name,:id)
         end
 
         # Set data for CRUD module

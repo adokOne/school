@@ -1,8 +1,8 @@
 module B1Admin
-  module Content
-    module Partner
+  module Products
+    module Order
       class ItemSerializer < ::B1Admin::BaseSerializer
-        attributes :name, :id, :logo_file_name, :active
+        attributes :active,:product_id, :created_at, :id
       end
     end
   end

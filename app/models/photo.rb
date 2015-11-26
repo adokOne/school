@@ -11,11 +11,5 @@ class Photo < ActiveRecord::Base
   validates :name, presence: true
   validates :name, length: { in: 5..255 }, format: {with:/\A^[^0-9`!@#\$%\^&*+_=]+\z/i}
 
-  validates :is_in_school, inclusion:{ in: [true,false] }
-  validates :is_in_club, inclusion:{ in: [true,false] }
-
-
-  scope :for_school, -> { where(is_in_school: true) }
-  scope :for_club, -> { where(is_in_club: true) }
 
 end

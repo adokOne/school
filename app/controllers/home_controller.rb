@@ -6,11 +6,11 @@ class HomeController < ApplicationController
   end
 
   def contacts
-    @form = Cv.new
+    @form = Feedback.new
   end
 
   def products
-    @products = Course.limit(3).all
+    @products = Product.limit(3).all
   end
 
   def category

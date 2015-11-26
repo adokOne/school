@@ -1,8 +1,8 @@
 module B1Admin
   module Content
-    module Partner
+    module Feedback
       class ItemSerializer < ::B1Admin::BaseSerializer
-        attributes :name, :id, :logo_file_name, :active
+        attributes :name, :id, :phone, :email
       end
     end
   end
