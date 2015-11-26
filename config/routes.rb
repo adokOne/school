@@ -1,7 +1,15 @@
 Rails.application.routes.draw do
   mount B1Admin::Engine => "/admin"
-  root to: "home#index"
-
+  root to: "home#main"
+  get "contacts", to: "home#contacts"
+  get "products", to: "home#products"
+  get 'page/:page', to: "home#index"
+  post 'feedback', to: "home#feedback"
+  get "blog/item/*seo_name", to: "home#item"
+  get "blog", to: "blog#index"
+  get "blog/category/*seo_name", to: "blog#category"
+  get "*path/(:id).:format", to: "home#item"
+  get "category/*seo_name", to: "home#category"
   # %w{partners club contacts school}.each do |meth|
   #   get meth, to: "home##{meth}"
   # end

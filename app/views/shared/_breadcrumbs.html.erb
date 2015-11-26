@@ -1,0 +1,33 @@
+<% if items.any? || last_text.present? %>
+  <div class="cherry-breadcrumbs">
+     <div class="container">
+        <div class="row">
+           <div class="col-md-12 col-sm-12"></div>
+           <div class="col-md-12 col-sm-12">
+              <div class="cherry-breadcrumbs_content">
+                 <div class="cherry-breadcrumbs_browse"></div>
+                 <div class="cherry-breadcrumbs_wrap">
+                    <div class="cherry-breadcrumbs_item">
+                      <a href="<%= url("/") %>" class="cherry-breadcrumbs_item_link is-home" rel="<%= t("uex.home")%>" title="<%= t("uex.home")%>"><%= t("uex.home")%></a>
+                    </div>
+                    <div class="cherry-breadcrumbs_item">
+                       <div class="cherry-breadcrumbs_item_sep">/</div>
+                    </div>
+                    <% items.each_pair do |link, text|%>
+                      <div class="cherry-breadcrumbs_item">
+                        <a href="<%= url(link) %>" class="cherry-breadcrumbs_item_link" rel="tag" title="<%= text %>"><%= text %></a>
+                      </div>
+                      <div class="cherry-breadcrumbs_item">
+                         <div class="cherry-breadcrumbs_item_sep">/</div>
+                      </div>
+                    <% end %>
+                    <div class="cherry-breadcrumbs_item">
+                      <span class="cherry-breadcrumbs_item_target"><%= last_text %></span>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+<%end%>

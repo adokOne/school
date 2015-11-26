@@ -1,6 +1,5 @@
 class Page < ActiveRecord::Base
   before_validation :generate_seo
-  self.per_page = 1
   belongs_to :category
   has_paper_trail on: [:update, :destroy]
 
@@ -17,9 +16,10 @@ class Page < ActiveRecord::Base
 
   scope :published, -> { }
   scope :by_rating, -> { order('created_at DESC') }
+  scope :by_category, ->(id) { where(category_id: id) }
 
   def seos
-    [self.category.seos,self.seo_name].flatten
+    [self.category.seos].flatten
   end
 
   def self.find_by_seo seo
@@ -29,6 +29,14 @@ class Page < ActiveRecord::Base
       return false unless item.seos.include?(s)
     end
     item
+  end
+
+  def link
+    "#{seos.join('/')}/#{self.id}.html"
+  end
+
+  def prepare_breadcrumbs
+    self.category.prepare_breadcrumbs
   end
 
   def generate_seo

@@ -1,67 +1,38 @@
-<div data-ctrl="Blog">
-  <div class="search-block">
-    <div class="container">
-      <div class="baloon">
-        <%= image_tag "baloon-3.png"%>
-        <p class="bobble-green"><%=t("school.subscribe_for_news")%></p>
-      </div>
-      <div class="birds"><%= image_tag "birds.png"%></div>
-      <div class="birds two"><%= image_tag "birds-2.png"%></div>
-      <div class="form">
-        <form name="search" id="search" action="<%=url("blog/search")%>" method="get">
-          <div class="search-input">
-            <input type="text" name="search" class="txtinput" placeholder="пошук статтей" required="required">
-            <a href="#" class="search-icon js-submit"></a>
-          </div>
-        </form>
-
-
-      <%= form_for @subscriber, url: blog_subscribe_path do |f|%>
-        <%=f.hidden_field :blog_subscribe, value: true  %>
-          <div class="email-input">
-          <%=f.email_field :email, class:"txtinput fr", placeholder: t('school.email_plc'), required: true  %>
-          <a href="#" class="search-icon js-submit"></a>
-          </div>
-<!--         <div class="form-row">
-          <%= f.check_box :active, required: true, checked: true  %>
-          <%= f.label :active, "Я хочу отримувати новини від SPEAK на скриньку"  %>
-        </div> -->
-
-      <a href="#" class="subscribe js-submit"><%=t("school.subscribe_for_news_btn")%></a>
-    <% end%>
-
-
-
-      </div>
-    </div>
-  </div>
-
-  <div class="themes-block">
-    <div class="container">
-      <% @items.each do |category|%>
-        <div class="blog-themes" id="<%= category.seo_name%>">
-          <h2><%= category.title%></h2>
-          <% category.pages_for_blog.each do |page|%>
-            <div class="theme-item">
-              <div class="image-block">
-                <img src="<%= page.logo(:medium)%>" alt="<%= page.title%>">
-              </div>
-              <% unless category.only_photos %>
-                <div class="text">
-                  <h5><%= page.title%></h5>
-                  <p><%= truncate(page.anons, length: 150,omission: '...') %> <a href="<%= url("blog/item/#{page.seos.join('/')}")%>"><%=t("school.show_more")%></a></p>
+<div class="row row-edge  ">
+   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="portfolio-wrap">
+         <div class="portfolio-container list-layout loading-animation-move-up" data-post-per-page="9" data-column="3" data-list-layout="list-layout" data-loading-mode="ajax-pagination" data-item-margin="30" data-fixed-height="300" data-template="portfolio_list.tmpl" data-posts-format="post-format-all">
+            <div class="portfolio-list" data-all-posts-count="12">
+              <% @items.each do |page| %>
+                <div class="portfolio-item item-1 odd  list-layout-item custom-hover clearfix">
+                  <div class="inner-wrap">
+                     <div class="media-content">
+                        <img width="1024" height="576" src="<%= page.logo %>" class="grid-image wp-post-image" alt="<%= page.title %>">
+                     </div>
+                     <div class="item-content">
+                        <h3><a href="<%= url(page.link) %>"><%= page.title %></a></h3>
+                        <p><%= page.anons %></p>
+                        <div class="entry-permalink">
+                          <a href="<%= url(page.link) %>" class="cherry-btn cherry-btn-primary cherry-btn-extra-large"><%= t("uex.read_more")%></a>
+                        </div>
+                     </div>
+                  </div>
                 </div>
-              <% end%>
+              <% end %>
             </div>
-          <% end %>
-          <div class="clear"></div>
-          <a href="<%= url("blog/category/#{category.seo_name}") %>" class="more"><%=t("school.read_all")%></a>
-        </div>
-      <% end %>
-    </div>
-  </div>
-
-  <% if @similar.any? %>
-    <%= render partial: "shared/similar", locals:{similar: @similar} %>
-  <% end %>
+            <div class="cherry-portfolio-ajax-loader" style="display: none; opacity: 0;">
+               <div class="cherry-spinner cherry-spinner-double-bounce">
+                  <div class="cherry-double-bounce1"></div>
+                  <div class="cherry-double-bounce2"></div>
+               </div>
+            </div>
+            <div class="portfolio-pagination with-ajax">
+                <nav class="navigation pagination" role="navigation">
+                    <h2 class="screen-reader-text">Pages:</h2>
+                    <%= will_paginate(@items, class: "nav-links", renderer: PaginationHelper::LinkRenderer) %>
+                </nav>
+            </div>
+         </div>
+      </div>
+   </div>
 </div>

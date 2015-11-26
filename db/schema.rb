@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151117103716) do
+ActiveRecord::Schema.define(version: 20151125220201) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "",    null: false
@@ -105,14 +105,18 @@ ActiveRecord::Schema.define(version: 20151117103716) do
   add_index "b1_admin_users", ["email", "blocked", "active"], name: "index_b1_admin_users_on_email_and_blocked_and_active", using: :btree
 
   create_table "categories", force: :cascade do |t|
-    t.string   "title",       limit: 255,                    null: false
-    t.integer  "parent_id",   limit: 4,          default: 0, null: false
-    t.string   "seo_name",    limit: 255,                    null: false
-    t.integer  "position",    limit: 4,          default: 0, null: false
+    t.string   "title",             limit: 255,                    null: false
+    t.integer  "parent_id",         limit: 4,          default: 0, null: false
+    t.string   "seo_name",          limit: 255,                    null: false
+    t.integer  "position",          limit: 4,          default: 0, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "desc",        limit: 4294967295
-    t.boolean  "only_photos", limit: 1
+    t.text     "desc",              limit: 4294967295
+    t.boolean  "only_photos",       limit: 1
+    t.string   "logo_file_name",    limit: 255
+    t.string   "logo_content_type", limit: 255
+    t.integer  "logo_file_size",    limit: 4
+    t.datetime "logo_updated_at"
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
@@ -132,6 +136,7 @@ ActiveRecord::Schema.define(version: 20151117103716) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "continent_id",      limit: 4,          default: 0
+    t.text     "desc_ru",           limit: 4294967295
     t.string   "logo_file_name",    limit: 255
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size",    limit: 4
@@ -139,18 +144,17 @@ ActiveRecord::Schema.define(version: 20151117103716) do
     t.boolean  "show_as_popular",   limit: 1
     t.string   "seo_name",          limit: 255
     t.text     "desc_en",           limit: 4294967295
-    t.text     "desc_uk",           limit: 4294967295
-    t.text     "desc_ru",           limit: 4294967295
     t.string   "meta_title_ru",     limit: 255,        default: ""
     t.text     "meta_desc_ru",      limit: 65535
     t.text     "meta_keys_ru",      limit: 65535
     t.string   "meta_title_en",     limit: 255,        default: ""
     t.text     "meta_desc_en",      limit: 65535
     t.text     "meta_keys_en",      limit: 65535
-    t.string   "meta_title_uk",     limit: 255,        default: ""
-    t.text     "meta_desc_uk",      limit: 65535
-    t.text     "meta_keys_uk",      limit: 65535
     t.boolean  "meta_is_generated", limit: 1,          default: true
+    t.text     "desc_uk",           limit: 4294967295
+    t.string   "meta_title_uk",     limit: 255
+    t.text     "meta_desc_uk",      limit: 65535
+    t.string   "meta_keys_uk",      limit: 255
   end
 
   add_index "cities", ["code"], name: "index_cities_on_code", using: :btree
@@ -181,6 +185,7 @@ ActiveRecord::Schema.define(version: 20151117103716) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "continent_id",      limit: 4,          default: 0
+    t.text     "desc_ru",           limit: 4294967295
     t.string   "flag_file_name",    limit: 255
     t.string   "flag_content_type", limit: 255
     t.integer  "flag_file_size",    limit: 4
@@ -188,17 +193,17 @@ ActiveRecord::Schema.define(version: 20151117103716) do
     t.text     "g_map_url",         limit: 65535
     t.string   "seo_name",          limit: 255
     t.text     "desc_en",           limit: 4294967295
-    t.text     "desc_uk",           limit: 4294967295
     t.string   "meta_title_ru",     limit: 255,        default: ""
     t.text     "meta_desc_ru",      limit: 65535
     t.text     "meta_keys_ru",      limit: 65535
     t.string   "meta_title_en",     limit: 255,        default: ""
     t.text     "meta_desc_en",      limit: 65535
     t.text     "meta_keys_en",      limit: 65535
-    t.string   "meta_title_uk",     limit: 255,        default: ""
-    t.text     "meta_desc_uk",      limit: 65535
-    t.text     "meta_keys_uk",      limit: 65535
     t.boolean  "meta_is_generated", limit: 1,          default: true
+    t.text     "desc_uk",           limit: 4294967295
+    t.string   "meta_title_uk",     limit: 255
+    t.text     "meta_desc_uk",      limit: 4294967295
+    t.string   "meta_keys_uk",      limit: 255
   end
 
   add_index "countries", ["code"], name: "index_countries_on_code", using: :btree
@@ -223,13 +228,14 @@ ActiveRecord::Schema.define(version: 20151117103716) do
   add_index "courses", ["course_type"], name: "index_courses_on_course_type", using: :btree
 
   create_table "cvs", force: :cascade do |t|
-    t.string   "name",                  limit: 255, default: ""
-    t.string   "email",                 limit: 255, default: ""
-    t.string   "phone",                 limit: 255, default: ""
+    t.string   "name",                  limit: 255,   default: ""
+    t.string   "email",                 limit: 255,   default: ""
+    t.string   "phone",                 limit: 255,   default: ""
     t.string   "document_file_name",    limit: 255
     t.string   "document_content_type", limit: 255
     t.integer  "document_file_size",    limit: 4
     t.datetime "document_updated_at"
+    t.text     "message",               limit: 65535
   end
 
   create_table "groups", force: :cascade do |t|

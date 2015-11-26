@@ -11,5 +11,6 @@
  * file per style scope.
  *
  *= require_self
+ *= require ./theme/shortcodes
  *= require_tree ./theme
  */

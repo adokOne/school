@@ -34,3 +34,5 @@
 //= require_tree ./controllers
 //= require ./script.js
 //= require input_functions
+//= require ./theme/cherry-api
+//= require_tree ./theme

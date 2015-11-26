@@ -8,6 +8,15 @@ class Category < ActiveRecord::Base
   has_many   :childrens, class_name:Category, foreign_key: :parent_id, dependent: :restrict_with_exception
   belongs_to :parent, class_name: Category, foreign_key: :parent_id
 
+
+  has_attached_file :logo,
+                    styles: { home: "64x64#",medium: "100x100#", big: "325x325#" },
+                    default_url: "/img/page-logo-missing.png",
+                    path:        ":rails_root/public/system/:class/:id/:style.:extension",
+                    url:         "/system/:class/:id/:style.:extension"
+
+  validates_attachment_content_type :logo, :content_type => /\Aimage/
+
   def to_tree_item
     {
       id:        self.id,
@@ -27,6 +36,10 @@ class Category < ActiveRecord::Base
     result.flatten
   end
 
+  def link
+    "/category/#{self.seos.join('/')}"
+  end
+
   def pages_for_blog
     self.all_pages[0..3]
   end
@@ -40,6 +53,25 @@ class Category < ActiveRecord::Base
       return false unless category.seos.include?(s)
     end
     category
+  end
+
+  def prepare_breadcrumbs( skip_self = false )
+
+    prepare = lambda{ |cat, is_rec|
+      if cat.parent.present?
+        result = prepare.call(cat.parent,true).merge(cat.parent.bread_hash)
+        resutl = result.merge(cat.bread_hash) unless use_self
+      else
+        result =  skip_self ? {} : is_rec ? {} : cat.bread_hash
+      end
+      return result
+    }
+    prepare.call(self,false)
+
+  end
+
+  def bread_hash
+    {"#{self.link}" => self.title}
   end
 
   def all_childrens

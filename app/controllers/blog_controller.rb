@@ -1,22 +1,7 @@
 class BlogController < ApplicationController
 
-  before_action :set_manifest
-
   def index
-    @similar = Page.limit(3).order(id: :desc)
-    @items   = Category.where(parent_id:0).all
-    @top_menu = @items.inject({}){|hash, item| hash[item.seo_name] = item.title; hash }
-  end
-
-  def category
-    @item    = Category.find_by_seo(params[:seo_name].split("/"))
-    @similar = Page.limit(3).where("category_id != ?",@item.id).order(id: :desc)
-    if @item.parent.present?
-      only_photos = @item.parent.only_photos
-    else
-      only_photos = @item.only_photos
-    end
-    render only_photos ? "photo_category" : "category"
+    @items = Page.published.by_rating.page(params[:page])
   end
 
   def item
@@ -44,17 +29,5 @@ class BlogController < ApplicationController
     end
     render json: json
   end
-
-  private
-
-  def set_manifest
-    @js_manifest = "blog"
-  end
-
-  def allowed_params
-    params.require(:subscriber).permit(:name,:email,:blog_subscribe)
-
-  end
-
 
 end

@@ -1,6 +1,24 @@
 .page-numbers.disabled{
 	display: none;
 }
+.sbOptions li{
+	text-align: left;
+}
+.filter-item{
+	text-align: left;
+	border-bottom: 1px solid #DDDDDD;
+    padding: 5px 0;
+}
+.filter-item img{
+	vertical-align: middle;
+}
+.filter-item a{
+	  display: inline-flex;
+    width: 215px;
+}
+.filter-item span{
+	margin: 7px 0px 0px 16px;
+}
 div.wpcf7 {
 	margin: 0;
 	padding: 0;

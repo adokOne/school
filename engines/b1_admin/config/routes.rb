@@ -57,6 +57,7 @@ B1Admin::Engine.routes.draw do
     resources :uploads
     resources :pages
     resources :categories do
+      post "upload", on: :member
       post "update_positions", on: :collection
     end
   end

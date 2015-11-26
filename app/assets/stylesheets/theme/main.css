@@ -2636,6 +2636,13 @@ ol.comment-list .children li > .children {
         left: 0;
         content: '\f105';
         font: 15px/20px FontAwesome; }
+
+      .widget ul.filter > li:before {
+        position: absolute;
+        top: 20px;
+        left: 0;
+        content: '\f105';
+        font: 15px/20px FontAwesome; }
         .site-footer .widget ul > li:before {
           display: none; }
       .site-footer .widget ul > li a {

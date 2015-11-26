@@ -13,4 +13,8 @@ module ApplicationHelper
     /#{params[:action]}/ =~ url || /#{params[:controller]}/ =~ url ? cls : ""
   end
 
+  def breadcrumbs items = [], last_text= ""
+    render partial: "shared/breadcrumbs", locals: {items: items, last_text: last_text}
+  end
+
 end
