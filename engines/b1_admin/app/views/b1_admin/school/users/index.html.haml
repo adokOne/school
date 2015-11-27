@@ -28,6 +28,8 @@
                     {{item.course_name}}
                   %td{"data-title" => "'Рівень англійської'"}
                     {{item.level}}
+                  %td{"data-title" => "'#{t('b1_admin.created_at')}'"}
+                    {{item.created_at | date:'dd.MM.yyyy HH:mm '}}
                   / %td{"data-title" => "'#{t('b1_admin.active')}'"}
                   /   %span.label.text-lg{"ng-class"=>"{'label-danger':!item.active,'label-success': item.active }"}
                   /     %span{"ng-switch" => "", :on => "item.active"}

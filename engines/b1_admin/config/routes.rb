@@ -55,6 +55,7 @@ B1Admin::Engine.routes.draw do
   end
   namespace :content do
     resources :vacancies
+    resources :quizes
     resources :uploads
     resources :photos do
       post "upload", on: :member
