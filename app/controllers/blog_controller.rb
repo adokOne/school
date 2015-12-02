@@ -1,11 +1,13 @@
 class BlogController < ApplicationController
 
   def index
-    @items = BlogPage.published.by_rating.page(params[:page])
+    @items = BlogPage.published.by_rating.paginate(page: params[:page], per_page: 5)
   end
 
   def item
-    @item = BlogPage.find_by_seo(params[:seo_name].split("/"))
+    @item = BlogPage.find_by_seo_name!(params[:seo_name])
+    @breadcrumbs_items = {"blog": I18n.t("uex.blog")}
+    @breadcrumbs_last = @item.title
   end
 
   def search

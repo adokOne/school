@@ -56,7 +56,7 @@ h6, .h6 {
     font: 30px/36px 'Roboto', sans-serif;
 }
 .site-header {
-    background-color: #00bbd3;
+    background-color: #F5F5F5;
     background-repeat: repeat;
     background-position: left;
     background-attachment: fixed;
@@ -70,7 +70,7 @@ h6, .h6 {
     font: 100 12px/18px 'Roboto', sans-serif;
 }
 .site-footer {
-    background-color: #00bbd3;
+    background-color: #2cabfa;
     background-repeat: repeat;
     background-position: left;
     background-attachment: fixed;

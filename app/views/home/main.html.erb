@@ -4,7 +4,7 @@
          <article class="clearfix post-5 page type-page status-publish " id="post-5">
             <div class="entry-meta entry-meta-top"></div>
             <div class="entry-content">
-               <div class="row">
+<!--                <div class="row">
                   <div class="container">
                      <div class="row row-edge">
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
@@ -13,22 +13,26 @@
                                  <div class="swiper-wrapper">
                                     <article class="cherry-swiper-carousel-slide swiper-slide post-item item-0 odd">
                                        <div class="inner clearfix">
-                                          <figure class="post-thumbnail"><a href="http://livedemo00.template-help.com/wordpress_55766/allergyasthma/innovative-laboratory-services-to-enhance-patient-health/" title="Innovative laboratory services to enhance patient health" class="post-thumbnail_link"><img class="wp-post-image croped-image " data-ratio="1" width="570" height="570" src="http://livedemo00.template-help.com/wordpress_55766/wp-content/uploads/2015/05/post-1-570x570.jpg" alt=""></a></figure>
+                                          <figure class="post-thumbnail">
+                                            <a href="<%= url("/")%>" title="" class="post-thumbnail_link">
+                                              <%= image_tag "banner.png", class:"wp-post-image croped-image " %>
+                                            </a>
+                                          </figure>
                                        </div>
                                     </article>
-                                    <!--/.cherry-swiper-carousel-item-->
+
                                     <article class="cherry-swiper-carousel-slide swiper-slide post-item item-1 even">
                                        <div class="inner clearfix">
                                           <figure class="post-thumbnail"><a href="http://livedemo00.template-help.com/wordpress_55766/gastroenterology/can-i-eat-and-drink-before-having-a-blood-test/" title="Can I eat and drink before having a blood test?" class="post-thumbnail_link"><img class="wp-post-image croped-image " data-ratio="1" width="570" height="570" src="http://livedemo00.template-help.com/wordpress_55766/wp-content/uploads/2015/05/post-2-570x570.jpg" alt=""></a></figure>
                                        </div>
                                     </article>
-                                    <!--/.cherry-swiper-carousel-item-->
+
                                     <article class="cherry-swiper-carousel-slide swiper-slide post-item item-2 odd">
                                        <div class="inner clearfix">
                                           <figure class="post-thumbnail"><a href="http://livedemo00.template-help.com/wordpress_55766/genetics/impact-the-heart-of-business/" title="Impact &#8211; The Heart of Business" class="post-thumbnail_link"><img class="wp-post-image croped-image " data-ratio="1" width="570" height="570" src="http://livedemo00.template-help.com/wordpress_55766/wp-content/uploads/2015/05/post-3-570x570.jpg" alt=""></a></figure>
                                        </div>
                                     </article>
-                                    <!--/.cherry-swiper-carousel-item-->
+
                                  </div>
                                  <div id="swiper-carousel-1-pagination" class="swiper-pagination"></div>
                               </section>
@@ -64,14 +68,44 @@
                         </div>
                      </div>
                   </div>
-               </div>
+               </div> -->
                <div class="row  " >
                   <div class="container">
                      <div class="row row-edge">
                         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                           <div class="row">
-                             <div class="col-md-9">
+                             <div class="col-md-12">
                               <div class="container">
+
+                <div class="author-bio clearfix">
+<div role="form" class="wpcf7" id="wpcf7-f180-p47-o1" lang="en-US" dir="ltr">
+                                          <form class="new_feedback" id="new_feedback" action="/feedback" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="✓">
+                                             <div class="row">
+                                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                   <span class="wpcf7-form-control-wrap your-name">
+                                                      <input class="wpcf7-form-control wpcf7-text" placeholder="ФИО" type="text" value="" name="feedback[name]" id="feedback_name">
+                                                   </span>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                   <span class="wpcf7-form-control-wrap your-email">
+                                                      <input class="wpcf7-form-control wpcf7-email" placeholder="Email" type="text" value="" name="feedback[email]" id="feedback_email">
+                                                   </span>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                   <span class="wpcf7-form-control-wrap phone">
+                                                      <input class="wpcf7-form-control wpcf7-phone" placeholder="Телефон" type="text" value="" name="feedback[phone]" id="feedback_phone">
+                                                   </span>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                   <span class="wpcf7-form-control-wrap">
+                                                      <input type="submit" value="Отправить" class="wpcf7-form-control wpcf7-submit">
+                                                   </span>
+                                                </div>
+                                             </div>
+                                       </div></form>
+                                    </div>
+                </div>
+
                                  <div id="primary" class="content-area">
                                     <main id="main" class="site-main" role="main">
                                       <% @pages.each do |page|%>
@@ -85,13 +119,13 @@
                                           </div>
                                           <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
                                             <a href="<%= url(page.link) %>" title="<%= page.title %>">
-                                              <img src="<%= page.logo(:home) %>" class="attachment-cherry-thumb-l wp-post-image" alt="<%= page.title %>"/>
+                                              <img   width="1088" height="387" src="<%= page.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="<%= page.title %>"/>
                                             </a>
                                           </figure>
-                                          <div class="entry-content"><%= page.anons %></div>
+<!--                                           <div class="entry-content"><%= page.anons %></div>
                                           <div class="entry-permalink">
                                             <a href="<%= url(page.link) %>" class="cherry-btn cherry-btn-primary cherry-btn-extra-large"><%= t("uex.read_more")%></a>
-                                          </div>
+                                          </div> -->
                                           <div class="entry-meta entry-meta-bottom"></div>
                                         </article>
 
@@ -107,64 +141,6 @@
                                     </main>
                                  </div>
                               </div>
-                             </div>
-                             <div class="col-md-3">
-                                <div class="cherry-services services_1 boxed-layout">
-                                   <div class="row">
-                                         <div class="services-listing">
-                                            <div id="services-358" class="cherry-services_item item-1 clearfix odd col-xs-12 clear-col-xs col-sm-12 clear-col-sm clear-col-lg">
-                                              <div class="services-inner" style="padding: 50 0;">
-                                                <label>Выберите город:</label>
-                                                <select id="city_s">
-                                                  <option value="украина">Украина</option>
-                                                  <option value="бровары">Бровары</option>
-                                                  <option value="винница">Винница</option>
-                                                  <option value="виноградово">Виноградово</option>
-                                                  <option value="днепропетровск">Днепропетровск</option>
-                                                  <option value="житомир">Житомир</option>
-                                                  <option value="запорожье">Запорожье</option>
-                                                  <option value="ивано-франковск">Ивано-Франковск</option>
-                                                  <option value="киев">Киев</option>
-                                                  <option value="комсомольск">Комсомольск</option>
-                                                  <option value="луцк">Луцк</option>
-                                                  <option value="львов">Львов</option>
-                                                  <option value="одесса">Одесса</option>
-                                                  <option value="полтава">Полтава</option>
-                                                  <option value="ровно">Ровно</option>
-                                                  <option value="сумы">Сумы</option>
-                                                  <option value="тернополь">Тернополь</option>
-                                                  <option value="ужгород">Ужгород</option>
-                                                  <option value="харьков">Харьков</option>
-                                                  <option value="херсон">Херсон</option>
-                                                  <option value="хмельницкий">Хмельницкий</option>
-                                                  <option value="черкассы">Черкассы</option>
-                                                  <option value="чернигов">Чернигов</option>
-                                                  <option value="черновцы">Черновцы</option>
-                                                </select>
-                                                <div class="widget-area">
-                                                   <aside class="widget_text">
-                                                      <div class="textwidget">
-                                                         <nav>
-                                                           <% @categories.each do |category|%>
-                                                             <div class="filter-item">
-                                                                 <a href="#">
-                                                                    <img src="<%= category.logo(:home) %>" alt="<%= category.title %>" >
-                                                                    <span><%= category.title %></span>
-                                                                  </a>
-                                                             </div>
-                                                           <% end %>
-                                                         </nav>
-                                                      </div>
-                                                   </aside>
-                                                </div>
-
-                                                <div class="cherry-services_feauters">
-                                                </div>
-                                               </div>
-                                            </div>
-                                         </div>
-                                   </div>
-                                </div>
                              </div>
                           </div>
                         </div>

@@ -40,6 +40,11 @@
 .table.products a:hover i{
     color: #00bbd3;
 }
+.author-bio_avatar .cherry-services_icon{
+	font-size: 55px;
+  line-height: 1em;
+  color: #00bbd3;
+}
 
 div.wpcf7 {
 	margin: 0;

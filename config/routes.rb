@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get "products", to: "home#products"
   get 'page/:page', to: "home#index"
   post 'feedback', to: "home#feedback"
-  get "blog/item/*seo_name", to: "home#item"
+  get "blog/*seo_name", to: "blog#item"
   get "blog", to: "blog#index"
   get "blog/category/*seo_name", to: "blog#category"
   get "*path/(:id).:format", to: "home#item"

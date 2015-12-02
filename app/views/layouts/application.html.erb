@@ -25,29 +25,6 @@
             <div id="static-area-header-top" class="header-top static-area">
                <div class="container">
                   <div class="row">
-                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 static-header-logo">
-                        <div class="site-branding">
-                           <h1 class="site-title image-logo">
-                              <a href="<%= url("/")%>" rel="home">
-                                 <%= image_tag "logo-click.png" %>
-                              </a>
-                           </h1>
-                        </div>
-                     </div>
-                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 static-header-sidebar">
-                        <div class="sidebar-header widget-area" role="complementary">
-                           <aside id="text-2" class="widget widget_text">
-                              <h3 class="widget-title">БУДЕМ РАДЫ ВАШИМ ЗВОНКАМ:</h3>
-                              <div class="textwidget"><i class="material-design-phone370"></i>38(067) 574 21 88</div>
-                           </aside>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <div id="static-area-header-bottom" class="header-bottom static-area">
-               <div class="container">
-                  <div class="row">
                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 static-header-menu">
                         <nav id="menu-primary" class="menu-primary menu" role="navigation">
                            <label class="cherry-mega-menu-mobile-trigger" for="trigger-menu-primary-items">Menu</label><input class="cherry-mega-menu-mobile-trigger-box" id="trigger-menu-primary-items" type="checkbox">
@@ -59,12 +36,16 @@
                               <li class="<%= url_is_current?("products","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("products") %>"><%= t("uex.products")%></a>
                               </li>
-                              <li class="<%= url_is_current?("blog","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
-                                    <a href="<%= url("blog") %>"><%= t("uex.blog")%></a>
-                              </li>
                               <li class="<%= url_is_current?("contacts","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("contacts") %>"><%= t("uex.contacts")%></a>
                               </li>
+                              <li class="<%= url_is_current?("signin","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
+                                    <a href="<%= url("users/signin") %>"><%= t("uex.signin")%></a>
+                              </li>
+                              <li class="<%= url_is_current?("blog","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
+                                    <a href="<%= url("blog") %>"><%= t("uex.blog")%></a>
+                              </li>
+
                            </ul>
                            <label class="cherry-mega-menu-mobile-close" for="trigger-menu-primary-items">Close</label>
                         </nav>
@@ -72,6 +53,33 @@
                   </div>
                </div>
             </div>
+
+
+
+            <div id="static-area-header-bottom" class="header-bottom static-area">
+               <div class="container">
+                  <div class="row">
+                     <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 static-header-logo">
+                        <div class="site-branding">
+                           <h1 class="site-title image-logo">
+                              <a href="<%= url("/")%>" rel="home">
+                                 <%= image_tag "logo-click.png" %>
+                              </a>
+                           </h1>
+                        </div>
+                     </div>
+<!--                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 static-header-sidebar">
+                        <div class="sidebar-header widget-area" role="complementary">
+                           <aside id="text-2" class="widget widget_text">
+                              <h3 class="widget-title">БУДЕМ РАДЫ ВАШИМ ЗВОНКАМ:</h3>
+                              <div class="textwidget"><i class="material-design-phone370"></i>38(067) 574 21 88</div>
+                           </aside>
+                        </div>
+                     </div> -->
+                  </div>
+               </div>
+            </div>
+
          <%= breadcrumbs(@breadcrumbs_items, @breadcrumbs_last)%>
          </header>
          <div id="content" class="site-content boxed extra-boxed">

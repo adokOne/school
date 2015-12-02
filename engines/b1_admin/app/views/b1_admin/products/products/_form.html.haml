@@ -51,7 +51,7 @@
                   .form-group{"ng-class" => "{'has-error': itemForm.period.$invalid && itemForm.$submitted}"}
                     = label_tag :period, "Период выполнения", class:"col-sm-3 control-label"
                     .col-sm-7
-                      = text_field_tag :period,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.period"
+                      = text_field_tag :period,"" ,class:"form-control", "ng-model"=>"editedItem.period"
 
 
 

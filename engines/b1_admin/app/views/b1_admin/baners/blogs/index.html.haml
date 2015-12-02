@@ -10,6 +10,7 @@
             .panel-control
               %button.btn.btn-default{:name => "refresh", :title => "Refresh", :type => "button","ng-click"=>"itemsTable.reload()"}
                 %i.fa.fa-refresh.icon-refresh
+              %a.btn.btn-primary{href: new_baners_blog_path,"ng-click"=>"$root.setRoute('#{new_baners_blog_path}')"}=t("b1_admin.add")
             %h3.panel-title Список статей
 
           .panel-body

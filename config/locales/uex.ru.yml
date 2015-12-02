@@ -1,5 +1,6 @@
 ru:
   uex:
+    signin: "Мой кабинет"
     contacts: "Контакты"
     in_social: "Мы в сетях"
     for_clients: "Для клиентов"
@@ -26,7 +27,7 @@ ru:
     email_plc: "Email"
     message_plc: "Ваше сообщение"
     submit: "Отправить"
-    product_header: "Заказав наши услуги, Вы получаете топовые позиции в поисковых системах Google или Yandex"
+    product_header: "Заказав наши услуги, Вы получаете топовые позиции в поисковых системах <b>Google</b> или <b>Yandex</b>"
     do_order: "Заказать"
     back_to_category: "Вернуться к категории ’%{name}’"
     do_order: "Заказать"

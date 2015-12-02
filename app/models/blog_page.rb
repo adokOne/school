@@ -16,10 +16,6 @@ class BlogPage < ActiveRecord::Base
   scope :by_rating, -> { order('created_at DESC') }
   scope :by_category, ->(id) { where(category_id: id) }
 
-  def seos
-    [self.category.seos].flatten
-  end
-
   def self.find_by_seo seo
     item = BlogPage.where(seo_name: seo.last).first
     return false unless item
@@ -30,7 +26,7 @@ class BlogPage < ActiveRecord::Base
   end
 
   def link
-    "#{seos.join('/')}/#{self.id}.html"
+    "blog/#{self.seo_name}"
   end
 
   def generate_seo

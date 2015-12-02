@@ -9,7 +9,7 @@ module B1Admin
 
       # Set data for CRUD module
       @model = ::BlogPage
-      @order = {position: :asc},{id: :asc}
+      @order = {id: :desc}
       # Include CRUD module
       include B1Admin::Concerns::Crud
 

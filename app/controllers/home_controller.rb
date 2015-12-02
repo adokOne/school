@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   def main
-    @pages = Page.published.by_rating.page(params[:page])
+    @pages = Page.published.by_rating.paginate(page: params[:page], per_page: 5)
     @categories = Category.get_parent
   end
 
