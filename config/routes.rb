@@ -22,5 +22,14 @@ Rails.application.routes.draw do
   # post "subscribe", to: "home#subscribe"
 
   # match "/404" => "home#error404", via: [ :get, :post, :patch, :delete ]
+
+  resources :users do
+    collection do
+      get "signin"
+      post "login"
+      get "forgot"
+      get "registration"
+    end
+  end
 end
 

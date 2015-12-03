@@ -18,6 +18,8 @@ class Page < ActiveRecord::Base
   scope :by_rating, -> { order('created_at DESC') }
   scope :by_category, ->(id) { where(category_id: id) }
 
+  belongs_to :user
+
   def seos
     [self.category.seos].flatten
   end

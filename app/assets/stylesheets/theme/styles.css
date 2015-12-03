@@ -1,3 +1,8 @@
+.user-cabinet .one-baner{
+	    border-bottom: 2px solid #F5F5F5;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
 .page-numbers.disabled{
 	display: none;
 }

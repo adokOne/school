@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151126205306) do
+ActiveRecord::Schema.define(version: 20151203201528) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -160,6 +160,14 @@ ActiveRecord::Schema.define(version: 20151126205306) do
   add_index "cities", ["country_id"], name: "index_cities_on_country_id", using: :btree
   add_index "cities", ["show_on_search"], name: "index_cities_on_show_on_search", using: :btree
 
+  create_table "contacts", force: :cascade do |t|
+    t.string  "type",    limit: 255, null: false
+    t.string  "value",   limit: 255
+    t.integer "user_id", limit: 4,   null: false
+  end
+
+  add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
+
   create_table "continents", force: :cascade do |t|
     t.string   "seo_name",   limit: 255,                      null: false
     t.string   "name_en",    limit: 255,        default: "-", null: false
@@ -239,11 +247,13 @@ ActiveRecord::Schema.define(version: 20151126205306) do
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
+    t.integer  "user_id",           limit: 4
   end
 
   add_index "pages", ["active"], name: "index_pages_on_active", using: :btree
   add_index "pages", ["category_id"], name: "index_pages_on_category_id", using: :btree
   add_index "pages", ["seo_name"], name: "index_pages_on_seo_name", using: :btree
+  add_index "pages", ["user_id"], name: "index_pages_on_user_id", using: :btree
 
   create_table "partners", force: :cascade do |t|
     t.string   "name",              limit: 255, default: "",   null: false
@@ -320,6 +330,24 @@ ActiveRecord::Schema.define(version: 20151126205306) do
     t.string   "file_content_type", limit: 255
     t.integer  "file_file_size",    limit: 4
     t.datetime "file_updated_at"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "name",                    limit: 255
+    t.string   "email",                   limit: 255,                   null: false
+    t.string   "password_digest",         limit: 255,                   null: false
+    t.boolean  "blocked",                 limit: 1,     default: false
+    t.datetime "blocked_until"
+    t.integer  "wrong_password_attempts", limit: 4,     default: 0
+    t.integer  "signins_count",           limit: 4,     default: 0
+    t.boolean  "active",                  limit: 1,     default: true
+    t.string   "avatar_file_name",        limit: 255
+    t.string   "avatar_content_type",     limit: 255
+    t.integer  "avatar_file_size",        limit: 4
+    t.datetime "avatar_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.text     "desc",                    limit: 65535
   end
 
   create_table "vacancies", force: :cascade do |t|

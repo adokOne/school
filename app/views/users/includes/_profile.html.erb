@@ -1,0 +1,94 @@
+<div class="cherry-tabs-pane cherry-clearfix  " style="display: block;">
+   <div class="row row-edge  ">
+      <div class="col-xs-12 col-sm-2 col-md-4 col-lg-4">
+        <div class="media-content">
+          <img class="image croped-image" src="<%= current_user.avatar %>" alt="paeg1-img1" width="336" height="336">
+          <div class="rollover-content ">
+            <div class="table-display">
+              <div class="links-container custom-links custom-hover-zoom table-cell">
+                <a class="item-link zoomlink magnific-popup-link" href="#"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4 extra_indent">
+         <h2><%= current_user.name %></h2>
+         <p><%= current_user.desc.present? ? current_user.desc : t("uex.not_indicated") %></p>
+      </div>
+      <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
+         <h2><%= t("uex.contact_data")%></h2>
+         <div class="cherry-list font-icon cherry-list_4967   ">
+            <ul>
+
+
+
+              <% if current_user.phones.present? %>
+                <% current_user.phones.each do |item|%>
+                  <li>
+                    <span class="material-design-phone370 list-icon"></span>
+                    <a href="#"><%= item%></a>
+                  </li>
+                <% end %>
+              <% else %>
+                <li>
+                  <span class="material-design-phone370 list-icon"></span>
+                  <a href="#"><%= t("uex.not_indicated")%></a>
+                </li>
+              <% end %>
+
+
+
+              <% if current_user.addresses.present? %>
+                <% current_user.addresses.each do |item|%>
+                  <li>
+                    <span class="material-design-home149 list-icon"></span>
+                    <a href="#"><%= item%></a>
+                  </li>
+                <% end %>
+              <% else %>
+                <li>
+                  <span class="material-design-home149 list-icon"></span>
+                  <a href="#"><%= t("uex.not_indicated")%></a>
+                </li>
+              <% end %>
+
+
+
+
+              <% if current_user.websites.present? %>
+                <% current_user.websites.each do |item|%>
+                  <li>
+                    <span class="material-design-world96 list-icon"></span>
+                    <a href="#"><%= item%></a>
+                  </li>
+                <% end %>
+              <% else %>
+                <li>
+                  <span class="material-design-world96 list-icon"></span>
+                  <a href="#"><%= t("uex.not_indicated")%></a>
+                </li>
+              <% end %>
+
+
+
+
+              <% if current_user.emails.present? %>
+                <% current_user.emails.each do |item|%>
+                  <li>
+                    <span class="material-design-black402 list-icon"></span>
+                    <a href="#"><%= item%></a>
+                  </li>
+                <% end %>
+              <% else %>
+                <li>
+                  <span class="material-design-black402 list-icon"></span>
+                  <a href="#"><%= t("uex.not_indicated")%></a>
+                </li>
+              <% end %>
+            </ul>
+         </div>
+         <div class="entry-permalink"><a href="<%= url("users/#{current_user.id}/edit") %>"><%= t("uex.edit")%></a></div>
+      </div>
+   </div>
+</div>

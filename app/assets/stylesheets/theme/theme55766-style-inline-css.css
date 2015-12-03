@@ -643,7 +643,7 @@ div.portfolio-wrap {
 .portfolio-wrap .portfolio-container .portfolio-item .rollover-content:before {
     background: #00bbd3;
 }
-.portfolio-wrap .portfolio-container .portfolio-item .custom-links .zoomlink:hover {
+.portfolio-wrap .portfolio-container .portfolio-item .custom-links .zoomlink:hover, .user-cabinet .zoomlink:hover {
     color: #fec006;
 }
 .portfolio-wrap .portfolio-container .portfolio-item .custom-links .permalink:hover {
@@ -811,7 +811,7 @@ address a:after {
     color: #fec006;
 }
 input[type="reset"], input[type="submit"] {
-    background-color: #00bbd3;
+    background-color: #2cabfa;
 }
 input[type="reset"]:hover, input[type="submit"]:hover {
     background-color: #fec006;

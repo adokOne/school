@@ -2111,10 +2111,10 @@ body.page .entry-content {
   .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .inner-wrap {
     -webkit-box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.12);
     box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.12); }
-  .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .rollover-content {
+  .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .rollover-content, .user-cabinet .rollover-content {
     background: none;
     z-index: 5; }
-    .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .rollover-content:before {
+    .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .rollover-content:before .user-cabinet .rollover-content:before {
       content: '';
       position: absolute;
       top: 0;
@@ -2127,9 +2127,9 @@ body.page .entry-content {
     text-align: center; }
     .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .item-content h3 {
       margin: 0 0 27px 0; }
-  .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links {
+  .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links, .user-cabinet .custom-links {
     padding: 10px 0; }
-    .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links .item-link {
+    .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links .item-link, .user-cabinet .item-link {
       -webkit-transition: all 0.3s ease;
       -o-transition: all 0.3s ease;
       transition: all 0.3s ease;
@@ -2139,18 +2139,18 @@ body.page .entry-content {
       width: 50px;
       height: 50px;
       border-radius: 50%; }
-    .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links .zoomlink {
+    .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links .zoomlink, .user-cabinet .zoomlink{
       font-size: 0;
       line-height: 0;
       border: none; }
-      .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links .zoomlink:before {
+      .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links .zoomlink:before, .user-cabinet .zoomlink:before{
         content: '\e12b';
         font-size: 48px;
         font-family: "material-design";
         line-height: 44px; }
-    .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links .permalink {
+    .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links .permalink, .user-cabinet .permalink {
       border: none; }
-      .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links .permalink:before {
+      .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item .custom-links .permalink:before, .user-cabinet .permalink:before {
         content: "\e087";
         font: 48px/44px "material-design"; }
   .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item.grid-layout-item .item-content {
@@ -2198,7 +2198,7 @@ body.page .entry-content {
     visibility: hidden;
     top: -75px;
     opacity: 0; }
-  .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item.custom-hover .media-content .rollover-content .item-link {
+  .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item.custom-hover .media-content .rollover-content .item-link, .user-cabinet .rollover-content .item-link {
     -webkit-transform: scale(0);
     -ms-transform: scale(0);
     -o-transform: scale(0);
@@ -2229,7 +2229,7 @@ body.page .entry-content {
     visibility: visible;
     top: 0;
     opacity: 1; }
-  .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item.custom-hover .media-content:hover .rollover-content .item-link {
+  .portfolio-wrap .portfolio-container .portfolio-list .portfolio-item.custom-hover .media-content:hover .rollover-content .item-link, .user-cabinet .rollover-content .item-link {
     -webkit-transform: scale(1);
     -ms-transform: scale(1);
     -o-transform: scale(1);
@@ -2513,7 +2513,7 @@ ol.comment-list .children li > .children {
     border-color: #e43b20; }
   .wpcf7 form .wpcf7-form-control-wrap .wpcf7-not-valid-tip {
     color: #e43b20; }
-.wpcf7 form input[type="text"], .wpcf7 form input[type="email"], .wpcf7 form input[type="tel"], .wpcf7 form textarea {
+.wpcf7 form input[type="text"], .wpcf7 form input[type="email"], .wpcf7 form input[type="password"], .wpcf7 form input[type="tel"], .wpcf7 form textarea {
   padding: 12px 20px;
   width: 100%;
   border: 1px solid #bcbcbc;

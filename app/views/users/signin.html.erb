@@ -1,0 +1,83 @@
+<div class="container">
+   <div class="row row-edge">
+      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+         <div class="cherry-services services_1 boxed-layout">
+            <div class="row">
+               <div class="services-listing">
+                  <div id="services-358" class="cherry-services_item item-1 clearfix odd col-xs-12 clear-col-xs col-sm-12 clear-col-sm col-md-4 clear-col-md col-lg-4 clear-col-lg">
+                     <div class="services-inner">
+                        <div class="cherry-services_icon"><i class="material-design-screen47"></i></div>
+                        <h3 class="cherry-services_title"><a href="#"><%= t("uex.manage_your_data") %></a></h3>
+                        <div class="cherry-services_feauters"><%= t("uex.manage_your_data_desc") %></div>
+                     </div>
+                  </div>
+                  <!--/.services-item-->
+                  <div id="services-357" class="cherry-services_item item-2 clearfix even col-xs-12 clear-col-xs col-sm-12 clear-col-sm col-md-4 col-lg-4">
+                     <div class="services-inner">
+                  <div role="form" class="wpcf7" id="wpcf7-f180-p47-o1" lang="en-US" dir="ltr">
+                    <% if flash[:error].present? %>
+                      <p style="color:red"><%= flash[:error] %></p>
+                    <% end%>
+                    <%= form_for @login, url: login_users_path do |f|%>
+                       <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                             <span class="wpcf7-form-control-wrap your-email">
+                                <%= f.email_field :email, class: "wpcf7-form-control wpcf7-email", placeholder: "Email" %>
+                             </span>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                             <span class="wpcf7-form-control-wrap your-name">
+                                <%= f.password_field :password, class: "wpcf7-form-control wpcf7-email", placeholder: "Password" %>
+                             </span>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                             <span class="wpcf7-form-control-wrap">
+                                <input type="submit" value="<%= t("uex.do_login") %>" class="wpcf7-form-control wpcf7-submit">
+                             </span>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <footer>
+                                <cite class="pull-left">
+                                  <%= link_to t("uex.registration") , registration_users_path %>
+                                </cite>
+                                <cite class="pull-right">
+                                <%= link_to t("uex.forgot_password") , forgot_users_path %>
+                                </cite>
+                              </footer>
+                          </div>
+
+
+
+
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                     </div>
+                  </div>
+                  <!--/.services-item-->
+                  <div id="services-356" class="cherry-services_item item-3 clearfix odd col-xs-12 clear-col-xs col-sm-12 clear-col-sm col-md-4 col-lg-4">
+                     <div class="services-inner">
+                        <div class="cherry-services_icon"><i class="material-design-users25"></i></div>
+                        <h3 class="cherry-services_title"><a href="#"><%= t("uex.work_with_another_clients") %></a></h3>
+                        <div class="cherry-services_feauters"><%= t("uex.work_with_another_clients_desc") %></div>
+                     </div>
+                  </div>
+                  <!--/.services-item-->
+               </div>
+            </div>
+         </div>
+      </div>
+                      <div class="author-bio clearfix">
+                   <figure class="author-bio_avatar alignleft "><div class="cherry-services_icon"><i class="material-design-tick7"></i></div></figure>
+                   <h3>Вы также можете сделать заказ связавшись с <a target="_blank" href="<%= url("contacts")%>" title="<%= t("uex.contacts")%>" >Нами</a></h3>
+                   <div class="description">Заказывая услуги у <a href="<%= url("/")%>">компании UEX</a> Вы получаете послный спектр ркламных услуг по отличному ссоотношению цена/качество</div>
+                </div>
+   </div>
+</div>
+
+<%#= File.read("/home/adok/WWW/uex/app/assets/stylesheets/theme/material-design.css.scss").scan(/material-design-(.+?)\:before/m).flatten.map do |icon|
+  "<i class=\"material-design-#{icon}\"></i>"
+ end.join("").html_safe
+
+%>

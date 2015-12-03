@@ -266,12 +266,12 @@ div.portfolio-wrap div.portfolio-item .inner-wrap {
   position: relative;
   overflow: hidden;
 }
-div.portfolio-wrap div.portfolio-item .inner-wrap .media-content {
+div.portfolio-wrap div.portfolio-item .inner-wrap .media-content, .user-cabinet .media-content {
   position: relative;
   display: block;
   overflow: hidden;
 }
-div.portfolio-wrap div.portfolio-item .inner-wrap .media-content img {
+div.portfolio-wrap div.portfolio-item .inner-wrap .media-content img, .user-cabinet .media-content img {
   width: 100%;
   height: auto;
 }
@@ -298,10 +298,10 @@ div.portfolio-wrap div.portfolio-item .inner-wrap .links-container .item-link {
   margin: 2px;
   display: inline-block;
 }
-div.portfolio-wrap div.portfolio-item .inner-wrap .links-container .item-link:hover {
+div.portfolio-wrap div.portfolio-item .inner-wrap .links-container .item-link:hover, .user-cabinet .item-link:hover {
   text-decoration: none;
 }
-div.portfolio-wrap div.portfolio-item .inner-wrap .rollover-content {
+div.portfolio-wrap div.portfolio-item .inner-wrap .rollover-content, .user-cabinet .rollover-content {
   position: absolute;
   top: 0;
   left: 0;
@@ -310,35 +310,35 @@ div.portfolio-wrap div.portfolio-item .inner-wrap .rollover-content {
   background: rgba(0, 0, 0, 0.3);
   text-align: center;
 }
-div.portfolio-wrap div.portfolio-item .inner-wrap .table-display {
+div.portfolio-wrap div.portfolio-item .inner-wrap .table-display, .user-cabinet .table-display {
   display: table;
   width: 100%;
   height: 100%;
 }
-div.portfolio-wrap div.portfolio-item .inner-wrap .table-cell {
+div.portfolio-wrap div.portfolio-item .inner-wrap .table-cell, .user-cabinet .table-cell {
   display: table-cell;
   vertical-align: middle;
 }
-div.portfolio-wrap div.portfolio-item.simple-fade-hover .rollover-content {
+div.portfolio-wrap div.portfolio-item.simple-fade-hover .rollover-content, .user-cabinet .rollover-content {
   opacity: 0;
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
-div.portfolio-wrap div.portfolio-item.simple-fade-hover .rollover-content:hover {
+div.portfolio-wrap div.portfolio-item.simple-fade-hover .rollover-content:hover, .user-cabinet .rollover-content:hover {
   opacity: 1;
 }
-div.portfolio-wrap div.portfolio-item.simple-scale-hover .media-content img {
+div.portfolio-wrap div.portfolio-item.simple-scale-hover .media-content img, .user-cabinet .media-content img {
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
-div.portfolio-wrap div.portfolio-item.simple-scale-hover .rollover-content {
+div.portfolio-wrap div.portfolio-item.simple-scale-hover .rollover-content, .user-cabinet .rollover-content {
   opacity: 0;
   -webkit-transform: scale(1.2);
   transform: scale(1.2);
   -webkit-transition: all 0.5s ease-out;
   transition: all 0.5s ease-out;
 }
-div.portfolio-wrap div.portfolio-item.simple-scale-hover .rollover-content:hover {
+div.portfolio-wrap div.portfolio-item.simple-scale-hover .rollover-content:hover, .user-cabinet .rollover-content:hover {
   opacity: 1;
   -webkit-transform: scale(1);
   transform: scale(1);

@@ -40,7 +40,7 @@
                                     <a href="<%= url("contacts") %>"><%= t("uex.contacts")%></a>
                               </li>
                               <li class="<%= url_is_current?("signin","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
-                                    <a href="<%= url("users/signin") %>"><%= t("uex.signin")%></a>
+                                    <a href="<%= current_user ? user_path(current_user) : url("users/signin") %>"><%= t("uex.signin")%></a>
                               </li>
                               <li class="<%= url_is_current?("blog","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("blog") %>"><%= t("uex.blog")%></a>
