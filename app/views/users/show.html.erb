@@ -92,7 +92,7 @@
                                       </ul>
                                    </div>
                                    <% #if logged_in? && current_user != @user %>
-                                    <div class="entry-permalink"><a href="<%= url("users/#{current_user.id}/edit") %>"><%= t("uex.send_message")%></a></div>
+                                    <div class="entry-permalink"><a href="<%= url("users/#{current_user.id}/messages/#{@user.id}") %>"><%= t("uex.send_message")%></a></div>
                                    <% #  end %>
                                 </div>
                              </div>

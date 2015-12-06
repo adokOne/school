@@ -1,0 +1,65 @@
+<div class="container user-cabinet" data-ctrl="Cabinet" >
+  <div class="row  ">
+     <div class="container">
+        <div class="row row-edge">
+           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box_2">
+              <div class=" ">
+                 <div class="inner">
+                    <div class="cherry-tabs cherry-tabs-style-default  " data-active="1">
+                       <div class="cherry-tabs-panes">
+                          <div class="cherry-tabs-pane cherry-clearfix  " style="display: block;">
+                            <div class="container">
+                              <div class="content-area">
+                                <div id="comments" class="comments-area">
+                                   <div class="comments">
+                                      <h3 class="comments-title"><%= t("uex.total_messsages",name: @user.name, href: user_path(@user) , count: current_user.message_to_show(@user).count ).html_safe %></h3>
+                                      <ol class="comment-list">
+                                        <% current_user.message_to_show(@user).each do |message|%>
+                                          <%= render "users/includes/one_message", message: message %>
+                                         <% end  %>
+                                      </ol>
+                                   </div>
+                                   <div id="respond" class="comment-respond">
+                                      <% if flash[:errors].present? %>
+                                        <p style="color:red"><%=  [t("uex.form.#{flash[:errors].keys.first}"), flash[:errors][flash[:errors].keys.first].first].join(" ").html_safe   %></p>
+                                      <% end%>
+                                      <h3 id="reply-title" class="comment-reply-title"><%= t("uex.leave_message")%></h3>
+                                      <%= form_for @message, url: create_message_user_path(current_user), class: "comment-form" do |f| %>
+                                          <%= f.hidden_field :reciver_id , value: params[:reciver_id]%>
+                                          <%= f.hidden_field :message_id , value: nil%>
+                                          <p class="comment-notes">
+                                            <span id="email-notes"><%= t("uex.will_be_delivered_to_user")%></span>
+                                          </p>
+                                         <div class="row">
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                               <p class="comment-form-author">
+                                                <%= f.text_field :topic , placeholder:  t("uex.message_topic"), required: true %>
+
+                                               </p>
+                                            </div>
+                                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                               <p class="comment-form-comment">
+                                                <%= f.text_area :body , placeholder:  t("uex.message_body"), required: true, cols:"45", rows:"8"  %>
+
+                                               <p class="form-submit">
+                                               <input name="submit" type="submit" id="submit" class="submit" value="<%= t("uex.send")%>">
+
+                                               </p>
+                                            </div>
+                                         </div>
+                                      <% end %>
+                                   </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
+</div>

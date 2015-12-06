@@ -23,6 +23,13 @@ $.Controller "Cabinet",
     el = $(ev.target)
     @rebuild_contacts(el, 1)
 
+  ".comment-reply-link -> click": (ev) ->
+    ev.preventDefault()
+    @element.find(".comment-form-author").hide()
+    @element.find(".comment-form-author input").removeAttr("required")
+    @element.find("#message_message_id").val($(ev.target).data("id"))
+    $('html, body').animate({scrollTop: $('#respond').offset().top}, 800);
+
   rebuild_contacts: (el, add) ->
     add = add || false
     self = @

@@ -1,7 +1,8 @@
 class User < ActiveRecord::Base
 
 
-  acts_as_messageable dependent: :destroy
+  acts_as_messageable dependent: :destroy,
+                      class_name: "UserMessage"
 
   after_save :clear_cache
 
@@ -61,14 +62,24 @@ class User < ActiveRecord::Base
   def unread_messages_count
     3
   end
-  #TODO
-  def messages
-    []
+
+  def message_to_show(user)
+    self.messages.where(ancestry: nil).are_from(user) + self.messages.where(ancestry: nil).are_to(user)
+  end
+
+
+  def distinct_messages
+    messages = {}
+    self.messages.each do |message|
+      key = [message.sent_messageable_id, message.received_messageable_id].sort.join
+      messages[key] = message if messages[key].nil?
+    end
+    messages.values
   end
 
   #TODO
   def messages_count
-    3
+    self.messages.count
   end
 
   def self.password

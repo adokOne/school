@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
-  before_filter :require_login, except: [:signin, :forgot, :registration, :login, :create ]
+  before_filter :require_login, except: [:signin, :forgot, :registration, :login, :create, :create_message ]
 
-  before_filter :is_own?, only: [:show,:update,:edit]
+  before_filter :is_own?, only: [:update,:edit]
 
   def index
     @users = User.active.by_rating.paginate(page: params[:page], per_page: 5)
@@ -72,8 +72,25 @@ class UsersController < ApplicationController
 
   end
 
-  def message
+  def messages
+    @user = User.find(params[:reciver_id])
+    @message = Message.new
+  end
 
+  def create_message
+    message = Message.new(message_params)
+    if message.valid?
+      if message_to_reply = current_user.received_messages.find_by_id( message.message_id )
+        message_to_reply.reply("RE: #{message_to_reply.topic}", message.body)
+      else
+        current_user.send_message(message.reciver, message.topic, message.body)
+      end
+
+      redirect_to user_messages_user_path(current_user, message.reciver)
+    else
+      flash[:errors] = message.errors.messages
+      redirect_to user_messages_user_path(current_user, message.reciver,anchor: "respond")
+    end
   end
 
   def show
@@ -106,6 +123,10 @@ class UsersController < ApplicationController
 
   def login_params
     params.require(:login).permit(:name,:email,:password)
+  end
+
+  def message_params
+    params.require(:message).permit(:topic,:body,:reciver_id,:message_id)
   end
 
   def allowed_params

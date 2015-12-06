@@ -32,7 +32,8 @@ Rails.application.routes.draw do
       get "registration"
     end
     member do
-      get "messages"
+      post "create_message"
+      get "messages/:reciver_id", to: "users#messages", as: "user_messages"
     end
   end
 end

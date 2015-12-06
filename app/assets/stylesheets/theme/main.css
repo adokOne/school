@@ -1340,7 +1340,7 @@ p {
   padding: 21px 0 0 0; }
 
 #static-area-header-bottom {
-  background-color: white;
+  /*background-color: white;*/
   padding: 23px 0 0 0;
   position: relative;
   z-index: 100;
@@ -1364,6 +1364,7 @@ p {
     box-shadow: none;
     background: none; }
   #menu-primary > #menu-primary-items > .menu-item > a {
+    font-weight: 300;
     padding: 0 24px 22px 24px;
     text-decoration: none;
     position: relative; }
@@ -2463,8 +2464,7 @@ ol.comment-list .children li > .children {
     text-transform: capitalize;
     margin-bottom: 5px;
     display: block; }
-    .comments-area .comment-list .comment-meta .comment-author .fn:before {
-      content: 'by '; }
+
   .comments-area .comment-list .comment-meta .comment-awaiting-moderation {
     margin: 0; }
   .comments-area .comment-list .comment-meta .comment-metadata:before {
