@@ -24,11 +24,15 @@ Rails.application.routes.draw do
   # match "/404" => "home#error404", via: [ :get, :post, :patch, :delete ]
 
   resources :users do
+    resources :baners ,only: [:update, :create, :edit, :new]
     collection do
       get "signin"
       post "login"
       get "forgot"
       get "registration"
+    end
+    member do
+      get "messages"
     end
   end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151203201528) do
+ActiveRecord::Schema.define(version: 20151206135135) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -161,9 +161,9 @@ ActiveRecord::Schema.define(version: 20151203201528) do
   add_index "cities", ["show_on_search"], name: "index_cities_on_show_on_search", using: :btree
 
   create_table "contacts", force: :cascade do |t|
-    t.string  "type",    limit: 255, null: false
-    t.string  "value",   limit: 255
-    t.integer "user_id", limit: 4,   null: false
+    t.string  "contact_type", limit: 255, null: false
+    t.string  "value",        limit: 255
+    t.integer "user_id",      limit: 4,   null: false
   end
 
   add_index "contacts", ["user_id"], name: "index_contacts_on_user_id", using: :btree
@@ -222,6 +222,31 @@ ActiveRecord::Schema.define(version: 20151203201528) do
     t.text   "message", limit: 65535
   end
 
+  create_table "impressions", force: :cascade do |t|
+    t.string   "impressionable_type", limit: 255
+    t.integer  "impressionable_id",   limit: 4
+    t.integer  "user_id",             limit: 4
+    t.string   "controller_name",     limit: 255
+    t.string   "action_name",         limit: 255
+    t.string   "view_name",           limit: 255
+    t.string   "request_hash",        limit: 255
+    t.string   "ip_address",          limit: 255
+    t.string   "session_hash",        limit: 255
+    t.text     "message",             limit: 65535
+    t.text     "referrer",            limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index", using: :btree
+  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index", using: :btree
+  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
+  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", length: {"impressionable_type"=>nil, "message"=>255, "impressionable_id"=>nil}, using: :btree
+  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
+
   create_table "members", force: :cascade do |t|
     t.string   "name",              limit: 255,   default: "", null: false
     t.text     "desc",              limit: 65535,              null: false
@@ -233,13 +258,33 @@ ActiveRecord::Schema.define(version: 20151203201528) do
     t.datetime "logo_updated_at"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.string   "topic",                      limit: 255
+    t.text     "body",                       limit: 65535
+    t.integer  "received_messageable_id",    limit: 4
+    t.string   "received_messageable_type",  limit: 255
+    t.integer  "sent_messageable_id",        limit: 4
+    t.string   "sent_messageable_type",      limit: 255
+    t.boolean  "opened",                     limit: 1,     default: false
+    t.boolean  "recipient_delete",           limit: 1,     default: false
+    t.boolean  "sender_delete",              limit: 1,     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "ancestry",                   limit: 255
+    t.boolean  "recipient_permanent_delete", limit: 1,     default: false
+    t.boolean  "sender_permanent_delete",    limit: 1,     default: false
+  end
+
+  add_index "messages", ["ancestry"], name: "index_messages_on_ancestry", using: :btree
+  add_index "messages", ["sent_messageable_id", "received_messageable_id"], name: "acts_as_messageable_ids", using: :btree
+
   create_table "pages", force: :cascade do |t|
-    t.integer  "category_id",       limit: 4,          default: 0,  null: false
-    t.string   "seo_name",          limit: 255,                     null: false
+    t.integer  "category_id",       limit: 4,          default: 0,     null: false
+    t.string   "seo_name",          limit: 255,                        null: false
     t.text     "desc",              limit: 4294967295
     t.text     "anons",             limit: 65535
-    t.string   "title",             limit: 255,                     null: false
-    t.string   "active",            limit: 255,        default: "", null: false
+    t.string   "title",             limit: 255,                        null: false
+    t.boolean  "active",            limit: 1,          default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "position",          limit: 4
@@ -248,6 +293,13 @@ ActiveRecord::Schema.define(version: 20151203201528) do
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
     t.integer  "user_id",           limit: 4
+    t.boolean  "has_adwords",       limit: 1,          default: false
+    t.boolean  "in_top",            limit: 1,          default: false
+    t.date     "top_until"
+    t.date     "adwords_untilm"
+    t.date     "top_set_date"
+    t.integer  "city_id",           limit: 4
+    t.integer  "country_id",        limit: 4
   end
 
   add_index "pages", ["active"], name: "index_pages_on_active", using: :btree

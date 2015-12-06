@@ -7,6 +7,12 @@
       <link rel="alternate" type="application/rss+xml" title="UEX Feed" href="<%= url("feed") %>"/>
       <link rel='stylesheet' id='font-awesome-css' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css?ver=4.4.0' type='text/css' media='all'/>
       <link rel='stylesheet' id='cherry-google-fonts-css' href='//fonts.googleapis.com/css?family=Roboto%3A500%2Cregular%2C100%7CAbril+Fatface%3Aitalic&#038;subset=latin%2Clatin-ext&#038;ver=4.3.1' type='text/css' media='all'/>
+      <% if @has_editor %>
+         <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" />
+
+      <% end %>
+
+
       <%= stylesheet_link_tag    'application', media: 'all' %>
       <%= javascript_include_tag 'application'%>
       <%= csrf_meta_tags %>
@@ -19,7 +25,7 @@
       <link href="favicon.ico" sizes="114x114" rel="apple-touch-icon-precomposed">
       <link href="favicon.ico" sizes="144x144" rel="apple-touch-icon-precomposed">
    </head>
-   <body class="<%= url_is_current?("category","home page blog")  %> <%= url_is_current?("main","home page blog")  %>  <%= url_is_current?("item","single single-post")  %>     page-template-default cherry-responsive cherry-no-sidebar cherry-navigation-arrow" dir="ltr">
+   <body class="<%= url_is_current?("category","home page blog")  %> <%= url_is_current?("main","home page blog")  %> <%= url_is_current?("baners","single single-post")  %> <%= url_is_current?("item","single single-post")  %>     page-template-default cherry-responsive cherry-no-sidebar cherry-navigation-arrow" dir="ltr">
       <div id="site-wrapper" class="hfeed site">
          <header id="header" class="site-header wide" role="banner">
             <div id="static-area-header-top" class="header-top static-area">
@@ -40,7 +46,7 @@
                                     <a href="<%= url("contacts") %>"><%= t("uex.contacts")%></a>
                               </li>
                               <li class="<%= url_is_current?("signin","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
-                                    <a href="<%= current_user ? user_path(current_user) : url("users/signin") %>"><%= t("uex.signin")%></a>
+                                    <a href="<%= current_user ? edit_user_path(current_user) : url("users/signin") %>"><%= t("uex.signin")%></a>
                               </li>
                               <li class="<%= url_is_current?("blog","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("blog") %>"><%= t("uex.blog")%></a>

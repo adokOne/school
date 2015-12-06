@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
 
+
+  acts_as_messageable dependent: :destroy
+
   after_save :clear_cache
 
   COOKIE_NAME = :user_token
@@ -19,8 +22,14 @@ class User < ActiveRecord::Base
   #Relations
   has_many :contacts
   has_many :pages
+
+  accepts_nested_attributes_for :contacts
   #End Relations
 
+
+  scope :by_rating, -> { order('created_at DESC') }
+  scope :by_category, ->(id) { where(category_id: id) }
+  scope :active, -> { where(active: true) }
 
   has_attached_file :avatar, styles: { medium: "300x300>",thumb: "100x100>" }, default_url: "/img/avatar-missing.png"
 
@@ -69,7 +78,10 @@ class User < ActiveRecord::Base
 
   Contact::TYPES.each do |type|
     define_method(type.pluralize) do
-      self.contacts.where(type: type).map(&:value)
+      self.contacts.where(contact_type: type).map(&:value)
+    end
+    define_method("#{type}_contacts") do
+      self.contacts.where(contact_type: type).all
     end
   end
 

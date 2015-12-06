@@ -1,94 +1,250 @@
 <div class="cherry-tabs-pane cherry-clearfix  " style="display: block;">
-   <div class="row row-edge  ">
-      <div class="col-xs-12 col-sm-2 col-md-4 col-lg-4">
-        <div class="media-content">
-          <img class="image croped-image" src="<%= current_user.avatar %>" alt="paeg1-img1" width="336" height="336">
-          <div class="rollover-content ">
-            <div class="table-display">
-              <div class="links-container custom-links custom-hover-zoom table-cell">
-                <a class="item-link zoomlink magnific-popup-link" href="#"></a>
+  <div role="form" class="wpcf7" id="wpcf7-f180-p47-o1" lang="en-US" dir="ltr">
+    <%= form_for current_user, url: user_path, class:"wpcf7-form page-form" do |f|%>
+       <div class="row row-edge  ">
+          <div class="col-xs-12 col-sm-2 col-md-4 col-lg-4">
+            <div class="media-content">
+              <%= f.file_field :avatar, style: "display:none",:"data-img-id"=>"user-img"  %>
+              <img class="image croped-image" src="<%= current_user.avatar %>" alt="paeg1-img1" width="336" height="336" id="user-img">
+              <div class="rollover-content ">
+                <div class="table-display">
+                  <div class="links-container custom-links custom-hover-zoom table-cell">
+                    <a class="item-link zoomlink magnific-popup-link" href="#"></a>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4 extra_indent">
-         <h2><%= current_user.name %></h2>
-         <p><%= current_user.desc.present? ? current_user.desc : t("uex.not_indicated") %></p>
-      </div>
-      <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
-         <h2><%= t("uex.contact_data")%></h2>
-         <div class="cherry-list font-icon cherry-list_4967   ">
-            <ul>
+
+          <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4 extra_indent">
+            <div class="row">
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <span class="wpcf7-form-control-wrap your-name">
+                  <%=f.text_field :name, class:"wpcf7-form-control wpcf7-text", placeholder: t("uex.name_plc") ,required: true%>
+                </span>
+              </div>
+
+              <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                 <span class="wpcf7-form-control-wrap your-message">
+                 <%=f.text_area :desc, class:"wpcf7-form-control wpcf7-textarea", placeholder: t("uex.uer_desc_plc"),cols:"3", rows:"3", style: "height: 270px;",required: true %>
+                 </span>
+              </div>
+
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
+             <h2><%= t("uex.contact_data")%></h2>
+             <div class="cherry-list font-icon cherry-list_4967  user-contancts ">
+                <ul>
 
 
 
-              <% if current_user.phones.present? %>
-                <% current_user.phones.each do |item|%>
-                  <li>
-                    <span class="material-design-phone370 list-icon"></span>
-                    <a href="#"><%= item%></a>
-                  </li>
-                <% end %>
-              <% else %>
-                <li>
-                  <span class="material-design-phone370 list-icon"></span>
-                  <a href="#"><%= t("uex.not_indicated")%></a>
-                </li>
-              <% end %>
+                  <% if current_user.phones.present? %>
+                    <% current_user.phone_contacts.each do |contact|%>
+                      <%= f.fields_for :contacts, contact do |fc|%>
+                        <li>
+                          <div class="row" data-type="phones" >
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <span class="material-design-phone370 list-icon"></span>
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                              <%= fc.hidden_field :contact_type, value: Contact::PHONE_TYPE %>
+                              <%= fc.text_field :value %>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <% if contact == current_user.phone_contacts.last %>
+                                <i class="material-design-add186 list-icon"></i>
+                              <% else %>
+                                <i class="material-design-horizontal39 list-icon minus"></i>
+                              <% end %>
+                            </div>
+                          </div>
+
+
+                        </li>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <%= f.fields_for :contacts,  Contact.new do |fc|%>
+                      <li>
+                          <div class="row" data-type="phones">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                              <span class="material-design-phone370 list-icon"></span>
+                            </div>
+                            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                              <%= fc.hidden_field :contact_type, value: Contact::PHONE_TYPE %>
+                              <%= fc.text_field :value %>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <i class="material-design-add186 list-icon"></i>
+                            </div>
+                          </div>
+                      </li>
+                    <% end %>
+                  <% end %>
 
 
 
-              <% if current_user.addresses.present? %>
-                <% current_user.addresses.each do |item|%>
-                  <li>
-                    <span class="material-design-home149 list-icon"></span>
-                    <a href="#"><%= item%></a>
-                  </li>
-                <% end %>
-              <% else %>
-                <li>
-                  <span class="material-design-home149 list-icon"></span>
-                  <a href="#"><%= t("uex.not_indicated")%></a>
-                </li>
-              <% end %>
 
 
 
 
-              <% if current_user.websites.present? %>
-                <% current_user.websites.each do |item|%>
-                  <li>
-                    <span class="material-design-world96 list-icon"></span>
-                    <a href="#"><%= item%></a>
-                  </li>
-                <% end %>
-              <% else %>
-                <li>
-                  <span class="material-design-world96 list-icon"></span>
-                  <a href="#"><%= t("uex.not_indicated")%></a>
-                </li>
-              <% end %>
+
+
+                  <% if current_user.addresses.present? %>
+                    <% current_user.address_contacts.each do |contact|%>
+                      <%= f.fields_for :contacts, contact do |fc|%>
+                        <li>
+                          <div class="row" data-type="addresses">
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <span class="material-design-home149 list-icon"></span>
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                              <%= fc.hidden_field :contact_type, value: Contact::ADDRESS_TYPE %>
+                              <%= fc.text_field :value %>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <% if contact == current_user.address_contacts.last %>
+                                <i class="material-design-add186 list-icon"></i>
+                              <% else %>
+                                <i class="material-design-horizontal39 list-icon minus"></i>
+                              <% end %>
+                            </div>
+                          </div>
+
+
+                        </li>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <%= f.fields_for :contacts,  Contact.new do |fc|%>
+                      <li>
+                          <div class="row" data-type="addresses">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                              <span class="material-design-home149 list-icon"></span>
+                            </div>
+                            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                              <%= fc.hidden_field :contact_type, value: Contact::ADDRESS_TYPE %>
+                              <%= fc.text_field :value %>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <i class="material-design-add186 list-icon"></i>
+                            </div>
+                          </div>
+                      </li>
+                    <% end %>
+                  <% end %>
 
 
 
 
-              <% if current_user.emails.present? %>
-                <% current_user.emails.each do |item|%>
-                  <li>
-                    <span class="material-design-black402 list-icon"></span>
-                    <a href="#"><%= item%></a>
-                  </li>
-                <% end %>
-              <% else %>
-                <li>
-                  <span class="material-design-black402 list-icon"></span>
-                  <a href="#"><%= t("uex.not_indicated")%></a>
-                </li>
-              <% end %>
-            </ul>
-         </div>
-         <div class="entry-permalink"><a href="<%= url("users/#{current_user.id}/edit") %>"><%= t("uex.edit")%></a></div>
-      </div>
+
+
+
+                  <% if current_user.websites.present? %>
+                    <% current_user.website_contacts.each do |contact|%>
+                      <%= f.fields_for :contacts, contact do |fc|%>
+                        <li>
+                          <div class="row" data-type="websites">
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <span class="material-design-world96 list-icon"></span>
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                              <%= fc.hidden_field :contact_type, value: Contact::WEBSITE_TYPE %>
+                              <%= fc.text_field :value %>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <% if contact == current_user.website_contacts.last %>
+                                <i class="material-design-add186 list-icon"></i>
+                              <% else %>
+                                <i class="material-design-horizontal39 list-icon minus"></i>
+                              <% end %>
+                            </div>
+                          </div>
+
+
+                        </li>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <%= f.fields_for :contacts,  Contact.new do |fc|%>
+                      <li>
+                          <div class="row" data-type="websites">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                              <span class="material-design-world96 list-icon"></span>
+                            </div>
+                            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                              <%= fc.hidden_field :contact_type, value: Contact::WEBSITE_TYPE %>
+                              <%= fc.text_field :value %>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <i class="material-design-add186 list-icon"></i>
+                            </div>
+                          </div>
+                      </li>
+                    <% end %>
+                  <% end %>
+
+
+
+
+
+
+
+                  <% if current_user.emails.present? %>
+                    <% current_user.email_contacts.each do |contact|%>
+                      <%= f.fields_for :contacts, contact do |fc|%>
+                        <li>
+                          <div class="row" data-type="emails">
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <span class="material-design-black402 list-icon"></span>
+                            </div>
+                            <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10">
+                              <%= fc.hidden_field :contact_type, value: Contact::EMAIL_TYPE %>
+                              <%= fc.text_field :value %>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <% if contact == current_user.email_contacts.last %>
+                                <i class="material-design-add186 list-icon"></i>
+                              <% else %>
+                                <i class="material-design-horizontal39 list-icon minus"></i>
+                              <% end %>
+                            </div>
+                          </div>
+
+
+                        </li>
+                      <% end %>
+                    <% end %>
+                  <% else %>
+                    <%= f.fields_for :contacts,  Contact.new do |fc|%>
+                      <li>
+                          <div class="row" data-type="emails">
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                              <span class="material-design-black402 list-icon"></span>
+                            </div>
+                            <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                              <%= fc.hidden_field :contact_type, value: Contact::EMAIL_TYPE %>
+                              <%= fc.text_field :value %>
+                            </div>
+                            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+                              <i class="material-design-add186 list-icon"></i>
+                            </div>
+                          </div>
+                      </li>
+                    <% end %>
+                  <% end %>
+
+
+                </ul>
+             </div>
+             <div class="submit-wrap">
+                <input type="submit" value="<%= t("uex.submit")%>" class="wpcf7-form-control wpcf7-submit" />
+             </div>
+
+             <!-- <div class="entry-permalink"><a href="<%= url("users/#{current_user.id}/edit") %>"><%= t("uex.edit")%></a></div> -->
+          </div>
+       </div>
+    <% end %>
    </div>
 </div>

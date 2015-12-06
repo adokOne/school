@@ -24,6 +24,7 @@ class HomeController < ApplicationController
 
   def item
     @item = Page.find(params[:id])
+    @item.impressions.create(ip_address: request.remote_ip,user_id: current_user ? current_user.id : 0)
     @breadcrumbs_items = @item.prepare_breadcrumbs
     @breadcrumbs_last = @item.title
   end

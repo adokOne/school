@@ -1,6 +1,7 @@
 class Country < ActiveRecord::Base
   include Localizable
   include Geolizable
+  UKRAINE_ID = 396
   #Relations
   has_many :cities, dependent: :restrict_with_exception
   has_many :airports, dependent: :restrict_with_exception

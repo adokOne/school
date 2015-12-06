@@ -1,4 +1,3 @@
-$.fn.cycle.defaults.autoSelector = "cycle-slideshow"
 Object.values = (obj) ->
   vals = []
   for key of obj
@@ -6,8 +5,9 @@ Object.values = (obj) ->
   vals
 window.init_selectbox = (elements) ->
   elements.selectbox
-    onOpen: (e) ->
+    onOpen: (e,f) ->
       selector = e.settings.classSelector
+      e.input.next().removeClass "error"
       e.input.next().find("." + selector).addClass "white"
     onClose: (e) ->
       selector = e.settings.classSelector
@@ -48,9 +48,23 @@ window.show_msg = (msg) ->
   alert(msg)
 
 
+window.read_url = (input, img_selector) ->
+  if input.files and input.files[0]
+    reader = new FileReader
+
+    reader.onload = (e) ->
+      $('img').show()
+      $(img_selector).attr 'src', e.target.result
+      return
+
+    reader.readAsDataURL input.files[0]
+
+window.htmlDecode = (input) ->
+  e = document.createElement('div')
+  e.innerHTML = input
+  if e.childNodes.length == 0 then '' else e.childNodes[0].nodeValue
 
 $(document).ready ->
-  $('.cycle-slideshow').cycle slides: '.s-item'
   # Enable controllers for elements
   $("*[data-ctrl]").each ->
     controllers = $(this).data("ctrl").split(" ")
@@ -68,3 +82,11 @@ $(document).ready ->
   $('.burger').click ->
     $(this).toggleClass('active').next('.open-menu').slideToggle()
     false
+  $('#summernote').each ->
+    text = $(this).html()
+    sumernote = $(this).summernote
+      callbacks:
+        onFocus: ($editable, sHtml) ->
+          $($editable.target).parents(".note-editor").removeClass "error"
+          return
+    sumernote.data('summernote').code(window.htmlDecode(text))

@@ -2068,6 +2068,19 @@ body.page .entry-content {
     -webkit-box-shadow: 3px 3px 5px 1px transparent, inset 3px 3px 5px 1px rgba(0, 0, 0, 0.1);
     box-shadow: 3px 3px 5px 1px transparent, inset 3px 3px 5px 1px rgba(0, 0, 0, 0.1); }
 
+
+.entry-permalink-small a {
+  font-size: 20px;
+  line-height: 23px;
+  display: inline-block;
+  vertical-align: top;
+  padding: 5px 10px 5px;
+  -webkit-box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.1), inset 3px 3px 5px 1px transparent;
+  box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.1), inset 3px 3px 5px 1px transparent; }
+  .entry-permalink a:hover {
+    -webkit-box-shadow: 3px 3px 5px 1px transparent, inset 3px 3px 5px 1px rgba(0, 0, 0, 0.1);
+    box-shadow: 3px 3px 5px 1px transparent, inset 3px 3px 5px 1px rgba(0, 0, 0, 0.1); }
+
 /* Portfolio
 ================================================== */
 .portfolio-wrap .portfolio-filter {
@@ -2296,7 +2309,7 @@ body.page .entry-content {
 .entry-meta .comments-link:before {
   content: '\e005'; }
 .entry-meta > span {
-  margin-right: 15px; }
+  margin-right: 13px; }
   .entry-meta > span:before {
     font-size: 24px;
     font-family: "material-design";

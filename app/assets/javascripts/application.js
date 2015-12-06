@@ -13,18 +13,20 @@
 
 
 
+
+//= require jquery-1.9.1.min
+//= require jquery-ui
+//= require bootstrap
 //= require jquery-1.7.2.min
 //= require jquery-ui-1.10.4.custom.min
-// require jquery-1.9.1.min
-// require jquery-ui-1.9.2.custom.min
+
+
 
 //= require icheck
 //= require jquery.selectbox-0.2.min
-//= require jquery.calendario.min
-//= require magnific-popup
-//= require jquery.cycle2.min
 
 
+//= require ./summernote
 //= require jquery.validate
 //= require ./protos
 //= require ./inflector

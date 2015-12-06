@@ -5,11 +5,11 @@ class UsersController < ApplicationController
   before_filter :is_own?, only: [:show,:update,:edit]
 
   def index
-    @users = (1..5).to_a
+    @users = User.active.by_rating.paginate(page: params[:page], per_page: 5)
   end
 
   def login
-    if user = User.where(email: allowed_params[:email]).take
+    if user = User.where(email: login_params[:email]).take
       if user.blocked
         flash[:error] = (t('b1_admin.admin_blocked') + (user.blocked_until ? t('b1_admin.admin_blocked_until') % [user.blocked_until.strftime("%d.%m.%Y %H:%M:%S")] : ""))
         redirect_to login_users_path
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
         flash[:error] = t('b1_admin.admin_not_active')
         redirect_to login_users_path
       else
-        if (token = user.sign_in(allowed_params[:password], request.remote_ip, request.referer, request.user_agent))
+        if (token = user.sign_in(login_params[:password], request.remote_ip, request.referer, request.user_agent))
           cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
           redirect_to user_path(user)
         else
@@ -37,7 +37,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    user = User.new(allowed_params)
+    user = User.new(login_params)
     if user.valid?
       user.save
       token = user.signin( request.remote_ip, request.referer, request.user_agent)
@@ -50,6 +50,21 @@ class UsersController < ApplicationController
   end
 
   def update
+    params_to_update = allowed_params.dup
+    contacts = params_to_update.delete(:contacts_attributes)
+
+
+    current_user.update_attributes(params_to_update)
+    if current_user.valid?
+      User.transaction do
+        current_user.contacts.map(&:destroy)
+        current_user.contacts.create(contacts.values)
+      end
+      redirect_to edit_user_path(current_user)
+    else
+      flash[:errors] = current_user.errors.messages
+      redirect_to edit_user_path(current_user)
+    end
 
   end
 
@@ -57,8 +72,12 @@ class UsersController < ApplicationController
 
   end
 
-  def show
+  def message
 
+  end
+
+  def show
+    @user = User.find(params[:id])
   end
 
 
@@ -85,8 +104,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def allowed_params
+  def login_params
     params.require(:login).permit(:name,:email,:password)
+  end
+
+  def allowed_params
+    params.require(:user).permit(:name,:desc,:avatar, contacts_attributes: [:contact_type,:value])
   end
 
 end

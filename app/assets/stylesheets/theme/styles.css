@@ -1,3 +1,22 @@
+.wpcf7-text.error, .wpcf7-textarea.error, .note-editor.error ,img.error, .sbHolder.error{
+	border: 1px solid red!important;
+}
+.user-contancts i.list-icon{
+	cursor: pointer;
+}
+.note-group-select-from-files {
+  display: none;
+}
+/*.user-contancts .list-icon{
+	visibility: hidden;
+}
+.user-contancts :last-child{
+	visibility: visible;
+}*/
+
+.wpcf7 .note-editable{
+	height: 500px
+}
 .user-cabinet .one-baner{
 	    border-bottom: 2px solid #F5F5F5;
     margin-bottom: 10px;

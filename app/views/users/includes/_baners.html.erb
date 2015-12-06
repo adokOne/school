@@ -11,27 +11,30 @@
 
   <% current_user.pages.each do |item|%>
     <div class="row row-edge one-baner ">
-    <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-    <img class="alignnone size-full wp-image-547" src="<%= item.logo%>" alt="page1-img2" width="336" height="336"></div>
+      <div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
+        <img class="alignnone size-full wp-image-547" src="<%= item.logo%>" alt="page1-img2" width="336" height="336">
+      </div>
       <div class="col-xs-12 col-sm-8 col-md-8 col-lg-8">
          <h2><%= item.title%></h2>
          <p><%= truncate(item.anons,length:180, omission: "...")%></p>
          <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
             <div class="entry-meta entry-meta-top">
-              <span class="posted-on"><time class="entry-date published" datetime="<%= item.created_at %>"><%= l(item.created_at, format: :uex) %></time></span>
+              <span class="posted-on"><time class="entry-date published" datetime="<%= item.created_at %>"><%= l(item.created_at, format: "%d.%m.%Y") %></time></span>
               <span class="material-design-visibility1"><a href="#" title="<%= item.views%>" rel="author"><%= item.views%></a></span>
-              <span class="comments-link"><a href="#">3 Отзыва</a></span>
+              <span class="comments-link"><a title="3 Отзыва" target="_blank" href="<%= url(item.link + "#commnets")%>">3 Отзыва</a></span>
+            </div>
+          </div>
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">
+            <div class="entry-meta entry-meta-top">
+              <span class="material-design-google119">Рекламируеться</span>
+              <span class="material-design-thumb54">В топе</span>
+              <span class="material-design-create3"><a href="<%= url("users/#{current_user.id}/baners/#{item.id}/edit") %>"><%= t("uex.edit")%></a></span>
             </div>
           </div>
          </div>
       </div>
-
-<!--       <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-         <h2>Quality of clinical tets</h2>
-         <p>For many people, clinical laboratory testing is an unfamiliar side of medical care. Yet many of the decisions you and your healthcare provider make about your health status – obtaining a diagnosis, developing a course of action for treatment, or monitoring your body’s response to therapy – are based on laboratory data. Our clinical laboratory testing is held to very high state and federal regulatory standards.</p>
-      </div> -->
     </div>
   <% end %>
-  <div class="entry-permalink pull-right"><a href="<%= url("users/#{current_user.id}/edit") %>"><%= t("uex.create_own_baner")%></a></div>
+  <div class="entry-permalink pull-right"><a href="<%= url("users/#{current_user.id}/baners/new") %>"><%= t("uex.create_own_baner")%></a></div>
 </div>
