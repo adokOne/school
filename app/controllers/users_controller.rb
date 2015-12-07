@@ -69,7 +69,27 @@ class UsersController < ApplicationController
   end
 
   def edit
+    stat_data = Page.get_stat_graph
+    @page_ids = stat_data.group_by{ |item| item[:page_id] }.keys
+    data = @page_ids.dup.fill(0)
+    @graph_data = {}
+    stat_data.group_by{ |item| item[:date] }.each_pair do |date, item|
+      @graph_data[date] = data.dup if @graph_data[date].nil?
+      item.each do |i|
+        @graph_data[date][@page_ids.index(i[:page_id])] = i[:count]
+      end
+    end
 
+    @graph_data_2 = {}
+    Page.get_stat_graph_unique.group_by{ |item| item[:date] }.each_pair do |date, item|
+      @graph_data_2[date] = data.dup if @graph_data_2[date].nil?
+      item.each do |i|
+        @graph_data_2[date][@page_ids.index(i[:page_id])] = i[:count]
+      end
+    end
+
+
+    @has_google_api = true
   end
 
   def messages

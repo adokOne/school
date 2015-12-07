@@ -17,4 +17,8 @@ module ApplicationHelper
     render partial: "shared/breadcrumbs", locals: {items: items, last_text: last_text}
   end
 
+  def page_name( page_id )
+    Page.find_by_id(page_id).try(:title)
+  end
+
 end

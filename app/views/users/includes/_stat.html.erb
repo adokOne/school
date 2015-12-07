@@ -1,0 +1,92 @@
+<div class="cherry-tabs-pane cherry-clearfix  " style="display: none;">
+   <div class="row row-edge  ">
+       <article class="clearfix post-596 page type-page status-publish hentry" id="post-596">
+          <h2>Статистика посещений (не уникальных)</h2>
+          <div id="chart_div" style="width: 100%; height: 40%;" ></div>
+          <h2>Статистика посещений (уникальных)</h2>
+          <div id="chart_div_2" style="width: 100%; height: 40%;" ></div>
+       </article>
+   </div>
+</div>
+
+<script type="text/javascript">
+
+google.load('visualization', '1', {packages: ['corechart', 'line']});
+google.setOnLoadCallback(drawBasic);
+
+function drawBasic() {
+
+
+      var options = {
+        hAxis: {
+          title: '<%= t("uex.period")%>'
+        },
+        vAxis: {
+          title: '<%= t("uex.visits_count")%>'
+        }
+      };
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('date', 'Date');
+      <% @page_ids.each do |page_id| %>
+        data.addColumn('number', '<%= page_name(page_id)%>');
+      <% end %>
+
+      data_rows = []
+      <% @graph_data.each_pair do |date, data|
+        year,monts,day = date.split("-")
+
+      %>
+      row = [new Date('<%= year %>','<%= monts %>','<%= day %>')]
+
+      data_rows.push(row.concat(<%= data.to_json %>))
+
+      <% end %>
+
+
+      data.addRows(data_rows);
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+      chart.draw(data, options);
+
+
+
+      var data_2 = new google.visualization.DataTable();
+      data_2.addColumn('date', 'Date');
+      <% @page_ids.each do |page_id| %>
+        data_2.addColumn('number', '<%= page_name(page_id)%>');
+      <% end %>
+
+      data_rows = []
+      <% @graph_data_2.each_pair do |date, data|
+        year,monts,day = date.split("-")
+
+      %>
+      row = [new Date('<%= year %>','<%= monts %>','<%= day %>')]
+
+      data_rows.push(row.concat(<%= data.to_json %>))
+
+      <% end %>
+
+
+      data_2.addRows(data_rows);
+
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div_2'));
+
+      chart.draw(data_2, options);
+
+
+
+
+
+
+
+
+
+
+
+    }
+
+</script>

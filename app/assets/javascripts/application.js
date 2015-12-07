@@ -38,3 +38,22 @@
 //= require input_functions
 //= require ./theme/cherry-api
 //= require_tree ./theme
+
+Array.prototype.list = function()
+{
+    var
+        limit = this.length,
+        orphans = arguments.length - limit,
+        scope = orphans > 0  && typeof(arguments[arguments.length-1]) != "string" ? arguments[arguments.length-1] : window
+    ;
+
+    while(limit--) scope[arguments[limit]] = this[limit];
+
+    if(scope != window) orphans--;
+
+    if(orphans > 0)
+    {
+        orphans += this.length;
+        while(orphans-- > this.length) scope[arguments[orphans]] = null;
+    }
+}

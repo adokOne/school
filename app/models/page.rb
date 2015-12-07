@@ -68,4 +68,49 @@ class Page < ActiveRecord::Base
     self.seo_name = self.title.russian_translit if self.respond_to?(:seo_name) && !self.title.nil? && self.seo_name.nil?
   end
 
+
+  def self.get_stat_graph
+    sql =
+    "SELECT
+        DATE(`impressions`.`created_at`) AS `date`,
+        impressionable_id,
+        SUM(`impressions`.`impressionable_id`) AS `count`
+
+    FROM `impressions`
+    WHERE `impressions`.`created_at` BETWEEN '2015-12-01 00:00:00' AND '2015-12-31 23:59:59'
+    GROUP BY `date`, `impressionable_id`
+    ORDER BY `date`
+    "
+    ActiveRecord::Base.connection.execute(sql,:as_array).to_a.map do |item|
+      {
+        date: item.first.strftime("%Y-%m-%d"),
+        page_id: item.second,
+        count: item.third
+      }
+    end
+  end
+
+
+  def self.get_stat_graph_unique
+    sql =
+    "SELECT
+        DATE(`impressions`.`created_at`) AS `date`,
+        impressionable_id,
+        COUNT(DISTINCT ip_address) as count
+
+    FROM `impressions`
+    WHERE `impressions`.`created_at` BETWEEN '2015-12-01 00:00:00' AND '2015-12-31 23:59:59'
+    GROUP BY `date`, `impressionable_id`
+    ORDER BY `date`
+    "
+    ActiveRecord::Base.connection.execute(sql,:as_array).to_a.map do |item|
+      {
+        date: item.first.strftime("%Y-%m-%d"),
+        page_id: item.second,
+        count: item.third
+      }
+    end
+  end
+
 end
+
