@@ -5,10 +5,11 @@ class BlogController < ApplicationController
   def index
     @similar = Page.active.limit(3).order(id: :desc)
     @items   = Category.where(parent_id:0).all
-    @top_menu = @items.inject({}){|hash, item| hash[item.seo_name] = {text: item.title}; hash }
+    top_menu
   end
 
   def category
+    top_menu
     @item    = Category.find_by_seo(params[:seo_name].split("/"))
     @similar = Page.active.limit(3).where("category_id != ?",@item.id).order(id: :desc)
     if @item.parent.present?
@@ -20,12 +21,13 @@ class BlogController < ApplicationController
   end
 
   def item
-
+    top_menu
     @item = Page.active.find_by_seo(params[:seo_name].split("/"))
     @similar = Page.active.limit(3).where("category_id != ?",@item.category_id).order(id: :desc)
   end
 
   def search
+    top_menu
     @similar = Page.limit(3).order(id: :desc)
     @items = []
     @count = 0
@@ -59,6 +61,10 @@ class BlogController < ApplicationController
   def allowed_params
     params.require(:subscriber).permit(:name,:email,:blog_subscribe)
 
+  end
+
+  def top_menu
+    @top_menu = Category.where(parent_id:0).all.inject({}){|hash, item| hash[item.seo_name] = {text: item.title}; hash }
   end
 
 

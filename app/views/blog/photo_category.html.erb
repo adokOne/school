@@ -28,7 +28,11 @@
           <% end %>
         </div>
         <div class="clear"></div>
-        <a href="<%= url("blog") %>" class="more"><%=t("school.back_to_blog")%></a>
+        <% if @item.childrens.empty?%>
+          <a href="<%= url("blog/category/#{@item.parent.seo_name}") %>" class="more"><%= t("school.back_to_all_category",title: @item.parent.title) %></a>
+        <% else %>
+          <a href="<%= url("blog") %>" class="more"><%=t("school.back_to_blog")%></a>
+        <% end %>
       </div>
     </div>
   </div>

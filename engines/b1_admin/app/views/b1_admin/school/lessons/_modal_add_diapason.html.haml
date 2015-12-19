@@ -12,7 +12,7 @@
           .form-group{"ng-class" => "{'has-error': itemForm.time.$invalid && itemForm.$submitted}"}
             %select.form-control{'id' => 'time', 'ng-model' => 'editedItem.time'}
               - create_hours(:start_time => 8.hours, :end_time => 23.hours).each do |i|
-                %option{'value' => "#{i.to_s.rjust(2, '0')}:00"}="#{i.to_s.rjust(2, '0')}"
+                %option{'value' => "#{i.to_s.rjust(2, '0')}"}="#{i.to_s.rjust(2, '0')}"
   .modal-footer
     %button.btn.btn-primary{'ng-click' => 'save()'}=t('b1_admin.save')
     %button.btn.btn-default{'ng-click' => 'cancel()'}=t('b1_admin.cancel')

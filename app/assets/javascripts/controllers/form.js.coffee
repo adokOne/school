@@ -21,11 +21,13 @@ $.Controller "Form",
         ignore: ""
         highlight: (el, e_cls) ->
           self.error_owl.removeClass("hidden")
-          # $(el).addClass e_cls
+          if $(el).parents(".new_survey_attempt").size() > 0
+            $(el).addClass e_cls
           if $(el).parents(".table").size() > 0
             $(el).parents(".table").find("p").addClass e_cls
         unhighlight: (el, e_cls) ->
-          # $(el).removeClass e_cls
+          if $(el).parents(".new_survey_attempt").size() > 0
+            $(el).removeClass e_cls
           if $(el).parents(".table").size() > 0
             $(el).parents(".table").find("p").removeClass e_cls
 

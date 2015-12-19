@@ -71,8 +71,8 @@
     <h2><%= t("school.calendar")%></h2>
     <div class="group-select">
       <select name="course" id="course">
-        <option disabled ><%= t("school.choose_group")%></option>
-        <option value="0" ><%= t("school.all_groups")%></option>
+        <option disabled ><%= t("school.#{is_club ? 'choose_group' : 'choose_course'}")%></option>
+        <option value="0" ><%= t("school.#{is_club ? 'all_groups' : 'all_courses'}")%></option>
         <%= courses.each do |course| %>
           <option value="<%= course.id%>" ><%= course.name %></option>
         <% end %>
