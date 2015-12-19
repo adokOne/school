@@ -64,7 +64,7 @@
   </div>
 </div>
 <% if @courses.any? %>
-  <%= render partial: "shared/courses", locals:{courses: @courses} %>
+  <%= render partial: "shared/courses", locals:{courses: @courses, is_club: false} %>
 <% end %>
 
 <% if @teachers.any? %>
@@ -74,6 +74,6 @@
   <%= render partial: "shared/galery", locals:{photos: @photos} %>
 <% end %>
 
-<%if @reviews.any? %>
+<%if @reviews.present? %>
   <%= render partial: "shared/reviews", locals:{reviews: @reviews} %>
 <% end %>

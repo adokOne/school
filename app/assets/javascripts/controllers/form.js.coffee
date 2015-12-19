@@ -30,6 +30,7 @@ $.Controller "Form",
             $(el).parents(".table").find("p").removeClass e_cls
 
         errorPlacement: (err, el) ->
+          console.log(self.error_owl)
           self.error_owl.removeClass("hidden")
 
         invalidHandler: (event, validator) ->
