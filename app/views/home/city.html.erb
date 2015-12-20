@@ -9,12 +9,12 @@
                 <% group.each do |item| %>
                   <li>
 
-                    <a href="<%= url(item.link) %>"><%= item.title%></a>
+                    <a href="<%= url([item.link,@city.seo_name].join("-")) %>"><%= item.title%></a>
                   </li>
                   <% item.childrens.each do |item|%>
                     <li>
                       <span class="material-design-verification24 list-icon" style=""></span>
-                      <a href="<%= url(item.link) %>"><%= item.title%></a>
+                      <a href="<%= url([item.link,@city.seo_name].join("-")) %>"><%= item.title%></a>
                     </li>
                   <% end %>
                 <% end %>
@@ -82,3 +82,4 @@
       </main>
    </div>
 </div>
+<%= render "shared/seo_block",  {text: @city.desc } %>

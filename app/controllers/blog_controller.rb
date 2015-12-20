@@ -8,6 +8,8 @@ class BlogController < ApplicationController
     @item = BlogPage.find_by_seo_name!(params[:seo_name])
     @breadcrumbs_items = {"blog": I18n.t("uex.blog")}
     @breadcrumbs_last = @item.title
+    @meta_desc  = @item.anons.truncate(170)
+    @meta_title = @item.title
   end
 
   def search

@@ -76,7 +76,7 @@
                                         <td>
                                           <b><%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH</b>
                                           <br/>
-                                          <a href="#">
+                                          <a href="<%= url(item.link)%>">
                                             <%= t("uex.do_order")%>
                                             <i class="fa fa-shopping-cart"></i>
                                           </a>
@@ -90,7 +90,7 @@
                                         <td>
                                           <b><%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH</b>
                                           <br/>
-                                          <a href="#">
+                                          <a href="<%= url(item.link)%>">
                                             <%= t("uex.do_order")%>
                                             <i class="fa fa-shopping-cart"></i>
                                           </a>
@@ -104,7 +104,7 @@
                                         <td>
                                           <b><%= item.second_price.to_i %> $ / <%= Product.covert_to_uah(item.second_price)  %> UAH</b>
                                           <br/>
-                                          <a href="#">
+                                          <a href="<%= url(item.link)%>">
                                             <%= t("uex.do_order")%>
                                             <i class="fa fa-shopping-cart"></i>
                                           </a>

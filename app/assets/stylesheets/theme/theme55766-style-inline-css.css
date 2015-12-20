@@ -535,8 +535,8 @@ h4 strong {
     background: #2cabfa;
 }
 .navigation.pagination .nav-links .page-numbers:hover, .navigation.pagination .nav-links .page-numbers.current {
-    color: #fff;
-    background: #fec006;
+    color: #000;
+    background: #fff;
 }
 .paging-navigation .nav-links a {
     background-color: #2cabfa;
@@ -802,7 +802,7 @@ body.single-portfolio article.type-portfolio .cherry-portfolio-single-post .post
     background: #2cabfa;
 }
 .cherry-follow_link[title="Vkontakte"] i {
-    background: #fec006;
+    background: #527498;
 }
 .cherry-follow_label:after {
     background: #fec006;

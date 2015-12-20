@@ -24,6 +24,7 @@ class Page < ActiveRecord::Base
   belongs_to :user
 
   has_many :impressions, :as=>:impressionable
+  has_many :reviews
 
 
 
@@ -39,7 +40,10 @@ class Page < ActiveRecord::Base
   def self.by_text( text )
     if text.present? && text.length > 0
       where("`anons` LIKE :search OR `desc` LIKE :search OR `title` LIKE :search",{search: "%#{text}%"})
+    else
+      self
     end
+
   end
 
   def views

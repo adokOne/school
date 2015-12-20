@@ -1343,7 +1343,7 @@ p {
   /*background-color: white;*/
   padding: 23px 0 0 0;
   position: relative;
-  z-index: 100;
+  z-index: 98;
   -webkit-box-shadow: 0 5px 11px rgba(0, 0, 0, 0.05);
   box-shadow: 0 5px 11px rgba(0, 0, 0, 0.05); }
   #static-area-header-bottom.isStick {
@@ -2526,7 +2526,7 @@ ol.comment-list .children li > .children {
     border-color: #e43b20; }
   .wpcf7 form .wpcf7-form-control-wrap .wpcf7-not-valid-tip {
     color: #e43b20; }
-.wpcf7 form input[type="text"], .wpcf7 form input[type="email"], .wpcf7 form input[type="password"], .wpcf7 form input[type="tel"], .wpcf7 form textarea {
+.wpcf7 form input[type="email"], .wpcf7 form input[type="text"], .wpcf7 form input[type="email"], .wpcf7 form input[type="password"], .wpcf7 form input[type="tel"], .wpcf7 form textarea {
   padding: 12px 20px;
   width: 100%;
   border: 1px solid #bcbcbc;
@@ -2855,7 +2855,7 @@ ol.comment-list .children li > .children {
 ================================================== */
 .left-indent > * {
   margin-left: 43px; }
-
+input[type="email"],
 input[type="text"],
 input[type="url"],
 input[type="search"],
@@ -2863,6 +2863,7 @@ textarea {
   border: 1px solid #e5e5e5;
   padding: 12px 19px; }
   input[type="text"]::-moz-placeholder,
+  input[type="email"]::-moz-placeholder,
   input[type="url"]::-moz-placeholder,
   input[type="search"]::-moz-placeholder,
   textarea::-moz-placeholder {

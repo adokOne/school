@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
 
   before_action :set_breadcrumbs
+  before_action :set_default_meta
   #protect_from_forgery with: :exception
 
   helper_method :current_user
@@ -11,6 +12,12 @@ class ApplicationController < ActionController::Base
   def set_breadcrumbs
     @breadcrumbs_items = {}
     @breadcrumbs_last = ""
+  end
+
+  def set_default_meta
+    @meta_keys  = t("uex.default_keys")
+    @meta_desc  = t("uex.default_desc")
+    @meta_title = t("uex.default_title")
   end
 
 

@@ -78,6 +78,10 @@ class Category < ActiveRecord::Base
     Category.where(parent_id: self.id).all
   end
 
+  def seo_text
+    read_attribute("seo_text_#{I18n.locale}")
+  end
+
   def self.to_tree
     get_parent.map(&:to_tree_item)
   end

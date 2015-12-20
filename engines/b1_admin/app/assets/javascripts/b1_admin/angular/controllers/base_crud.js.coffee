@@ -130,21 +130,19 @@ angular.module("B1Admin").controller "CrudController", [
       text_area_name = if $scope.editedItem && $scope.editedItem.text_area_name then $scope.editedItem.text_area_name else text_area_name
       angular.forEach angular.element(".summernote"), ((item) ->
         item = angular.element(item)
-        if Config.with_locales
+        if Config.with_locales || $scope.withLocales
           if $scope.editedItem && $scope.editedItem.is_mongoid_localize
             $scope.editedItem["#{text_area_name}_translations"]["#{item.data("lang")}"] = item.code()
           else
             $scope.editedItem["#{text_area_name}_#{item.data("lang")}"] = item.code()
         else
-          console.log("wefwe")
-          console.log(text_area_name,$scope.editedItem[text_area_name])
           $scope.editedItem[text_area_name] = item.code()
       )
     setToEditor = ->
       text_area_name = if $scope.editedItem && $scope.editedItem.text_area_name then $scope.editedItem.text_area_name else text_area_name
       angular.forEach angular.element(".summernote"), ((item) ->
         item = angular.element(item)
-        if Config.with_locales
+        if Config.with_locales || $scope.withLocales
           if $scope.editedItem.is_mongoid_localize
             item.code($scope.editedItem["#{text_area_name}_translations"]["#{item.data("lang")}"]) unless $scope.editedItem is undefined
           else

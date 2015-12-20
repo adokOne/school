@@ -2,9 +2,11 @@
 <html lang="en-US">
    <head>
       <meta charset="UTF-8"/>
-      <title>UEX</title>
+      <title><%= @meta_title%></title>
+      <meta name="description" content="<%= @meta_desc%>"/>
+      <meta name="keywords" content="<%= @meta_keys%>"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
-      <link rel="alternate" type="application/rss+xml" title="UEX Feed" href="<%= url("feed") %>"/>
+
       <link rel='stylesheet' id='font-awesome-css' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css?ver=4.4.0' type='text/css' media='all'/>
       <link rel='stylesheet' id='cherry-google-fonts-css' href='//fonts.googleapis.com/css?family=Roboto%3A500%2Cregular%2C100%7CAbril+Fatface%3Aitalic&#038;subset=latin%2Clatin-ext&#038;ver=4.3.1' type='text/css' media='all'/>
       <% if @has_editor %>
@@ -20,6 +22,7 @@
       <% end %>
       <%= csrf_meta_tags %>
       <meta name="generator" content="B1 Dev"/>
+      <link rel="publisher" href="https://plus.google.com/u/0/b/103359602341449879335/103359602341449879335/posts"/>
       <link rel='canonical' href='<%= Settings.domain %>'/>
       <link rel='shortlink' href='<%= Settings.domain %>'/>
       <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
@@ -65,9 +68,25 @@
                                     <a href="<%= url("blog") %>"><%= t("uex.blog")%></a>
                               </li>
                               <li class="separator cherry-mega-menu-top-item">/</li>
-                              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
-                                    <a href="#">RU</a>
+
+
+                              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-66 cherry-mega-menu-top-item item-submenu-position-fullwidth cherry-mega-menu-has-children item-type-standard item-align-top-left menu-item-standard" data-hide-mobile="" data-sub-hr-position="fullwidth" data-sub-vr-position="vertical-parent" data-sub-type="standard">
+                                 <a href="#" data-title="<%= I18n.locale.to_s.upcase%>"><%= I18n.locale.to_s.upcase%><i class="fa fa-angle-down mega-menu-arrow top-level-arrow"></i></a>
+                                 <ul class="cherry-mega-menu-sub level-0 effect-slide-top simple-sub" style="background-color: #fff;min-width: 95px;">
+                                    <% I18n.available_locales.each do |locale|%>
+                                    <li id="menu-item-298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-298 cherry-mega-menu-sub-item item-nested-sub item-nested-sub-1 menu-item-standard"><a href="<%= locale_url(locale)  %>/" data-title="<%= locale.to_s.upcase %>"><%= locale.to_s.upcase %></a></li>
+                                    <% end %>
+                                 </ul>
                               </li>
+
+
+
+
+
+
+
+
+
                            </ul>
                            <label class="cherry-mega-menu-mobile-close" for="trigger-menu-primary-items">Close</label>
                         </nav>

@@ -25,4 +25,9 @@ module ApplicationHelper
     Page.find_by_id(page_id).try(:title)
   end
 
+  def locale_url( locale )
+    return "#" if I18n.locale == locale
+    url_for( locale: locale )
+  end
+
 end

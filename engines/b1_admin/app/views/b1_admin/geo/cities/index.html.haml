@@ -46,16 +46,11 @@
                 = label_tag :meta_is_generated, t("b1_admin.meta_is_generated"), class:"control-label"
                 %select.form-control{"ng-model" => "filters.meta_is_generated", "ng-options" => "k as v for (k, v) in ['Нет','Да']"}
 
-              .form-group{"ng-class" => "{'has-error': itemForm.controller.$invalid && itemForm.$submitted}"}
-                = label_tag :continent_id, t("b1_admin.continent"), class:"control-label"
-                %select.form-control{"ng-model" => "filters.continent_id", "ng-options" => "continent.id as continent.name for continent in continents"}
+
               .form-group{"ng-class" => "{'has-error': itemForm.action.$invalid && itemForm.$submitted}"}
                 = label_tag :country_id, t("b1_admin.country"), class:"control-label"
                 %select.form-control{"ng-model" => "filters.country_id", "ng-options" => "country.id as country.name for country in countries"}
 
-              .form-group{"ng-class" => "{'has-error': itemForm.code.$invalid && itemForm.$submitted}"}
-                = label_tag :code, t("b1_admin.code"), class:"control-label"
-                = text_field_tag :code,"" ,class:"form-control","ng-minlength"=>3,"ng-maxlength"=>3, "ng-model"=>"filters.code","placeholder"=>'IEV'
 
               / .form-group{"ng-class" => "{'has-error': itemForm.ip.$invalid && itemForm.$submitted}"}
               /   = label_tag :user_id, t("b1_admin.user"), class:"control-label"

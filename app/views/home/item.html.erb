@@ -24,99 +24,46 @@
                            </div>
                         </div>
                      </nav>
-<!--                      <div class="author-bio clearfix">
-                        <figure class="author-bio_avatar alignleft"><img alt='admin' src='http://2.gravatar.com/avatar/b263802e2004e058851acabb4111135e?s=83&#038;d=mm&#038;r=g' srcset='http://2.gravatar.com/avatar/b263802e2004e058851acabb4111135e?s=166&amp;d=mm&amp;r=g 2x' class='avatar avatar-83 photo' height='83' width='83'/></figure>
-                        <h3>Written by <a href="http://livedemo00.template-help.com/wordpress_55766/author/admin/" title="Posts by admin" rel="author">admin</a></h3>
-                        <div class="description">I am a professional blogger interested in everything taking place in cyberspace. I am running this website and try my best to make it a better place to visit. I post only the articles that are related to the topic and thoroughly analyze all visitors’ comments to cater to their needs better.</div>
-                     </div> -->
+                     <% @item.reviews.moderated.each do |message|%>
+                        <div class="author-bio clearfix">
+                           <figure class="author-bio_avatar alignleft"><img  src='<%= asset_path("reviwer.png") %>'  class='avatar avatar-83 photo' height='83' width='83'/></figure>
+                           <h3>Отзыв от <a href="#" title="<%= message.name %>" rel="author"><%= message.name %></a></h3>
+                           <div class="description"><%= message.comment%></div>
+                        </div>
+                     <% end %>
 
-<!--                      <div id="comments" class="comments-area">
-                        <div class="comments">
-                           <h3 class="comments-title">3 responses</h3>
-                           <ol class="comment-list">
-                              <li id="comment-32" class="comment even thread-even depth-1 parent">
-                                 <article id="div-comment-32" class="comment-body">
-                                    <footer class="comment-meta">
-                                       <div class="comment-author vcard">
-                                          <img alt='' src='http://1.gravatar.com/avatar/126eacb397318a52073e24bf5b7781a1?s=83&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/126eacb397318a52073e24bf5b7781a1?s=166&amp;d=mm&amp;r=g 2x' class='avatar avatar-83 photo' height='83' width='83'/> <b class="fn">Bernard Show</b> <span class="says">says:</span>
-                                       </div>
-                                       <div class="comment-metadata">
-                                          <a href="http://livedemo00.template-help.com/wordpress_55766/allergyasthma/innovative-laboratory-services-to-enhance-patient-health/#comment-32">
-                                          <time datetime="2015-10-20T09:16:36+00:00">
-                                          October 20, 2015 at 9:16 am </time>
-                                          </a>
-                                       </div>
-                                    </footer>
-                                    <div class="comment-content">
-                                       <p>That’s awesome! Future belongs to youngsters, so businessmen can’t ignore their needs in any case.</p>
-                                    </div>
-                                    <div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://livedemo00.template-help.com/wordpress_55766/allergyasthma/innovative-laboratory-services-to-enhance-patient-health/?replytocom=32#respond' onclick='return addComment.moveForm( "div-comment-32", "32", "respond", "22" )' aria-label='Reply to Bernard Show'>Reply</a></div>
-                                 </article>
-                                 <ol class="children">
-                                    <li id="comment-33" class="comment odd alt depth-2 parent">
-                                       <article id="div-comment-33" class="comment-body">
-                                          <footer class="comment-meta">
-                                             <div class="comment-author vcard">
-                                                <img alt='' src='http://1.gravatar.com/avatar/126eacb397318a52073e24bf5b7781a1?s=83&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/126eacb397318a52073e24bf5b7781a1?s=166&amp;d=mm&amp;r=g 2x' class='avatar avatar-83 photo' height='83' width='83'/> <b class="fn">Sarah Cole</b> <span class="says">says:</span>
-                                             </div>
-                                             <div class="comment-metadata">
-                                                <a href="http://livedemo00.template-help.com/wordpress_55766/allergyasthma/innovative-laboratory-services-to-enhance-patient-health/#comment-33">
-                                                <time datetime="2015-10-20T09:21:05+00:00">
-                                                October 20, 2015 at 9:21 am </time>
-                                                </a>
-                                             </div>
-                                          </footer>
-                                          <div class="comment-content">
-                                             <p>The author did a great job with all these research work. Really valuable information, thank you!</p>
-                                          </div>
-                                          <div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://livedemo00.template-help.com/wordpress_55766/allergyasthma/innovative-laboratory-services-to-enhance-patient-health/?replytocom=33#respond' onclick='return addComment.moveForm( "div-comment-33", "33", "respond", "22" )' aria-label='Reply to Sarah Cole'>Reply</a></div>
-                                       </article>
-                                       <ol class="children">
-                                          <li id="comment-34" class="comment even depth-3">
-                                             <article id="div-comment-34" class="comment-body">
-                                                <footer class="comment-meta">
-                                                   <div class="comment-author vcard">
-                                                      <img alt='' src='http://1.gravatar.com/avatar/126eacb397318a52073e24bf5b7781a1?s=83&#038;d=mm&#038;r=g' srcset='http://1.gravatar.com/avatar/126eacb397318a52073e24bf5b7781a1?s=166&amp;d=mm&amp;r=g 2x' class='avatar avatar-83 photo' height='83' width='83'/> <b class="fn">Michael Ventura</b> <span class="says">says:</span>
-                                                   </div>
-                                                   <div class="comment-metadata">
-                                                      <a href="http://livedemo00.template-help.com/wordpress_55766/allergyasthma/innovative-laboratory-services-to-enhance-patient-health/#comment-34">
-                                                      <time datetime="2015-10-20T09:22:01+00:00">
-                                                      October 20, 2015 at 9:22 am </time>
-                                                      </a>
-                                                   </div>
-                                                </footer>
-                                                <div class="comment-content">
-                                                   <p>Completely agree with the author. Modern businessmen should involve young people, introduce brands to them, socialize… Looks like a fresh product market!</p>
-                                                </div>
-                                                <div class="reply"><a rel='nofollow' class='comment-reply-link' href='http://livedemo00.template-help.com/wordpress_55766/allergyasthma/innovative-laboratory-services-to-enhance-patient-health/?replytocom=34#respond' onclick='return addComment.moveForm( "div-comment-34", "34", "respond", "22" )' aria-label='Reply to Michael Ventura'>Reply</a></div>
-                                             </article>
-                                          </li>
-                                       </ol>
-                                    </li>
-                                 </ol>
-                              </li>
-                           </ol>
-                        </div>
-                        <div id="respond" class="comment-respond">
-                           <h3 id="reply-title" class="comment-reply-title">Leave a reply <small><a rel="nofollow" id="cancel-comment-reply-link" href="/wordpress_55766/allergyasthma/innovative-laboratory-services-to-enhance-patient-health/#respond" style="display:none;">Cancel reply</a></small></h3>
-                           <form action="http://livedemo00.template-help.com/wordpress_55766/wp-comments-post.php" method="post" id="commentform" class="comment-form" novalidate>
-                              <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked <span class="required">*</span></p>
-                              <div class='row'>
-                                 <div class='col-xs-12 col-sm-12 col-md-6'>
-                                    <p class="comment-form-author"><input id="author" name="author" type="text" placeholder="Name" value="" size="30" aria-required='true' required='required'/></p>
-                                    <p class="comment-form-email"><input id="email" name="email" type="text" placeholder="E-mail" value="" size="30" aria-describedby="email-notes" aria-required='true' required='required'/></p>
-                                    <p class="comment-form-url"><input id="url" name="url" type="text" placeholder="Website" value="" size="30"/></p>
-                                 </div>
-                                 <div class='col-xs-12 col-sm-12 col-md-6'>
-                                    <p class="comment-form-comment"><textarea id="comment" name="comment" placeholder="Comment" cols="45" rows="8" aria-describedby="form-allowed-tags" aria-required="true" required="required"></textarea></p>
-                                    <p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Submit"/> <input type='hidden' name='comment_post_ID' value='22' id='comment_post_ID'/>
-                                       <input type='hidden' name='comment_parent' id='comment_parent' value='0'/>
-                                    </p>
-                                 </div>
-                              </div>
-                           </form>
-                        </div>
-                     </div> -->
+                     <div id="comments" class="comments-area">
+                       <div id="respond" class="comment-respond">
+                          <% if flash[:message].present? %>
+                            <p style="color:green"><%=  flash[:message]   %></p>
+                          <% end%>
+                          <h3 id="reply-title" class="comment-reply-title"><%= t("uex.leave_review")%></h3>
+                          <%= form_for Review.new, url: review_path, class: "comment-form" do |f| %>
+                              <%= f.hidden_field :page_id , value: @item.id %>
+                             <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                   <p class="comment-form-author">
+                                    <%= f.text_field :name , placeholder:  t("uex.review_name"), required: true %>
+
+                                   </p>
+                                   <p class="comment-form-author">
+                                    <%= f.email_field :email , placeholder:  t("uex.review_email"), required: true %>
+
+                                   </p>
+                                </div>
+                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                   <p class="comment-form-comment">
+                                    <%= f.text_area :comment , placeholder:  t("uex.review_body"), required: true, cols:"45", rows:"8"  %>
+
+                                   <p class="form-submit">
+                                   <input name="submit" type="submit" id="submit" class="submit" value="<%= t("uex.send")%>">
+
+                                   </p>
+                                </div>
+                             </div>
+                          <% end %>
+                       </div>
+                     </div>
                </div>
                </main>
             </div>

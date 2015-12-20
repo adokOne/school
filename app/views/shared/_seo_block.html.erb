@@ -1,0 +1,8 @@
+<%if text.present?%>
+  <div class="container">
+    <div class="author-bio clearfix" style="margin-top: 50px;">
+       <figure class="author-bio_avatar alignleft "><div class="cherry-services_icon"><i class="material-design-thumb54"></i></div></figure>
+       <div class="description"><%= text.html_safe%></div>
+    </div>
+  </div>
+<%end%>

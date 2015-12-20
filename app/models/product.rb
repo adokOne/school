@@ -20,4 +20,8 @@ class Product < ActiveRecord::Base
   def self.covert_to_uah( amount )
     (amount * 24.9).to_i
   end
+
+  def link
+    "/product/#{self.id}"
+  end
 end

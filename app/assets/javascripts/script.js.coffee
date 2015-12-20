@@ -89,3 +89,12 @@ $(document).ready ->
           $($editable.target).parents(".note-editor").removeClass "error"
           return
     sumernote.data('summernote').code(window.htmlDecode(text))
+
+
+  $('.menu-item-has-children').hover (->
+    $(this).find('ul').addClass 'active-sub'
+    return
+  ), ->
+    $(this).find('ul').removeClass 'active-sub'
+    return
+
