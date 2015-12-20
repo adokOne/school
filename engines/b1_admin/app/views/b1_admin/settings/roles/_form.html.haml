@@ -2,7 +2,7 @@
   #page-title
     %h1.page-header.text-overflow
       =t("b1_admin.roles")
-  #page-content{:"ng-controller"=>"RolesController","ng-init"=>"modules=#{@modules.to_json}; editedItem=#{@item.serializable_hash.to_json}",:"data-url"=>settings_roles_path,:"data-delete-text"=>t("b1_admin.delete_permission_confirm")}    
+  #page-content{:"ng-controller"=>"RolesController","ng-init"=>"modules=#{@modules.to_json}; editedItem=#{@item.serializable_hash.to_json}",:"data-url"=>settings_roles_path,:"data-delete-text"=>t("b1_admin.delete_permission_confirm")}
     .row
       .panel
         .panel-heading
@@ -17,7 +17,7 @@
                   = label_tag :name, t("b1_admin.title"), class:"col-sm-1 control-label"
                   .col-sm-11
                     = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.name"
-                - B1Admin::LANGS.each do |l|
+                - %w{uk ru}.each do |l|
                   .form-group{"ng-class" => "{'has-error': itemForm.desc_#{l}.$invalid && itemForm.$submitted}"}
                     = label_tag :"desc_#{l}", "#{t("b1_admin.desc")} #{l.upcase}", class:"col-sm-1 control-label"
                     .col-sm-11

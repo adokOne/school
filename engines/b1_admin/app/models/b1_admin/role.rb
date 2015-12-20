@@ -11,7 +11,7 @@ module B1Admin
 
     #Validates
     validates :name,      length: { in: 5..30 },format: {with:/\A^[^0-9`!@#\$%\^&*+_=]+\z/i}, presence: true
-    B1Admin::LANGS.each do |l|
+    %w{uk ru}.each do |l|
     	validates :"desc_#{l}", length: { in: 10..50},format: {with:/\A^[^`!@#\$%\^&*+_=]+\z/i}
   	end
     #End validates

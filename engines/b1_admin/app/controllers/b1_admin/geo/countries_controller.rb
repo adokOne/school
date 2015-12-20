@@ -19,7 +19,7 @@ module B1Admin
       @model            = ::Country
       @order            = :"name_#{I18n.locale}"
       @image_field_name = :flag
-      @includes         = [:continent]
+
       # Include CRUD module
       include B1Admin::Concerns::Crud
 

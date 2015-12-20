@@ -15,7 +15,7 @@ module B1Admin
     #Validates
     validates :ico,:controller, presence: true
     validates :ico,        length: { in: 5..30 },format: {with:/\A^[^0-9`!@#\$%\^&*+=]+\z/i}
-    B1Admin::LANGS.each do |l|
+    %w{uk ru}.each do |l|
     	validates :"name_#{l}", length: { in: 3..30},format: {with:/\A^[^0-9`!@#\$%\^&*+=]+\z/i}, presence: true, on:[:update]
   	end
     validates :controller, length: { in: 3..50},format: {with:/\A^[^`!@#\$%\^&*+=]+\z/i}

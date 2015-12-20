@@ -2,7 +2,7 @@ module B1Admin
   module Settings
     module Role
       class ItemSerializer < ::B1Admin::BaseSerializer
-        attributes *([:id, :name] +  B1Admin::LANGS.map{|l| :"desc_#{l}"}),:permissions
+        attributes *([:id, :name] +  %w{uk ru}.map{|l| :"desc_#{l}"}),:permissions
         has_many :modules
 
         def permissions

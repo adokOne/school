@@ -6,9 +6,9 @@ module B1Admin
         @item.modules = []
         @item.permissions = []
       end
-      
+
       def allowed_params
-        params.require(:item).permit(B1Admin::LANGS.map{|l| "desc_#{l}"} + [{module_ids: []},{permission_ids: []},:name])
+        params.require(:item).permit(%w{uk ru}.map{|l| "desc_#{l}"} + [{module_ids: []},{permission_ids: []},:name])
       end
 
       def set_data
