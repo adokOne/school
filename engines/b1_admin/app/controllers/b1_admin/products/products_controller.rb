@@ -4,8 +4,12 @@ module B1Admin
 
 
       def allowed_params
-        params.require(:item).permit(:active,:name,:title,:desc,:show_in_top, :has_sale, :has_second_price, :is_one_time, :price, :second_price, :sale_price, :period)
+        translated_fields = I18n.available_locales.map do |l|
+          ["desc_#{l}","name_#{l}","anons_#{l}"]
+        end
+        params.require(:item).permit( translated_fields + [:active,:name,:title,:desc,:show_in_top, :has_sale, :has_second_price, :is_one_time, :price, :second_price, :sale_price, :period])
       end
+
 
       # Set data for CRUD module
       @model            = ::Product

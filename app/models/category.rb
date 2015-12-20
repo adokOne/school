@@ -1,4 +1,6 @@
 class Category < ActiveRecord::Base
+
+  include Localizable
   #include Localizable
   BLOG_LIMIT = 4
   # #includes :parent

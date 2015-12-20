@@ -7,7 +7,7 @@
                         </header>
                         <div class="entry-meta entry-meta-top">
                            <span class="posted-on"><time class="entry-date published" datetime="<%= @item.created_at %>"><%= l(@item.created_at, format: :uex) %></time></span>
-                           <span class="comments-link"><a href="#comments">3 отзыва</a></span>
+                           <span class="comments-link"><a href="#comments"><%= @item.reviews_count %>  отзыва</a></span>
                         </div>
                         <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
                           <img width="1088" height="387" src="<%= @item.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="post-1"/>

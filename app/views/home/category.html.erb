@@ -20,7 +20,7 @@
                                           </header>
                                           <div class="entry-meta entry-meta-top">
                                              <span class="posted-on"><time class="entry-date published" datetime="<%= page.created_at %>"><%= l(page.created_at, format: :uex) %></time></span>
-                                             <span class="comments-link"><a href="#">3 отзыва</a></span>
+                                             <span class="comments-link"><a href="#"><%= page.reviews_count %> отзыва</a></span>
                                           </div>
                                           <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
                                             <a href="<%= url(page.link) %>" title="<%= page.title %>">
@@ -57,4 +57,4 @@
       </main>
    </div>
 </div>
-<%= render "shared/seo_block",  {text: @item.seo_text } %>
+<%= render "shared/seo_block",  {text: @item.desc } %>

@@ -1,0 +1,106 @@
+<div class="container">
+   <div id="primary" class="content-area">
+      <main id="main" class="site-main" role="main">
+         <article class="clearfix post-43 page type-page status-publish hentry" id="post-43">
+            <div class="portfolio-wrap">
+              <div class="container">
+                <div class="author-bio clearfix">
+                   <figure class="author-bio_avatar alignleft "><div class="cherry-services_icon"><i class="material-design-thumb54"></i></div></figure>
+                   <h3>Вы всегда останетесь довольны качеством Наши услуг!</a></h3>
+                   <div class="description"><%= t("uex.product_header").html_safe%></div>
+                </div>
+
+
+
+                 <div class="row row-edge">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                       <div class="cherry-services services_1 boxed-layout">
+                          <div class="row">
+                            <div class="services-listing">
+                              <div class="row">
+                                <div style="text-align: inherit;" class=" item-1 clearfix odd col-xs-4 clear-col-xs col-sm-4 clear-col-sm col-md-4 clear-col-md clear-col-lg  col-lg-4 ">
+                                   <div class="services-inner">
+                                      <h3 class="cherry-services_title">
+                                        <%= @item.name%>
+                                      </h3>
+                                      <img class="image croped-image " data-ratio="0.7" width="500" height="350" src="<%= @item.logo%>" alt="">
+                                      <div class="cherry-services_feauters"><%= @item.desc.html_safe%></div>
+                                   </div>
+                                </div>
+
+
+                                <div style="text-align: inherit;" class=" item-2 clearfix odd col-xs-8 clear-col-xs col-sm-8 clear-col-sm col-md-8 clear-col-md  col-lg-8 ">
+                                   <div class="services-inner">
+                  <div role="form" class="wpcf7" id="wpcf7-f180-p47-o1" lang="en-US" dir="ltr">
+                    <% if flash[:error].present? %>
+                      <p style="color:red"><%=  flash[:error].html_safe    %></p>
+                    <% end%>
+                    <%= form_for AnonimOrder.new, url: order_path do |f|%>
+                    <%= f.hidden_field :product_id, value: @item.id %>
+                       <div class="row">
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                             <span class="wpcf7-form-control-wrap">
+                                <%= f.text_field :name, class: "wpcf7-form-control wpcf7-email", placeholder: t("uex.form.name"), required: true %>
+                             </span>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                             <span class="wpcf7-form-control-wrap">
+                                <%= f.email_field :email, class: "wpcf7-form-control wpcf7-email", placeholder: t("uex.form.email"), required: true %>
+                             </span>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                             <span class="wpcf7-form-control-wrap">
+                                <%= f.text_field :phone, class: "wpcf7-form-control wpcf7-email", placeholder: t("uex.form.phone"), required: true %>
+                             </span>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                             <span class="wpcf7-form-control-wrap">
+                                <input type="submit" value="<%= t("uex.do_order") %>" class="wpcf7-form-control wpcf7-submit">
+                             </span>
+                          </div>
+                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                              <footer>
+                                <cite>
+                                  Если Вы зарегистрированы, осуществите заказ услуги из кабинета после входа. <%= link_to t("uex.enter") , signin_users_path %>
+                                </cite>
+                              </footer>
+                          </div>
+
+
+
+
+                        </div>
+                      </div>
+                    <% end %>
+                  </div>
+                                   </div>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                       </div>
+
+
+
+                    </div>
+                 </div>
+
+
+
+
+                <div class="author-bio clearfix">
+                   <figure class="author-bio_avatar alignleft "><div class="cherry-services_icon"><i class="material-design-tick7"></i></div></figure>
+                   <h3><%= t("uex.you_can_order")%><a target="_blank" href="<%= url("contacts")%>" title="<%= t("uex.contacts")%>" ><%= t("uex.with_us")%></a></h3>
+                   <div class="description">Заказывая услуги у <a href="<%= url("/")%>">компании UEX</a> Вы получаете послный спектр ркламных услуг по отличному ссоотношению цена/качество</div>
+                </div>
+
+              </div>
+            </div>
+         </article>
+      </main>
+   </div>
+</div>
+
+
+

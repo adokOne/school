@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     @has_search = true
     @cities    = City.where(country_id: Country::UKRAINE_ID ).pluck("name_#{I18n.locale}",:id)
     @categories = Category.get_parent
-    @pages = Page.published.by_rating.by_text(params[:search]).paginate(page: params[:page], per_page: 5)
+    @pages = Page.published.by_rating.by_text(params[:search]).includes(:reviews).paginate(page: params[:page], per_page: 5)
   end
 
   def contacts
@@ -97,7 +97,28 @@ class HomeController < ApplicationController
   end
 
   def product
+    if logged_in?
+      redirect_to edit_user_path(current_user, anchor: "orders")
+    end
+    @item = Product.find(params[:id])
+  end
 
+  def order
+    order = AnonimOrder.new(params[:anonim_order])
+    if order.valid?
+      if order.user_exist?
+        flash[:error] = I18n.t("uex.user_exist_on_order", login_path: signin_users_path, forgot_path: forgot_users_path)
+      else
+        user = User.create(email: order.email, name: order.name, password: User.password)
+        token = user.signin( request.remote_ip, request.referer, request.user_agent)
+        cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
+        order.create_real
+        flash[:message] = I18n.t("uex.order_was_created")
+      end
+    else
+      flash[:error] = [t("uex.form.#{order.errors.messages.keys.first}"), order.errors.messages[order.errors.messages.keys.first].first].join(" ")
+    end
+    redirect_to :back
   end
 
 end

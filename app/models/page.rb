@@ -50,6 +50,10 @@ class Page < ActiveRecord::Base
     impressions.size
   end
 
+  def reviews_count
+    self.reviews.count
+  end
+
   def unique_impression_count
     impressions.group(:ip_address).size #UNTESTED: might not be correct syntax
   end

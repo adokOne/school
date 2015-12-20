@@ -1,11 +1,53 @@
-%div{"ng-controller" => "LessonsController", 'data-url' => school_lessons_path, 'data-courses-url' => products_products_path, "ng-init" => "", 'ng_mouseup' => 'mouseup($event);', :'data-delete-text'=>t('b1_admin.delete_confirm'),}
+%div{:"ng-controller"=>"CrudController",:"data-url"=>products_orders_path,:"data-delete-text"=>t("b1_admin.delete_confirm")}
   #content-container
     #page-title
       %h1.page-header.text-overflow
-        Заняття
+        Транзакции
     #page-content
       .row
-        .col-md-12#items
-          .panel
-            .panel-body
-              = render 'tariffs_map'
+        .panel
+          .panel-heading
+            .panel-control
+              %button.btn.btn-default{:name => "refresh", :title => "Refresh", :type => "button","ng-click"=>"itemsTable.reload()"}
+                %i.fa.fa-refresh.icon-refresh
+              %a.btn.btn-primary{href: new_products_order_path,"ng-click"=>"$root.setRoute('#{new_products_order_path}')"}=t("b1_admin.add")
+            %h3.panel-title Список Транзакций
+
+          .panel-body
+            %div{style:"margin-top: 30px;"}
+            %div{"cg-busy" => "{'promise': itemsPromise,'backdrop': true,'message': '#{t('b1_admin.loading')}'}"}
+              %table.table.table-hover.table-striped.table-vcenter#itemsTable{"ng-table"=>"itemsTable"}
+                %tr{"ng-repeat" => "item in data"}
+                  %td{"data-title" => "'Услуга'"}
+                    {{item.product_name}}
+                  %td{"data-title" => "'Сумма'"}
+                    {{item.amount}}
+                  %td{"data-title" => "'Дата'"}
+                    {{item.created_at}}
+
+                  %td.min-w-td.text-center{"data-title" => "'#{t('b1_admin.user_actions')}'"}
+                    - if user_can?(:edit)
+                      %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{products_orders_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{products_orders_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}
+                    - if user_can?(:destroy)
+                      %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)"}
+  - content_for :aside do
+    .hidden
+  %aside#aside-container
+    #aside
+      .panel
+        .panel-heading
+          %h3.panel-title
+            %i.fa.fa-lg.fa-navicon.filter-toggler
+            %span=t("b1_admin.filter")
+        = form_tag products_orders_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+          .panel-body
+            .col-sm-12
+              .form-group{"ng-class" => "{'has-error': itemForm.email.$invalid && itemForm.$submitted}"}
+                = label_tag :email, t("b1_admin.email"), class:"control-label"
+                = text_field_tag :email,"" ,class:"form-control","ng-maxlength"=>255, "ng-model"=>"filters.email"
+              .form-group{"ng-class" => "{'has-error': itemForm.country_id.$invalid && itemForm.$submitted}"}
+                = label_tag :course_id, "Услуга", class:"control-label"
+                %select.form-control{"ng-model" => "filters.course_id", "ng-options" => "item.id as item.name for item in #{@courses.to_json}"}
+          .panel-footer.text-right
+            %a.btn.btn-success{"ng-click"=>"filter()"}=t("b1_admin.do_filter")
+            %a.btn.btn-warning{"ng-click"=>"reset()"}=t("b1_admin.reset_filter")

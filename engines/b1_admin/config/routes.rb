@@ -37,6 +37,7 @@ B1Admin::Engine.routes.draw do
   namespace :products do
     resources :orders
     resources :transactions
+    resources :users
   	resources :products do
       post "upload", on: :member
     end

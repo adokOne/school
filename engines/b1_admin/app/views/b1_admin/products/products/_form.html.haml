@@ -3,20 +3,23 @@
     %a.btn.btn-success.pull-right{href:products_products_path,"ng-click"=>"$root.setRoute('#{products_products_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
       Услуги
-  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};", :"data-url"=>products_products_path}
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"withLocales=true;editedItem=#{@item.serializable_hash.to_json};", :"data-url"=>products_products_path}
     .row
       .col
         .panel
           .panel-heading
+            .panel-control
+              = render "shared/lang_selector"
             %h3.panel-title Создание/редактирование
           = form_tag products_products_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .row
                 .col-md-8
-                  .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
-                    = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
-                    .col-sm-7
-                      = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
+                  - I18n.available_locales.each do |l|
+                    .form-group{"ng-class" => "{'has-error': itemForm.name_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}" }
+                      = label_tag :"name_#{l}", t("b1_admin.title"), class:"col-sm-3 control-label"
+                      .col-sm-8
+                        = text_field_tag :"name_#{l}","" ,class:"form-control", "ng-minlength"=>3, "ng-model"=>"editedItem.name_#{l}"
                   .form-group{"ng-class" => "{'has-error': itemForm.show_in_top.$invalid && itemForm.$submitted}"}
                     = label_tag :show_in_top, "Пакет, отображать сверху", class:"col-sm-3 control-label"
                     .col-sm-7
@@ -67,11 +70,20 @@
                     = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
                     .col-sm-7
                       %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
-                  .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang lang" }
-                    = label_tag :"desc", t("b1_admin.desc"), class:"col-sm-3 control-label"
-                    .col-sm-7
-                      .summernote{class: "summernote lang",:"data-lang"=>"uk"}
-                      = text_area_tag :"desc","" ,class:"form-control hidden",required: true, "ng-model"=>"editedItem.desc"
+                  - I18n.available_locales.each do |l|
+                    / .form-group{"ng-class" => "{'has-error': itemForm.anons_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}"}
+                    /   = label_tag :"anons_#{l}", "Короткое описание", class:"col-sm-3 control-label"
+                    /   .col-sm-7
+                    /     .summernote{class: "summernote_#{l} lang lang_#{l}",style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}",:"data-lang"=>l}
+                    /     = text_area_tag :"anons_#{l}","" ,class:"form-control hidden", "ng-model"=>"editedItem.anons_#{l}"
+
+
+
+                    .form-group{"ng-class" => "{'has-error': itemForm.desc_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}"}
+                      = label_tag :"desc_#{l}", t("b1_admin.desc"), class:"col-sm-3 control-label"
+                      .col-sm-7
+                        .summernote{class: "summernote_#{l} lang lang_#{l}",style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}",:"data-lang"=>l}
+                        = text_area_tag :"desc_#{l}","" ,class:"form-control hidden", "ng-model"=>"editedItem.desc_#{l}"
 
 
                   .form-group

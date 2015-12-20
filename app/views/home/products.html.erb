@@ -26,7 +26,7 @@
                                       <img class="image croped-image " data-ratio="0.7" width="500" height="350" src="<%= item.logo%>" alt="">
                                       <div class="cherry-services_feauters"><%= item.desc.html_safe%></div>
                                       <div class="entry-permalink">
-                                        <a href="#" class="cherry-btn cherry-btn-primary cherry-btn-extra-large"><%= t("uex.do_order")%></a>
+                                        <a href="<%= url(item.link)%>" class="cherry-btn cherry-btn-primary cherry-btn-extra-large"><%= t("uex.do_order")%></a>
                                       </div>
                                    </div>
                                 </div>

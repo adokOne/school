@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151220165522) do
+ActiveRecord::Schema.define(version: 20151220211745) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -104,20 +104,17 @@ ActiveRecord::Schema.define(version: 20151220165522) do
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "title",             limit: 255,                       null: false
+    t.string   "title_ru",          limit: 255,                       null: false
     t.integer  "parent_id",         limit: 4,          default: 0,    null: false
     t.string   "seo_name",          limit: 255,                       null: false
     t.integer  "position",          limit: 4,          default: 0,    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "desc",              limit: 4294967295
+    t.text     "desc_ru",           limit: 4294967295
     t.string   "logo_file_name",    limit: 255
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
-    t.string   "seo_text_ru",       limit: 255
-    t.string   "seo_text_uk",       limit: 255
-    t.string   "seo_text_en",       limit: 255
     t.boolean  "meta_is_generated", limit: 1,          default: true
     t.text     "meta_desc_ru",      limit: 65535
     t.text     "meta_desc_uk",      limit: 65535
@@ -128,6 +125,10 @@ ActiveRecord::Schema.define(version: 20151220165522) do
     t.string   "meta_title_ru",     limit: 255
     t.string   "meta_title_uk",     limit: 255
     t.string   "meta_title_en",     limit: 255
+    t.text     "desc_uk",           limit: 4294967295
+    t.text     "desc_en",           limit: 4294967295
+    t.string   "title_en",          limit: 255
+    t.string   "title_uk",          limit: 255
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
@@ -306,6 +307,7 @@ ActiveRecord::Schema.define(version: 20151220165522) do
     t.string   "currency",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "status",         limit: 4
   end
 
   create_table "pages", force: :cascade do |t|
@@ -371,8 +373,8 @@ ActiveRecord::Schema.define(version: 20151220165522) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "name",              limit: 255,   default: "",    null: false
-    t.boolean  "active",            limit: 1,     default: true,  null: false
+    t.string   "name_ru",           limit: 255,      default: "",    null: false
+    t.boolean  "active",            limit: 1,        default: true,  null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "logo_file_name",    limit: 255
@@ -380,15 +382,22 @@ ActiveRecord::Schema.define(version: 20151220165522) do
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
     t.string   "title",             limit: 255
-    t.text     "desc",              limit: 65535
-    t.boolean  "show_in_top",       limit: 1,     default: false
-    t.boolean  "has_sale",          limit: 1,     default: false
-    t.boolean  "has_second_price",  limit: 1,     default: false
-    t.boolean  "is_one_time",       limit: 1,     default: false
-    t.float    "price",             limit: 24,    default: 0.0
-    t.float    "second_price",      limit: 24,    default: 0.0
-    t.float    "sale_price",        limit: 24,    default: 0.0
+    t.text     "desc_ru",           limit: 16777215
+    t.boolean  "show_in_top",       limit: 1,        default: false
+    t.boolean  "has_sale",          limit: 1,        default: false
+    t.boolean  "has_second_price",  limit: 1,        default: false
+    t.boolean  "is_one_time",       limit: 1,        default: false
+    t.float    "price",             limit: 24,       default: 0.0
+    t.float    "second_price",      limit: 24,       default: 0.0
+    t.float    "sale_price",        limit: 24,       default: 0.0
     t.string   "period",            limit: 255
+    t.string   "name_uk",           limit: 255
+    t.string   "name_en",           limit: 255
+    t.text     "desc_uk",           limit: 16777215
+    t.text     "desc_en",           limit: 16777215
+    t.text     "anons_en",          limit: 65535
+    t.text     "anons_ru",          limit: 65535
+    t.text     "anons_uk",          limit: 65535
   end
 
   create_table "reviews", force: :cascade do |t|

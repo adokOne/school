@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
   has_many :contacts
   has_many :pages
   has_many :transactions
+  has_many :orders
 
   accepts_nested_attributes_for :contacts
   #End Relations
@@ -36,6 +37,8 @@ class User < ActiveRecord::Base
   has_attached_file :avatar, styles: { medium: "300x300>",thumb: "100x100>" }, default_url: "/img/avatar-missing.png"
 
   validates_attachment_file_name :avatar, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/]
+
+
 
 
   # Authenticate current user by password, block user if wrong password auth attempts greather of maximum

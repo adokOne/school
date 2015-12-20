@@ -136,11 +136,12 @@ module B1Admin
           # @render [JSON]
           ##
           define_method(:update) do
+            @params_to_update = allowed_params.dup
             response = success_update_response
             ActiveRecord::Base.transaction do
               before_update
-              params_to_update = allowed_params
-              unless @item.update_attributes(params_to_update)
+
+              unless @item.update_attributes(@params_to_update)
                 response = fail_update_response @item
               end
 
@@ -156,9 +157,8 @@ module B1Admin
           # @render [JSON]
           ##
           define_method(:create) do
-            params_to_create = allowed_params
-            params_to_create.delete("id")
-            item  = self.class.model.new(params_to_create)
+            @params_to_create = allowed_params.dup
+            item  = self.class.model.new(@params_to_create)
             response = success_update_response
             unless item.valid? && item.save
               response = fail_update_response item

@@ -7,8 +7,13 @@ module B1Admin
       # @return [ActiveRecord::Relation<City>]
       ##
       def filter items,k,v
-        items = items.where(product_id: v)       if "product_id" == k
-        items = items.where(email: v.to_s)  if "email" == k
+        items = items.where(status: v.to_i)       if "status" == k
+        if "email" == k
+          if user = ::User.find_by_email(v)
+            items = items.where(user_id: user.id)
+          end
+        end
+
         return items
       end
 
@@ -17,11 +22,12 @@ module B1Admin
       end
 
       def set_data
-        @courses  = ::Product.map{|c| {name: c.name,id: c.id} }
+        @courses  = ::Product.all.map{|c| {name: c.name,id: c.id} }
       end
 
       # Set data for CRUD module
       @model            = ::Transaction
+      @order            = [{id: :desc}]
       # Include CRUD module
       include B1Admin::Concerns::Crud
     end

@@ -1,5 +1,7 @@
 class Product < ActiveRecord::Base
 
+  include Localizable
+
   validates :name, presence: true
   validates :name,     length: { in: 5..255 }, format: {with:/\A^[^0-9`!@#\$%\^&*+_=]+\z/i}
   validates :active, inclusion:{ in: [true,false] }
@@ -24,4 +26,14 @@ class Product < ActiveRecord::Base
   def link
     "/product/#{self.id}"
   end
+
+
+  def cost
+    if self.has_sale
+      self.sale_price
+    else
+      self.price
+    end
+  end
+
 end

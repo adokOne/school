@@ -24,6 +24,7 @@ Rails.application.routes.draw do
 
     post "search", to: "home#search"
     post "review", to: "home#review"
+    post "order", to: "home#order"
 
     get "product/:id", to:"home#product"
 

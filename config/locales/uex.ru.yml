@@ -86,6 +86,7 @@ ru:
       name: Нзавание компании
       password: Пароль
       email: Email
+      phone: "Телефон"
     cabinet:
       profile: "Профиль"
       my_baner: "Обьявления"
@@ -116,3 +117,7 @@ ru:
     review_name: "Ваше имя"
     review_email: "Ваш e-mail"
     review_moderate: "После модерации Ваше сообщение будет опубликовано, Вы получите сообщение на e-mail который указали"
+
+
+    order_was_created: "Ваша заявка будет обработана в кратчайшие сроки. Наш менеджер свяжеться с Вами"
+    user_exist_on_order: "Данный e-mail уже зарегистрирован в Нашей системе, <a href='%{login_path}'>войдите</a> или <a href='%{forgot_path}'>востановите пароль</a>"

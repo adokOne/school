@@ -7,13 +7,13 @@
                  <div class="inner" style="background-color:#ffffff;">
                     <div class="cherry-tabs cherry-tabs-style-default  " data-active="1">
                         <div class="cherry-tabs-nav">
-                          <span class="" data-url="" data-target="blank"><%= t("uex.cabinet.partners") %></span>
-                          <span class="cherry-tabs-current" data-url="" data-target="blank"><%= t("uex.cabinet.profile") %></span>
-                          <span class="" data-url="" data-target="blank"><%= t("uex.cabinet.my_baner") %></span>
+                          <span class="" data-anchor="partners" ><%= t("uex.cabinet.partners") %></span>
+                          <span class="cherry-tabs-current" data-anchor="profile" ><%= t("uex.cabinet.profile") %></span>
+                          <span class="" data-anchor="baners" ><%= t("uex.cabinet.my_baner") %></span>
 
-                          <span class="" data-url="" data-target="blank"><%= t("uex.cabinet.messages") %></span>
-                          <span class="" data-url="" data-target="blank"><%= t("uex.cabinet.orders") %></span>
-                          <span class="" data-url="" data-target="blank"><%= t("uex.cabinet.my_payments") %></span>
+                          <span class="" data-anchor="messages"><%= t("uex.cabinet.messages") %></span>
+                          <span class="" data-anchor="orders" ><%= t("uex.cabinet.orders") %></span>
+                          <span class="" data-anchor="paymnets" ><%= t("uex.cabinet.my_payments") %></span>
                         </div>
                        <div class="cherry-tabs-panes">
                           <%= render "users/includes/stat"%>

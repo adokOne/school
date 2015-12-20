@@ -17,6 +17,7 @@ angular.module("B1Admin").controller "CrudController", [
     filtersClone = angular.copy $scope.filters
     text_area_name = "desc"
     $scope.statusColors =
+      0: "#FF0101"
       1: "#4EAE32"
       2: "#EED80B"
       3: "#D85C28"
