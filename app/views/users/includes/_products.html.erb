@@ -1,0 +1,129 @@
+<div class="cherry-tabs-pane cherry-clearfix  " style="display: none;">
+  <div class="row row-edge  ">
+     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box_3">
+        <div class="cherry-box  " style="box-shadow:none;-webkit-box-shadow:none">
+          <%= form_for Order.new,  url: create_order_path do |f|%>
+           <div class="inner" style="background-color:#ffffff;">
+              <div class="row row-edge  ">
+                <div class="author-bio clearfix" style="box-shadow:none;-webkit-box-shadow:none">
+                   <figure class="author-bio_avatar alignleft "><div class="cherry-services_icon"><i class="material-design-tack"></i></div></figure>
+                   <h3><%= t("uex.manage_your_pages")%></h3>
+                   <div class="description"><%= t("uex.manage_your_pages_desc")%></div>
+                </div>
+
+
+                <table class="table products">
+                   <tbody>
+                      <% current_user.pages.each_with_index do |item,idx|%>
+                      <tr>
+                        <td class="prod_name">
+                        <span class="material-design-verification24 list-icon" style="color: #00bbd3;"></span>
+                          <b><%= item.title %></b>
+                        </td>
+                        <td>
+                        <%= f.radio_button :page_id, item.id, required: idx.zero? %>
+                        </td>
+                      </tr>
+                      <% end %>
+                   </tbody>
+                </table>
+                <div class="author-bio clearfix" style="box-shadow:none;-webkit-box-shadow:none;padding-top: 30px;">
+                   <figure class="author-bio_avatar alignleft "><div class="cherry-services_icon"><i class="material-design-briefcase50"></i></div></figure>
+                   <h3><%= t("uex.choose_ypur_plan")%></h3>
+                   <div class="description"><%= t("uex.choose_ypur_plan_desc")%></div>
+                </div>
+                <table class="table products">
+                   <tbody>
+                      <tr class="white-block">
+                         <td>Вид услуги</td>
+                         <td>Срок выполнения</td>
+                         <td colspan="3">Стоимость услуги</td>
+                      </tr>
+                      <tr >
+                         <td colspan="2"></td>
+                         <td>Разово</td>
+                         <td>Месяц</td>
+                         <td>2 Месяца</td>
+                      </tr>
+                      <% Product.active.each_with_index do |item,idx|%>
+                      <tr>
+                        <td class="prod_name">
+                        <span class="material-design-verification24 list-icon" style="color: #00bbd3;"></span>
+                          <b><%= item.name %></b>
+                        </td>
+                        <td><%= item.period %></td>
+                        <% if item.is_one_time %>
+                          <td>
+                            <b><%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH</b>
+                            <br/>
+<!--                             <a href="#">
+                              <%= t("uex.do_order")%>
+                              <i class="fa fa-shopping-cart"></i>
+                            </a> -->
+                            <%= f.radio_button :product_id, item.id, required: idx.zero? %>
+                          </td>
+                        <% else %>
+                          <td>—</td>
+                        <% end %>
+
+
+                        <% if !item.is_one_time %>
+                          <td>
+                            <b><%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH</b>
+                            <br/>
+<!--                             <a href="#">
+                              <%= f.radio_button :product_id, item.id%>
+                              <%= t("uex.do_order")%>
+                              <i class="fa fa-shopping-cart"></i>
+                            </a> -->
+                            <%= f.radio_button :product_id, item.id%>
+                          </td>
+                        <% else %>
+                          <td>—</td>
+                        <% end %>
+
+
+                        <% if !item.is_one_time && item.has_second_price %>
+                          <td>
+                            <b><%= item.second_price.to_i %> $ / <%= Product.covert_to_uah(item.second_price)  %> UAH</b>
+                            <br/>
+<!--                             <a href="#">
+                              <%= t("uex.do_order")%>
+                              <i class="fa fa-shopping-cart"></i>
+                            </a> -->
+                            <%= f.radio_button :product_id, item.id%>
+                          </td>
+                        <% else %>
+                          <td>—</td>
+                        <% end %>
+
+
+                      </tr>
+                      <% end %>
+                   </tbody>
+                </table>
+
+
+
+              </div>
+
+           </div>
+           <div class="entry-permalink pull-right"><a id="create_order" href="#"><%= t("uex.create_order")%></a></div>
+          <% end %>
+        </div>
+     </div>
+  </div>
+  <div class="author-bio clearfix" style="box-shadow:none;-webkit-box-shadow:none">
+    <figure class="author-bio_avatar alignleft "><div class="cherry-services_icon"><i class="material-design-tick7"></i></div></figure>
+    <h3><%= t("uex.you_can_order")%><a target="_blank" href="<%= url("contacts")%>" title="<%= t("uex.contacts")%>" ><%= t("uex.with_us")%></a></h3>
+    <div class="description">Заказывая услуги у <a href="<%= url("/")%>">компании UEX</a> Вы получаете послный спектр ркламных услуг по отличному ссоотношению цена/качество</div>
+  </div>
+</div>
+
+<style type="text/css">
+
+  .author-bio{
+    padding:0;
+    margin: 0;
+  }
+</style>

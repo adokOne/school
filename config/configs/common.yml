@@ -2,6 +2,11 @@ defaults: &defaults
 
   domain: "http://0.0.0.0:3000"
   fb_token: "230258430429159|t-jmyqCxomGNW5jT6K2n23HEdfE"
+  liq_pay:
+    url: "https://www.liqpay.com/api/checkout"
+    public_key: "i5754055702"
+    private_key: "8ERQ502uzFdQQisYAz8MK1wx9fV428SOLei97f8P"
+
   hotelier_langs:
     - en
     - ru

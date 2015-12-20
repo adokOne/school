@@ -33,4 +33,11 @@ class City < ActiveRecord::Base
     Geo.nearest(self.lat,self.lng,"city",limit,5)
   end
 
+  def link
+    "/tag/#{self.seo_name}"
+  end
+
+  def anons
+    read_attribute("anons_#{I18n.locale}")
+  end
 end

@@ -3,6 +3,7 @@ $.Controller "Cabinet",
     @error_cls = "error"
     @form = @element.find("form")
     @init_validation()
+    @init_dialog()
 
   "input[type=file] -> change": (ev) ->
     el = $(ev.target)
@@ -23,12 +24,47 @@ $.Controller "Cabinet",
     el = $(ev.target)
     @rebuild_contacts(el, 1)
 
+  "#create_transaction -> click": (ev) ->
+    ev.preventDefault()
+    @dialog.dialog('open')
+
   ".comment-reply-link -> click": (ev) ->
     ev.preventDefault()
     @element.find(".comment-form-author").hide()
     @element.find(".comment-form-author input").removeAttr("required")
     @element.find("#message_message_id").val($(ev.target).data("id"))
     $('html, body').animate({scrollTop: $('#respond').offset().top}, 800);
+
+
+  "#new_transaction input[type=submit] -> click": (ev) ->
+    ev.preventDefault()
+    self = @
+    form = $(ev.target).parents("form")
+    $.ajax
+      type: "POST"
+      url: form.attr("action")
+      data: form.serialize()
+      success: (resp) ->
+        if resp.success
+          $("body").append($(resp.form))
+          $("form:last").submit()
+      error: (resp) ->
+
+
+
+  "#create_order -> click": (ev) ->
+    ev.preventDefault()
+    self = @
+    form = $(ev.target).parents("form")
+    $.ajax
+      type: "POST"
+      url: form.attr("action")
+      data: form.serialize()
+      success: (resp) ->
+        if resp.success
+          console.log(resp)
+      error: (resp) ->
+
 
   rebuild_contacts: (el, add) ->
     add = add || false
@@ -45,6 +81,9 @@ $.Controller "Cabinet",
           $(this).attr("id", $(this).attr("id").replace(/\d+/, i))
           $(this).attr("name", $(this).attr("name").replace(/\d+/, i))
         i++
+
+  init_dialog: ->
+    @dialog = @element.find('#dialog').dialog autoOpen: false
   init_validation: ->
     self = @
     @form.each (idx,form) ->

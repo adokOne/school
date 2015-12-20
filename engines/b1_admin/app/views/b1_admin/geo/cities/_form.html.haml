@@ -40,6 +40,14 @@
                       %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"meta_is_generated", "ng-model"=>"editedItem.meta_is_generated"}
                 .col-md-9
                   - I18n.available_locales.each do |l|
+                    .form-group{"ng-class" => "{'has-error': itemForm.anons_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}"}
+                      = label_tag :"anons_#{l}","Анонс", class:"col-sm-1 control-label"
+                      .col-sm-10
+                        = text_area_tag :"anons_#{l}","" ,class:"form-control", "ng-model"=>"editedItem.anons_#{l}"
+
+
+
+
                     .form-group{"ng-class" => "{'has-error': itemForm.meta_title.$invalid && itemForm.$submitted}",class: "lang lang_#{l}",style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}"}
                       = label_tag :"meta_title_#{l}", t("b1_admin.meta_title"), class:"col-sm-1 control-label"
                       .col-sm-10

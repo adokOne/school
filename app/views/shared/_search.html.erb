@@ -1,0 +1,37 @@
+<div class="search-row clearfix" data-ctrl="Search">
+  <div role="form" class="wpcf7" id="wpcf7-f180-p47-o1" lang="en-US" dir="ltr">
+    <%= form_for Search.new, url: search_path do %>
+    <form class="new_search" id="new_search" action="/search" accept-charset="UTF-8" method="post">
+       <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+             <span class="wpcf7-form-control-wrap your-name">
+                <input class="wpcf7-form-control wpcf7-text search-field" placeholder="Поиск" type="text" value="<%= params[:search]%>" name="search[text]" id="search_text">
+             </span>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <select name="search[city_id]">
+             <option disabled selected value="" ><%= t("uex.city")%></option>
+             <%= options_for_select(@cities) %>
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+            <select name="search[category_id]" required="required">
+               <option disabled selected value=""><%= t("uex.category")%></option>
+               <% @categories.each do |cat| %>
+                   <option value="<%= cat.id%>" class="label" ><%= cat.title%></option>
+                   <% cat.childrens.each do |cat| %>
+                         <option value="<%= cat.id%>" class="label" ><%= cat.title%></option>
+                   <% end %>
+               <% end %>
+            </select>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+             <span class="wpcf7-form-control-wrap">
+                <input type="submit" value="найти" class="wpcf7-form-control wpcf7-submit js-submit">
+             </span>
+          </div>
+        </div>
+      </div>
+    <%end%>
+  </div>
+</div>

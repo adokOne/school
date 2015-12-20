@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151206135135) do
+ActiveRecord::Schema.define(version: 20151220135936) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -115,6 +115,9 @@ ActiveRecord::Schema.define(version: 20151206135135) do
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
+    t.string   "seo_text_ru",       limit: 255
+    t.string   "seo_text_uk",       limit: 255
+    t.string   "seo_text_en",       limit: 255
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
@@ -153,6 +156,12 @@ ActiveRecord::Schema.define(version: 20151206135135) do
     t.string   "meta_title_uk",     limit: 255
     t.text     "meta_desc_uk",      limit: 65535
     t.string   "meta_keys_uk",      limit: 255
+    t.string   "anons_ru",          limit: 255
+    t.string   "anons_uk",          limit: 255
+    t.string   "anons_en",          limit: 255
+    t.string   "seo_text_ru",       limit: 255
+    t.string   "seo_text_uk",       limit: 255
+    t.string   "seo_text_en",       limit: 255
   end
 
   add_index "cities", ["code"], name: "index_cities_on_code", using: :btree
@@ -278,6 +287,17 @@ ActiveRecord::Schema.define(version: 20151206135135) do
   add_index "messages", ["ancestry"], name: "index_messages_on_ancestry", using: :btree
   add_index "messages", ["sent_messageable_id", "received_messageable_id"], name: "acts_as_messageable_ids", using: :btree
 
+  create_table "orders", force: :cascade do |t|
+    t.integer  "product_id",     limit: 4
+    t.integer  "user_id",        limit: 4
+    t.integer  "page_id",        limit: 4
+    t.integer  "transaction_id", limit: 4
+    t.float    "amount",         limit: 24
+    t.string   "currency",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "pages", force: :cascade do |t|
     t.integer  "category_id",       limit: 4,          default: 0,     null: false
     t.string   "seo_name",          limit: 255,                        null: false
@@ -300,6 +320,12 @@ ActiveRecord::Schema.define(version: 20151206135135) do
     t.date     "top_set_date"
     t.integer  "city_id",           limit: 4
     t.integer  "country_id",        limit: 4
+    t.boolean  "in_ukraine_top",    limit: 1,          default: false
+    t.boolean  "in_state_top",      limit: 1,          default: false
+    t.boolean  "in_category_top",   limit: 1,          default: false
+    t.date     "ukraine_top_date"
+    t.date     "state_top_date"
+    t.date     "category_top_date"
   end
 
   add_index "pages", ["active"], name: "index_pages_on_active", using: :btree
@@ -374,6 +400,21 @@ ActiveRecord::Schema.define(version: 20151206135135) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "transactions", force: :cascade do |t|
+    t.integer  "payment_system", limit: 4
+    t.float    "amount",         limit: 24
+    t.integer  "user_id",        limit: 4
+    t.string   "description",    limit: 255
+    t.integer  "product_id",     limit: 4
+    t.integer  "status",         limit: 4
+    t.string   "tnx_id",         limit: 255,                 null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "currency",       limit: 255, default: "UAH"
+  end
+
+  add_index "transactions", ["tnx_id"], name: "index_transactions_on_tnx_id", unique: true, using: :btree
 
   create_table "upload_images", force: :cascade do |t|
     t.datetime "created_at",                    null: false

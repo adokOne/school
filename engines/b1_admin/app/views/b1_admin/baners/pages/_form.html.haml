@@ -3,7 +3,7 @@
     %a.btn.btn-success.pull-right{href:baners_pages_path,"ng-click"=>"$root.setRoute('#{baners_pages_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
       Страницы
-  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}; categories=#{@categories.to_json}",:"data-url"=>baners_pages_path,"data-back-url"=>baners_pages_path}
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}; categories=#{@categories.to_json};cities=#{@cities.to_json}",:"data-url"=>baners_pages_path,"data-back-url"=>baners_pages_path}
     .row
       .col
         .panel
@@ -19,6 +19,11 @@
                 = label_tag :category_id, t("b1_admin.category"), class:"col-sm-1 control-label"
                 .col-sm-5
                   %select.form-control{"ng-model" => "editedItem.category_id", "ng-options" => "continent.id as continent.title for continent in categories",required: true}
+              .form-group{"ng-class" => "{'has-error': itemForm.city_id.$invalid && itemForm.$submitted}"}
+                = label_tag :city_id, "Город", class:"col-sm-1 control-label"
+                .col-sm-5
+                  %select.form-control{"ng-model" => "editedItem.city_id", "ng-options" => "continent.id as continent.name for continent in cities",required: true}
+
               .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
                 = label_tag :active, t("b1_admin.active"), class:"col-sm-1 control-label"
                 .col-sm-5

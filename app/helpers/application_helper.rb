@@ -9,8 +9,12 @@ module ApplicationHelper
     Settings.domain + url
   end
 
-  def url_is_current?( url, cls = "active" )
-    /#{params[:action]}/ =~ url || /#{params[:controller]}/ =~ url ? cls : ""
+  def url_is_current?( url, cls = "active", action = false )
+    if action
+      /#{params[:controller]}/ =~ url && /#{params[:action]}/ =~ action ? cls : ""
+    else
+      /#{params[:action]}/ =~ url || /#{params[:controller]}/ =~ url ? cls : ""
+    end
   end
 
   def breadcrumbs items = [], last_text= ""

@@ -28,7 +28,7 @@
       <link href="favicon.ico" sizes="114x114" rel="apple-touch-icon-precomposed">
       <link href="favicon.ico" sizes="144x144" rel="apple-touch-icon-precomposed">
    </head>
-   <body class="<%= url_is_current?("category","home page blog")  %> <%= url_is_current?("main","home page blog")  %> <%= url_is_current?("baners","single single-post")  %> <%= url_is_current?("item","single single-post")  %>     page-template-default cherry-responsive cherry-no-sidebar cherry-navigation-arrow" dir="ltr">
+   <body class="<%= url_is_current?("category","home page blog")  %> <%= url_is_current?("main","home page blog")  %>  <%= url_is_current?("city","home page blog")  %>  <%= url_is_current?("baners","single single-post")  %> <%= url_is_current?("item","single single-post")  %>     page-template-default cherry-responsive cherry-no-sidebar cherry-navigation-arrow" dir="ltr">
       <div id="site-wrapper" class="hfeed site">
          <header id="header" class="site-header wide" role="banner">
             <div id="static-area-header-top" class="header-top static-area">
@@ -36,25 +36,38 @@
                   <div class="row">
                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 static-header-menu">
                         <nav id="menu-primary" class="menu-primary menu" role="navigation">
-                           <label class="cherry-mega-menu-mobile-trigger" for="trigger-menu-primary-items">Menu</label><input class="cherry-mega-menu-mobile-trigger-box" id="trigger-menu-primary-items" type="checkbox">
+<!--                            <label class="cherry-mega-menu-mobile-trigger" for="trigger-menu-primary-items">Menu</label><input class="cherry-mega-menu-mobile-trigger-box" id="trigger-menu-primary-items" type="checkbox"> -->
                            <ul id="menu-primary-items" class="menu-items cherry-mega-no-js cherry-mega-menu mega-menu-direction-horizontal total-columns-12" data-event="hover" data-effect="slide-top" data-direction="horizontal" data-mobile-trigger="768" data-parent-selector=".cherry-mega-menu">
 
                               <li class="<%= url_is_current?("main","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("/") %>"><%= t("uex.home")%></a>
                               </li>
+                              <li class="separator cherry-mega-menu-top-item">/</li>
                               <li class="<%= url_is_current?("products","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("products") %>"><%= t("uex.products")%></a>
                               </li>
+                              <li class="separator cherry-mega-menu-top-item">/</li>
                               <li class="<%= url_is_current?("contacts","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("contacts") %>"><%= t("uex.contacts")%></a>
                               </li>
+                              <li class="separator cherry-mega-menu-top-item">/</li>
                               <li class="<%= url_is_current?("signin","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= current_user ? edit_user_path(current_user) : url("users/signin") %>"><%= t("uex.signin")%></a>
                               </li>
+                              <li class="separator cherry-mega-menu-top-item">/</li>
+                              <% if logged_in?%>
+                              <li class="<%= url_is_current?("users","current-menu-item", "index")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
+                                    <a href="<%= url("users") %>"><%= t("uex.users")%></a>
+                              </li>
+                              <li class="separator cherry-mega-menu-top-item">/</li>
+                              <%end%>
                               <li class="<%= url_is_current?("blog","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("blog") %>"><%= t("uex.blog")%></a>
                               </li>
-
+                              <li class="separator cherry-mega-menu-top-item">/</li>
+                              <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
+                                    <a href="#">RU</a>
+                              </li>
                            </ul>
                            <label class="cherry-mega-menu-mobile-close" for="trigger-menu-primary-items">Close</label>
                         </nav>
@@ -82,23 +95,7 @@
 
                         </div>
                      </div>
-<!--                      <div class="col-xs-12 col-sm-12 col-md-9 col-lg-9">
-                        <div class="site-branding">
-                           <h1 class="site-title image-logo">
-                              ПЕРВАЯ
-БАННЕРНАЯ ПОИСКОВАЯ СИСТЕМА
-В МИРЕ
-                           </h1>
-                        </div>
-                     </div> -->
-<!--                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 static-header-sidebar">
-                        <div class="sidebar-header widget-area" role="complementary">
-                           <aside id="text-2" class="widget widget_text">
-                              <h3 class="widget-title">БУДЕМ РАДЫ ВАШИМ ЗВОНКАМ:</h3>
-                              <div class="textwidget"><i class="material-design-phone370"></i>38(067) 574 21 88</div>
-                           </aside>
-                        </div>
-                     </div> -->
+                     <%= render("shared/search") if @has_search%>
                   </div>
                </div>
             </div>
@@ -131,6 +128,9 @@
                                           </li>
                                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65">
                                                 <a href="<%= url("contacts") %>"><%= t("uex.contacts")%></a>
+                                          </li>
+                                          <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65">
+                                                <a href="<%= url("cities") %>"><%= t("uex.cities")%></a>
                                           </li>
                                        </ul>
                                     </div>

@@ -1,4 +1,10 @@
 GIT
+  remote: git://github.com/liqpay/sdk-ruby.git
+  revision: 3cbb88e3dfcdd4d7c0bbd0c7e0284f4df13dcfd2
+  specs:
+    liqpay (0.0.1)
+
+GIT
   remote: https://github.com/backupify/active_attr_extensions.git
   revision: 8eb2e92431dbc9a01fe9ddf3b2a42edef798a0f8
   specs:
@@ -386,6 +392,7 @@ DEPENDENCIES
   jquery-rails
   jquery-ui-rails
   koala (~> 2.2)
+  liqpay!
   mysql2
   paper_trail (~> 4.0.0.rc)
   pry-rails

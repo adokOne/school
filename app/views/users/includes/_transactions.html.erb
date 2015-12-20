@@ -1,0 +1,63 @@
+<div class="cherry-tabs-pane cherry-clearfix  " style="display: none;">
+   <div class="row row-edge  ">
+       <article class="clearfix post-596 page type-page status-publish hentry" id="post-596">
+          <div class="row row-edge  ">
+
+             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box_3">
+                <div class="cherry-box  " style="box-shadow:none;-webkit-box-shadow:none">
+                   <div class="inner" style="background-color:#ffffff;">
+                      <div class="row row-edge  ">
+                        <h2><%= t("uex.your_balance",balance: current_user.balance)%></h2>
+                        <table class="table products">
+                           <tbody>
+                              <tr style="color:#000000">
+                                 <td>ID платежа</td>
+                                 <td>Дата</td>
+                                 <td>Сумма</td>
+                                 <td>Описание</td>
+                                 <td>Статус</td>
+                              </tr>
+                              <% current_user.transactions.each do |item|%>
+                              <tr>
+                                <td class="prod_name">
+                                <span class="material-design-verification24 list-icon" style="color: #00bbd3;"></span>
+                                  <b><%= item.tnx_id %></b>
+                                </td>
+                                <td><%= l(item.updated_at, format: :long) %></td>
+                                <td><%= item.amount %> <%= item.currency%></td>
+                                <td><%= item.description %></td>
+                                <td  class="pay_status_<%= item.status%>" ><%= t("uex.pay_statuses._#{item.status}") %></td>
+
+
+                              </tr>
+                              <% end %>
+                           </tbody>
+                        </table>
+
+                      </div>
+
+                   </div>
+                </div>
+                <div class="entry-permalink pull-right"><a id="create_transaction" href="#"><%= t("uex.create_transaction")%></a></div>
+             </div>
+          </div>
+       </article>
+   </div>
+</div>
+<div id="dialog" title="<%= t("uex.amount_to_pay")%>" style="    width: 500px;" data-ctrl="Cabinet">
+  <%= form_for Transaction.new, url: create_transaction_user_path(current_user), class: "comment-form"  do |f| %>
+     <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <p class="comment-form-author">
+            <%= f.number_field :amount , placeholder:  t("uex.amount"), required: true, min: 1 %>
+
+           </p>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+           <p class="form-submit">
+              <input name="submit" type="submit" id="submit" class="submit" value="<%= t("uex.pay")%>">
+           </p>
+        </div>
+     </div>
+  <% end %>
+</div>

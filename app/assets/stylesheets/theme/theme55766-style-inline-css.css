@@ -511,6 +511,9 @@ h4 strong {
     color: #fff;
     background: #f62e46;
 }
+.separator{
+    display: none;
+}
 #menu-primary #menu-primary-items>.menu-item {
     float: none;
     width: auto!important;

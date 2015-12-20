@@ -1,0 +1,20 @@
+<div class="row row-edge  ">
+   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <div class="portfolio-wrap">
+         <div class="portfolio-container list-layout loading-animation-move-up" data-post-per-page="9" data-column="3" data-list-layout="list-layout" data-loading-mode="ajax-pagination" data-item-margin="30" data-fixed-height="300" data-template="portfolio_list.tmpl" data-posts-format="post-format-all">
+            <div class="portfolio-list" data-all-posts-count="12">
+              <% @cities.each do |page| %>
+                <div class="portfolio-item item-1 odd  list-layout-item custom-hover clearfix">
+                  <div class="inner-wrap">
+                     <div class="item-content" style="width:100%">
+                        <h3><a href="<%= url(page.link) %>"><%= page.name %></a></h3>
+                        <p><%= page.anons %></p>
+                     </div>
+                  </div>
+                </div>
+              <% end %>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>

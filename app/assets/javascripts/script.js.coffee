@@ -16,12 +16,11 @@ window.init_selectbox = (elements) ->
 window.init_icheck = (element) ->
   element.find('input[type="radio"], input[type="checkbox"]').iCheck('destroy').iCheck(
     cursor: true
-    checkboxClass: 'icheckbox_minimal'
-    radioClass: 'iradio_minimal'
+    checkboxClass: 'icheckbox_square-blue'
+    radioClass: 'iradio_square-blue'
   )
   element.find('input[type="radio"], input[type="checkbox"]').on "ifClicked", (ev) ->
     $(ev.target).change()
-
 
 
 window.parseQuery = (name) ->

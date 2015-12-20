@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
 
   before_action :set_breadcrumbs
-  protect_from_forgery with: :exception
+  #protect_from_forgery with: :exception
 
   helper_method :current_user
   helper_method :logged_in?
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
       if request.xhr?
         render json: {success: false, login: false}
       else
-        redirect_to root_url
+        redirect_to signin_users_path
       end
     end
   end

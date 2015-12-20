@@ -17,6 +17,9 @@ class Page < ActiveRecord::Base
   scope :published, -> { }
   scope :by_rating, -> { order('created_at DESC') }
   scope :by_category, ->(id) { where(category_id: id) }
+  scope :by_city, ->(id) { where(city_id: id) }
+
+  scope :by_text, ->(id) { where(title: id) }
 
   belongs_to :user
 
@@ -33,7 +36,11 @@ class Page < ActiveRecord::Base
   validates :active, inclusion:{ in: [true,false] }
   #End validates
 
-
+  def self.by_text( text )
+    if text.present? && text.length > 0
+      where("`anons` LIKE :search OR `desc` LIKE :search OR `title` LIKE :search",{search: "%#{text}%"})
+    end
+  end
 
   def views
     impressions.size
@@ -57,7 +64,7 @@ class Page < ActiveRecord::Base
   end
 
   def link
-    "#{seos.join('/')}/#{self.id}.html"
+    "/#{seos.join('/')}/#{self.id}.html"
   end
 
   def prepare_breadcrumbs

@@ -23,6 +23,7 @@ class User < ActiveRecord::Base
   #Relations
   has_many :contacts
   has_many :pages
+  has_many :transactions
 
   accepts_nested_attributes_for :contacts
   #End Relations
@@ -80,6 +81,10 @@ class User < ActiveRecord::Base
   #TODO
   def messages_count
     self.messages.count
+  end
+
+  def balance
+    [self.transactions.for_balance.map(&:amount).sum, "UAH"].join(" ")
   end
 
   def self.password

@@ -1,4 +1,4 @@
-<div class="container user-cabinet" >
+<div class="container user-cabinet"  data-ctrl="Cabinet">
   <div class="row  ">
      <div class="container">
         <div class="row row-edge">
@@ -20,28 +20,8 @@
                           <%= render "users/includes/profile"%>
                           <%= render "users/includes/baners"%>
                           <%= render "users/includes/messages"%>
-                          <div class="cherry-tabs-pane cherry-clearfix  " style="display: none;">
-                             <div class="row row-edge  ">
-                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                   <h2>Instructions to follow</h2>
-                                   <p>Our healthcare professionals who arrange your tests will tell you whether there are any specific instructions you need to follow before your test. You can eat and drink as normal before some blood tests. In other cases, you will be instructed not to eat or drink (other than water) before your test. You may also be told not to drink alcohol or not to smoke before your test. If you are nervous or have a tendency to feel woozy or faint, tell the phlebotomist before you begin.</p>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4"><img class="alignnone size-full wp-image-560" src="http://livedemo00.template-help.com/wordpress_55766/wp-content/uploads/2015/05/page1-img4.jpg" alt="page1-img4" width="336" height="336"></div>
-                                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                                   <h2>Easy tips to remember</h2>
-                                   <div class="cherry-list font-icon cherry-list_4058   ">
-                                      <ul>
-                                         <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">No medicine before tests</a></li>
-                                         <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">No smoking and alcool</a></li>
-                                         <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">Consult with your doctor</a></li>
-                                         <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">Keep calm</a></li>
-                                         <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">No caffeinated beverages</a></li>
-                                         <li><span class="material-design-verification24 list-icon" style=""></span><a href="#">Fresh air and positive emotions</a></li>
-                                      </ul>
-                                   </div>
-                                </div>
-                             </div>
-                          </div>
+                          <%= render "users/includes/products"%>
+                          <%= render "users/includes/transactions"%>
                        </div>
                     </div>
                  </div>
@@ -51,7 +31,7 @@
      </div>
   </div>
 </div>
-<%= File.read("/home/adok/WWW/uex/app/assets/stylesheets/theme/material-design.css.scss").scan(/material-design-(.+?)\:before/m).flatten.map do |icon|
+<%#= File.read("/home/adok/WWW/uex/app/assets/stylesheets/theme/material-design.css.scss").scan(/material-design-(.+?)\:before/m).flatten.map do |icon|
   "<i class=\"material-design-#{icon}\"></i>"
  end.join("").html_safe
 

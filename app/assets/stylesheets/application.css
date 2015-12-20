@@ -13,5 +13,6 @@
  *= require_self
  *= require ./theme/shortcodes
  *= require ./summernote
+ *= require ./blue
  *= require_tree ./theme
  */

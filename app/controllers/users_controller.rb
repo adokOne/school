@@ -19,7 +19,7 @@ class UsersController < ApplicationController
       else
         if (token = user.sign_in(login_params[:password], request.remote_ip, request.referer, request.user_agent))
           cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
-          redirect_to user_path(user)
+          redirect_to edit_user_path(current_user)
         else
           if (attempts_left = (::B1Config.get_const.max_password_attempts - user.wrong_password_attempts)) > 0
             flash[:error] = t('b1_admin.wrong_password') + (t('b1_admin.attempts_left') % [attempts_left])
@@ -36,13 +36,35 @@ class UsersController < ApplicationController
     end
   end
 
+  def create_transaction
+    transaction = current_user.transactions.create( transaction_params )
+    liqpay = Liqpay::Liqpay.new(
+      :public_key  => Settings.liq_pay[:public_key],
+      :private_key => Settings.liq_pay[:private_key],
+    )
+    html = liqpay.cnb_form({
+      :version        => "3",
+      :amount         => transaction.amount,
+      :currency       => transaction.currency,
+      :description    => transaction.description,
+      :order_id       => transaction.tnx_id,
+      :server_url     => [Settings.domain, check_transaction_path].join("/") ,
+      :result_url     => [Settings.domain, edit_user_path(current_user,anchor: "transactions")].join("/")
+    })
+    render json: {success: true, form: html}
+  end
+
+  def create_order
+
+  end
+
   def create
     user = User.new(login_params)
     if user.valid?
       user.save
       token = user.signin( request.remote_ip, request.referer, request.user_agent)
       cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
-      redirect_to user_path(user)
+      redirect_to edit_user_path(current_user)
     else
       flash[:errors] = user.errors.messages
       redirect_to registration_users_path
@@ -151,6 +173,10 @@ class UsersController < ApplicationController
 
   def allowed_params
     params.require(:user).permit(:name,:desc,:avatar, contacts_attributes: [:contact_type,:value])
+  end
+
+  def transaction_params
+    params.require(:transaction).permit(:amount)
   end
 
 end

@@ -20,7 +20,7 @@ module B1Admin
 
       def allowed_params
         translated_fields = I18n.available_locales.map do |l|
-          ["desc_#{l}","name_#{l}","meta_keys_#{l}","meta_title_#{l}","meta_desc_#{l}"]
+          ["desc_#{l}","name_#{l}","meta_keys_#{l}","meta_title_#{l}","meta_desc_#{l}","anons_#{l}"]
         end
         params.require(:item).permit( translated_fields + [:id,:time_zone,:code,:country_id,:show_on_search,:continent_id,:show_as_popular, :meta_is_generated])
       end
