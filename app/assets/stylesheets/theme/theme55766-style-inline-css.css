@@ -435,7 +435,7 @@ address {
 }
 }
 @media ( min-width:600px )  {
-    .simple-menu li: hover>ul, .simple-menu li.focus>ul, .simple-menu li.menu-hover>ul {
+    .simple-menu li:hover>ul, .simple-menu li.focus>ul, .simple-menu li.menu-hover>ul {
     opacity: 1;
     visibility: visible;
     overflow: visible;

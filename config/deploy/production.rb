@@ -1,5 +1,5 @@
 set :deploy_to, "/home/#{fetch(:user)}/#{fetch(:application)}"
-set :branch, :master
+set :branch, :uex
 set :puma_conf,       "#{shared_path}/puma.rb"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock" #accept array for multi-bind
 # # Simple Role Syntax

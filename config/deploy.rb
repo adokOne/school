@@ -2,7 +2,7 @@
 server '193.84.22.53', port: 22 , user: 'adok', roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'ssh://git@github.com/adokOne/school.git'
-set :application,     'school'
+set :application,     'uex'
 set :user,            'adok'
 set :rvm_type, :user                     # Defaults to: :auto
 set :rvm_ruby_version, 'ruby-head'      # Defaults to: 'default'
@@ -19,7 +19,7 @@ set :keep_releases, 1
 
 ## Defaults:
 # set :scm,           :git
-# set :branch,        :new_dep
+set :branch,        :uex
 # set :format,        :pretty
 # set :log_level,     :debug
 # set :keep_releases, 5
