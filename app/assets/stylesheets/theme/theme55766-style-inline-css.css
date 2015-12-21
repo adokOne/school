@@ -470,7 +470,7 @@ h4 strong {
     font: 500 20px/25px 'Roboto', sans-serif;
     ;
 }
-#menu-primary .sub-menu .menu-item>a: hover, #menu-primary .cherry-mega-menu-sub>a:hover, #menu-primary .cherry-mega-menu-sub .menu-item:hover>a {
+#menu-primary .sub-menu .menu-item>a:hover, #menu-primary .cherry-mega-menu-sub>a:hover, #menu-primary .cherry-mega-menu-sub .menu-item:hover>a {
     color: #2cabfa;
 }
 #menu-primary .cherry-mega-menu-sub .megamenu-post-wrap .btn {
