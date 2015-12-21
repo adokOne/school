@@ -17,8 +17,15 @@ module B1Admin
         return items
       end
 
+      def before_update
+        user = params.dup[:item].delete("user")
+        if user.kind_of?(Hash) && user["originalObject"].present?
+          @params_to_update[:user_id] = user["originalObject"]["id"]
+        end
+      end
+
       def allowed_params
-        params.require(:item).permit(:product_id,:name,:email,:phone)
+        params.require(:item).permit(:product_id,:description,:amount,:status)
       end
 
       def set_data

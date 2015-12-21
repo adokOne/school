@@ -51,7 +51,7 @@ class User < ActiveRecord::Base
   # @retrun [Nil]
   def sign_in(password, ip, referer, user_agent)
     if authenticate(password)
-      update!(blocked: false, blocked_until: nil, wrong_password_attempts: 0)
+      update!(blocked: false, blocked_until: nil, wrong_password_attempts: 0, signins_count: (self.signins_count + 1) )
       signin(ip, user_agent, referer)
     else
       increment!(:wrong_password_attempts)
@@ -90,6 +90,10 @@ class User < ActiveRecord::Base
     [self.transactions.for_balance.map(&:amount).sum, "UAH"].join(" ")
   end
 
+  def total_payed
+    [self.transactions.payed.map(&:amount).sum, "UAH"].join(" ")
+  end
+
   def self.password
     (0...8).map { (65 + rand(26)).chr }.join
   end
@@ -102,6 +106,10 @@ class User < ActiveRecord::Base
     define_method("#{type}_contacts") do
       self.contacts.where(contact_type: type).all
     end
+  end
+
+  def is_vip
+    [true,false].sample
   end
 
   private

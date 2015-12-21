@@ -25,6 +25,7 @@ class Page < ActiveRecord::Base
 
   has_many :impressions, :as=>:impressionable
   has_many :reviews
+  has_many :orders
 
 
 

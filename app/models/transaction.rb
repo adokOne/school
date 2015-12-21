@@ -14,6 +14,7 @@ class Transaction < ActiveRecord::Base
   validates :status, inclusion:{ in: [STATUS_CREATED,STATUS_SUCCESS,STATUS_FAILED, STATUS_DEBITED] }
 
   scope :for_balance, -> { where(status: [STATUS_SUCCESS, STATUS_DEBITED  ]  ) }
+  scope :payed, -> { where(status: STATUS_SUCCESS  ) }
 
   def set_tnx
     self.status = STATUS_CREATED if self.status.nil?

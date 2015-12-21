@@ -1,0 +1,52 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:products_orders_path,"ng-click"=>"$root.setRoute('#{products_orders_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      Транзакции
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};", :"data-url"=>products_orders_path}
+    .row
+      .col
+        .panel
+          .panel-heading
+            %h3.panel-title Создание/редактировоание
+          = form_tag products_orders_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .row
+                .col-md-8
+                  .form-group{"ng-class" => "{'has-error': itemForm.amount.$invalid && itemForm.$submitted}"}
+                    = label_tag :amount, "Сумма", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = number_field_tag :amount,"" ,class:"form-control",required: true,"ng-minlength"=>-10000,"ng-max"=>10000, "ng-model"=>"editedItem.amount"
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.page_id.$invalid && itemForm.$submitted}"}
+                    = label_tag :page_id, "ID страницы", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = number_field_tag :page_id,"" ,class:"form-control","ng-min"=>1,"ng-max"=>100000, "ng-model"=>"editedItem.page_id"
+                  .form-group{"ng-class" => "{'has-error': itemForm.transaction_id.$invalid && itemForm.$submitted}"}
+                    = label_tag :transaction_id, "ID транзации", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = number_field_tag :transaction_id,"" ,class:"form-control","ng-min"=>1,"ng-max"=>100000, "ng-model"=>"editedItem.transaction_id"
+                  / .form-group{"ng-class" => "{'has-error': itemForm.description.$invalid && itemForm.$submitted}"}
+                  /   = label_tag :description, "Сумма", class:"col-sm-3 control-label"
+                  /   .col-sm-8
+                  /     = text_field_tag :description,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.description"
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.user_id.$invalid && itemForm.$submitted}"}
+                    = label_tag :user_id, "Пользователь", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      %angucomplete#members{:datafield => "items", :descriptionfield => "name,email",:inputclass => "form-control form-control-small", :pause => "200", :placeholder => "Ввведите email", :selectedobject => "editedItem.user", :titlefield => "name,email", :url => "#{products_users_path}.json?term=", "value"=>"{{editedItem.user.name}}"}
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.product_id.$invalid && itemForm.$submitted}"}
+                    = label_tag :product_id, "Услуга", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %select.form-control{"ng-model" => "editedItem.product_id", "ng-options" => "item.id as item.name for item in #{@products.to_json}",required: true}
+                  .form-group{"ng-class" => "{'has-error': itemForm.status.$invalid && itemForm.$submitted}"}
+                    = label_tag :status, "Статус", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %select.form-control{"ng-model" => "editedItem.status", "ng-options" => "item.id as item.name for item in #{I18n.t('uex.order_statuses').each_pair.map{|i,k| {name: k, id: i.to_s.sub("_","").to_i}  }.to_json}",required: true}
+
+
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

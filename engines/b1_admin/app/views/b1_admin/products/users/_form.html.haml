@@ -1,0 +1,104 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:products_users_path,"ng-click"=>"$root.setRoute('#{products_users_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      Пользователи
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}",:"data-url"=>products_users_path}
+    .row
+      .col-lg-12
+        .panel
+          .panel-heading
+            %h3.panel-title Создание/редактирование
+          = form_tag products_users_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
+                = label_tag :name, t("b1_admin.title"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.name"
+              .form-group{"ng-class" => "{'has-error': itemForm.email.$invalid && itemForm.$submitted}"}
+                = label_tag :email, t("b1_admin.email"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :email,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.email",type: :email
+              .form-group{"ng-class" => "{'has-error': itemForm.phone.$invalid && itemForm.$submitted}"}
+                = label_tag :phone, "Телефон (через запятую)", class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :phone,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.phone"
+              .form-group{"ng-class" => "{'has-error': itemForm.address.$invalid && itemForm.$submitted}"}
+                = label_tag :address, "Адрес (через запятую)", class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :address,"" ,class:"form-control",required: true,"ng-minlength"=>3, "ng-model"=>"editedItem.address"
+
+
+              .form-group{"ng-class" => "{'has-error': itemForm.website.$invalid && itemForm.$submitted}"}
+                = label_tag :website, "Сайт (через запятую)", class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :website,"" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.website"
+
+
+              .form-group{"ng-class" => "{'has-error': itemForm.password.$invalid && itemForm.$submitted}"}
+                = label_tag :password, t("b1_admin.password"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :password,"" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.password"
+              .form-group{"ng-class" => "{'has-error': itemForm.password_confirmation.$invalid && itemForm.$submitted}"}
+                = label_tag :password_confirmation, t("b1_admin.password_confirmation"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  = text_field_tag :password_confirmation,"" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.password_confirmation", "pw-check"=>"password"
+              .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                = label_tag :active, t("b1_admin.active"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
+              .form-group{"ng-class" => "{'has-error': itemForm.blocked.$invalid && itemForm.$submitted}"}
+                = label_tag :active, t("b1_admin.blocked"), class:"col-sm-2 control-label"
+                .col-sm-10
+                  %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.blocked"}
+
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")
+                %a.btn.btn-trans.btn-icon.fa.fa-camera.add-tooltip.fileinput{"tooltip" => t("b1_admin.add_photo"), :href => "#"}
+          %form#file-dropzone.dropzone{action: upload_products_user_path}
+            %input{type: :hidden,name: :id, value: @item.id}
+
+- content_for :aside do
+  .hidden
+
+%aside#aside-container
+  #aside
+    .nano.has-scrollbar
+      .nano-content{:style => "right: -15px;", :tabindex => "0"}
+        / Simple profile
+        .text-center.pad-all
+          .pad-ver
+            %img.img-md.img-border.img-circle{alt:@item.name, src: @item.avatar}
+          %h4.text-lg.text-overflow.mar-no=@item.name
+          - if @item.id
+            .pad-ver.btn-group
+              %a.btn.btn-icon.btn-hover-mint.fa.fa-envelope.icon-lg{:href => "#"}
+        %hr
+          %ul.list-group.bg-trans
+            / Profile Details
+            %li.list-group-item.list-item-sm
+              %i.fa.fa-phone.fa-fw
+              =@item.phone
+            %li.list-group-item.list-item-sm
+              %i.fa.fa-envelope-o.fa-fw
+              =@item.email
+            %li.list-group-item.list-item-sm
+              %i.fa.fa-clock-o.fa-fw
+              =l(@item.created_at, format: :long) if @item.created_at
+          %hr
+            .pad-hor
+              %h5.text-thin Обьявления
+              - @item.pages.each do |perm|
+                %a{href: url(perm[:link]), target: "_blank"}=perm[:title]
+                %br
+                %br
+            %hr
+              .text-center.clearfix
+                .col-xs-6
+                  %p.h3.text-thin=@item.signins_count
+                  %small.text-muted=t("b1_admin.signins_count")
+                .col-xs-6
+                  %p.h3.text-thin=@item.messages_count
+                  %small.text-muted=t("b1_admin.sended_messages")

@@ -1,8 +1,16 @@
 module B1Admin
   module Products
     module User
-      class ListSerializer < ::B1Admin::BaseSerializer
-        attributes :created_at, :email, :id, :name
+      class ListSerializer < ::ActiveModel::Serializer
+        attributes :avatar, :name,:email,:blocked,:phone,:created_at,:blocked_until,:id,:active,:signins_count, :balance, :pages_count, :is_vip, :total_payed
+
+        def phone
+          self.object.phones.join(",")
+        end
+
+        def pages_count
+          self.object.pages.count
+        end
       end
     end
   end

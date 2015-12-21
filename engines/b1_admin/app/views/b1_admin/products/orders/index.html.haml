@@ -2,7 +2,7 @@
   #content-container
     #page-title
       %h1.page-header.text-overflow
-        Транзакции
+        Заказы
     #page-content
       .row
         .panel
@@ -11,17 +11,30 @@
               %button.btn.btn-default{:name => "refresh", :title => "Refresh", :type => "button","ng-click"=>"itemsTable.reload()"}
                 %i.fa.fa-refresh.icon-refresh
               %a.btn.btn-primary{href: new_products_order_path,"ng-click"=>"$root.setRoute('#{new_products_order_path}')"}=t("b1_admin.add")
-            %h3.panel-title Список Транзакций
+            %h3.panel-title Список Заказов
 
           .panel-body
             %div{style:"margin-top: 30px;"}
             %div{"cg-busy" => "{'promise': itemsPromise,'backdrop': true,'message': '#{t('b1_admin.loading')}'}"}
               %table.table.table-hover.table-striped.table-vcenter#itemsTable{"ng-table"=>"itemsTable"}
                 %tr{"ng-repeat" => "item in data"}
+                  %td{"data-title" => "'ID'"}
+                    {{item.id}}
                   %td{"data-title" => "'Услуга'"}
                     {{item.product_name}}
                   %td{"data-title" => "'Сумма'"}
                     {{item.amount}}
+                  %td{"data-title" => "'#{t('b1_admin.status')}'"}
+                    %span.label.text-lg{style:"background-color:{{statusColors[item.status]}}"}
+                      %span{"ng-switch" => "", :on => "item.status"}
+                        %span{"ng-switch-when" => "0"}=t('uex.order_statuses._0')
+                        %span{"ng-switch-when" => "1"}=t('uex.order_statuses._1')
+                        %span{"ng-switch-when" => "2"}=t('uex.order_statuses._2')
+                        %span{"ng-switch-when" => "3"}=t('uex.order_statuses._3')
+
+                  %td{"data-title" => "'Менеджер'"}
+                    {{item.manager}}
+
                   %td{"data-title" => "'Дата'"}
                     {{item.created_at}}
 
@@ -46,8 +59,13 @@
                 = label_tag :email, t("b1_admin.email"), class:"control-label"
                 = text_field_tag :email,"" ,class:"form-control","ng-maxlength"=>255, "ng-model"=>"filters.email"
               .form-group{"ng-class" => "{'has-error': itemForm.country_id.$invalid && itemForm.$submitted}"}
-                = label_tag :course_id, "Услуга", class:"control-label"
-                %select.form-control{"ng-model" => "filters.course_id", "ng-options" => "item.id as item.name for item in #{@courses.to_json}"}
+                = label_tag :status, "Статус", class:"control-label"
+                %select.form-control{"ng-model" => "filters.status", "ng-options" => "item.id as item.name for item in #{I18n.t('uex.order_statuses').each_pair.map{|i,k| {name: k, id: i.to_s.sub("_","").to_i}  }.to_json}"}
+              .form-group{"ng-class" => "{'has-error': itemForm.country_id.$invalid && itemForm.$submitted}"}
+                = label_tag :product_id, "Услуга", class:"control-label"
+                %select.form-control{"ng-model" => "filters.product_id", "ng-options" => "item.id as item.name for item in #{@products.to_json}"}
+
+
           .panel-footer.text-right
             %a.btn.btn-success{"ng-click"=>"filter()"}=t("b1_admin.do_filter")
             %a.btn.btn-warning{"ng-click"=>"reset()"}=t("b1_admin.reset_filter")

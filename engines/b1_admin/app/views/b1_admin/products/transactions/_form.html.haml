@@ -19,19 +19,19 @@
                     .col-sm-8
                       = number_field_tag :amount,"" ,class:"form-control",required: true,"ng-minlength"=>-10000,"ng-max"=>10000, "ng-model"=>"editedItem.amount"
                   .form-group{"ng-class" => "{'has-error': itemForm.description.$invalid && itemForm.$submitted}"}
-                    = label_tag :description, "Сумма", class:"col-sm-3 control-label"
+                    = label_tag :description, "Описание", class:"col-sm-3 control-label"
                     .col-sm-8
                       = text_field_tag :description,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.description"
 
                   .form-group{"ng-class" => "{'has-error': itemForm.user_id.$invalid && itemForm.$submitted}"}
                     = label_tag :user_id, "Пользователь", class:"col-sm-3 control-label"
                     .col-sm-8
-                      %angucomplete#members{:datafield => "items", :descriptionfield => "name,email",:inputclass => "form-control form-control-small", :pause => "200", :placeholder => "Ввведите email", :selectedobject => "editedItem.user", :titlefield => "name,email", :url => "#{products_users_path}.json?term=", "value"=>"{{editedItem.name}}"}
+                      %angucomplete#members{:datafield => "items", :descriptionfield => "name,email",:inputclass => "form-control form-control-small", :pause => "200", :placeholder => "Ввведите email", :selectedobject => "editedItem.user", :titlefield => "name,email", :url => "#{products_users_path}.json?term=", "value"=>"{{editedItem.user.name}}"}
 
-                  .form-group{"ng-class" => "{'has-error': itemForm.course_id.$invalid && itemForm.$submitted}"}
+                  .form-group{"ng-class" => "{'has-error': itemForm.product_id.$invalid && itemForm.$submitted}"}
                     = label_tag :product_id, "Услуга", class:"col-sm-3 control-label"
                     .col-sm-7
-                      %select.form-control{"ng-model" => "editedItem.course_id", "ng-options" => "item.id as item.name for item in #{@courses.to_json}",required: true}
+                      %select.form-control{"ng-model" => "editedItem.product_id", "ng-options" => "item.id as item.name for item in #{@courses.to_json}",required: true}
                   .form-group{"ng-class" => "{'has-error': itemForm.status.$invalid && itemForm.$submitted}"}
                     = label_tag :status, "Статус", class:"col-sm-3 control-label"
                     .col-sm-7

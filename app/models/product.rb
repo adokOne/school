@@ -14,6 +14,8 @@ class Product < ActiveRecord::Base
 
   validates_attachment_file_name :logo, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/]
 
+
+  has_many :orders
   scope :active, -> { where(active: true) }
   scope :for_top, -> { where(show_in_top: true) }
   scope :for_table, -> { where(show_in_top: false) }
