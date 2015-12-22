@@ -31,7 +31,7 @@
       <link href="favicon.ico" sizes="114x114" rel="apple-touch-icon-precomposed">
       <link href="favicon.ico" sizes="144x144" rel="apple-touch-icon-precomposed">
    </head>
-   <body class="<%= url_is_current?("category","home page blog")  %> <%= url_is_current?("main","home page blog")  %>  <%= url_is_current?("city","home page blog")  %>  <%= url_is_current?("baners","single single-post")  %> <%= url_is_current?("item","single single-post")  %>     page-template-default cherry-responsive cherry-no-sidebar cherry-navigation-arrow" dir="ltr">
+   <body class="<%= url_is_current?("category","home page blog")  %> <%= url_is_current?("main","home page blog")  %>  <%= url_is_current?("city","home page blog")  %>  <%= url_is_current?("baners","single single-post")  %> <%= url_is_current?("item","single single-post")  %>  <%= @cls%>  <%= url_is_current?("add","single single-post")  %>  page-template-default cherry-responsive cherry-no-sidebar cherry-navigation-arrow" dir="ltr">
       <div id="site-wrapper" class="hfeed site">
          <header id="header" class="site-header wide" role="banner">
             <div id="static-area-header-top" class="header-top static-area">
@@ -46,42 +46,48 @@
                                     <a href="<%= url("/") %>"><%= t("uex.home")%></a>
                               </li>
                               <li class="separator cherry-mega-menu-top-item">/</li>
+                              <li class="<%= url_is_current?("add","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
+                                    <a href="<%= url("add") %>"><%= t("uex.add_baner")%></a>
+                              </li>
+                              <li class="separator cherry-mega-menu-top-item">/</li>
                               <li class="<%= url_is_current?("products","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("products") %>"><%= t("uex.products")%></a>
                               </li>
-                              <li class="separator cherry-mega-menu-top-item">/</li>
+<!--                               <li class="separator cherry-mega-menu-top-item">/</li>
                               <li class="<%= url_is_current?("contacts","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("contacts") %>"><%= t("uex.contacts")%></a>
-                              </li>
+                              </li> -->
                               <li class="separator cherry-mega-menu-top-item">/</li>
                               <li class="<%= url_is_current?("signin","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= current_user ? edit_user_path(current_user) : url("users/signin") %>"><%= t("uex.signin")%></a>
                               </li>
                               <li class="separator cherry-mega-menu-top-item">/</li>
-                              <% if logged_in?%>
+
                               <li class="<%= url_is_current?("users","current-menu-item", "index")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("users") %>"><%= t("uex.users")%></a>
                               </li>
                               <li class="separator cherry-mega-menu-top-item">/</li>
-                              <%end%>
-                              <li class="<%= url_is_current?("blog","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
+
+<!--                               <li class="<%= url_is_current?("blog","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("blog") %>"><%= t("uex.blog")%></a>
                               </li>
-                              <li class="separator cherry-mega-menu-top-item">/</li>
+                              <li class="separator cherry-mega-menu-top-item">/</li> -->
 
 
                               <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-66 cherry-mega-menu-top-item item-submenu-position-fullwidth cherry-mega-menu-has-children item-type-standard item-align-top-left menu-item-standard" data-hide-mobile="" data-sub-hr-position="fullwidth" data-sub-vr-position="vertical-parent" data-sub-type="standard">
                                  <a href="#" data-title="<%= I18n.locale.to_s.upcase%>"><%= I18n.locale.to_s.upcase%><i class="fa fa-angle-down mega-menu-arrow top-level-arrow"></i></a>
-                                 <ul class="cherry-mega-menu-sub level-0 effect-slide-top simple-sub" style="background-color: #fff;min-width: 95px;">
+                                 <ul class="cherry-mega-menu-sub level-0 effect-slide-top simple-sub" style="background-color: #fff;min-width: 82px;">
                                     <% I18n.available_locales.each do |locale|%>
                                     <li id="menu-item-298" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-298 cherry-mega-menu-sub-item item-nested-sub item-nested-sub-1 menu-item-standard"><a href="<%= locale_url(locale)  %>/" data-title="<%= locale.to_s.upcase %>"><%= locale.to_s.upcase %></a></li>
                                     <% end %>
                                  </ul>
                               </li>
 
-
-
-
+                              <% if logged_in?%>
+                                 <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
+                                       <a href="<%= url("logout") %>"><%= t("uex.logout")%></a>
+                                 </li>
+                              <% end %>
 
 
 
@@ -163,9 +169,9 @@
                                     <div class="textwidget">
                                        <ul>
                                           <li><a href="<%= url("products") %>"><%= t("uex.products")%></a></li>
-                                          <li><a href="<%= url("orders/create_page") %>"><%= t("uex.order_create_page")%></a></li>
-                                          <li><a href="<%= url("orders/baner_up") %>"><%= t("uex.order_baner_up")%></a></li>
-                                          <li><a href="<%= url("orders/page_up") %>"><%= t("uex.order_page_up")%></a></li>
+                                          <li><a href="<%= url("orders/add") %>"><%= t("uex.add_baner")%></a></li>
+<!--                                           <li><a href="<%= url("orders/baner_up") %>"><%= t("uex.order_baner_up")%></a></li>
+                                          <li><a href="<%= url("orders/page_up") %>"><%= t("uex.order_page_up")%></a></li> -->
                                           <li><a href="<%= url("users/login") %>"><%= t("uex.user_sign_in")%></a></li>
                                        </ul>
                                     </div>

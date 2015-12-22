@@ -1,10 +1,11 @@
 class UsersController < ApplicationController
 
-  before_filter :require_login, except: [:signin, :forgot, :registration, :login, :create, :create_message ]
+  before_filter :require_login, except: [:signin, :forgot, :registration, :login, :create, :create_message,:index ]
 
   before_filter :is_own?, only: [:update,:edit]
 
   def index
+    @cls = "single single-post"
     @users = User.active.by_rating.paginate(page: params[:page], per_page: 5)
   end
 

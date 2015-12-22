@@ -97,4 +97,8 @@ gem 'capistrano-passenger'
 gem 'capistrano3-puma' , group: :development
 gem "koala", "~> 2.2"
 
-gem 'google-adwords-api'
+# AdWords API gem.
+gem 'google-adwords-api', '~> 0.18.0'
+
+# Gem for OAuth authorization.
+gem 'oauth2'

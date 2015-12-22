@@ -9,7 +9,7 @@ module B1Admin
         end
 
         def page_name
-          self.object.page.try(:name)
+          self.object.page.try(:title)
         end
 
         def product_name
@@ -20,9 +20,6 @@ module B1Admin
           B1Admin::User.find_by_id(self.object.admin_id).try(:name)
         end
 
-        def product_name
-
-        end
       end
     end
   end

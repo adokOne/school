@@ -1365,7 +1365,7 @@ p {
     background: none; }
   #menu-primary > #menu-primary-items > .menu-item > a {
     font-weight: 300;
-    padding: 0 24px 22px 24px;
+    padding: 0 10px 22px 24px;
     text-decoration: none;
     position: relative; }
     #menu-primary > #menu-primary-items > .menu-item > a .mega-menu-arrow {
@@ -1389,7 +1389,7 @@ p {
   #menu-primary > #menu-primary-items .cherry-mega-menu-sub,
   #menu-primary > #menu-primary-items .cherry-mega-menu-sub.simple-sub {
     margin: 0;
-    padding: 30px 33px 31px 33px;
+    padding: 5px 22px 6px 30px;
     background-color: #f6f6f6;
     min-width: 259px;
     -webkit-box-shadow: 2px 3px 6px 1px rgba(0, 0, 0, 0.12);

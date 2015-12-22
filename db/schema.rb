@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151221140805) do
+ActiveRecord::Schema.define(version: 20151221170435) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -309,6 +309,7 @@ ActiveRecord::Schema.define(version: 20151221140805) do
     t.datetime "updated_at"
     t.integer  "status",         limit: 4
     t.integer  "admin_id",       limit: 4
+    t.date     "start_date"
   end
 
   create_table "pages", force: :cascade do |t|
@@ -399,6 +400,12 @@ ActiveRecord::Schema.define(version: 20151221140805) do
     t.text     "anons_en",          limit: 65535
     t.text     "anons_ru",          limit: 65535
     t.text     "anons_uk",          limit: 65535
+    t.boolean  "has_vip_status",    limit: 1,        default: false
+    t.boolean  "has_category_top",  limit: 1,        default: false
+    t.boolean  "has_region_top",    limit: 1,        default: false
+    t.boolean  "has_main_top",      limit: 1,        default: false
+    t.boolean  "has_adwords_stat",  limit: 1,        default: false
+    t.integer  "period_of_service", limit: 4,        default: 0
   end
 
   create_table "reviews", force: :cascade do |t|

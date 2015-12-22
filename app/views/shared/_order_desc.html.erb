@@ -1,0 +1,5 @@
+<div class="author-bio clearfix <%= with_shadow ? "" : "wihout_shadow"%>">
+   <figure class="author-bio_avatar alignleft "><div class="cherry-services_icon"><i class="material-design-tick7"></i></div></figure>
+   <h3><%= t("uex.you_can_order")%><a target="_blank" href="<%= url("contacts")%>" title="<%= t("uex.contacts")%>" ><%= t("uex.with_us")%></a></h3>
+   <div class="description"><%= t("uex.order_at_uex",url: url("/") ).html_safe%></div>
+</div>

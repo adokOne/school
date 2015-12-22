@@ -1,94 +1,121 @@
-<div class="container user-cabinet" data-ctrl="Cabinet">
-   <div id="primary" class="content-area">
-      <main id="main" class="site-main" role="main">
-         <article class="cherry-has-entry-date cherry-has-entry-author cherry-has-entry-comments clearfix post-22 post type-post status-publish format-standard has-post-thumbnail hentry category-allergyasthma" id="post-22">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                <% if flash[:errors].present? %>
-                  <p style="color:red"><%=  [t("uex.form.#{flash[:errors].keys.first}"), flash[:errors][flash[:errors].keys.first].first].join(" ").html_safe   %></p>
-                <% end%>
-               <div role="form" class="wpcf7" id="wpcf7-f180-p47-o1" lang="en-US" dir="ltr">
-                  <div class="screen-reader-response"></div>
-                  <%= form_for @item, url: params[:action] =~/new/ ? user_baners_path : user_baner_path , class:"wpcf7-form page-form" do |f| %>
-                    <%= f.hidden_field :id %>
-                     <div class="row">
-                       <div class="media-content">
-                         <%= f.file_field :logo, style: "display:none",:"data-img-id"=>"baner-img",required: @item.logo.present? ? false : true %>
-                         <img width="1088" height="387" style="height: 387px!important;" src="<%= @item.logo %>" class="image croped-image" id="baner-img" />
-                         <div class="rollover-content ">
-                           <div class="table-display">
-                             <div class="links-container custom-links custom-hover-zoom table-cell">
-                               <a class="item-link zoomlink magnific-popup-link" href="#"></a>
-                             </div>
-                           </div>
-                         </div>
-                       </div>
+<div class="container user-cabinet"  data-ctrl="Cabinet">
+  <div class="row  ">
+     <div class="container">
+        <div class="row row-edge">
+           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box_2">
+              <div class="cherry-box  ">
+                 <div class="inner" style="background-color:#ffffff;">
+                    <div class="cherry-tabs cherry-tabs-style-default  " data-active="1">
+                        <div class="cherry-tabs-nav">
+                          <span class="" data-anchor="partners" ><%= t("uex.cabinet.partners") %></span>
+                          <span class="cherry-tabs-current" data-url="<%= edit_user_path(current_user) %>#profile" data-target="self"><%= t("uex.cabinet.profile") %></span>
+                          <span class="" data-anchor="baners" data-url="<%= edit_user_path(current_user) %>#baners" data-target="self"><%= t("uex.cabinet.my_baner") %></span>
+
+                          <span class="" data-anchor="messages" data-url="<%= edit_user_path(current_user) %>#messages" data-target="self"><%= t("uex.cabinet.messages") %></span>
+                          <span class="" data-anchor="orders" data-url="<%= edit_user_path(current_user) %>#orders" data-target="self" ><%= t("uex.cabinet.orders") %></span>
+                          <span class="" data-anchor="paymnets" data-url="<%= edit_user_path(current_user) %>#paymnets" data-target="self"><%= t("uex.cabinet.my_payments") %></span>
+                        </div>
+                        <main id="main" class="site-main" role="main">
+                           <article class="cherry-has-entry-date cherry-has-entry-author cherry-has-entry-comments clearfix post-22 post type-post status-publish format-standard has-post-thumbnail hentry category-allergyasthma" id="post-22">
+                              <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                  <% if flash[:error].present? %>
+                                    <p style="color:red"><%=  flash[:error].html_safe   %></p>
+                                  <% end%>
+                                  <% if flash[:message].present? %>
+                                    <p style="color:green"><%=  flash[:message].html_safe   %></p>
+                                  <% end%>
+                                 <div role="form" class="wpcf7" id="wpcf7-f180-p47-o1" lang="en-US" dir="ltr">
+                                    <div class="screen-reader-response"></div>
+                                    <%= form_for @item, url: params[:action] =~/new/ ? user_baners_path : user_baner_path , class:"wpcf7-form page-form" do |f| %>
+                                      <%= f.hidden_field :id %>
+                                       <div class="row">
+                                          <div class="entry-meta entry-meta-top">
+                                             <span class="photo-resolution"><i class="material-design-mountain31"></i><%= t("uex.file_definition")%></span>
+                                          </div>
+                                         <div class="media-content">
+                                           <%= f.file_field :logo, style: "display:none",:"data-img-id"=>"baner-img",required: @item.logo.present? ? false : true %>
+                                           <img width="1088" height="387" style="height: 387px!important;" src="<%= @item.logo %>" class="image croped-image" id="baner-img" />
+                                           <div class="rollover-content ">
+                                             <div class="table-display">
+                                               <div class="links-container custom-links custom-hover-zoom table-cell">
+                                                 <a class="item-link zoomlink magnific-popup-link" href="#"></a>
+                                               </div>
+                                             </div>
+                                           </div>
+                                         </div>
 
 
 
-                        <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
+                                          <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
 
-                        </figure>
-                     </div>
-                     <div class="row">
-                        <div class="row">
-                           <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                 <span class="wpcf7-form-control-wrap your-name">
-                                    <select name="page[country_id]" required="required">
-                                       <option disabled <%= @item.country_id.present? ? "" : "selected" %> value="" ><%= t("uex.choose_country")%></option>
-                                       <%= options_for_select(@countries) %>
-                                    </select>
-                                 </span>
+                                          </figure>
+                                       </div>
+                                       <div class="row">
+                                          <div class="row">
+                                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                   <span class="wpcf7-form-control-wrap your-name">
+                                                      <select name="page[country_id]" required="required">
+                                                         <option disabled <%= @item.country_id.present? ? "" : "selected" %> value="" ><%= t("uex.choose_country")%></option>
+                                                         <%= options_for_select(@countries) %>
+                                                      </select>
+                                                   </span>
+                                                </div>
+                                                <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                                                   <span class="wpcf7-form-control-wrap your-name">
+                                                      <select name="page[city_id]" required="required">
+                                                         <option disabled <%= @item.city_id.present? ? "" : "selected" %> value="" ><%= t("uex.choose_city")%></option>
+                                                         <%= options_for_select(@cities) %>
+                                                      </select>
+                                                   </span>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                                   <span class="wpcf7-form-control-wrap your-name">
+                                                      <select name="page[category_id]" required="required">
+                                                         <option disabled <%= @item.category_id.present?  && !@item.category_id.zero?  ? "" : "selected" %> value=""><%= t("uex.chose_category")%></option>
+                                                         <% @categories.each do |cat| %>
+                                                             <option value="<%= cat.id%>" class="label" <%= @item.category_id.present? && @item.category_id==cat.id  ? "selected" : "" %>><%= cat.title%></option>
+                                                             <% cat.childrens.each do |cat| %>
+                                                                   <option value="<%= cat.id%>" class="label" <%= @item.category_id.present? && @item.category_id==cat.id  ? "selected" : "" %>><%= cat.title%></option>
+                                                             <% end %>
+                                                         <% end %>
+                                                      </select>
+                                                   </span>
+                                                </div>
+                                             </div>
+                                          </div>
+                                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                             <span class="wpcf7-form-control-wrap your-name">
+                                                <%=f.text_field :title, class:"wpcf7-form-control wpcf7-text", placeholder: t("uex.title_plc") ,required: true%>
+                                             </span>
+                                          </div>
+                                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                             <span class="wpcf7-form-control-wrap your-message">
+                                             <%=f.text_area :anons, class:"wpcf7-form-control wpcf7-textarea", placeholder: t("uex.anons_plc"),cols:"3", rows:"3", style: "height: 80px;"%>
+                                             </span>
+                                          </div>
+                                          <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                             <span class="wpcf7-form-control-wrap your-message">
+
+                                             <%=f.text_area :desc, class:"wpcf7-form-control wpcf7-textarea", placeholder: t("uex.message_plc"), id: "summernote", escape: false,required: true  %>
+                                             </span>
+                                          </div>
+                                       </div>
+                                       <div class="submit-wrap">
+                                          <input type="submit" value="<%= t("uex.submit")%>" class="wpcf7-form-control wpcf7-submit" />
+                                       </div>
+                                    <% end %>
+                                 </div>
                               </div>
-                              <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-                                 <span class="wpcf7-form-control-wrap your-name">
-                                    <select name="page[city_id]" required="required">
-                                       <option disabled <%= @item.city_id.present? ? "" : "selected" %> value="" ><%= t("uex.choose_city")%></option>
-                                       <%= options_for_select(@cities) %>
-                                    </select>
-                                 </span>
-                              </div>
-                              <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                 <span class="wpcf7-form-control-wrap your-name">
-                                    <select name="page[category_id]" required="required">
-                                       <option disabled <%= @item.category_id.present?  && !@item.category_id.zero?  ? "" : "selected" %> value=""><%= t("uex.chose_category")%></option>
-                                       <% @categories.each do |cat| %>
-                                           <option value="<%= cat.id%>" class="label" <%= @item.category_id.present? && @item.category_id==cat.id  ? "selected" : "" %>><%= cat.title%></option>
-                                           <% cat.childrens.each do |cat| %>
-                                                 <option value="<%= cat.id%>" class="label" <%= @item.category_id.present? && @item.category_id==cat.id  ? "selected" : "" %>><%= cat.title%></option>
-                                           <% end %>
-                                       <% end %>
-                                    </select>
-                                 </span>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                           <span class="wpcf7-form-control-wrap your-name">
-                              <%=f.text_field :title, class:"wpcf7-form-control wpcf7-text", placeholder: t("uex.name_plc") ,required: true%>
-                           </span>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                           <span class="wpcf7-form-control-wrap your-message">
-                           <%=f.text_area :anons, class:"wpcf7-form-control wpcf7-textarea", placeholder: t("uex.message_plc"),cols:"3", rows:"3", style: "height: 80px;",required: true %>
-                           </span>
-                        </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                           <span class="wpcf7-form-control-wrap your-message">
-<!--                               <textarea class="wpcf7-form-control wpcf7-textarea" placeholder="<%= t("uex.message_plc")%>" id="summernote" name="page[desc]" style="display: none;"><%= raw @item.desc %></textarea> -->
-                           <%=f.text_area :desc, class:"wpcf7-form-control wpcf7-textarea", placeholder: t("uex.message_plc"), id: "summernote", escape: false,required: true  %>
-                           </span>
-                        </div>
-                     </div>
-                     <div class="submit-wrap">
-                        <input type="submit" value="<%= t("uex.submit")%>" class="wpcf7-form-control wpcf7-submit" />
-                     </div>
-                  <% end %>
-               </div>
-            </div>
 
-            <div class="entry-meta entry-meta-bottom"></div>
-         </article>
-      </main>
-   </div>
+                              <div class="entry-meta entry-meta-bottom"></div>
+                           </article>
+                        </main>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </div>
+     </div>
+  </div>
 </div>

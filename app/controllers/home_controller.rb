@@ -16,6 +16,14 @@ class HomeController < ApplicationController
     @products = Product.active.for_table
   end
 
+  def logout
+    if current_user
+      current_user.signout(cookies[User::COOKIE_NAME], request.remote_ip, request.user_agent)
+      cookies.delete(User::COOKIE_NAME)
+    end
+    redirect_to root_url
+  end
+
   def category
     @has_search = true
     seo_name = params[:seo_name]
@@ -120,5 +128,44 @@ class HomeController < ApplicationController
     end
     redirect_to :back
   end
+
+  def add
+    if logged_in?
+      redirect_to new_user_baner_path(current_user)
+    end
+    @has_editor = true
+    @countries = Country.where(id: Country::UKRAINE_ID ).pluck("name_#{I18n.locale}",:id)
+    @cities    = City.where(country_id: Country::UKRAINE_ID ).pluck("name_#{I18n.locale}",:id)
+    @categories = Category.get_parent
+    @item = AnonimPage.new(flash[:page].present? ? flash[:page] : {})
+  end
+
+  def add_baner
+    baner = AnonimPage.new(baner_params)
+    if baner.valid?
+      if baner.user_exist?
+        flash[:page] = baner
+        flash[:error] = I18n.t("uex.user_exist_on_order", login_path: signin_users_path, forgot_path: forgot_users_path)
+        redirect_to(request.referer + "#notice") and return
+      else
+        user = User.create(email: baner.email, name: baner.name, password: User.password)
+        token = user.signin( request.remote_ip, request.referer, request.user_agent)
+        cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
+        baner = baner.create_real(baner_params[:logo])
+        flash[:message] = I18n.t("uex.page_on_moder")
+        redirect_to edit_user_baner_path(current_user, baner)
+      end
+    else
+      flash[:page] = baner
+      flash[:error] = [t("uex.form.#{baner.errors.messages.keys.first}"), baner.errors.messages[baner.errors.messages.keys.first].first].join(" ")
+      redirect_to(request.referer + "#notice") and return
+    end
+  end
+
+  def baner_params
+    params.require(:anonim_page).permit(:name,:email,:phone,:title,:anons,:logo,:category_id,:city_id, :country_id, :desc)
+  end
+
+
 
 end

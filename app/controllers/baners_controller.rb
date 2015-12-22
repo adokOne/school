@@ -9,27 +9,37 @@ class BanersController < ApplicationController
   def create
     baner =  current_user.pages.new(allowed_params)
     if baner.valid?
+      baner.save
       redirect_to user_path(current_user)
     else
-      flash[:errors] = baner.errors.messages
-      redirect_to new_user_baner_path
+      flash[:page] = baner
+      flash[:error] = [t("uex.form.#{baner.errors.messages.keys.first}"), baner.errors.messages[baner.errors.messages.keys.first].first].join(" ")
+      flash[:message] = I18n.t("uex.page_on_moder")
+      redirect_to edit_user_baner_path(current_user, baner)
     end
   end
+
+
+
 
   def update
     baner = current_user.pages.find(params[:id])
     baner.update_attributes(allowed_params)
     if baner.valid?
-      redirect_to user_path(current_user)
+      baner.save
+      baner.disactivate!
+      flash[:message] = I18n.t("uex.page_on_moder")
+      redirect_to edit_user_baner_path(current_user, baner)
     else
-      flash[:errors] = baner.errors.messages
+      flash[:page] = baner
+      flash[:error] = [t("uex.form.#{baner.errors.messages.keys.first}"), baner.errors.messages[baner.errors.messages.keys.first].first].join(" ")
       redirect_to edit_user_baner_path(current_user,baner)
     end
 
   end
 
   def new
-    @item = Page.new
+    @item = Page.new(flash[:page].present? ? flash[:page] : {})
     @has_editor = true
   end
 

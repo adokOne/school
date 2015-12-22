@@ -113,11 +113,7 @@
         </div>
      </div>
   </div>
-  <div class="author-bio clearfix" style="box-shadow:none;-webkit-box-shadow:none">
-    <figure class="author-bio_avatar alignleft "><div class="cherry-services_icon"><i class="material-design-tick7"></i></div></figure>
-    <h3><%= t("uex.you_can_order")%><a target="_blank" href="<%= url("contacts")%>" title="<%= t("uex.contacts")%>" ><%= t("uex.with_us")%></a></h3>
-    <div class="description">Заказывая услуги у <a href="<%= url("/")%>">компании UEX</a> Вы получаете послный спектр ркламных услуг по отличному ссоотношению цена/качество</div>
-  </div>
+  <%= render "shared/order_desc", with_shadow: false %>
 </div>
 
 <style type="text/css">

@@ -1,3 +1,7 @@
+.wihout_shadow{
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
 .sbHolder, .search-field, .new_search input[type=submit] {
 	border: 1px solid #18BBEA;
     height: 50px;
@@ -13,6 +17,19 @@
 .wpcf7 form.new_search .wpcf7-form-control-wrap{
 	margin: 0;
 }
+/*.testimonials-item{
+border-bottom: 2px solid #F5F5F5;
+    margin-bottom: 10px;
+}*/
+.photo-resolution i{
+  color: #2cabfa;
+    font-size: 24px;
+    font-family: "material-design";
+    line-height: 1em;
+    display: inline-block;
+    vertical-align: top;
+    padding-right: 6px;
+}
 .new_search .search-field{
 	border: 1px solid #18BBEA!important;
     height: 50px;
@@ -26,7 +43,7 @@ header{
 }
 #menu-primary-items{
 	    margin: 0 auto;
-    width: 800px;
+   /* width: 800px;*/
         margin-bottom: 70px;
 }
 .separator{

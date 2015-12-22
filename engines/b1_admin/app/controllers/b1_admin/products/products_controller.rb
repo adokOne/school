@@ -7,7 +7,7 @@ module B1Admin
         translated_fields = I18n.available_locales.map do |l|
           ["desc_#{l}","name_#{l}","anons_#{l}"]
         end
-        params.require(:item).permit( translated_fields + [:active,:name,:title,:desc,:show_in_top, :has_sale, :has_second_price, :is_one_time, :price, :second_price, :sale_price, :period])
+        params.require(:item).permit( translated_fields + [:active,:name,:title,:desc,:show_in_top, :has_sale, :has_second_price, :is_one_time, :price, :second_price, :sale_price, :period, :has_vip_status, :has_category_top, :has_region_top, :has_main_top, :has_adwords_stat, :period_of_service])
       end
 
 

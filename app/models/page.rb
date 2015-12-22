@@ -9,7 +9,9 @@ class Page < ActiveRecord::Base
                     path:        ":rails_root/public/system/:class/:id/:style.:extension",
                     url:         "/system/:class/:id/:style.:extension"
 
-  validates_attachment_content_type :logo, :content_type => /\Aimage/
+  validates_attachment :logo,
+    content_type: { content_type: /\Aimage/ },
+    size: { in: 0.megabytes..1.megabytes }
 
   delegate :title, to: :category, prefix: true, allow_nil: true
   delegate :seo_name, to: :category, prefix: true, allow_nil: true
@@ -32,9 +34,9 @@ class Page < ActiveRecord::Base
 
 
   #Validates
-  validates :title,:anons,:desc,:country_id, :city_id, :category_id,  presence: true
+  validates :title,:country_id, :city_id, :category_id, :user_id, presence: true
   validates :title,     length: { in: 3..200 }
-  validates :anons,     length: { in: 25..5000 }
+  validates :anons,     length: { in: 0..5000 }
   validates :active, inclusion:{ in: [true,false] }
   #End validates
 
@@ -46,6 +48,11 @@ class Page < ActiveRecord::Base
     end
 
   end
+
+  def disactivate!
+    self.update_attribute(:active, false)
+  end
+
 
   def views
     impressions.size

@@ -3,29 +3,29 @@ Rails.application.routes.draw do
 
   scope "(:locale)", :locale => /ru|uk|en/ do
 
+
+    %W{add contacts products cities logout}.each do |item|
+      get item, to: "home##{item}"
+    end
+    %w{search review order feedback add_baner}.each do |item|
+      post item, to: "home##{item}"
+    end
+
     root to: "home#main"
     post "/", to: "home#main"
-    get "contacts", to: "home#contacts"
-    get "products", to: "home#products"
-    get 'page/:page', to: "home#index"
-    post 'feedback', to: "home#feedback"
-    get "blog/*seo_name", to: "blog#item"
-    get "cities", to: "home#cities"
-    get "blog", to: "blog#index"
 
+    get 'page/:page', to: "home#index"
+
+    get "blog", to: "blog#index"
+    get "blog/*seo_name", to: "blog#item"
     get "blog/category/*seo_name", to: "blog#category"
+
     get "*path/(:id).:format", to: "home#item"
     get "category/*seo_name", to: "home#category"
-
     post "check/transaction", to: "home#check_transaction"
     post "create/order", to: "users#create_order"
 
     get "tag/:seo_name", to:"home#city"
-
-    post "search", to: "home#search"
-    post "review", to: "home#review"
-    post "order", to: "home#order"
-
     get "product/:id", to:"home#product"
 
 

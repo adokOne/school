@@ -1,11 +1,7 @@
 <div class="cherry-tabs-pane cherry-clearfix  " style="display: none;">
   <% unless current_user.pages.any? %>
     <div class="row row-edge  ">
-    <div class="author-bio clearfix" style="box-shadow:none">
-       <figure class="author-bio_avatar alignleft "><div class="cherry-services_icon"><i class="material-design-round52"></i></div></figure>
-       <h3> <%= t("uex.you_dont_have_banners_yet")%> <a target="_blank" href="<%= url("contacts")%>" title="<%= t("uex.contacts")%>" ><%=t("uex.with_us")%></a></h3>
-       <div class="description">Заказывая услуги у <a href="<%= url("/")%>">компании UEX</a> Вы получаете послный спектр ркламных услуг по отличному ссоотношению цена/качество</div>
-    </div>
+    <%= render "shared/order_desc", with_shadow: false %>>
     </div>
   <% end %>
 
@@ -36,5 +32,5 @@
       </div>
     </div>
   <% end %>
-  <div class="entry-permalink pull-right"><a href="<%= url("users/#{current_user.id}/baners/new") %>"><%= t("uex.create_own_baner")%></a></div>
+  <div class="entry-permalink pull-right" style="margin-top: 50px;"><a href="<%= url("users/#{current_user.id}/baners/new") %>"><%= t("uex.create_own_baner")%></a></div>
 </div>

@@ -1,0 +1,15 @@
+ru:
+  activemodel:
+    errors:
+      models:
+        anonim_page:
+          attributes:
+            logo_file_size:
+              in_between: "Не должен превышать 1MB"
+  activerecord:
+    errors:
+      models:
+        page:
+          attributes:
+            logo_file_size:
+              in_between: "Не должен превышать 1MB"
