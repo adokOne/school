@@ -1,0 +1,184 @@
+        <div id="content" class="site-content boxed extra-boxed">
+          <div class="container">
+            <div id="primary" class="content-area">
+              <main id="main" class="site-main" role="main">
+                  <article class="clearfix post-43 page type-page status-publish hentry" id="">
+                    <div class="portfolio-wrap">
+                      <div class="container">
+                        <div class="arrow">
+                          <%= image_tag "arrow.png"%>
+                        </div>
+                        <div class="arrow right">
+                          <%= image_tag "arrow.png"%>
+                        </div>
+                        <div class="row">
+                          <div class="heading">
+                            <h2>Что вы получите?</h2>
+                          </div>
+
+                          <div class="col-lg-8 col-lg-offset-2">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                              <div class="service">
+                                <%= image_tag "round.png"%>
+                                <div class="service-desc">ПЕРСОНАЛЬНУЮ СТРАНИЦУ <br>(БАННЕР + ОПИСАНИЕ УСЛУГ)</div>
+                              </div>
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                              <div class="service">
+                                <%= image_tag "round2.png"%>
+                              </div>
+                              <div class="service-desc">РАЗМЕЩЕНИЕ В ТОП <br>GOOGLE</div>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div class="row">
+                          <div class="working-scheme">
+                            <div class="heading">
+                              <h3><%= t("uex.how_it_works")%></h3>
+                            </div>
+                            <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                              <%= image_tag "square.png"%>
+
+                              <p><%= t("uex.how_it_works_desc._0")%> </p>
+                           </div>
+                           <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                              <%= image_tag "square2.png"%>
+                            <p><%= t("uex.how_it_works_desc._1")%> </p>
+                           </div>
+                           <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                              <%= image_tag "square3.png"%>
+                            <p><%= t("uex.how_it_works_desc._2")%></p>
+                           </div>
+                           <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                              <%= image_tag "square4.png"%>
+                            <p><%= t("uex.how_it_works_desc._3")%></p>
+                           </div>
+                           <div class="item col-xs-6 col-sm-4 col-md-3 col-lg-3 col-lg-3  col-offset-lg-4-half">
+                            <div class="arrow small">
+                              <%= image_tag "arrow.png"%>
+                            </div>
+                            <%= image_tag "square5.png"%>
+                            <p><%= t("uex.how_it_works_desc._4")%></p>
+                           </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </article>
+                </main>
+             </div>
+          </div>
+        </div>
+
+        <div class="section">
+          <div class="container">
+            <div class="col-lg-12">
+              <p>НАШ ПЕРЕЧЕНЬ ПАРТНЕРОВ СТРЕМИТЕЛЬНО РАСТЕТ!</p>
+              <p><em>более 1000 посетителей ежедневно!</em></p>
+              <p>Вы получите прямую ссылку на ваш сайт с трастового ресурса — <strong>UEX.link.</strong></p>
+              <p><span>Хватит тратить деньги</span> на покупку некачественных ссылок, выбирайте лучшее!</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="tariff-block">
+          <div class="content">
+            <div class="container">
+              <div class="heading">
+                <h3><%= t("uex.our_tarrifs")%></h3>
+              </div>
+              <div class="col-lg-12">
+                <table>
+                  <tr class="white-block">
+                     <th><%= t("uex.service_type")%></td>
+                     <th><%= t("uex.service_period")%></td>
+                     <th colspan="3"><%= t("uex.service_amount")%></td>
+                  </tr>
+                  <tr >
+                     <th colspan="2"></td>
+                     <th><%= t("uex.one_time")%></td>
+                     <th><%= t("uex.one_month")%></td>
+                     <th><%= t("uex.two_month")%></td>
+                  </tr>
+                  <% @products.each do |item|%>
+                  <tr>
+                    <td >
+                      <%= item.name %>
+                    </td>
+                    <td><%= item.period %></td>
+                    <% if item.is_one_time %>
+                      <td>
+                        <%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH
+                      </td>
+                    <% else %>
+                      <td>—</td>
+                    <% end %>
+
+
+                    <% if !item.is_one_time %>
+                      <td>
+                        <%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH
+                      </td>
+                    <% else %>
+                      <td>—</td>
+                    <% end %>
+
+
+                    <% if !item.is_one_time && item.has_second_price %>
+                      <td>
+                        <%= item.second_price.to_i %> $ / <%= Product.covert_to_uah(item.second_price)  %> UAH
+                      </td>
+                    <% else %>
+                      <td>—</td>
+                    <% end %>
+                  </tr>
+                  <% end %>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-block" id="order" data-ctrl="Form">
+          <div class="container">
+            <div class="heading wide">
+              <h3><%= t("uex.are_you_ready_to_get_money")%></h3>
+            </div>
+            <% if flash[:error].present? %>
+              <p style="color:red"><%=  flash[:error].html_safe    %></p>
+            <% end%>
+            <% if flash[:message].present? %>
+              <p style="color:green"><%=  flash[:message].html_safe    %></p>
+            <% end%>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-10">
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xs-offset-0 col-sm-offset-0 col-md-offset-6 col-lg-offset-6">
+                <%= form_for @order, url: order_path do |f|%>
+                  <div class="row">
+                    <select name="anonim_order[product_id]" required="required">
+                      <option selected disabled><%= t("uex.choose_secrive")%></option>
+                      <%= @products.each do |product|%>
+                        <option value="<%= product.id %>"><%= product.name %></option>
+                      <% end %>
+                    </select>
+                  </div>
+                  <div class="row">
+                    <%= f.text_field :name, class: "wpcf7-form-control wpcf7-email", placeholder: t("uex.form.name"), required: true %>
+                  </div>
+                  <div class="row">
+                    <%= f.email_field :email, class: "wpcf7-form-control wpcf7-email", placeholder: t("uex.form.email"), required: true %>
+                  </div>
+                  <div class="row">
+                    <%= f.text_field :phone, class: "wpcf7-form-control wpcf7-email", placeholder: t("uex.form.phone"), required: true %>
+                  </div>
+                  <div class="row">
+                    <%= f.text_area :comment, placeholder: t("uex.comment_plc") %>
+                  </div>
+                  <div class="row">
+                    <input type="submit" class="submit" value="<%= t("uex.do_order") %>">
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>

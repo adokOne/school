@@ -12,8 +12,12 @@ class HomeController < ApplicationController
   end
 
   def products
-    @products_for_top = Product.active.for_top
+    @body_cls = "products"
+    @has_video = true
+    @order = AnonimOrder.new( flash[:order].present? ? flash[:order] : {})
+    #@products_for_top = Product.active.for_top
     @products = Product.active.for_table
+    render template: "home/products_2"
   end
 
   def logout
@@ -112,21 +116,27 @@ class HomeController < ApplicationController
   end
 
   def order
-    order = AnonimOrder.new(params[:anonim_order])
-    if order.valid?
-      if order.user_exist?
-        flash[:error] = I18n.t("uex.user_exist_on_order", login_path: signin_users_path, forgot_path: forgot_users_path)
-      else
-        user = User.create(email: order.email, name: order.name, password: User.password)
-        token = user.signin( request.remote_ip, request.referer, request.user_agent)
-        cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
-        order.create_real
-        flash[:message] = I18n.t("uex.order_was_created")
-      end
+    if cookies[:new_order].present?
+      flash[:error] = I18n.t("uex.cant_create_to_many_orders")
     else
-      flash[:error] = [t("uex.form.#{order.errors.messages.keys.first}"), order.errors.messages[order.errors.messages.keys.first].first].join(" ")
+      order = AnonimOrder.new(params[:anonim_order])
+      if order.valid?
+        if order.user_exist?
+          flash[:error] = I18n.t("uex.user_exist_on_order", login_path: signin_users_path, forgot_path: forgot_users_path)
+        else
+          user = User.create(email: order.email, name: order.name, password: User.password)
+          token = user.signin( request.remote_ip, request.referer, request.user_agent)
+          cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
+          order.create_real
+          cookies[:new_order] = { value: true, expires:  1.hour.from_now  }
+          flash[:message] = I18n.t("uex.order_was_created")
+        end
+      else
+        flash[:order] = order
+        flash[:error] = [t("uex.form.#{order.errors.messages.keys.first}"), order.errors.messages[order.errors.messages.keys.first].first].join(" ")
+      end
     end
-    redirect_to :back
+    redirect_to request.referer + "#order"
   end
 
   def add
@@ -141,6 +151,10 @@ class HomeController < ApplicationController
   end
 
   def add_baner
+    if cookies[:new_page].present?
+      flash[:error] = I18n.t("uex.cant_create_to_many_pages")
+      redirect_to(request.referer + "#notice") and return
+    end
     baner = AnonimPage.new(baner_params)
     if baner.valid?
       if baner.user_exist?
@@ -153,7 +167,8 @@ class HomeController < ApplicationController
         cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
         baner = baner.create_real(baner_params[:logo])
         flash[:message] = I18n.t("uex.page_on_moder")
-        redirect_to edit_user_baner_path(current_user, baner)
+        cookies[:new_page] = { value: true, expires:  1.hour.from_now  }
+        redirect_to edit_user_baner_path(current_user, baner) and return
       end
     else
       flash[:page] = baner

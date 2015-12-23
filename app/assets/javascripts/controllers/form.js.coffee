@@ -16,13 +16,9 @@ $.Controller "Form",
       $(form).validate
         ignore: ""
         highlight: (el, e_cls) ->
-          self.error_owl.show()
-          #$(el).addClass e_cls
+          $(el).addClass e_cls
         unhighlight: (el, e_cls) ->
-          #$(el).removeClass e_cls
-          self.error_owl.hide()
-        errorPlacement: (err, el) ->
-          self.error_owl.show()
+          $(el).removeClass e_cls
         onkeyup: false
         onfocusout: false
         focusCleanup: true

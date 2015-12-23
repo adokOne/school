@@ -1,0 +1,378 @@
+
+.products #site-wrapper{
+  background: #fff;
+}
+
+.col-offset-lg-4-half {
+  margin-left: 37.33333%;
+}
+
+.container {
+  position: relative;
+}
+
+.products #header {
+  background: image-url('header-bg.jpg');
+  background-size: 100% 100%;
+}
+
+.arrow {
+  position: absolute;
+  top: 231px;
+    left: -170px;
+  width: 347px;
+  height: 91px;
+}
+
+.arrow.right {
+  top: 345px;
+  right: -130px;
+    left: auto;
+    -webkit-transform: rotate(-151deg);
+       -mox-transform: rotate(-151deg);
+        transform: rotate(-151deg);
+}
+
+.arrow.small {
+  width: 160px;
+    height: auto;
+    left: -151%;
+    top: 145px;
+    -webkit-transform: rotate(90deg);
+       -mox-transform: rotate(90deg);
+        transform: rotate(90deg);
+}
+
+.phone-block {
+  margin-top: 50px;
+}
+
+.phone-block .phone {
+  width: 270px;
+  padding: 23px 0;
+  margin: auto;
+  color: #fff;
+  font-size: 25px;
+  font-weight: bold;
+  background: #2b91d8;
+}
+
+.video-block {
+  margin-bottom: 50px;
+  background-color: rgba(105, 158, 192, 0.7);
+}
+
+.video-block .text {
+  width: 480px;
+  margin-top: 75px;
+  padding: 30px 0;
+  font-size: 20px;
+  text-align: center;
+  border-top: 1px solid #fff;
+    border-bottom: 1px solid #fff;
+    background: image-url('arrow-white.png') no-repeat 100%;
+}
+
+.video-block .text p {
+  margin: 0;
+  font-weight: 100;
+}
+
+.video-block .video-holder {
+  width: 520px;
+    height: 300px;
+    margin-top: 22px;
+    padding: 20px 0px 0 95px;
+  background: image-url('video-holder.png') no-repeat;
+}
+
+.video-block .video-holder .video-wrap {
+  width: 327px;
+  height: 206px;
+  background: #fff;
+}
+
+.video-block .text h6 {
+  font-size: 20px;
+  margin: 0 0 20px 0;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+.products .site-content h2, .products .site-content h3 {
+    color: #2b91d8;
+    padding: 15px 0;
+    border-top: 1px solid #2b91d8;
+    border-bottom: 1px solid #2b91d8;
+}
+
+.products .site-content h2 {
+  font-size: 50px;
+  text-transform: uppercase;
+}
+
+.products .site-content h3 {
+  font-size: 50px;
+}
+
+.heading {
+  width: 570px;
+  margin: auto;
+  text-align: center;
+}
+
+.heading.wide {
+  width: 750px;
+}
+
+.service {
+  text-align: center;
+}
+
+.service-desc {
+  width: 300px;
+    margin: auto;
+    padding: 23px 0;
+  text-align: center;
+  color: #fff;
+  font-size: 18px;
+  background: #2b91d8;
+}
+
+.working-scheme {
+  position: relative;
+  margin-top: 70px;
+}
+
+.working-scheme .item {
+  text-align: center;
+  font-size: 18px;
+  color: #2b91d8;
+}
+
+.working-scheme .item p {
+  border-left: 1px solid #dfdfdf;
+  border-right: 1px solid #dfdfdf;
+}
+
+.section {
+  padding: 40px 0;
+  text-align: center;
+  font-size: 28px;
+  color: #2b91d8;
+  // -webkit-box-shadow: 0px 0px 15px 0px #666;;
+  //     box-shadow: 0px 0px 15px 0px #666;;
+}
+
+.section span {
+  text-decoration: underline;
+}
+
+.tariff-block {
+  margin-top: 50px;
+}
+
+.tariff-block table {
+  color: #2b91d8;
+  font-size: 20px;
+  text-align: center;
+
+}
+
+.tariff-block table th {
+  text-align: center;
+  font-weight: normal;
+  text-transform: uppercase;
+  vertical-align: middle;
+  border-left: 1px solid #e3e3e3;
+}
+
+.tariff-block table th:first-child {
+  border-left: none;
+}
+
+.tariff-block table td {
+  font-weight: 100;
+  vertical-align: middle;
+  border-left: 1px solid #e3e3e3;
+  border-top: 1px solid #e3e3e3;
+}
+
+.tariff-block table td:first-child {
+  text-align: left;
+  border-left: none;
+}
+
+.form-block {
+  margin-top: 50px;
+}
+
+.form-block .container {
+  background: image-url('notebook.jpg') no-repeat 0 150px;
+}
+
+.form-block input, .form-block textarea {
+  width: 100%;
+  margin-bottom: 25px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  resize: none;
+  font-size: 20px;
+  border: 1px solid #c2c2c2;
+}
+
+.form-block textarea {
+  height: 200px;
+}
+
+.form-block input {
+  height: 70px;
+}
+
+.form-block .sbHolder {
+  position: relative;
+  height: 70px;
+  margin-bottom: 25px;
+  font-size: 20px;
+  -webkit-border-radius: 20px;
+  border-radius: 20px;
+  border: 1px solid #c2c2c2;
+}
+
+.form-block .sbSelector {
+  position: static;
+  width: auto;
+  color: #2b91d8;
+  line-height: 67px;
+  text-indent: 19px;
+}
+
+.form-block .sbToggle {
+  position: absolute;
+  top: 29px; right: 19px;
+    width: 24px;
+  height: 12px;
+  background: image-url('select-arrow.png') no-repeat 0 -14px;
+  transition: none;
+}
+
+.form-block .sbToggleOpen {
+  background-position: 0 0;
+}
+
+.form-block .sbOptions {
+  top: 52px !important;
+    padding: 20px 0;
+    border: 1px solid #c2c2c2;
+    border-top: none;
+    -webkit-border-radius: 0 0 20px 20px;
+    border-radius: 0 0 20px 20px;
+    box-sizing: content-box;
+    text-indent: 20px;
+}
+
+.form-block .sbOptions li {
+  margin-bottom: 10px;
+}
+
+.form-block .sbOptions li a {
+  color: #2b91d8;
+}
+
+.form-block .submit {
+  float: right;
+  width: auto;
+  background: #1089de;
+}
+
+::-webkit-input-placeholder {
+   color: #2b91d8;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #2b91d8;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #2b91d8;
+}
+
+:-ms-input-placeholder {
+   color: #2b91d8;
+}
+
+
+@media (max-width: 992px) {
+  #header {
+    background: none;
+  }
+
+  .video-block {
+    margin-bottom: 0;
+  }
+
+  .video-block .text {
+    background: none;
+  }
+
+  .arrow {
+    display: none;
+  }
+
+  .col-offset-lg-4-half {
+    margin: 0;
+  }
+
+  .form-block .container {
+    background: none;
+  }
+}
+
+@media (max-width: 768px) {
+
+  .heading, .heading.wide {
+    width: auto;
+  }
+
+  .products .site-content h2, .products .site-content  h3 {
+    font-size: 20px;
+    padding: 0;
+  }
+
+  .video-block .text {
+    width: auto;
+  }
+
+  .video-block .video-holder {
+    width: auto;
+    height: auto;
+    margin: 0;
+    padding: 20px 0px 0 0px;
+    background: none;
+  }
+
+  .phone-block .phone {
+    margin-bottom: 10px;
+  }
+
+  .service-desc {
+    width: auto;
+    padding: 5px 0;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .working-scheme p {
+    font-size: 12px;
+  }
+
+  .section {
+    padding: 20px 0;
+    font-size: 16px;
+  }
+
+  .tariff-block table {
+    font-size: 10px;
+    line-height: 1.3;
+  }
+}

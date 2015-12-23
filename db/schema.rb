@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151222143827) do
+ActiveRecord::Schema.define(version: 20151223103027) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -310,6 +310,7 @@ ActiveRecord::Schema.define(version: 20151222143827) do
     t.integer  "status",         limit: 4
     t.integer  "admin_id",       limit: 4
     t.date     "start_date"
+    t.text     "comment",        limit: 65535
   end
 
   create_table "pages", force: :cascade do |t|

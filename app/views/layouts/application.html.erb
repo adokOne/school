@@ -31,7 +31,7 @@
       <link href="favicon.ico" sizes="114x114" rel="apple-touch-icon-precomposed">
       <link href="favicon.ico" sizes="144x144" rel="apple-touch-icon-precomposed">
    </head>
-   <body class="<%= url_is_current?("category","home page blog")  %> <%= url_is_current?("main","home page blog")  %>  <%= url_is_current?("city","home page blog")  %>  <%= url_is_current?("baners","single single-post")  %> <%= url_is_current?("item","single single-post")  %>  <%= @cls%>  <%= url_is_current?("add","single single-post")  %>  page-template-default cherry-responsive cherry-no-sidebar cherry-navigation-arrow" dir="ltr">
+   <body class="<%= url_is_current?("category","home page blog")  %> <%= url_is_current?("main","home page blog")  %>  <%= url_is_current?("city","home page blog")  %>  <%= url_is_current?("baners","single single-post")  %> <%= url_is_current?("item","single single-post")  %>  <%= @body_cls %>  <%= url_is_current?("add","single single-post")  %>  page-template-default cherry-responsive cherry-no-sidebar cherry-navigation-arrow" dir="ltr">
       <div id="site-wrapper" class="hfeed site">
          <header id="header" class="site-header wide" role="banner">
             <div id="static-area-header-top" class="header-top static-area">
@@ -117,12 +117,30 @@
                                  </span>
 
                            </h1>
+                           <div class="phone-block">
+                              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                 <div class="phone">
+                                  +38(067) 574 21 88
+                                 </div>
+                              </div>
 
+                              <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                 <div class="phone">
+                                  +38(093) 170 05 96
+                                 </div>
+                              </div>
+                              <div class="clear"></div>
+                           </div>
                         </div>
+
+
+
                      </div>
+
                      <%= render("shared/search") if @has_search%>
                   </div>
                </div>
+               <%= render("shared/video") if @has_video%>
             </div>
 
          <%= breadcrumbs(@breadcrumbs_items, @breadcrumbs_last)%>

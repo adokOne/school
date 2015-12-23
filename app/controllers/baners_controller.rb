@@ -7,9 +7,14 @@ class BanersController < ApplicationController
   #before_filter :is_own?, only: [:show,:update,:edit]
 
   def create
+    if cookies[:new_page].present?
+      flash[:error] = I18n.t("uex.cant_create_to_many_pages")
+      redirect_to(request.referer + "#notice") and return
+    end
     baner =  current_user.pages.new(allowed_params)
     if baner.valid?
       baner.save
+      cookies[:new_page] = { value: true, expires:  1.hour.from_now  }
       redirect_to user_path(current_user)
     else
       flash[:page] = baner
