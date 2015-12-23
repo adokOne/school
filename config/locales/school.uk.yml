@@ -35,7 +35,7 @@ uk:
 
     call_subscribe_popup_header: "Замовити зворотній дзвінок"
     choose_your_level: "Ваш рівень англійської"
-    date_group_plc: "оберіть дату та групу"
+    date_group_plc: "Оберіть дату та групу"
     levels:
       starter: starter
       elementary: elementary
@@ -44,11 +44,11 @@ uk:
       upper-intermediate: upper-intermediate
       advanced: advanced
     subscribe_for_call: "Замовити дзвінок"
-    check_your_level: "Визначити мій рівень англійскої"
+    check_your_level: "Визначити мій рівень англійської"
     vacancy_title_2: Якщо ви підходите на дану вакансію ми з радістю розглянемо Ваше резюме
     fb_course_link: 'Ми тісніше спілкуємось у нашій групі на <a target="_blank" href="%{link}">Facebook</a>. Долучайтесь!'
     level_test: "Тестування"
-    test_completed: "Дякуемо! Ваш тест завершено з результатом: %{count} балів.<p>Ваш рівень англійської мови ви можете визначити за табличкою нижче:</p><ul class='correct_answers'><li>0 - 20 = Beginner</li><li>21 - 40 = Elementary</li><li>41 - 60 = Pre-Intermediate</li><li>61 - 75 = Intermediate</li><li>76 - 99 = Higher Intermediate</li></ul><p>Якщо ви хочете підвищити ваш рівень англійської, ми завжди будемо раді вам допомогти :)</p><div class='clear'></div>"
+    test_completed: "Дякуємо! Результати тесту ми надіслали Вам на e-mail. Якщо Ви хочете підвищити рівень англійської, ми з радістю допоможемо :)"
     complete_test: "Завершити тест"
     level_test_desc: "Цей тест допоможе визначити Ваш рівень англійської мови. Результати тесту Ви отримаєте на Ваш e-mail."
     reviews: Відгуки
@@ -60,10 +60,10 @@ uk:
     vavancy_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ:"
     lesson_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ ДЛЯ ЗАПИСУ НА ЗАНЯТТЯ:"
     email_plc: Ваш e-mail
-    name_plc: Ваше ім”я
+    name_plc: Ваше ім'я
     phone_plc: Ваш телефон
     fields_wit_errors_text: "<span>БУДЬТЕ УВАЖНІ!</span> Ви не заповнили всі поля"
-    subscribe_for_news: підписатись на новини
+    subscribe_for_news: Підпишись на новини
     subscribe_for_vacancy: надiслати резюме
     news_subscribe_popup_header: "ВКАЖІТЬ ВАШІ ДАНІ ДЛЯ ПІДПИСКИ НА НОВИНИ:"
     follow_us: Слідкуй за нами в

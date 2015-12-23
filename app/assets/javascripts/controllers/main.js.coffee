@@ -64,9 +64,10 @@ $.Controller "Main",
     el = $(ev.target)
     el = if el.hasClass("js-link") then el else el.parents(".js-link")
     cls = el.data("cls")
+    console.log(cls)
     @element.find('.course-description').show()
     $('html, body').animate({scrollTop: $('.course-description').offset().top}, 800);
-    idx = @element.find('.cycle-slideshow .s-item').index(@element.find(".cycle-slideshow .#{cls}"))
+    idx = @element.find('.cycle-slideshow .s-item').index(@element.find(".cycle-slideshow .#{cls}")) - 1
     console.log(".cycle-slideshow .#{cls}")
     console.log(idx)
     @element.find('.cycle-slideshow').cycle(idx);

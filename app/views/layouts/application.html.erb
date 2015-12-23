@@ -122,10 +122,10 @@
             <% addresses.each do |address| %>
               <!-- <li><%= address.name %></li> -->
               <% address.phones.split(",").each do |phone| %>
-                <li><a><%=phone %></a></li>
+                <li style="margin-bottom:3px"><a><%=phone %></a></li>
               <% end %>
               <% if address.email.present? %>
-                <li><%= t("school.send_mail_here")%> <a href="mailto:<%= address.email %>"><%= address.email %></a></li>
+                <li><%= t("school.send_mail_here")%> <a href="mailto:<%= address.email %>" style="font-size: 12px;"><%= address.email %></a></li>
               <% end %>
             <% end %>
           </ul>
