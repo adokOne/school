@@ -114,6 +114,7 @@ ru:
     amount_to_pay: "Сумма к оплате"
     cant_create_to_many_orders: Вы уже создали заказ, в течение часа с Вами свяжеться Наш менеджер.
     cant_create_to_many_pages: Вы уже создали обьявление, в течение часа с оно будет обрабтано.
+    cant_create_to_many_feedbacks: Вы уже подавали обращение с Вами свяжеться Наш менеджер
     form:
       logo_file_size: "Размер файла"
       logo_content_type: Формат файла

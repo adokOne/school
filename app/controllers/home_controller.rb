@@ -8,7 +8,7 @@ class HomeController < ApplicationController
   end
 
   def contacts
-    @form = Feedback.new
+    @form = Feedback.new( flash[:feedback].present? ? flash[:feedback] : {})
   end
 
   def products
@@ -26,6 +26,23 @@ class HomeController < ApplicationController
       cookies.delete(User::COOKIE_NAME)
     end
     redirect_to root_url
+  end
+
+  def feedback
+    if cookies[:new_feedback].present?
+      flash[:error] = I18n.t("uex.cant_create_to_many_feedbacks")
+    else
+      feedback = Feedback.new(feedback_params)
+      if feedback.valid?
+        feedback.save
+        cookies[:new_feedback] = { value: true, expires:  1.hour.from_now  }
+        flash[:message] = I18n.t("uex.order_was_created")
+      else
+        flash[:error] = [t("uex.form.#{feedback.errors.messages.keys.first}"), feedback.errors.messages[feedback.errors.messages.keys.first].first].join(" ")
+        flash[:feedback] = feedback
+      end
+    end
+    redirect_to(request.referer + "#notice")
   end
 
   def category
@@ -179,6 +196,10 @@ class HomeController < ApplicationController
 
   def baner_params
     params.require(:anonim_page).permit(:name,:email,:phone,:title,:anons,:logo,:category_id,:city_id, :country_id, :desc)
+  end
+
+  def feedback_params
+    params.require(:feedback).permit(:name,:email,:phone,:message)
   end
 
 
