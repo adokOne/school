@@ -144,7 +144,7 @@ namespace :import do
   desc "Pages"
   task :blog_pages => :environment do
     i = 0
-    #BlogPage.delete_all
+    BlogPage.delete_all
     WpPost.order("ID DESC").where(post_type: "post").each do |item|
       next unless  %w{pending publish}.include?(item.post_status)
       content = item.post_content
@@ -155,27 +155,28 @@ namespace :import do
       # end
       # next
 
-      _item = {
-        admin_id: AUTHOR_ALIAS[item],
-        admin_update_id: AUTHOR_ALIAS[item],
-        slug: item.post_name,
-        title: item.post_title,
-        desc: item.post_content,
-        active: %w{publish}.include?(item.post_status),
-        old_id: item.ID,
-        created_at: item.post_date,
-      }
+
 
       item.wp_term_relationships.each do |rel|
         if rel.wp_term.wp_term_taxonomyie.try(:taxonomy) == "category" && rel.wp_term.term_id ==  381
-          _item[:category_id] = Category.find_by_old_id(rel.wp_term.term_id).id
+          _item = {
+            admin_id: AUTHOR_ALIAS[item],
+            admin_update_id: AUTHOR_ALIAS[item],
+            slug: item.post_name,
+            title: item.post_title,
+            desc: item.post_content,
+            active: %w{publish}.include?(item.post_status),
+            old_id: item.ID,
+            created_at: item.post_date,
+          }
+          page = BlogPage.create(_item)
+          unless page.valid?
+            p page.errors
+            p item
+          end
         end
       end
-      page = BlogPage.create(_item)
-      unless page.valid?
-        p page.errors
-        p item
-      end
+
     end
   end
 

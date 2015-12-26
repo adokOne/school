@@ -44,7 +44,7 @@ angular.module("B1Admin").controller "CrudController", [
     $scope.Item = $resource("#{$element.data("url")}/:id.json",{},{query:{isArray:false},update:{ method:'PUT' }})
     if angular.element("#itemsTable").length
       $scope.itemsTable = new ngTableParams(
-        page: 21
+        page: 1
         count: Config.perPage
         total: 0
       ,
