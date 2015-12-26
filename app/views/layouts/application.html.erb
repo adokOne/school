@@ -28,7 +28,9 @@
       <% end %>
       <meta property="og:title" content="<%=@meta_title%>" />
       <meta property="og:description" content="<%=@meta_desc%>" />
-      <meta property="og:url" content="http://www.uex.link/avto-moto-kuiv/zapchastunu-kuiv/468.html" />
+      <% if @og_url%>
+         <meta property="og:url" content="<%= @og_url%>" />
+      <% end %>
       <meta property="og:site_name" content="UEX" />
 
       <% if  @section_name %>
