@@ -23,7 +23,7 @@ class Page < ActiveRecord::Base
   delegate :seo_name, to: :category, prefix: true, allow_nil: true
 
   scope :published, -> { }
-  scope :by_rating, -> { order('id DESC') }
+  scope :by_rating, -> { order('created_at DESC') }
   scope :by_category, ->(id) { where(category_id: id) }
   scope :by_city, ->(id) { where(city_id: id) }
 
