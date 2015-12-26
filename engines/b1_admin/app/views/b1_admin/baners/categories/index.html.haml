@@ -1,1 +1,41 @@
-=render file: "b1_admin/blog/pages/index", layout: false
+#content-container
+  #page-title
+    %h1.page-header.text-overflow
+      Категории
+  #page-content
+    .row
+      .col-md-12{:"ng-controller"=>"FaqCatController","ng-init"=>"editedItem=#{@item.to_json}; categories=#{@categories.to_json}",:"data-url"=>baners_categories_path,"data-back-url"=>baners_categories_path,:"data-delete-text"=>t("b1_admin.delete_faqcat_confirm")}
+        .panel
+          .panel-heading
+            .panel-title
+              .btn.btn-mint{"ng-click"=>"collapse()"}=t("b1_admin.collapse")
+              .btn.btn-purple{"ng-click"=>"expand()"}=t("b1_admin.uncollapse")
+              - if user_can?(:update_positions)
+                .btn.btn-success{"ng-click"=>"updatePositions()"}=t("b1_admin.update_positions")
+                .btn.btn-info{"ng-click"=>"revert()"}=t("b1_admin.revert_positions")
+              - if user_can?(:new)
+                %a.btn.btn-primary{href:new_baners_category_path,"ng-click"=>"$root.setRoute('#{new_baners_category_path}')"}=t("b1_admin.add")
+          .panel-body
+            %div#tree-root{"ui-tree" => ""}
+              %ol{"ng-model" => "items", "ui-tree-nodes" => ""}
+                %li{ "ng-repeat" => "item in items", "ui-tree-node" => ""}
+                  %div{"ui-tree-handle" => ""}
+                    %button.btn.btn-success.btn-xm.nodrag{"data-nodrag" => true, "ng-click" => "toggle(this)"}
+                      %i.nodrag{"ng-class" => "{'fa fa-angle-double-right': collapsed, 'fa fa-angle-double-down': !collapsed}"}
+                    {{item.title}}
+                    %b Всего обьявлений {{item.pages_count}}
+                    - if user_can?(:destroy)
+                      %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)","data-nodrag" => true}
+                    - if user_can?(:edit)
+                      %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{baners_categories_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{baners_categories_path}/' + item.id + '/edit/')",style:"margin-right: 15px;","data-nodrag" => true}
+                      %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-primary.fa.fa-plus-circle.add-tooltip{"tooltip" => t("b1_admin.show"), :href => "#","ng-click" => "show(item)","data-nodrag" => true}
+                  %ol{"ng-class" => "{hidden: collapsed}", "ng-model" => "item.childs", "ui-tree-nodes" => ""}
+                    %li{ "ng-repeat" => "item in item.childs", "ui-tree-node" => ""}
+                      %div{"ui-tree-handle" => ""}
+                        {{item.title}}
+                        %b Всего обьявлений {{item.pages_count}}
+                        - if user_can?(:destroy)
+                          %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)","data-nodrag" => true}
+                        - if user_can?(:edit)
+                          %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{baners_categories_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{baners_categories_path}/' + item.id + '/edit/')",style:"margin-right: 15px;","data-nodrag" => true}
+                        %a.pull-right.btn.btn-sm.btn-trans.btn-icon.btn-hover-primary.fa.fa-plus-circle.add-tooltip{"tooltip" => t("b1_admin.show"), :href => "#","ng-click" => "show(item)","data-nodrag" => true}

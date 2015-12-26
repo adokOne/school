@@ -30,4 +30,27 @@ module ApplicationHelper
     url_for( locale: locale )
   end
 
+  def render_categories(categories,active)
+    render_list = Proc.new do | categories, active, is_sub |
+      content_tag :ul, class: (is_sub ? "sub" : "sbOptions cats")  do
+        categories.each_with_index.map do |cat, i|
+          content_tag :li , class: ("last" if i == categories.size - 1 ) do
+            str = [
+              link_to(url(cat.link), class: [("active" if active == cat.id),"steps_lable"].compact) do
+                [cat.title ,(cat.childrens.any? ?  content_tag(:span, "", class: "arrow-select" ) : "" )].join.html_safe
+              end
+            ]
+            if cat.childrens.any?
+              str << render_list.call(cat.childrens, active,true)
+            end
+            str.join("").html_safe
+          end
+        end.join("").html_safe
+      end
+    end
+    content_tag :div, :class => 'sbHolder' do
+      render_list.call(categories, active, false)
+    end
+  end
+
 end

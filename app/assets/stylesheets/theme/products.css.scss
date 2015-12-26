@@ -1,4 +1,12 @@
-
+.categories_block .arrow-select {
+    position: absolute;
+    top: 29px;
+    right: 19px;
+    width: 24px;
+    height: 12px;
+    background: image-url("select-arrow.png") no-repeat 0 -14px;
+    transition: none;
+}
 .products #site-wrapper{
   background: #fff;
 }

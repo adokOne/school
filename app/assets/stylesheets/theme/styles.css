@@ -1,3 +1,27 @@
+.categories_block .sub{
+      display: none;
+}
+.categories_block ul {
+  list-style: none;
+      background: #fff;
+}
+.steps_lable{
+    position: relative;
+/*    width: 240px;*/
+    display: block;
+    line-height: 30px;
+        font-weight: 500;
+}
+.sub .steps_lable{
+
+        font-weight: 400;
+}
+.sbOptions.cats{
+  max-height: 350px;
+}
+.steps_lable:hover{
+  background-color: #2b91d8;
+}
 .wihout_shadow{
   -webkit-box-shadow: none;
   box-shadow: none;

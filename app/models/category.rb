@@ -64,7 +64,7 @@ class Category < ActiveRecord::Base
     prepare = lambda{ |cat, is_rec|
       if cat.parent.present?
         result = prepare.call(cat.parent,true).merge(cat.parent.bread_hash)
-        resutl = result.merge(cat.bread_hash) unless use_self
+        resutl = result.merge(cat.bread_hash) unless skip_self
       else
         result =  skip_self ? {} : is_rec ? {} : cat.bread_hash
       end
@@ -103,14 +103,14 @@ class Category < ActiveRecord::Base
         title:     item.title,
         parent_id: item.parent_id,
         seo:       item.seos.join("/"),
-        childs:    item.childrens.map{ |item| to_tree_recoursive.call(item) }
+        childs:    item.childrens.map{ |item| to_tree_recoursive.call(item) },
+        pages_count: item.pages.count
       }
     end
 
-    Rails.cache.fetch("categories_tree", expires_in: 1.month) do
-      raise
+    #Rails.cache.fetch("categories_tree", expires_in: 1.month) do
       Category.where(parent_id:0).map{ |item| to_tree_recoursive.call(item) }
-    end
+    #end
   end
 
   private

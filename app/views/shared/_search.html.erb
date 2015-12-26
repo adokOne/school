@@ -14,9 +14,20 @@
              <%= options_for_select(@cities) %>
             </select>
           </div>
-          <% cache @categories do %>
+
+          <%# cache @categories do %>
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <select name="search[category_id]" required="required">
+             <%= render_categories(@categories,1)%>
+<!--               <div class="categories_block">
+                <ul>
+                  <% @categories.each do |cat|%>
+                    <li>
+                      <%= link_to cat.title, url(cat.link)%>
+                    </li>
+                  <% end %>
+                </ul>
+              </div> -->
+<!--               <select name="search[category_id]" required="required">
                  <option disabled selected value=""><%= t("uex.category")%></option>
                  <% @categories.each do |cat| %>
                      <option value="<%= cat.id%>" class="label" ><%= cat.title%></option>
@@ -24,9 +35,9 @@
                            <option value="<%= cat.id%>" class="label" ><%= cat.title%></option>
                      <% end %>
                  <% end %>
-              </select>
+              </select> -->
             </div>
-          <% end %>
+          <%# end %>
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
              <span class="wpcf7-form-control-wrap">
                 <input type="submit" value="найти" class="wpcf7-form-control wpcf7-submit js-submit">
