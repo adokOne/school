@@ -17,7 +17,7 @@ module B1Admin
       def allowed_params
 
         translated_fields = I18n.available_locales.map do |l|
-          ["desc_#{l}","title_#{l}","meta_keys_#{l}","meta_title_#{l}","meta_desc_#{l}"]
+          ["desc_#{l}","title_#{l}","meta_keys_#{l}","meta_title_#{l}","meta_desc_#{l}", "city_seo_template_#{l}"]
         end
 
         params.require(:item).permit(translated_fields + [:id,:parent_id,:meta_is_generated])

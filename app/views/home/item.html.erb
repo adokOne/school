@@ -1,69 +1,69 @@
-            <div class="container">
-               <div id="primary" class="content-area">
-                  <main id="main" class="site-main" role="main">
-                     <article class="cherry-has-entry-date cherry-has-entry-author cherry-has-entry-comments clearfix post-22 post type-post status-publish format-standard has-post-thumbnail hentry category-allergyasthma" id="post-22">
-                        <header class="entry-header">
-                           <h2 class="entry-title"><%= @item.title %></h2>
-                        </header>
-                        <div class="entry-meta entry-meta-top">
-                           <span class="posted-on"><time class="entry-date published" datetime="<%= @item.created_at %>"><%= l(@item.created_at, format: :uex) %></time></span>
-                           <span class="comments-link"><a href="#comments"><%= @item.reviews_count %>  отзыва</a></span>
-                        </div>
-                        <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
-                          <img width="1088" height="387" src="<%= @item.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="post-1"/>
-                        </figure>
-                        <div class="entry-content">
-                           <%= @item.desc.html_safe %>
-                        </div>
-                        <div class="entry-meta entry-meta-bottom"></div>
-                     </article>
-                     <nav class="navigation post-navigation" role="navigation">
-                        <div class="paging-navigation">
-                           <div class="nav-links">
-                              <div class="nav-previous"><a href="<%= @item.category.link%>" rel="prev"><%= t("uex.back_to_category",name: @item.category_title)%></a></div>
-                           </div>
-                        </div>
-                     </nav>
-                     <% @item.reviews.moderated.each do |message|%>
-                        <div class="author-bio clearfix">
-                           <figure class="author-bio_avatar alignleft"><img  src='<%= asset_path("reviwer.png") %>'  class='avatar avatar-83 photo' height='83' width='83'/></figure>
-                           <h3>Отзыв от <a href="#" title="<%= message.name %>" rel="author"><%= message.name %></a></h3>
-                           <div class="description"><%= message.comment%></div>
-                        </div>
-                     <% end %>
-
-                     <div id="comments" class="comments-area">
-                       <div id="respond" class="comment-respond">
-                          <% if flash[:message].present? %>
-                            <p style="color:green"><%=  flash[:message]   %></p>
-                          <% end%>
-                          <h3 id="reply-title" class="comment-reply-title"><%= t("uex.leave_review")%></h3>
-                          <%= form_for Review.new, url: review_path, class: "comment-form" do |f| %>
-                              <%= f.hidden_field :page_id , value: @item.id %>
-                             <div class="row">
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                   <p class="comment-form-author">
-                                    <%= f.text_field :name , placeholder:  t("uex.review_name"), required: true %>
-
-                                   </p>
-                                   <p class="comment-form-author">
-                                    <%= f.email_field :email , placeholder:  t("uex.review_email"), required: true %>
-
-                                   </p>
-                                </div>
-                                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-                                   <p class="comment-form-comment">
-                                    <%= f.text_area :comment , placeholder:  t("uex.review_body"), required: true, cols:"45", rows:"8"  %>
-
-                                   <p class="form-submit">
-                                   <input name="submit" type="submit" id="submit" class="submit" value="<%= t("uex.send")%>">
-
-                                   </p>
-                                </div>
-                             </div>
-                          <% end %>
-                       </div>
-                     </div>
-               </div>
-               </main>
+<div class="container">
+   <div id="primary" class="content-area">
+      <main id="main" class="site-main" role="main">
+         <article class="cherry-has-entry-date cherry-has-entry-author cherry-has-entry-comments clearfix post-22 post type-post status-publish format-standard has-post-thumbnail hentry category-allergyasthma" id="post-22">
+            <header class="entry-header">
+               <h2 class="entry-title"><%= @item.title %></h2>
+            </header>
+            <div class="entry-meta entry-meta-top">
+               <span class="posted-on"><time class="entry-date published" datetime="<%= @item.created_at %>"><%= l(@item.created_at, format: :uex) %></time></span>
+               <span class="comments-link"><a href="#comments"><%= @item.reviews_count %>  отзыва</a></span>
             </div>
+            <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
+              <img width="1088" height="387" src="<%= @item.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="post-1"/>
+            </figure>
+            <div class="entry-content">
+               <%= @item.desc.html_safe %>
+            </div>
+            <div class="entry-meta entry-meta-bottom"></div>
+         </article>
+         <nav class="navigation post-navigation" role="navigation">
+            <div class="paging-navigation">
+               <div class="nav-links">
+                  <div class="nav-previous"><a href="<%= @item.category.link%>" rel="prev"><%= t("uex.back_to_category",name: @item.category_title)%></a></div>
+               </div>
+            </div>
+         </nav>
+         <% @item.reviews.moderated.each do |message|%>
+            <div class="author-bio clearfix">
+               <figure class="author-bio_avatar alignleft"><img  src='<%= asset_path("reviwer.png") %>'  class='avatar avatar-83 photo' height='83' width='83'/></figure>
+               <h3>Отзыв от <a href="#" title="<%= message.name %>" rel="author"><%= message.name %></a></h3>
+               <div class="description"><%= message.comment%></div>
+            </div>
+         <% end %>
+
+         <div id="comments" class="comments-area">
+           <div id="respond" class="comment-respond">
+              <% if flash[:message].present? %>
+                <p style="color:green"><%=  flash[:message]   %></p>
+              <% end%>
+              <h3 id="reply-title" class="comment-reply-title"><%= t("uex.leave_review")%></h3>
+              <%= form_for Review.new, url: review_path, class: "comment-form" do |f| %>
+                  <%= f.hidden_field :page_id , value: @item.id %>
+                 <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                       <p class="comment-form-author">
+                        <%= f.text_field :name , placeholder:  t("uex.review_name"), required: true %>
+
+                       </p>
+                       <p class="comment-form-author">
+                        <%= f.email_field :email , placeholder:  t("uex.review_email"), required: true %>
+
+                       </p>
+                    </div>
+                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                       <p class="comment-form-comment">
+                        <%= f.text_area :comment , placeholder:  t("uex.review_body"), required: true, cols:"45", rows:"8"  %>
+
+                       <p class="form-submit">
+                       <input name="submit" type="submit" id="submit" class="submit" value="<%= t("uex.send")%>">
+
+                       </p>
+                    </div>
+                 </div>
+              <% end %>
+           </div>
+         </div>
+   </div>
+   </main>
+</div>
