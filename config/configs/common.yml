@@ -15,7 +15,11 @@ defaults: &defaults
     - UAH
     - EUR
     - USD
-    - RUR
+
+  languages:
+    ru: "ru_RU"
+    uk: "uk_UA"
+    en: "en_US"
 development:
   <<: *defaults
 

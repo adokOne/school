@@ -30,6 +30,7 @@ class Page < ActiveRecord::Base
   scope :by_text, ->(id) { where(title: id) }
 
   belongs_to :user
+  belongs_to :city
 
   has_many :impressions, :as=>:impressionable
   has_many :reviews

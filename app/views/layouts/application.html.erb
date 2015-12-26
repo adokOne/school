@@ -9,6 +9,42 @@
 
       <link rel='stylesheet' id='font-awesome-css' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css?ver=4.4.0' type='text/css' media='all'/>
       <link rel='stylesheet' id='cherry-google-fonts-css' href='//fonts.googleapis.com/css?family=Roboto%3A500%2Cregular%2C100%7CAbril+Fatface%3Aitalic&#038;subset=latin%2Clatin-ext&#038;ver=4.3.1' type='text/css' media='all'/>
+
+      <meta name="generator" content="B1 Dev"/>
+      <link rel="publisher" href="https://plus.google.com/u/0/b/103359602341449879335/103359602341449879335/posts"/>
+<!--       <link rel='canonical' href='<%= Settings.domain %>'/> -->
+
+      <link rel='shortlink' href='<%= Settings.domain %>'/>
+
+      <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
+      <link href="favicon.ico" sizes="57x57" rel="apple-touch-icon-precomposed">
+      <link href="favicon.ico" sizes="72x72" rel="apple-touch-icon-precomposed">
+      <link href="favicon.ico" sizes="114x114" rel="apple-touch-icon-precomposed">
+      <link href="favicon.ico" sizes="144x144" rel="apple-touch-icon-precomposed">
+
+      <meta property="og:locale" content="<%= Settings.languages[I18n.locale.to_s] %>" />
+      <% if @og_type %>
+         <meta property="og:type" content="<%= @og_type %>" />
+      <% end %>
+      <meta property="og:title" content="<%=@meta_title%>" />
+      <meta property="og:description" content="<%=@meta_desc%>" />
+      <meta property="og:url" content="http://www.uex.link/avto-moto-kuiv/zapchastunu-kuiv/468.html" />
+      <meta property="og:site_name" content="UEX" />
+
+      <% if  @section_name %>
+         <meta property="article:section" content="<%= @section_name%>" />
+      <% end %>
+      <% if @published_at%>
+         <meta property="article:published_time" content="<%= @published_at%>" />
+         <meta property="article:modified_time" content="<%= @published_at%>" />
+         <meta property="og:updated_time" content="<%= @published_at%>" />
+      <% end %>
+      <% if  @image %>
+         <meta property="og:image" content="<%= Settings.domain + @image.to_s%>" />
+      <% end %>
+
+
+
       <% if @has_editor %>
          <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" />
 
@@ -21,15 +57,27 @@
          <script type="text/javascript" src="https://www.google.com/jsapi"></script>
       <% end %>
       <%= csrf_meta_tags %>
-      <meta name="generator" content="B1 Dev"/>
-      <link rel="publisher" href="https://plus.google.com/u/0/b/103359602341449879335/103359602341449879335/posts"/>
-      <link rel='canonical' href='<%= Settings.domain %>'/>
-      <link rel='shortlink' href='<%= Settings.domain %>'/>
-      <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
-      <link href="favicon.ico" sizes="57x57" rel="apple-touch-icon-precomposed">
-      <link href="favicon.ico" sizes="72x72" rel="apple-touch-icon-precomposed">
-      <link href="favicon.ico" sizes="114x114" rel="apple-touch-icon-precomposed">
-      <link href="favicon.ico" sizes="144x144" rel="apple-touch-icon-precomposed">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    </head>
    <body class="<%= url_is_current?("category","home page blog")  %> <%= url_is_current?("main","home page blog")  %>  <%= url_is_current?("city","home page blog")  %>  <%= url_is_current?("baners","single single-post")  %> <%= url_is_current?("item","single single-post")  %>  <%= @body_cls %>  <%= url_is_current?("add","single single-post")  %>  page-template-default cherry-responsive cherry-no-sidebar cherry-navigation-arrow" dir="ltr">
       <div id="site-wrapper" class="hfeed site">

@@ -73,7 +73,7 @@ class HomeController < ApplicationController
     @meta_desc  = @item.meta_is_generated ? I18n.t("uex.default_category_desc", {name: @breadcrumbs_last } )   : @item.meta_desc
     @meta_title = @item.meta_is_generated ? I18n.t("uex.default_category_title", {name: @breadcrumbs_last } )  : @item.meta_title
     @meta_keys  = @item.meta_is_generated ? @meta_keys  : @item.meta_keys
-
+    @og_type = "object"
   end
 
   def item
@@ -87,7 +87,10 @@ class HomeController < ApplicationController
     @meta_title = @item.meta_is_generated ? @item.title  : @item.meta_title
     @meta_keys  = @item.meta_is_generated ? @meta_keys  : @item.meta_keys
 
-
+    @section_name = "#{@item.category.title} #{@item.city.name}"
+    @image = @item.logo
+    @published_at = @item.created_at
+    @og_type = "article"
   end
 
   def cities

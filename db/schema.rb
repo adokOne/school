@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151226003854) do
+ActiveRecord::Schema.define(version: 20151226083545) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -376,6 +376,7 @@ ActiveRecord::Schema.define(version: 20151226003854) do
     t.integer  "old_id",            limit: 4
     t.integer  "admin_id",          limit: 4
     t.integer  "admin_update_id",   limit: 4
+    t.string   "focuskw",           limit: 255
   end
 
   add_index "pages", ["active"], name: "index_pages_on_active", using: :btree

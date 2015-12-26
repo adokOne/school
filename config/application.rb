@@ -35,5 +35,5 @@ module Core
     # config.exceptions_app = CustomPublicExceptions.new(Rails.public_path)
 
   end
-  ActiveRecord::Base.logger = Logger.new STDOUT
+  #ActiveRecord::Base.logger = Logger.new STDOUT
 end

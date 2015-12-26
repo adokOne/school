@@ -28,7 +28,21 @@ class WpPost < ActiveRecord::Base
 
   )
   has_many :wp_term_relationships, :foreign_key => :object_id, :primary_key => :ID
+  has_many :wp_postmetas, :foreign_key => :post_id, :primary_key => :ID
 end
+
+class WpPostmeta < ActiveRecord::Base
+  establish_connection(
+    :adapter  => "mysql2",
+    :host     => "localhost",
+    :username => "root",
+    :password => "",
+    :database => "uex_db"
+
+  )
+  belongs_to :wp_post, :foreign_key => :post_id, :primary_key => :ID
+end
+
 class WpTerm< ActiveRecord::Base
   establish_connection(
     :adapter  => "mysql2",
@@ -141,20 +155,57 @@ namespace :import do
     end
   end
 
+  desc "Post meta"
+  task :post_meat => :environment do
+      i = 0
+    WpPost.order("ID DESC").where(post_type: "post").each do |item|
+      next unless  %w{pending publish}.include?(item.post_status)
+
+      _item = {}
+      if elem = item.wp_postmetas.where(meta_key: "_yoast_wpseo_focuskw").first
+        i +=1
+        _item[:focuskw] = elem.meta_value
+      end
+
+      if elem = item.wp_postmetas.where(meta_key: "_yoast_wpseo_metadesc").first
+        _item[:meta_desc] = elem.meta_value
+      end
+
+      if elem = item.wp_postmetas.where(meta_key: "_yoast_wpseo_title").first
+        _item[:meta_title] = elem.meta_value
+      end
+
+      if elem = item.wp_postmetas.where(meta_key: "_yoast_wpseo_metakeywords").first
+        _item[:meta_keys] = elem.meta_value
+      end
+
+
+      if page = Page.find_by_old_id(item.ID)
+        page.update_attributes(_item)
+        p
+      end
+
+
+      # item.wp_term_relationships.each do |rel|
+      #   if rel.wp_term.wp_term_taxonomyie.try(:taxonomy) == "category"
+      #     _item[:category_id] = Category.find_by_old_id(rel.wp_term.term_id).id
+      #   end
+      # end
+      # page = Page.create(_item)
+      # unless page.valid?
+      #   p page.errors
+      #   p item
+      # end
+    end
+  end
+
+
   desc "Pages"
   task :blog_pages => :environment do
     i = 0
     BlogPage.delete_all
     WpPost.order("ID DESC").where(post_type: "post").each do |item|
       next unless  %w{pending publish}.include?(item.post_status)
-      content = item.post_content
-
-      # if content.match(/<img class=".*size-full.*" .* src=\"(.*?)\".*\/>/)
-      #   i += 1
-      #   p i
-      # end
-      # next
-
 
 
       item.wp_term_relationships.each do |rel|
