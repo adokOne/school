@@ -3,41 +3,21 @@
     <%= form_for Search.new, url: search_path do %>
     <form class="new_search" id="new_search" action="/search" accept-charset="UTF-8" method="post">
        <div class="row">
+          <% cache [@cities,I18n.locale,@city] do %>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <%= render_cities(@cities,@city && @city.kind_of?(City) ? @city : nil, t("uex.city"))%>
+            </div>
+          <% end %>
+          <% cache [@categories,I18n.locale,@city,@item] do %>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+             <%= render_categories(@categories,@item && @item.kind_of?(Category) ? @item : nil, t("uex.category"), @city ? @city : nil) %>
+            </div>
+          <% end %>
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
              <span class="wpcf7-form-control-wrap your-name">
                 <input class="wpcf7-form-control wpcf7-text search-field" placeholder="Поиск" type="text" value="<%= params[:search]%>" name="search[text]" id="search_text">
              </span>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <select name="search[city_id]">
-             <option disabled selected value="" ><%= t("uex.city")%></option>
-             <%= options_for_select(@cities) %>
-            </select>
-          </div>
-
-          <%# cache @categories do %>
-            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-             <%= render_categories(@categories,1)%>
-<!--               <div class="categories_block">
-                <ul>
-                  <% @categories.each do |cat|%>
-                    <li>
-                      <%= link_to cat.title, url(cat.link)%>
-                    </li>
-                  <% end %>
-                </ul>
-              </div> -->
-<!--               <select name="search[category_id]" required="required">
-                 <option disabled selected value=""><%= t("uex.category")%></option>
-                 <% @categories.each do |cat| %>
-                     <option value="<%= cat.id%>" class="label" ><%= cat.title%></option>
-                     <% cat.childrens.each do |cat| %>
-                           <option value="<%= cat.id%>" class="label" ><%= cat.title%></option>
-                     <% end %>
-                 <% end %>
-              </select> -->
-            </div>
-          <%# end %>
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
              <span class="wpcf7-form-control-wrap">
                 <input type="submit" value="найти" class="wpcf7-form-control wpcf7-submit js-submit">

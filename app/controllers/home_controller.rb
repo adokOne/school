@@ -1,10 +1,11 @@
 class HomeController < ApplicationController
   include ApplicationHelper
   PER_PAGE= 10
+
+
+  before_action :set_search_data, only: [:main, :category, :city]
+
   def main
-    @has_search = true
-    @cities    = City.where(country_id: Country::UKRAINE_ID ).pluck("name_#{I18n.locale}",:id)
-    @categories = Category.get_parent
     @pages = Page.published.by_rating.by_text(params[:search]).includes(:reviews).paginate(page: params[:page], per_page: PER_PAGE)
   end
 
@@ -16,7 +17,6 @@ class HomeController < ApplicationController
     @body_cls = "products"
     @has_video = true
     @order = AnonimOrder.new( flash[:order].present? ? flash[:order] : {})
-    #@products_for_top = Product.active.for_top
     @products = Product.active.for_table
     render template: "home/products_2"
   end
@@ -47,7 +47,6 @@ class HomeController < ApplicationController
   end
 
   def category
-    @has_search = true
     seo_name = params[:seo_name]
     splited = seo_name.split("-")
     @city = false
@@ -63,12 +62,8 @@ class HomeController < ApplicationController
       @pages = Page.published.by_rating.by_category(@item.id).page(params[:page])
     end
 
-    @categories = Category.get_parent
-    @cities    = City.where(country_id: Country::UKRAINE_ID ).pluck("name_#{I18n.locale}",:id)
-    @breadcrumbs_items = @item.prepare_breadcrumbs( true )
+    @breadcrumbs_items = @item.prepare_breadcrumbs( true, @city )
     @breadcrumbs_last = @city ? "#{@item.title} #{@city.name}" : @item.title
-
-
 
     @meta_desc  = @item.meta_is_generated ? I18n.t("uex.default_category_desc", {name: @breadcrumbs_last } )   : @item.meta_desc
     @meta_title = @item.meta_is_generated ? I18n.t("uex.default_category_title", {name: @breadcrumbs_last } )  : @item.meta_title
@@ -100,12 +95,9 @@ class HomeController < ApplicationController
 
 
   def city
-    @has_search = true
-    @cities    = City.where(country_id: Country::UKRAINE_ID ).pluck("name_#{I18n.locale}",:id)
     @allowed_categories = Category.get_parent
     @city  = City.find_by_seo_name(params[:seo_name])
     @pages = Page.published.by_rating.by_city(@city.id).paginate(page: params[:page], per_page: PER_PAGE)
-    @categories = Category.get_parent
 
 
     @meta_desc  = @city.meta_is_generated ? I18n.t("uex.default_city_desc", {name: @city.name } )   : @city.meta_desc
@@ -199,6 +191,8 @@ class HomeController < ApplicationController
     end
   end
 
+  private
+
   def baner_params
     params.require(:anonim_page).permit(:name,:email,:phone,:title,:anons,:logo,:category_id,:city_id, :country_id, :desc)
   end
@@ -206,6 +200,15 @@ class HomeController < ApplicationController
   def feedback_params
     params.require(:feedback).permit(:name,:email,:phone,:message)
   end
+
+
+  def set_search_data
+    @cities     = City.where(country_id: Country::UKRAINE_ID ).select("name_#{I18n.locale}",:id, :seo_name, :updated_at)
+    @categories = Category.get_parent
+    @has_search = true
+  end
+
+
 
 
 

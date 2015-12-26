@@ -34,14 +34,14 @@ class Category < ActiveRecord::Base
   def generate_seo
     self.seo_name = self.title.russian_translit if self.respond_to?(:seo_name) && !self.title.nil? && self.seo_name.nil?
   end
-  def seos
+  def seos( city = nil)
     result = []
-    result << (self.parent.nil? ? [self.seo_name] : [self.parent.seos,self.seo_name])
+    result << (self.parent.nil? ? [self.seo_name,( city ? city.seo_name : nil)].compact.join("-") : [self.parent.seos( city ), [self.seo_name,( city ? city.seo_name : nil)].compact.join("-") ])
     result.flatten
   end
 
-  def link
-    "/category/#{self.seos.join('/')}"
+  def link( city = nil )
+    "/category/#{self.seos( city ).join('/')}"
   end
 
   def pages_for_blog
@@ -51,6 +51,17 @@ class Category < ActiveRecord::Base
     (self.childrens.map(&:pages) + self.pages).flatten
   end
   def self.find_by_seo seo
+    city_seos = City.avilables_seo
+    seo.map! do |item|
+      elemets = item.split("-")
+      p elemets
+      p city_seos & elemets
+      if (city_seos & elemets).any?
+        elemets = elemets[0...-1]
+      end
+      elemets.join("-")
+    end
+
     category = Category.where(seo_name: seo.last).includes(:pages).first
     return false unless category
     seo.each do |s|
@@ -59,23 +70,23 @@ class Category < ActiveRecord::Base
     category
   end
 
-  def prepare_breadcrumbs( skip_self = false )
+  def prepare_breadcrumbs( skip_self = false, city = nil )
 
-    prepare = lambda{ |cat, is_rec|
+    prepare = lambda{ |cat, is_rec, city|
       if cat.parent.present?
-        result = prepare.call(cat.parent,true).merge(cat.parent.bread_hash)
-        resutl = result.merge(cat.bread_hash) unless skip_self
+        result = prepare.call(cat.parent,true, city).merge(cat.parent.bread_hash(city))
+        resutl = result.merge(cat.bread_hash(city)) unless skip_self
       else
-        result =  skip_self ? {} : is_rec ? {} : cat.bread_hash
+        result =  skip_self ? {} : is_rec ? {} : cat.bread_hash(city)
       end
       return result
     }
-    prepare.call(self,false)
+    prepare.call(self,false, city)
 
   end
 
-  def bread_hash
-    {"#{self.link}" => self.title}
+  def bread_hash( city = nil)
+    {"#{self.link(city)}" => city ? [self.title, city.name].join(" ")  : self.title}
   end
 
   def all_childrens
@@ -108,9 +119,9 @@ class Category < ActiveRecord::Base
       }
     end
 
-    #Rails.cache.fetch("categories_tree", expires_in: 1.month) do
+    Rails.cache.fetch("categories_tree", expires_in: 1.month) do
       Category.where(parent_id:0).map{ |item| to_tree_recoursive.call(item) }
-    #end
+    end
   end
 
   private

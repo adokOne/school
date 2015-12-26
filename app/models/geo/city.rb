@@ -16,6 +16,8 @@ class City < ActiveRecord::Base
 
   default_scope { order("name_#{I18n.locale}") }
 
+  after_save :clear_cache
+
   def to_item
     {
       name:self.name,
@@ -39,4 +41,15 @@ class City < ActiveRecord::Base
   def anons
     read_attribute("anons_#{I18n.locale}")
   end
+
+  def self.avilables_seo
+    Rails.cache.fetch("cities_avilables_seo", expires_in: 1.month) do
+      City.all.pluck(:seo_name)
+    end
+  end
+
+  def clear_cache
+    Rails.cache.delete("cities_avilables_seo")
+  end
+
 end

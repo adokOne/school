@@ -15,9 +15,21 @@
 .sub .steps_lable{
 
         font-weight: 400;
+        padding-left: 20px;
+}
+.sub{
+  padding: 0;
+  margin: 0;
+}
+.sbSelector.active{
+  font-weight: 500;
 }
 .sbOptions.cats{
   max-height: 350px;
+  top: 50px;
+  max-height: 327px;
+  overflow: auto!important;
+  display: none;
 }
 .steps_lable:hover{
   background-color: #2b91d8;

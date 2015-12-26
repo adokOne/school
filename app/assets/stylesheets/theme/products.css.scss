@@ -1,11 +1,14 @@
-.categories_block .arrow-select {
+.sbHolder.custom .sbToggle {
     position: absolute;
-    top: 29px;
+    top: 20px;
     right: 19px;
     width: 24px;
     height: 12px;
     background: image-url("select-arrow.png") no-repeat 0 -14px;
     transition: none;
+}
+.sbHolder.custom .sbToggle.sbToggleOpen{
+      background-position: 0 0;
 }
 .products #site-wrapper{
   background: #fff;
