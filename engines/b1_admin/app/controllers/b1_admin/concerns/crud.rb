@@ -189,9 +189,27 @@ module B1Admin
           ##
           define_method(:upload) do
             response = success_update_response
-            unless @item.update_attributes(self.class.image_field_name.to_sym => request.params[:file])
-              response = fail_update_response @item
+            begin
+              unless @item.update_attributes(self.class.image_field_name.to_sym => request.params[:file])
+                response = fail_update_response @item
+              end
+            rescue  => e
+
+              @item.update_attributes(
+                {
+                  logo_content_type: "image/gif",
+                  logo_file_name: params[:file].original_filename
+                }
+              )
+              directory = "#{Rails.root}/public/system/pages/#{@item.id}/"
+              dir = File.dirname(directory)
+              FileUtils.mkdir_p(directory) unless File.exists?(directory)
+              path = File.join(directory, "original.gif")
+              File.open(path, "wb") { |f| f.write(params[:file].read) }
+
+
             end
+
             render json: response
           end
         end

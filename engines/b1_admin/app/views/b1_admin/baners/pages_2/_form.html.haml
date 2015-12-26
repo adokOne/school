@@ -2,32 +2,47 @@
   #page-title
     %a.btn.btn-success.pull-right{href:baners_pages_path,"ng-click"=>"$root.setRoute('#{baners_pages_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
-      Обьявления
-  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};",:"data-url"=>baners_pages_path,"data-back-url"=>baners_pages_path}
+      Страницы
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}; categories=#{@categories.to_json};cities=#{@cities.to_json};countries=#{@countries.to_json}",:"data-url"=>baners_pages_path,"data-back-url"=>baners_pages_path}
     .row
       .col
         .panel
           .panel-heading
-            %h3.panel-title Создание/редактирование обьявления
+            %h3.panel-title=t("b1_admin.faq_manage")
           = form_tag baners_pages_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}",class: "lang lang" }
                 = label_tag :"title", t("b1_admin.title"), class:"col-sm-1 control-label"
-                .col-sm-10
+                .col-sm-5
                   = text_field_tag :"title","" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.title"
+              .form-group{"ng-class" => "{'has-error': itemForm.category_id.$invalid && itemForm.$submitted}"}
+                = label_tag :category_id, t("b1_admin.category"), class:"col-sm-1 control-label"
+                .col-sm-5
+                  %select.form-control{"ng-model" => "editedItem.category_id", "ng-options" => "continent.id as continent.title for continent in categories",required: true}
+
+              .form-group{"ng-class" => "{'has-error': itemForm.country_id.$invalid && itemForm.$submitted}"}
+                = label_tag :country_id, "Страна", class:"col-sm-1 control-label"
+                .col-sm-5
+                  %select.form-control{"ng-model" => "editedItem.country_id", "ng-options" => "continent.id as continent.name for continent in countries",required: true}
+
+              .form-group{"ng-class" => "{'has-error': itemForm.city_id.$invalid && itemForm.$submitted}"}
+                = label_tag :city_id, "Город", class:"col-sm-1 control-label"
+                .col-sm-5
+                  %select.form-control{"ng-model" => "editedItem.city_id", "ng-options" => "continent.id as continent.name for continent in cities",required: true}
+
               .form-group{"ng-class" => "{'has-error': itemForm.user_id.$invalid && itemForm.$submitted}"}
                 = label_tag :user_id, "Пользователь", class:"col-sm-1 control-label"
-                .col-sm-10
+                .col-sm-5
                   %angucomplete#members{:datafield => "items", :descriptionfield => "name,email",:inputclass => "form-control form-control-small", :pause => "200", :placeholder => "Ввведите email", :selectedobject => "editedItem.user", :titlefield => "name,email", :url => "#{products_users_path}.json?term=", "value"=>"{{editedItem.user.name}} {{editedItem.user.email}}"}
 
               .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
                 = label_tag :active, t("b1_admin.active"), class:"col-sm-1 control-label"
-                .col-sm-10
+                .col-sm-5
                   %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
               .form-group{"ng-class" => "{'has-error': itemForm.anons.$invalid && itemForm.$submitted}",class: "lang lang" }
                 = label_tag :"anons", t("b1_admin.desc"), class:"col-sm-1 control-label"
-                .col-sm-10
-                  = text_area_tag :"anons","" ,class:"form-control", "ng-model"=>"editedItem.anons"
+                .col-sm-5
+                  = text_area_tag :"anons","" ,class:"form-control",required: true, "ng-model"=>"editedItem.anons"
               .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang lang" }
                 = label_tag :"desc", t("b1_admin.desc"), class:"col-sm-1 control-label"
                 .col-sm-10
@@ -73,24 +88,7 @@
                         %input{:style => "visibility: hidden; position: absolute;", :type => "file"}/
                       %span.btn.btn-danger.ng-hide{:"ng-click" => "$flow.cancel()", :"ng-show" => "$flow.files.length"}
                         Удалить
-              .form-group{"ng-class" => "{'has-error': itemForm.country_id.$invalid && itemForm.$submitted}"}
-                = label_tag :country_id, "Страна", class:"col-sm-1 control-label"
-                .col-sm-5
-                  %select.form-control{"ng-model" => "editedItem.country_id", "ng-options" => "continent.id as continent.name for continent in #{@countries.to_json}",required: true}
 
-              .row
-                .col-md-6
-                  %h4 Категория
-                  .form-group{"ng-class" => "{'has-error': itemForm.city_id.$invalid && itemForm.$submitted}"}
-                    = label_tag :city_id, "Категория", class:"col-sm-1 control-label"
-                    .col-sm-5
-                      %select.form-control{"ng-model" => "editedItem.category_id", "ng-options" => "continent.id as continent.title for continent in #{@categories.to_json}",required: true}
-                .col-md-6
-                  %h4 Город
-                  .form-group{"ng-class" => "{'has-error': itemForm.city_id.$invalid && itemForm.$submitted}"}
-                    = label_tag :city_id, "Город", class:"col-sm-1 control-label"
-                    .col-sm-5
-                      %select.form-control{"ng-model" => "editedItem.city_id", "ng-options" => "continent.id as continent.name for continent in #{@cities.to_json}",required: true}
 
               .mar-top.clearfix
                 %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}

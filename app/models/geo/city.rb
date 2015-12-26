@@ -7,8 +7,7 @@ class City < ActiveRecord::Base
   has_many :airports, dependent: :restrict_with_exception
   #End Relations
   #Validates
-  validates :code,:country_id, presence: true
-  validates :code,        length: { in: 3..3 },format: {with:/\A^[^0-9`!@#\$%\^&*+=]+\z/i}
+  validates :country_id, presence: true
   #End validates
 
   has_attached_file :logo, styles: { medium: "311x278>",thumb: "155x138>" }, default_url: "/img/city-missing.png",path:":rails_root/public/system/:class/:id/:style.png",url:"/system/:class/:id/:style.png"

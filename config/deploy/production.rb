@@ -2,6 +2,12 @@ set :deploy_to, "/home/#{fetch(:user)}/#{fetch(:application)}"
 set :branch, :uex
 set :puma_conf,       "#{shared_path}/puma.rb"
 set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock" #accept array for multi-bind
+
+server '159.203.76.46', port: 22 , user: 'deploy', roles: [:web, :app, :db], primary: true
+
+set :user,            'deploy'
+set :rvm_ruby_version, 'ruby-2.2-head'      # Defaults to: 'default'
+
 # # Simple Role Syntax
 # # ==================
 # # Supports bulk-adding hosts to roles, the primary server in each group

@@ -1,10 +1,11 @@
 class HomeController < ApplicationController
 
+  PER_PAGE= 10
   def main
     @has_search = true
     @cities    = City.where(country_id: Country::UKRAINE_ID ).pluck("name_#{I18n.locale}",:id)
     @categories = Category.get_parent
-    @pages = Page.published.by_rating.by_text(params[:search]).includes(:reviews).paginate(page: params[:page], per_page: 5)
+    @pages = Page.published.by_rating.by_text(params[:search]).includes(:reviews).paginate(page: params[:page], per_page: PER_PAGE)
   end
 
   def contacts
@@ -99,7 +100,7 @@ class HomeController < ApplicationController
     @cities    = City.where(country_id: Country::UKRAINE_ID ).pluck("name_#{I18n.locale}",:id)
     @allowed_categories = Category.get_parent
     @city  = City.find_by_seo_name(params[:seo_name])
-    @pages = Page.published.by_rating.by_city(@city.id).paginate(page: params[:page], per_page: 5)
+    @pages = Page.published.by_rating.by_city(@city.id).paginate(page: params[:page], per_page: PER_PAGE)
     @categories = Category.get_parent
 
 

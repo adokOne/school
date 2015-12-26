@@ -2,7 +2,7 @@ module B1Admin
   module Geo
     module City
       class ListSerializer < ::B1Admin::BaseSerializer
-        attributes :name,:id,:code,:show_on_search,:show_as_popular,:continent,:country,:meta_is_generated
+        attributes :name,:id,:show_on_search,:show_as_popular,:continent,:country,:meta_is_generated
 
         def continent
           self.object.continent.nil? ? "" : self.object.continent.name

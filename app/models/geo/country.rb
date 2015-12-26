@@ -1,7 +1,7 @@
 class Country < ActiveRecord::Base
   include Localizable
   include Geolizable
-  UKRAINE_ID = 396
+  Country::UKRAINE_ID = 1
   #Relations
   has_many :cities, dependent: :restrict_with_exception
 

@@ -1,11 +1,12 @@
 # Change these
-server '193.84.22.53', port: 22 , user: 'adok', roles: [:web, :app, :db], primary: true
+#server '193.84.22.53', port: 22 , user: 'adok', roles: [:web, :app, :db], primary: true
 
 set :repo_url,        'ssh://git@github.com/adokOne/school.git'
 set :application,     'uex'
-set :user,            'adok'
+set :user,            'deploy'
 set :rvm_type, :user                     # Defaults to: :auto
 set :rvm_ruby_version, 'ruby-head'      # Defaults to: 'default'
+server '159.203.76.46', port: 22 , user: 'deploy', roles: [:web, :app, :db], primary: true
 
 # Don't change these unless you know what you're doing
 set :pty,             true

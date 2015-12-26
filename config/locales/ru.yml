@@ -256,3 +256,5 @@ ru:
       short: "%d %b, %H:%M"
       uex: "%d %B, %Y"
     pm: вечера
+  will_paginate:
+    page_gap: ""

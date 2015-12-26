@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151223103027) do
+ActiveRecord::Schema.define(version: 20151226003854) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -101,42 +101,60 @@ ActiveRecord::Schema.define(version: 20151223103027) do
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
+    t.integer  "old_id",            limit: 4
+    t.integer  "admin_id",          limit: 4
+    t.integer  "admin_update_id",   limit: 4
+    t.string   "slug",              limit: 255
   end
 
   create_table "categories", force: :cascade do |t|
-    t.string   "title_ru",          limit: 255,                       null: false
-    t.integer  "parent_id",         limit: 4,          default: 0,    null: false
-    t.string   "seo_name",          limit: 255,                       null: false
-    t.integer  "position",          limit: 4,          default: 0,    null: false
+    t.string   "title_ru",             limit: 255,                       null: false
+    t.integer  "parent_id",            limit: 4,          default: 0,    null: false
+    t.string   "seo_name",             limit: 255,                       null: false
+    t.integer  "position",             limit: 4,          default: 0,    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "desc_ru",           limit: 4294967295
-    t.string   "logo_file_name",    limit: 255
-    t.string   "logo_content_type", limit: 255
-    t.integer  "logo_file_size",    limit: 4
+    t.text     "desc_ru",              limit: 4294967295
+    t.string   "logo_file_name",       limit: 255
+    t.string   "logo_content_type",    limit: 255
+    t.integer  "logo_file_size",       limit: 4
     t.datetime "logo_updated_at"
-    t.boolean  "meta_is_generated", limit: 1,          default: true
-    t.text     "meta_desc_ru",      limit: 65535
-    t.text     "meta_desc_uk",      limit: 65535
-    t.text     "meta_desc_en",      limit: 65535
-    t.text     "meta_keys_ru",      limit: 65535
-    t.text     "meta_keys_uk",      limit: 65535
-    t.text     "meta_keys_en",      limit: 65535
-    t.string   "meta_title_ru",     limit: 255
-    t.string   "meta_title_uk",     limit: 255
-    t.string   "meta_title_en",     limit: 255
-    t.text     "desc_uk",           limit: 4294967295
-    t.text     "desc_en",           limit: 4294967295
-    t.string   "title_en",          limit: 255
-    t.string   "title_uk",          limit: 255
+    t.boolean  "meta_is_generated",    limit: 1,          default: true
+    t.text     "meta_desc_ru",         limit: 65535
+    t.text     "meta_desc_uk",         limit: 65535
+    t.text     "meta_desc_en",         limit: 65535
+    t.text     "meta_keys_ru",         limit: 65535
+    t.text     "meta_keys_uk",         limit: 65535
+    t.text     "meta_keys_en",         limit: 65535
+    t.string   "meta_title_ru",        limit: 255
+    t.string   "meta_title_uk",        limit: 255
+    t.string   "meta_title_en",        limit: 255
+    t.text     "desc_uk",              limit: 4294967295
+    t.text     "desc_en",              limit: 4294967295
+    t.string   "title_en",             limit: 255
+    t.string   "title_uk",             limit: 255
+    t.integer  "old_id",               limit: 4
+    t.integer  "old_parent",           limit: 4
+    t.text     "city_seo_template_ru", limit: 65535
+    t.text     "city_seo_template_en", limit: 65535
+    t.text     "city_seo_template_uk", limit: 65535
   end
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
   add_index "categories", ["position"], name: "index_categories_on_position", using: :btree
   add_index "categories", ["seo_name"], name: "index_categories_on_seo_name", using: :btree
 
+  create_table "categories_pages", force: :cascade do |t|
+    t.integer "category_id", limit: 4
+    t.integer "page_id",     limit: 4
+  end
+
+  create_table "category_aliases", force: :cascade do |t|
+    t.integer "category_id", limit: 4
+    t.string  "seo_name",    limit: 255
+  end
+
   create_table "cities", force: :cascade do |t|
-    t.string   "code",              limit: 255
     t.float    "lat",               limit: 24,         default: 0.0,  null: false
     t.float    "lng",               limit: 24,         default: 0.0,  null: false
     t.string   "name_ru",           limit: 255,        default: ""
@@ -175,10 +193,19 @@ ActiveRecord::Schema.define(version: 20151223103027) do
     t.string   "seo_text_en",       limit: 255
   end
 
-  add_index "cities", ["code"], name: "index_cities_on_code", using: :btree
   add_index "cities", ["continent_id"], name: "index_cities_on_continent_id", using: :btree
   add_index "cities", ["country_id"], name: "index_cities_on_country_id", using: :btree
   add_index "cities", ["show_on_search"], name: "index_cities_on_show_on_search", using: :btree
+
+  create_table "cities_pages", force: :cascade do |t|
+    t.integer "city_id", limit: 4
+    t.integer "page_id", limit: 4
+  end
+
+  create_table "city_aliases", force: :cascade do |t|
+    t.integer "city_id",  limit: 4
+    t.string  "seo_name", limit: 255
+  end
 
   create_table "contacts", force: :cascade do |t|
     t.string  "contact_type", limit: 255, null: false
@@ -345,6 +372,10 @@ ActiveRecord::Schema.define(version: 20151223103027) do
     t.text     "meta_desc",         limit: 65535
     t.text     "meta_keys",         limit: 65535
     t.string   "meta_title",        limit: 255
+    t.string   "slug",              limit: 255
+    t.integer  "old_id",            limit: 4
+    t.integer  "admin_id",          limit: 4
+    t.integer  "admin_update_id",   limit: 4
   end
 
   add_index "pages", ["active"], name: "index_pages_on_active", using: :btree
