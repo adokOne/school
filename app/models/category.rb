@@ -19,6 +19,8 @@ class Category < ActiveRecord::Base
 
   validates_attachment_content_type :logo, :content_type => /\Aimage/
 
+  after_save :clear_cache
+
   def to_tree_item
     {
       id:        self.id,
@@ -89,7 +91,9 @@ class Category < ActiveRecord::Base
   end
 
   def self.get_parent
-    Category.where(parent_id:0).order({position: :asc},{id: :asc})
+    Rails.cache.fetch("categories_parent", expires_in: 1.month) do
+      Category.where(parent_id:0).includes(:childrens).order({position: :asc},{id: :asc})
+    end
   end
 
   def self.to_tree
@@ -102,7 +106,18 @@ class Category < ActiveRecord::Base
         childs:    item.childrens.map{ |item| to_tree_recoursive.call(item) }
       }
     end
-    Category.where(parent_id:0).map{ |item| to_tree_recoursive.call(item) }
+
+    Rails.cache.fetch("categories_tree", expires_in: 1.month) do
+      raise
+      Category.where(parent_id:0).map{ |item| to_tree_recoursive.call(item) }
+    end
+  end
+
+  private
+
+  def clear_cache
+    Rails.cache.delete("categories_tree")
+    Rails.cache.delete("categories_parent")
   end
 
 end

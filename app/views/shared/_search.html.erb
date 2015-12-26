@@ -14,17 +14,19 @@
              <%= options_for_select(@cities) %>
             </select>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-            <select name="search[category_id]" required="required">
-               <option disabled selected value=""><%= t("uex.category")%></option>
-               <% @categories.each do |cat| %>
-                   <option value="<%= cat.id%>" class="label" ><%= cat.title%></option>
-                   <% cat.childrens.each do |cat| %>
-                         <option value="<%= cat.id%>" class="label" ><%= cat.title%></option>
-                   <% end %>
-               <% end %>
-            </select>
-          </div>
+          <% cache @categories do %>
+            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
+              <select name="search[category_id]" required="required">
+                 <option disabled selected value=""><%= t("uex.category")%></option>
+                 <% @categories.each do |cat| %>
+                     <option value="<%= cat.id%>" class="label" ><%= cat.title%></option>
+                     <% cat.childrens.each do |cat| %>
+                           <option value="<%= cat.id%>" class="label" ><%= cat.title%></option>
+                     <% end %>
+                 <% end %>
+              </select>
+            </div>
+          <% end %>
           <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
              <span class="wpcf7-form-control-wrap">
                 <input type="submit" value="найти" class="wpcf7-form-control wpcf7-submit js-submit">
