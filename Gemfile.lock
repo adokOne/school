@@ -266,6 +266,7 @@ GEM
       cocaine (~> 0.5.5)
       mime-types
       mimemagic (= 0.3.0)
+    php-serialize (1.1.0)
     pry (0.10.1)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -437,6 +438,7 @@ DEPENDENCIES
   mysql2
   oauth2
   paper_trail (~> 4.0.0.rc)
+  php-serialize
   pry-rails
   pry-rescue
   puma

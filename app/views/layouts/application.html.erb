@@ -28,9 +28,7 @@
       <% end %>
       <meta property="og:title" content="<%=@meta_title%>" />
       <meta property="og:description" content="<%=@meta_desc%>" />
-      <% if @og_url%>
-         <meta property="og:url" content="<%= @og_url%>" />
-      <% end %>
+      <meta property="og:url" content="<%= Settings.domain + request.fullpath %>" />
       <meta property="og:site_name" content="UEX" />
 
       <% if  @section_name %>
@@ -161,9 +159,7 @@
                            <h1 class="site-title image-logo">
                                  <%= image_tag "logo.png", style:"width: 176px;" %>
                                  <span>
-                                    БАННЕРНАЯ ПОИСКОВАЯ СИСТЕМА
-                                    <br/>
-                                    <small>Мы размещаем информацию только об оригинальных товарах и качественных услугах</small>
+                                    <%= t("uex.lozung").html_safe%>
                                  </span>
 
                            </h1>
@@ -223,9 +219,6 @@
                                           </li>
                                           <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65">
                                                 <a href="<%= url("contacts") %>"><%= t("uex.contacts")%></a>
-                                          </li>
-                                          <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-65">
-                                                <a href="<%= url("cities") %>"><%= t("uex.cities")%></a>
                                           </li>
                                        </ul>
                                     </div>

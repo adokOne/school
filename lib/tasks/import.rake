@@ -43,6 +43,19 @@ class WpPostmeta < ActiveRecord::Base
   belongs_to :wp_post, :foreign_key => :post_id, :primary_key => :ID
 end
 
+class WpOption < ActiveRecord::Base
+  establish_connection(
+    :adapter  => "mysql2",
+    :host     => "localhost",
+    :username => "root",
+    :password => "",
+    :database => "uex_db"
+
+  )
+end
+
+
+
 class WpTerm< ActiveRecord::Base
   establish_connection(
     :adapter  => "mysql2",
@@ -94,6 +107,29 @@ AUTHOR_ALIAS = {
   13 => 9 #admin@uex.link
 }
 namespace :import do
+
+
+  desc "Import category seo"
+  task :category_seo => :environment do
+    require 'php_serialize'
+    data = WpOption.where(option_name: "wpseo_taxonomy_meta").first.option_value
+    data = PHP.unserialize(data)
+    data["category"].each_pair do |id, data|
+      if category = Category.find_by_old_id(id)
+        _item = {}
+        # p data["wpseo_bctitle"].to_s.force_encoding("UTF-8")
+        # p "/"*200
+        I18n.available_locales.each do |l|
+          _item["meta_desc_#{l}"] = data["wpseo_desc"].to_s.force_encoding("UTF-8")
+          _item["meta_keys_#{l}"] = data["wpseo_metakey"].to_s.force_encoding("UTF-8")
+          _item["meta_title_#{l}"] = data["wpseo_title"].to_s.force_encoding("UTF-8")
+          # _item["focuskw_#{l}"] =
+        end
+        category.update_attributes( _item )
+      end
+    end
+  end
+
 
   desc "Import cities"
   task :cities => :environment do

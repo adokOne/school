@@ -86,7 +86,6 @@ class HomeController < ApplicationController
     @image = @item.logo
     @published_at = @item.created_at
     @og_type = "article"
-    @og_url = url(@item.link)
   end
 
   def cities
