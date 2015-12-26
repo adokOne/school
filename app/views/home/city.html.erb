@@ -47,11 +47,13 @@
                                              <span class="posted-on"><time class="entry-date published" datetime="<%= page.created_at %>"><%= l(page.created_at, format: :uex) %></time></span>
                                              <span class="comments-link"><a href="#"><%= page.reviews_count %>  отзыва</a></span>
                                           </div>
+                                          <% if page.logo.present? %>
                                           <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
                                             <a href="<%= url(page.link) %>" title="<%= page.title %>">
                                               <img   width="1088" height="387" src="<%= page.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="<%= page.title %>"/>
                                             </a>
                                           </figure>
+                                          <% end %>
                                           <div class="entry-content">&nbsp&nbsp</div>
                                           <div class="entry-permalink pull-right">
                                             <a href="<%= url(page.link) %>" class="cherry-btn cherry-btn-primary cherry-btn-extra-large"><%= t("uex.read_more")%></a>
