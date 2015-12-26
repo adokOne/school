@@ -65,9 +65,9 @@ class WpTerm< ActiveRecord::Base
     :database => "uex_db"
 
   )
-  has_many :wp_term_relationship, :foreign_key => :term_taxonomy_id , :primary_key => :term_id
+  has_many :wp_term_relationships, :foreign_key => :term_taxonomy_id , :primary_key => :term_id
   has_one :wp_term_taxonomyie, :foreign_key => :term_id
-  has_many :wp_posts, :through =>:wp_term_relationship
+  has_many :wp_posts, :through =>:wp_term_relationships, :foreign_key => :object_id
 end
 class WpTermTaxonomyie< ActiveRecord::Base
   establish_connection(
@@ -103,7 +103,7 @@ AUTHOR_ALIAS = {
   8 => 5, # seo@uex.link
   1 => 6, # text@uex.link
   7 => 7, # it@uex.link
-  10 => 8, # smm@uex.link
+  #10 => 8, # smm@uex.link
   13 => 9 #admin@uex.link
 }
 namespace :import do
@@ -317,4 +317,34 @@ namespace :import do
     #   p data
     # end
   end
+
+
+  desc "Import old db"
+  task :update_page_canonical => :environment do
+    page_ids = []
+    city_categories = ["kuiv","brovaru","jutomir","rivne","dnepropetrovsk","lutsk","dnepr","cherkasu","odesa","lviv","chernivci","frankivsk","jutomur","ujgorod","ternopil","dn","herson","odessa","harkiv","vn","dnipropetrovsk","vinnucya","symu","vidpochinok_kharkiv","organizasia_svyat_kharkiv","dizain_odessa","vinnisa","chernigiv","kharkiv","poltava","zaporijia","budremrob_lutsk","dp","opalennya_kyiv","budrem_frankivsk","stoitelstvo_i_remont_kharkov","dostavka_lviv","obladnannya_zaporyzhya","zaporizhya","kiev","poslugi_zhutomir","zhut","kancelaria_kh","met_kharkiv","kyiv","poslugy_chernigiv","zoo_chernigiv","stoitelstvo_i_remont_kherson","vizy_kharkiv","zaporyzhya","hr","sg_vinnycja","landshaft_kyiv","avtoservice_dn","tekstyl_od","kv","obladnannja_harkiv","vinnycja","poligrafija_harkiv","obladnannja_zhytomyr","budivnyctvo_remont_ternopil","pasazhyrski_perev_hv","hk","stoljarni_robory_dp","lv","vikna_dveri_vorota_dp","lc","avtovykup_hr","mebel_harkiv","hmelnitskij","hmel","oteli_restorany_od","brovary","otdyh_odessa","chernivcy","poslugy_kr","poslugy_pl","vantazhni_perevezennja_dp","avtovykup_rv","perevezennja_yzh","orenda_hr","poslugy_yzh","avtoservice_lc","od"]
+
+    categories = []
+    WpTerm.all.each do |item|
+      if item.wp_term_taxonomyie.try(:taxonomy) == "category"
+        categories << item
+      end
+    end
+    categories.group_by do |item|
+      item.slug.split("-").last
+    end.each_pair do |city, data|
+      if city_categories.include?(city)
+        data.each do |cat|
+          page_ids << cat.wp_posts.map(&:ID)
+        end
+      end
+    end
+
+    Page.where(old_id: page_ids.flatten.uniq).update_all( city_is_canonical: true )
+
+  end
+
+
+
+
 end

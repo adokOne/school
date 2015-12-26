@@ -20,7 +20,11 @@ Rails.application.routes.draw do
     get "blog/*seo_name", to: "blog#item"
     get "blog/category/*seo_name", to: "blog#category"
 
+    get "*path/advert/(:id).:format", to: "home#item", is_new: true
     get "*path/(:id).:format", to: "home#item"
+
+
+
     get "category/*seo_name", to: "home#category"
     post "check/transaction", to: "home#check_transaction"
     post "create/order", to: "users#create_order"

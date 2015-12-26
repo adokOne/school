@@ -58,9 +58,8 @@ class String
   def russian_translit text=""
       text = text.empty? ? self : text
       text = text.gsub_arr(["?","!"],"")
-      p text
-      translited = text.tr('абвгдеёзийклмнопрстуфхэыь ', 'abvgdeezijklmnoprstufhey\'-')
-      translited = translited.tr('АБВГДЕЁЗИЙКЛМНОПРСТУФХЭ ', 'abvgdeezijklmnoprstufhey\'-')
+      translited = text.tr('абвгдеёзийклмнопрстуфхэыь ', 'abvgdeezijklmnoprstufhey\'~')
+      translited = translited.tr('АБВГДЕЁЗИЙКЛМНОПРСТУФХЭ ', 'abvgdeezijklmnoprstufhey\'~')
       translited = translited.gsub(/[жцчшщъюяЖЦЧШЩЪЮЯ]/,
           'ж' => 'zh', 'ц' => 'ts', 'ч' => 'ch', 'ш' => 'sh', 'щ' => 'sch', 'ъ' => '', 'ю' => 'ju', 'я' => 'ja',
           'Ж' => 'zh', 'Ц' => 'ts', 'Ч' => 'ch', 'Ш' => 'sh', 'Щ' => 'sch', 'Ъ' => '', 'Ю' => 'ju', 'Я' => 'ja')

@@ -20,7 +20,7 @@
          <nav class="navigation post-navigation" role="navigation">
             <div class="paging-navigation">
                <div class="nav-links">
-                  <div class="nav-previous"><a href="<%= @item.category.link%>" rel="prev"><%= t("uex.back_to_category",name: @item.category_title)%></a></div>
+                  <div class="nav-previous"><a href="<%= @item.category.link( @item.city_is_canonical ? @item.city : nil ) %>" rel="prev"><%= t("uex.back_to_category",name: @item.category_title)%></a></div>
                </div>
             </div>
          </nav>

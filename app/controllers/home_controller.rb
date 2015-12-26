@@ -72,6 +72,12 @@ class HomeController < ApplicationController
   end
 
   def item
+    unless params[:is_new]
+      if page = Page.find_by_slug(params[:id])
+        redirect_to( page.link, status: 301 ) and return
+      end
+    end
+
     @item = Page.find(params[:id])
     @item.impressions.create(ip_address: request.remote_ip,user_id: current_user ? current_user.id : 0)
     @breadcrumbs_items = @item.prepare_breadcrumbs
@@ -86,6 +92,7 @@ class HomeController < ApplicationController
     @image = @item.logo
     @published_at = @item.created_at
     @og_type = "article"
+    @canonical = url(@item.canonical_link)
   end
 
   def cities
@@ -102,6 +109,7 @@ class HomeController < ApplicationController
     @meta_desc  = @city.meta_is_generated ? I18n.t("uex.default_city_desc", {name: @city.name } )   : @city.meta_desc
     @meta_title = @city.meta_is_generated ? I18n.t("uex.default_city_title", {name: @city.name } )  : @city.meta_title
     @meta_keys  = @city.meta_is_generated ? @meta_keys  : @city.meta_keys
+    og_type = "object"
   end
 
   def search

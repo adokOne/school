@@ -13,7 +13,7 @@ module B1Admin
       end
 
       def allowed_params
-        params.require(:item).permit(:id,:active,:seo_name,:category_id,:anons,:desc,:title, :city_id, :meta_is_generated, :meta_title, :meta_desc,:meta_keys, :user_id, :country_id)
+        params.require(:item).permit(:city_is_canonical, :id,:active,:seo_name,:category_id,:anons,:desc,:title, :city_id, :meta_is_generated, :meta_title, :meta_desc,:meta_keys, :user_id, :country_id)
       end
 
       def set_data

@@ -1,6 +1,7 @@
 class Page < ActiveRecord::Base
   before_validation :generate_seo
   belongs_to :category
+
   has_paper_trail on: [:update, :destroy]
 
   @attachment_sizes =  { home: "760x270#",thumb: "100x100#", big: "800x300#" }
@@ -78,8 +79,8 @@ class Page < ActiveRecord::Base
     impressions.group(:ip_address).size #UNTESTED: might not be correct syntax
   end
 
-  def seos
-    [self.category.seos].flatten
+  def seos( city = nil )
+    [self.category.seos( city )].flatten
   end
 
   def self.find_by_seo seo
@@ -92,11 +93,19 @@ class Page < ActiveRecord::Base
   end
 
   def link
-    "/#{seos.join('/')}/#{self.id}.html"
+     canonical_link
+  end
+
+  def canonical_link
+    if self.city_is_canonical
+      "/#{seos(self.city).join('/')}/advert/#{self.id}.html"
+    else
+      "/#{seos.join('/')}/advert/#{self.id}.html"
+    end
   end
 
   def prepare_breadcrumbs
-    self.category.prepare_breadcrumbs
+    self.category.prepare_breadcrumbs( false, self.city_is_canonical ? self.city : nil )
   end
 
   def generate_seo

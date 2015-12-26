@@ -12,8 +12,11 @@
 
       <meta name="generator" content="B1 Dev"/>
       <link rel="publisher" href="https://plus.google.com/u/0/b/103359602341449879335/103359602341449879335/posts"/>
-<!--       <link rel='canonical' href='<%= Settings.domain %>'/> -->
 
+
+      <% if @canonical%>
+         <link rel='canonical' href='<%= @canonical %>'/>
+      <% end %>
       <link rel='shortlink' href='<%= Settings.domain %>'/>
 
       <link type="image/x-icon" href="favicon.ico" rel="shortcut icon">
