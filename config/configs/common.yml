@@ -24,7 +24,7 @@ test:
 
 production:
   <<: *defaults
-  domain: "http://193.84.22.53"
+  domain: "http://159.203.76.46"
 
 staging:
   <<: *defaults
