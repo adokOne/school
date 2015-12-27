@@ -198,6 +198,18 @@ class HomeController < ApplicationController
     end
   end
 
+  def payment
+
+  end
+
+  def check_transaction
+    render :nothing, status: 200
+  end
+
+  def payment_success
+
+  end
+
   private
 
   def baner_params
@@ -218,21 +230,6 @@ class HomeController < ApplicationController
     @categories = Category.get_parent
     @has_search = true
   end
-
-  def payment
-
-  end
-
-  def check_transaction
-
-  end
-
-  def payment_success
-
-  end
-
-
-
 
 
 end
