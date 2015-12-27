@@ -1,4 +1,4 @@
-%div{:"ng-controller"=>"CrudController",:"data-url"=>baners_pages_path,:"data-delete-text"=>t("b1_admin.delete_confirm")}
+%div{:"ng-controller"=>"PagesController",:"data-url"=>baners_pages_path,:"data-delete-text"=>t("b1_admin.delete_confirm")}
   #content-container
     #page-title
       %h1.page-header.text-overflow
@@ -33,3 +33,52 @@
                       %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-success.fa.fa-pencil.add-tooltip{"tooltip" => t("b1_admin.edit"),href:"#{baners_pages_path}/{{item.id}}/edit/","ng-click"=>"$root.setRoute('#{baners_pages_path}/' + item.id + '/edit/')",style:"margin-right: 15px;"}
                     - if user_can?(:destroy)
                       %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-times.add-tooltip{"tooltip" => t("b1_admin.delete"), :href => "#","ng-click" => "destroy(item)"}
+
+                    - if user_can?(:show_reviews)
+                      %a.btn.btn-sm.btn-trans.btn-icon.btn-hover-danger.fa.fa-search.add-tooltip{"tooltip" => "Просмотреть отзывы", :href => "#","ng-click" => "showReviews(item)"}
+
+
+  - content_for :aside do
+    .hidden
+  %aside#aside-container
+    #aside
+      .panel
+        .panel-footer.text-right
+          %a.btn.btn-success{"ng-click"=>"filter()"}=t("b1_admin.do_filter")
+          %a.btn.btn-warning{"ng-click"=>"reset()"}=t("b1_admin.reset_filter")
+
+        .panel-heading
+          %h3.panel-title=t("b1_admin.filter")
+        = form_tag geo_cities_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+          .panel-body
+            .col-sm-12
+              .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                = label_tag :active, "Активное?", class:"control-label"
+                %select.form-control{"ng-model" => "filters.active", "ng-options" => "k as v for (k, v) in ['Нет','Да']"}
+              .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                = label_tag :category_id, "Категория", class:"control-label"
+                %select.form-control{"ng-model" => "filters.category_id", "ng-options" => "country.id as country.name for country in #{@categories.to_json}"}
+              .form-group{"ng-class" => "{'has-error': itemForm.action.$invalid && itemForm.$submitted}"}
+                = label_tag :country_id, "Страна", class:"control-label"
+                %select.form-control{"ng-model" => "filters.country_id", "ng-options" => "country.id as country.name for country in #{@countries.to_json}"}
+              .form-group{"ng-class" => "{'has-error': itemForm.action.$invalid && itemForm.$submitted}"}
+                = label_tag :city_id, "Город", class:"control-label"
+                %select.form-control{"ng-model" => "filters.city_id", "ng-options" => "country.id as country.name for country in #{@cities.to_json}"}
+              .form-group{"ng-class" => "{'has-error': itemForm.action.$invalid && itemForm.$submitted}"}
+                = label_tag :id, "ID", class:"control-label"
+                = text_field_tag :"id","" ,class:"form-control", "ng-model"=>"filters.id"
+              .form-group{"ng-class" => "{'has-error': itemForm.action.$invalid && itemForm.$submitted}"}
+                = label_tag :id, "Старое ID", class:"control-label"
+                = text_field_tag :"slug","" ,class:"form-control", "ng-model"=>"filters.slug"
+              .form-group{"ng-class" => "{'has-error': itemForm.meta_is_generated.$invalid && itemForm.$submitted}"}
+                = label_tag :has_new_reviews, "СЕО генерированое?", class:"control-label"
+                %select.form-control{"ng-model" => "filters.meta_is_generated", "ng-options" => "k as v for (k, v) in ['Нет','Да']"}
+              .form-group{"ng-class" => "{'has-error': itemForm.has_new_reviews.$invalid && itemForm.$submitted}"}
+                = label_tag :has_new_reviews, "Есть новые отзывы?", class:"control-label"
+                %select.form-control{"ng-model" => "filters.has_new_reviews", "ng-options" => "k as v for (k, v) in ['Нет','Да']"}
+
+
+              / .form-group{"ng-class" => "{'has-error': itemForm.ip.$invalid && itemForm.$submitted}"}
+              /   = label_tag :user_id, t("b1_admin.user"), class:"control-label"
+              /   %angucomplete#members{:datafield => "users", :descriptionfield => "email",:inputclass => "form-control form-control-small", :pause => "200", :placeholder => "Search users", :selectedobject => "testObj", :titlefield => "name", :url => "#{logs_systems_users_path}?term="}
+= render "reviews"

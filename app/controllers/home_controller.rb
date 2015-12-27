@@ -123,7 +123,7 @@ class HomeController < ApplicationController
   end
 
   def review
-    review = Review.create(params[:reviews])
+    review = Review.create(review_params.merge(moderated: false))
     flash[:message] = I18n.t("uex.review_moderate")
     redirect_to request.referer + "#comments"
 
@@ -206,6 +206,10 @@ class HomeController < ApplicationController
 
   def feedback_params
     params.require(:feedback).permit(:name,:email,:phone,:message)
+  end
+
+  def review_params
+    params.require(:review).permit(:name,:email,:comment, :page_id)
   end
 
 

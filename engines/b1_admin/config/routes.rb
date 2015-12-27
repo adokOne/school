@@ -50,6 +50,9 @@ B1Admin::Engine.routes.draw do
     resources :pages do
       post "upload", on: :member
     end
+    resources :reviews do
+      get "accept", on: :member
+    end
     resources :blogs do
       post "upload", on: :member
     end

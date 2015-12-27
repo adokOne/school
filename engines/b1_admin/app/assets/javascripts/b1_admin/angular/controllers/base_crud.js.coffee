@@ -39,8 +39,6 @@ angular.module("B1Admin").controller "CrudController", [
       $scope.status.opened = true
 
 
-
-
     $scope.Item = $resource("#{$element.data("url")}/:id.json",{},{query:{isArray:false},update:{ method:'PUT' }})
     if angular.element("#itemsTable").length
       $scope.itemsTable = new ngTableParams(
@@ -102,12 +100,10 @@ angular.module("B1Admin").controller "CrudController", [
       setFromEditor()
       $scope.beforeSave()
       $scope.itemForm.$setSubmitted()
-      console.log($scope.itemForm)
       if $scope.itemForm.$valid
         $rootScope.showLoader()
 
         if $scope.editedItem.id
-          console.log($scope.editedItem.id)
           $scope.Item.update {id:$scope.editedItem.id},{item:$scope.editedItem}, (resp) ->
             saveCallback(resp,true)
           , ->
