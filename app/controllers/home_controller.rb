@@ -223,6 +223,10 @@ class HomeController < ApplicationController
 
   end
 
+  def check_transaction
+
+  end
+
   def payment_success
 
   end
