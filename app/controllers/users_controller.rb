@@ -1,4 +1,8 @@
 class UsersController < ApplicationController
+  include ActionView::Context
+  include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::FormTagHelper
+  include Liqpay::LiqpayHelper
 
   before_filter :require_login, except: [:signin, :forgot, :registration, :login, :create, :create_message,:index ]
 
@@ -39,21 +43,17 @@ class UsersController < ApplicationController
 
   def create_transaction
     transaction = current_user.transactions.create( transaction_params )
-    liqpay = Liqpay::Liqpay.new(
-      :public_key  => Settings.liq_pay[:public_key],
-      :private_key => Settings.liq_pay[:private_key],
-    )
-    html = liqpay.cnb_form({
-      :version        => "3",
+    liqpay = Liqpay::Request.new(
       :amount         => transaction.amount,
       :currency       => transaction.currency,
       :description    => transaction.description,
       :order_id       => transaction.tnx_id,
       :server_url     => [Settings.domain, check_transaction_path].join("/") ,
       :result_url     => [Settings.domain, edit_user_path(current_user,anchor: "paymnets")].join("/")
-    })
-    render json: {success: true, form: html}
+    )
+    render json: {success: true, form: liqpay_button(liqpay) }
   end
+
 
   def create_order
 

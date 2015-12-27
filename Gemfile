@@ -41,7 +41,7 @@ gem 'impressionist'
 
 gem 'angularjs-rails-resource', '~> 1.1.1'
 
-gem 'liqpay', github: 'liqpay/sdk-ruby'
+gem 'liqpay', '~>1.0.0'
 
 gem 'validates_email_format_of'
 gem 'active_model_serializers'
