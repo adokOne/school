@@ -8,13 +8,9 @@ Allow: /wp-content/uploads/
 Disallow: /tag
 Disallow: /?search=
 
-
 User-agent: Yandex
 Allow: /wp-content/uploads/
 Disallow: /tag
 Disallow: /?search=
 
 Host: www.uex.link
-Sitemap: http://www.uex.link/post-sitemap.xml
-Sitemap: http://www.uex.link/page-sitemap.xml
-Sitemap: http://www.uex.link/category-sitemap.xml
