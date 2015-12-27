@@ -104,7 +104,6 @@ module B1Admin
           ##
           define_method(:new) do
             @item = self.class.model.new
-            p "#{self.class.name.deconstantize}::#{self.class.serializer}::ItemSerializer"
             @item = "#{self.class.name.deconstantize}::#{self.class.serializer}::ItemSerializer".constantize.new(@item,false)
             render layout: !params.has_key?(:only_template)
           end
@@ -137,10 +136,15 @@ module B1Admin
           ##
           define_method(:update) do
             @params_to_update = allowed_params.dup
+
+
+            if @item.respond_to(:admin_update_id)
+              @params_to_update[:admin_update_id] = current_admin.id
+            end
+
             response = success_update_response
             ActiveRecord::Base.transaction do
               before_update
-
               unless @item.update_attributes(@params_to_update)
                 response = fail_update_response @item
               end
@@ -159,6 +163,12 @@ module B1Admin
           define_method(:create) do
             @params_to_create = allowed_params.dup
             item  = self.class.model.new(@params_to_create)
+            if item.respond_to(:admin_id)
+              item.admin_id = current_admin.id
+            end
+
+
+
             response = success_update_response
             unless item.valid? && item.save
               response = fail_update_response item

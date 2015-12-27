@@ -75,6 +75,12 @@ class Page < ActiveRecord::Base
     self.reviews.count
   end
 
+  def is_vip
+    self.orders.where(status: Order::STATUS_SUCCESS).map(&:product).compcat.each do |prod|
+
+    end
+  end
+
   def unique_impression_count
     impressions.group(:ip_address).size #UNTESTED: might not be correct syntax
   end

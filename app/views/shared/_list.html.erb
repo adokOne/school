@@ -18,7 +18,7 @@
                                  <div id="primary" class="content-area">
                                     <main id="main" class="site-main" role="main">
                                       <% pages.each do |page|%>
-                                        <article class="cherry-has-entry-date cherry-has-entry-author cherry-has-entry-comments clearfix post-22 post type-post status-publish format-standard has-post-thumbnail category-allergyasthma baner-article" id="post-22">
+                                        <article class="cherry-has-entry-date cherry-has-entry-author cherry-has-entry-comments clearfix post-22 post type-post status-publish format-standard has-post-thumbnail category-allergyasthma baner-article" style="position: relative;">
                                           <header class="entry-header">
                                              <h2 class="entry-title"><a href="<%= url(page.link) %>" rel="bookmark"><%= page.title %></a></h2>
                                           </header>
@@ -28,6 +28,10 @@
                                           </div>
                                           <% if page.logo.present? %>
                                           <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
+                                            <a href="#" class="sale-box">
+                                              <span class="sale-label">VIP</span>
+                                            </a>
+
                                             <a href="<%= url(page.link) %>" title="<%= page.title %>">
                                               <img   width="1088" height="387" src="<%= page.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="<%= page.title %>"/>
                                             </a>

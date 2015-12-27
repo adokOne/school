@@ -103,3 +103,4 @@ gem 'google-adwords-api', '~> 0.18.0'
 
 # Gem for OAuth authorization.
 gem 'oauth2'
+gem 'meta-tags'

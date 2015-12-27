@@ -15,5 +15,13 @@ class Order < ActiveRecord::Base
 
 
 
+  before_save :process
 
+
+
+  def process
+    if self.changes["status"].present? && self.changes["status"].last == STATUS_SUCCESS
+      self.start_date = Date.today
+    end
+  end
 end
