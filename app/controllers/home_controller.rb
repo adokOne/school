@@ -209,12 +209,12 @@ class HomeController < ApplicationController
     if @liqpay_response.success?
       if transaction = Transaction.find_by_tnx_id(@liqpay_response.order_id)
         if transaction.amount == @liqpay_response.amount.to_f
-          transaction.update_attribute(status: Transaction::STATUS_SUCCESS )
+          transaction.update_attribute(status: Transaction::STATUS_SUCCESS, transaction_id: @liqpay_response.transaction_id )
         end
       end
     else
       if transaction = Transaction.find_by_tnx_id(@liqpay_response.order_id)
-        transaction.update_attribute(status: Transaction::STATUS_FAILED )
+        transaction.update_attribute(status: Transaction::STATUS_FAILED, transaction_id: @liqpay_response.transaction_id  )
       end
     end
     render text: "Ok"
@@ -232,7 +232,7 @@ class HomeController < ApplicationController
    @description="Пополнение счета UEX",
     @type="buy",
      @status="failure",
-     @transaction_id="109535757",
+     @="109535757",
      @sender_phone="380632165840",
      @request_signature="ylY3SnKXdD/qqbKujWxE1fLWQLM=",
      @signature="ylY3SnKXdD/qqbKujWxE1fLWQLM=">

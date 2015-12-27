@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151226183219) do
+ActiveRecord::Schema.define(version: 20151227085550) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -486,6 +486,7 @@ ActiveRecord::Schema.define(version: 20151226183219) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "currency",       limit: 255, default: "UAH"
+    t.string   "transaction_id", limit: 255
   end
 
   add_index "transactions", ["tnx_id"], name: "index_transactions_on_tnx_id", unique: true, using: :btree
