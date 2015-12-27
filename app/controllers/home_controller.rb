@@ -206,8 +206,11 @@ class HomeController < ApplicationController
 
   def check_transaction
     @liqpay_response = Liqpay::Response.new(params)
+    Rails.logger.warn("*"*100)
+    Rails.logger.warn(@liqpay_response.inspect)
+    Rails.logger.warn("*"*100)
     if @liqpay_response.success?
-      Rails.logger.warn(@liqpay_response.inspect)
+
       # check that order_id is valid
       # check that amount matches
       # handle success
