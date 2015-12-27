@@ -20,6 +20,10 @@
                 %tr{"ng-repeat" => "item in data"}
                   %td{"data-title" => "'Название'"}
                     {{item.title}}
+                  %td{"data-title" => "'Город'"}
+                    {{item.city_name}}
+                  %td{"data-title" => "'Категория'"}
+                    {{item.category_name}}
                   %td{"data-title" => "'#{t('b1_admin.logo')}'"}
                     %img.img-circle.img-sm{"ng-src" => "{{item.logo}}"}/
                   %td{"data-title" => "'#{t('b1_admin.active')}'"}

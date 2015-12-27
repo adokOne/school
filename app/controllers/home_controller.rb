@@ -219,6 +219,14 @@ class HomeController < ApplicationController
     @has_search = true
   end
 
+  def payment
+
+  end
+
+  def payment_success
+
+  end
+
 
 
 

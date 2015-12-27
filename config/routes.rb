@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   scope "(:locale)", :locale => /ru|uk|en/ do
 
 
-    %W{add contacts products cities logout}.each do |item|
+    %W{add contacts products cities logout payment_success}.each do |item|
       get item, to: "home##{item}"
     end
     %w{search review order feedback add_baner}.each do |item|
@@ -31,6 +31,8 @@ Rails.application.routes.draw do
 
     get "tag/:seo_name", to:"home#city"
     get "product/:id", to:"home#product"
+
+    match "payment", to: "home#payment", via: [:get,:post]
 
 
 
