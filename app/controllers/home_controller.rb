@@ -206,20 +206,36 @@ class HomeController < ApplicationController
 
   def check_transaction
     @liqpay_response = Liqpay::Response.new(params)
-    Rails.logger.warn("*"*100)
-    Rails.logger.warn(@liqpay_response.inspect)
-    Rails.logger.warn("*"*100)
     if @liqpay_response.success?
-
-      # check that order_id is valid
-      # check that amount matches
-      # handle success
+      if transaction = Transaction.find_by_tnx_id(@liqpay_response.order_id)
+        if transaction.amount == @liqpay_response.amount.to_f
+          transaction.update_attribute(status: Transaction::STATUS_SUCCESS )
+        end
+      end
     else
-      # handle error
+      if transaction = Transaction.find_by_tnx_id(@liqpay_response.order_id)
+        transaction.update_attribute(status: Transaction::STATUS_FAILED )
+      end
     end
+    render text: "Ok"
   rescue Liqpay::InvalidResponse
-    # handle error
+    render text: "Error signature!"
   end
+
+
+<Liqpay::Response:0x00000008078ca0
+ @public_key="i5754055702",
+ @private_key="8ERQ502uzFdQQisYAz8MK1wx9fV428SOLei97f8P",
+  @order_id="OZUZGZQG",
+  @amount="1.00",
+  @currency="UAH",
+   @description="Пополнение счета UEX",
+    @type="buy",
+     @status="failure",
+     @transaction_id="109535757",
+     @sender_phone="380632165840",
+     @request_signature="ylY3SnKXdD/qqbKujWxE1fLWQLM=",
+     @signature="ylY3SnKXdD/qqbKujWxE1fLWQLM=">
 
   def payment_success
 
