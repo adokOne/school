@@ -113,6 +113,15 @@ angular.module("B1Admin").controller "CrudController", [
             saveCallback(resp)
           , ->
             $rootScope.error(alertSelector,$rootScope.server_error)
+
+
+
+    $scope.setProcessed = (item) ->
+      $scope.Item.update {id:item.id},{item:item}, (resp) ->
+        loadItems() if resp.success
+      , ->
+        $rootScope.error(alertSelector,$rootScope.server_error)
+
     $scope.filter = ->
       $scope.itemsTable.page(1)
       $scope.itemsTable.reload()

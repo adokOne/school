@@ -6,4 +6,8 @@ class Feedback < ActiveRecord::Base
   validates :phone,    length: { in: 6..20 }#, numericality:true
 
 
+  def admin_name
+    B1Admin::User.find_by_id(self.admin_id).try(:name)
+  end
+
 end

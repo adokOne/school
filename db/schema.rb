@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227085550) do
+ActiveRecord::Schema.define(version: 20151227090641) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -263,10 +263,12 @@ ActiveRecord::Schema.define(version: 20151227085550) do
   add_index "countries", ["continent_id"], name: "index_countries_on_continent_id", using: :btree
 
   create_table "feedbacks", force: :cascade do |t|
-    t.string "name",    limit: 255,   default: ""
-    t.string "email",   limit: 255,   default: ""
-    t.string "phone",   limit: 255,   default: ""
-    t.text   "message", limit: 65535
+    t.string  "name",      limit: 255,   default: ""
+    t.string  "email",     limit: 255,   default: ""
+    t.string  "phone",     limit: 255,   default: ""
+    t.text    "message",   limit: 65535
+    t.integer "admin_id",  limit: 4
+    t.boolean "processed", limit: 1,     default: false
   end
 
   create_table "impressions", force: :cascade do |t|
