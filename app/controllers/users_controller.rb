@@ -50,7 +50,7 @@ class UsersController < ApplicationController
       :description    => transaction.description,
       :order_id       => transaction.tnx_id,
       :server_url     => [Settings.domain, check_transaction_path].join("/") ,
-      :result_url     => [Settings.domain, edit_user_path(current_user,anchor: "transactions")].join("/")
+      :result_url     => [Settings.domain, edit_user_path(current_user,anchor: "paymnets")].join("/")
     })
     render json: {success: true, form: html}
   end
