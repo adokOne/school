@@ -5,6 +5,8 @@ class HomeController < ApplicationController
 
   before_action :set_search_data, only: [:main, :category, :city]
 
+
+
   def main
     @pages = Page.published.by_rating.by_text(params[:search]).includes(:reviews).paginate(page: params[:page], per_page: PER_PAGE)
   end
@@ -203,7 +205,17 @@ class HomeController < ApplicationController
   end
 
   def check_transaction
-    render :nothing, status: 200
+    @liqpay_response = Liqpay::Response.new(params)
+    if @liqpay_response.success?
+      p @liqpay_response
+      # check that order_id is valid
+      # check that amount matches
+      # handle success
+    else
+      # handle error
+    end
+  rescue Liqpay::InvalidResponse
+    # handle error
   end
 
   def payment_success
