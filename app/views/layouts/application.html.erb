@@ -93,6 +93,10 @@
 <!--                            <label class="cherry-mega-menu-mobile-trigger" for="trigger-menu-primary-items">Menu</label><input class="cherry-mega-menu-mobile-trigger-box" id="trigger-menu-primary-items" type="checkbox"> -->
                            <ul style="<%= logged_in? ? 'width: 990px;' : ''%>" id="menu-primary-items" class="menu-items cherry-mega-no-js cherry-mega-menu mega-menu-direction-horizontal total-columns-12" data-event="hover" data-effect="slide-top" data-direction="horizontal" data-mobile-trigger="768" data-parent-selector=".cherry-mega-menu">
 
+                              <% if !logged_in? %>
+                              <li class="current-menu-item menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                              <% end %>
+
                               <li class="<%= url_is_current?("main","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
                                     <a href="<%= url("/") %>"><%= t("uex.home")%></a>
                               </li>
@@ -167,7 +171,7 @@
 
                            </h1>
                            <%  if @has_video %>
-                           <div class="phone-block">
+<!--                            <div class="phone-block">
                               <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
                                  <div class="phone">
                                   +38(067) 574 21 88
@@ -180,7 +184,7 @@
                                  </div>
                               </div>
                               <div class="clear"></div>
-                           </div>
+                           </div> -->
                            <% end %>
                         </div>
 
