@@ -34,6 +34,13 @@ class User < ActiveRecord::Base
   scope :by_category, ->(id) { where(category_id: id) }
   scope :active, -> { where(active: true) }
 
+
+
+
+
+
+
+
   has_attached_file :avatar, styles: { medium: "300x300>",thumb: "100x100>" }, default_url: "/img/avatar-missing.png"
 
   validates_attachment_file_name :avatar, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/]
@@ -69,6 +76,29 @@ class User < ActiveRecord::Base
 
   def message_to_show(user)
     self.messages.where(ancestry: nil).are_from(user) + self.messages.where(ancestry: nil).are_to(user)
+  end
+
+  def is_vip
+    self.orders.where(status: Order::STATUS_SUCCESS).each do |order|
+      if order.product.has_vip_status
+        if order.start_date + order.product.period_of_service.days >= Date.today
+          return true
+        end
+      end
+    end
+    return false
+  end
+
+
+  def has_adwords_stat
+    self.orders.where(status: Order::STATUS_SUCCESS).each do |order|
+      if order.product.has_adwords_stat
+        if order.start_date + order.product.period_of_service.days >= Date.today
+          return true
+        end
+      end
+    end
+    return false
   end
 
 

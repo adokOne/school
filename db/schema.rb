@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151227090641) do
+ActiveRecord::Schema.define(version: 20151228133737) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -343,43 +343,51 @@ ActiveRecord::Schema.define(version: 20151227090641) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.integer  "category_id",       limit: 4,          default: 0,     null: false
-    t.string   "seo_name",          limit: 255,                        null: false
-    t.text     "desc",              limit: 4294967295
-    t.text     "anons",             limit: 65535
-    t.string   "title",             limit: 255,                        null: false
-    t.boolean  "active",            limit: 1,          default: false, null: false
+    t.integer  "category_id",              limit: 4,          default: 0,     null: false
+    t.string   "seo_name",                 limit: 255,                        null: false
+    t.text     "desc",                     limit: 4294967295
+    t.text     "anons",                    limit: 65535
+    t.string   "title",                    limit: 255,                        null: false
+    t.boolean  "active",                   limit: 1,          default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "position",          limit: 4
-    t.string   "logo_file_name",    limit: 255
-    t.string   "logo_content_type", limit: 255
-    t.integer  "logo_file_size",    limit: 4
+    t.integer  "position",                 limit: 4
+    t.string   "logo_file_name",           limit: 255
+    t.string   "logo_content_type",        limit: 255
+    t.integer  "logo_file_size",           limit: 4
     t.datetime "logo_updated_at"
-    t.integer  "user_id",           limit: 4
-    t.boolean  "has_adwords",       limit: 1,          default: false
-    t.boolean  "in_top",            limit: 1,          default: false
+    t.integer  "user_id",                  limit: 4
+    t.boolean  "has_adwords",              limit: 1,          default: false
+    t.boolean  "in_top",                   limit: 1,          default: false
     t.date     "top_until"
     t.date     "adwords_untilm"
     t.date     "top_set_date"
-    t.integer  "city_id",           limit: 4
-    t.integer  "country_id",        limit: 4
-    t.boolean  "in_ukraine_top",    limit: 1,          default: false
-    t.boolean  "in_state_top",      limit: 1,          default: false
-    t.boolean  "in_category_top",   limit: 1,          default: false
+    t.integer  "city_id",                  limit: 4
+    t.integer  "country_id",               limit: 4
+    t.boolean  "in_ukraine_top",           limit: 1,          default: false
+    t.boolean  "in_state_top",             limit: 1,          default: false
+    t.boolean  "in_category_top",          limit: 1,          default: false
     t.date     "ukraine_top_date"
     t.date     "state_top_date"
     t.date     "category_top_date"
-    t.boolean  "meta_is_generated", limit: 1,          default: true
-    t.text     "meta_desc",         limit: 65535
-    t.text     "meta_keys",         limit: 65535
-    t.string   "meta_title",        limit: 255
-    t.string   "slug",              limit: 255
-    t.integer  "old_id",            limit: 4
-    t.integer  "admin_id",          limit: 4
-    t.integer  "admin_update_id",   limit: 4
-    t.string   "focuskw",           limit: 255
-    t.boolean  "city_is_canonical", limit: 1,          default: false
+    t.boolean  "meta_is_generated",        limit: 1,          default: true
+    t.text     "meta_desc",                limit: 65535
+    t.text     "meta_keys",                limit: 65535
+    t.string   "meta_title",               limit: 255
+    t.string   "slug",                     limit: 255
+    t.integer  "old_id",                   limit: 4
+    t.integer  "admin_id",                 limit: 4
+    t.integer  "admin_update_id",          limit: 4
+    t.string   "focuskw",                  limit: 255
+    t.boolean  "city_is_canonical",        limit: 1,          default: false
+    t.boolean  "is_vip_db",                limit: 1,          default: false
+    t.boolean  "has_main_top_db",          limit: 1,          default: false
+    t.boolean  "has_city_top_db",          limit: 1,          default: false
+    t.boolean  "has_category_top_db",      limit: 1,          default: false
+    t.date     "is_vip_db_date"
+    t.date     "has_main_top_db_date"
+    t.date     "has_city_top_db_date"
+    t.date     "has_category_top_db_date"
   end
 
   add_index "pages", ["active"], name: "index_pages_on_active", using: :btree
@@ -518,6 +526,8 @@ ActiveRecord::Schema.define(version: 20151227090641) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "desc",                    limit: 65535
+    t.boolean  "is_vip_db",               limit: 1,     default: false
+    t.date     "is_vip_db_date"
   end
 
   create_table "vacancies", force: :cascade do |t|

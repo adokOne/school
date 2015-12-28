@@ -2,11 +2,16 @@
    <div id="primary" class="content-area">
       <main id="main" class="site-main" role="main">
          <% @users.each do |user|%>
-         <article class="clearfix post-596 page type-page status-publish hentry" id="post-596">
+         <article class="clearfix post-596 page type-page status-publish hentry" style="    position: relative;">
             <div class="testimonials-wrap testimonials-page">
                <div class="testimonials-list">
 
                      <div id="quote-114" class="testimonials-item item-1 odd clearfix">
+                        <% if user.is_vip %>
+                          <a href="#" class="sale-box">
+                            <span class="sale-label">VIP</span>
+                          </a>
+                        <% end %>
                         <img width="100" height="100" src="<%= user.avatar(:thumb)%>" class="avatar wp-post-image" alt="<%= user.name%>">
                         <blockquote>
                            <p><%= user.desc%></p>

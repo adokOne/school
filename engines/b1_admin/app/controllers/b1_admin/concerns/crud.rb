@@ -138,7 +138,7 @@ module B1Admin
             @params_to_update = allowed_params.dup
 
 
-            if @item.respond_to(:admin_update_id)
+            if @item.respond_to?(:admin_update_id)
               @params_to_update[:admin_update_id] = current_admin.id
             end
 
@@ -163,7 +163,7 @@ module B1Admin
           define_method(:create) do
             @params_to_create = allowed_params.dup
             item  = self.class.model.new(@params_to_create)
-            if item.respond_to(:admin_id)
+            if item.respond_to?(:admin_id)
               item.admin_id = current_admin.id
             end
 

@@ -8,7 +8,7 @@ class HomeController < ApplicationController
 
 
   def main
-    @pages = Page.published.by_rating.by_text(params[:search]).includes(:reviews).paginate(page: params[:page], per_page: PER_PAGE)
+    @pages = Page.published.by_main_top.includes(:reviews,:city,:category).page(params[:page] )
   end
 
   def contacts

@@ -23,12 +23,53 @@ class Page < ActiveRecord::Base
   delegate :title, to: :category, prefix: true, allow_nil: true
   delegate :seo_name, to: :category, prefix: true, allow_nil: true
 
-  scope :published, -> { }
+  scope :published, -> { where(active: true) }
   scope :by_rating, -> { order('created_at DESC') }
   scope :by_category, ->(id) { where(category_id: id) }
   scope :by_city, ->(id) { where(city_id: id) }
 
   scope :by_text, ->(id) { where(title: id) }
+
+
+
+
+
+
+  scope :by_main_top, -> {
+    return order('
+      is_vip_db DESC, IF(is_vip_db=1, is_vip_db_date, 0) DESC,
+      has_main_top_db DESC, IF(has_main_top_db=1, has_main_top_db_date, 0) DESC,
+      has_city_top_db DESC, IF(has_city_top_db=1, has_city_top_db_date, 0) DESC,
+      has_category_top_db DESC, IF(has_category_top_db=1, has_category_top_db_date, 0) DESC,
+      created_at DESC
+    ')
+  }
+
+  scope :by_category_top, -> {
+    order('
+      is_vip_db DESC, IF(is_vip_db=1, is_vip_db_date, 0) DESC,
+      has_category_top_db DESC, IF(has_category_top_db=1, has_category_top_db_date, 0) DESC,
+      has_main_top_db DESC, IF(has_main_top_db=1, has_main_top_db_date, 0) DESC,
+      has_city_top_db DESC, IF(has_city_top_db=1, has_city_top_db_date, 0) DESC,
+      created_at DESC
+    ')
+  }
+
+  scope :by_city_top, -> {
+    order('
+      is_vip_db DESC, IF(is_vip_db=1, is_vip_db_date, 0) DESC,
+      has_city_top_db DESC, IF(has_city_top_db=1, has_city_top_db_date, 0) DESC,
+      has_main_top_db DESC, IF(has_main_top_db=1, has_main_top_db_date, 0) DESC,
+      has_category_top_db DESC, IF(has_category_top_db=1, has_category_top_db_date, 0) DESC,
+      created_at DESC
+    ')
+  }
+
+
+
+
+
+
 
   belongs_to :user
   belongs_to :city
@@ -61,6 +102,18 @@ class Page < ActiveRecord::Base
 
   end
 
+  def self.main_order
+    self.sort_by{|item| [item.is_vip, item.has_main_top, item.has_city_top , item.has_category_top] }
+  end
+
+  def self.category_order
+    self.sort_by{|item| [item.is_vip, item.has_category_top , item.has_main_top  , item.has_city_top] }
+  end
+
+  def self.city_order
+    self.sort_by{|item| [item.is_vip, item.has_city_top , item.has_main_top , item.has_category_top] }
+  end
+
 
   def disactivate!
     self.update_attribute(:active, false)
@@ -76,10 +129,50 @@ class Page < ActiveRecord::Base
   end
 
   def is_vip
-    self.orders.where(status: Order::STATUS_SUCCESS).map(&:product).compcat.each do |prod|
-
+    self.orders.where(status: Order::STATUS_SUCCESS).each do |order|
+      if order.product.has_vip_status
+        if order.start_date + order.product.period_of_service.days >= Date.today
+          return true
+        end
+      end
     end
+    return false
   end
+
+
+  def has_main_top
+    self.orders.where(status: Order::STATUS_SUCCESS).each do |order|
+      if order.product.has_main_top
+        if order.start_date + order.product.period_of_service.days >= Date.today
+          return true
+        end
+      end
+    end
+    return false
+  end
+
+  def has_city_top
+    self.orders.where(status: Order::STATUS_SUCCESS).each do |order|
+      if order.product.has_region_top
+        if order.start_date + order.product.period_of_service.days >= Date.today
+          return true
+        end
+      end
+    end
+    return false
+  end
+
+  def has_category_top
+    self.orders.where(status: Order::STATUS_SUCCESS).each do |order|
+      if order.product.has_category_top
+        if order.start_date + order.product.period_of_service.days >= Date.today
+          return true
+        end
+      end
+    end
+    return false
+  end
+
 
   def unique_impression_count
     impressions.group(:ip_address).size #UNTESTED: might not be correct syntax

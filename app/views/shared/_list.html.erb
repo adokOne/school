@@ -1,4 +1,4 @@
-<% cache [pages, I18n.locale] do %>
+<%# cache [pages, I18n.locale] do %>
 <div class="container">
    <div id="primary" class="content-area">
       <main id="main" class="site-main" role="main">
@@ -28,9 +28,11 @@
                                           </div>
                                           <% if page.logo.present? %>
                                           <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
-                                            <a href="#" class="sale-box">
-                                              <span class="sale-label">VIP</span>
-                                            </a>
+                                            <% if page.is_vip_db %>
+                                              <a href="#" class="sale-box">
+                                                <span class="sale-label">VIP</span>
+                                              </a>
+                                            <% end %>
 
                                             <a href="<%= url(page.link) %>" title="<%= page.title %>">
                                               <img   width="1088" height="387" src="<%= page.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="<%= page.title %>"/>
@@ -66,5 +68,5 @@
       </main>
    </div>
 </div>
-<% end %>
+<%# end %>
 

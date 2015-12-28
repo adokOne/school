@@ -24,3 +24,6 @@
 every 1.hour do
   rake 'system:delete_tmp_data'
 end
+every 5.minutes do
+  rake 'update:vip'
+end
