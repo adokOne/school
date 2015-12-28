@@ -21,6 +21,7 @@ class Page < ActiveRecord::Base
     size: { in: 0.megabytes..10.megabytes }
 
   delegate :title, to: :category, prefix: true, allow_nil: true
+  delegate :name, to: :city, prefix: true, allow_nil: true
   delegate :seo_name, to: :category, prefix: true, allow_nil: true
 
   scope :published, -> { where(active: true) }
