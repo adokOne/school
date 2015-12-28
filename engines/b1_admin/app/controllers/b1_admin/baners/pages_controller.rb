@@ -22,7 +22,7 @@ module B1Admin
 
       def set_data
         @categories = ::Category.order("title_ru ASC").all.map{|c| {name: c.title,id: c.id} }
-        @cagegoties_tree = Category.to_tree
+        @cagegoties_tree = ::Category.to_tree
         @cities = ::City.where(country_id: Country::UKRAINE_ID ).all.map{|c| {name: c.name,id: c.id} }
         @countries = ::Country.all.map{|c| {name: c.name,id: c.id} }
       end
