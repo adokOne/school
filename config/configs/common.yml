@@ -28,7 +28,7 @@ test:
 
 production:
   <<: *defaults
-  domain: "http://159.203.76.46"
+  domain: "http://uex.link"
 
 staging:
   <<: *defaults
