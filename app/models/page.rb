@@ -88,7 +88,7 @@ class Page < ActiveRecord::Base
 
 
   #Validates
-  validates :title,:country_id, :city_id, :category_id, :user_id, presence: true
+  validates :title,:country_id, :city_id, :category_id,  presence: true
   validates :title,     length: { in: 3..200 }
   # validates :anons,     length: { in: 0..5000 }
   validates :active, inclusion:{ in: [true,false] }
