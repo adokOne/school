@@ -84,7 +84,7 @@
                   .form-group{"ng-class" => "{'has-error': itemForm.city_id.$invalid && itemForm.$submitted}"}
                     = label_tag :city_id, "Категория", class:"col-sm-1 control-label"
                     .col-sm-5
-                      %select.form-control{"ng-model" => "editedItem.category_id", "ng-options" => "continent.id as continent.title for continent in #{@categories.to_json}",required: true}
+                      %select.form-control{"ng-model" => "editedItem.category_id", "ng-options" => "continent.id as continent.name for continent in #{@categories.to_json}",required: true}
                 .col-md-6
                   %h4 Город
                   .form-group{"ng-class" => "{'has-error': itemForm.city_id.$invalid && itemForm.$submitted}"}
