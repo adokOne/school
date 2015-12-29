@@ -42,7 +42,7 @@ module B1Admin
       # Set data for CRUD module
       @model = ::Page
       @additional_check_actions = :show_reviews
-      @order = {position: :asc},{id: :asc}
+      @order = {position: :asc},{id: :desc}
       # Include CRUD module
       include B1Admin::Concerns::Crud
 

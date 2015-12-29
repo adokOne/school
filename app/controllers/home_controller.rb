@@ -58,6 +58,9 @@ class HomeController < ApplicationController
       end
     end
     @item  = Category.find_by_seo(seo_name.split("/"))
+    unless @item
+      redirect_to :root and return
+    end
     if @city
       @pages = Page.published.by_rating.by_category(@item.id).by_city(@city.id).page(params[:page])
     else
@@ -223,6 +226,10 @@ class HomeController < ApplicationController
   end
 
   def payment_success
+
+  end
+
+  def error_404
 
   end
 
