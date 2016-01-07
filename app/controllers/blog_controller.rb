@@ -6,7 +6,7 @@ class BlogController < ApplicationController
 
   def item
 
-    if page = Page.find_by_slug(params[:seo_name])
+    if page = BlogPage.find_by_slug(params[:seo_name])
       redirect_to( page.link, status: 301 ) and return
     end
 

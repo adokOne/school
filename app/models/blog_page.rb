@@ -26,7 +26,7 @@ class BlogPage < ActiveRecord::Base
   end
 
   def link
-    "blog/#{self.seo_name}"
+    "/blog/#{self.seo_name}"
   end
 
   def generate_seo
