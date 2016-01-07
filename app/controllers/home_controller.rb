@@ -8,7 +8,11 @@ class HomeController < ApplicationController
 
 
   def main
-    @pages = Page.published.by_main_top.includes(:reviews,:city,:category).page(params[:page] )
+    @pages = Page.published
+    if params[:search].present?
+      @pages = @pages.where("`anons` LIKE :search OR `desc` LIKE :search OR `title` LIKE :search",{search: "%#{params[:search]}%"})
+    end
+    @pages = @pages.by_main_top.includes(:reviews,:city,:category).page(params[:page] )
   end
 
   def contacts

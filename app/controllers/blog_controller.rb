@@ -5,6 +5,12 @@ class BlogController < ApplicationController
   end
 
   def item
+
+    if page = Page.find_by_slug(params[:seo_name])
+      redirect_to( page.link, status: 301 ) and return
+    end
+
+
     @item = BlogPage.find_by_seo_name!(params[:seo_name])
     @breadcrumbs_items = {"blog": I18n.t("uex.blog")}
     @breadcrumbs_last = @item.title
