@@ -34,6 +34,8 @@ class User < ActiveRecord::Base
   scope :by_category, ->(id) { where(category_id: id) }
   scope :active, -> { where(active: true) }
 
+  scope :by_this_month, -> { where('MONTH(created_at) = MONTH(NOW())') }
+
 
 
 

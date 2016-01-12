@@ -32,6 +32,8 @@ class Page < ActiveRecord::Base
   scope :by_text, ->(id) { where(title: id) }
 
 
+  scope :unactive, -> { where(active: false) }
+  scope :by_today, -> { where("created_at >= CURDATE() && created_at < (CURDATE() + INTERVAL 1 DAY)") }
 
 
 

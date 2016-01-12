@@ -1,0 +1,64 @@
+#content-container
+  #page-content
+    .row
+      .col-md-4.col-lg-4
+        / Tile with progress bar (Comments)
+        / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        .panel.panel-mint.panel-colorful
+          .pad-all.media
+            .media-left
+              %span.icon-wrap.icon-wrap-xs
+                %i.fa.fa-comment.fa-3x
+            .media-body
+              %p.h3.text-thin.media-heading=@reviews_count
+              %small.text-uppercase Отзывов
+          .progress.progress-xs.progress-dark-base.mar-no
+            .progress-bar.progress-bar-light{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "45.9", :role => "progressbar", :style => "width: 45.9%"}
+          .pad-all.text-right
+            %small
+              %span.text-semibold
+                %i.fa.fa-unlock-alt.fa-fw
+                =@reviews_unaproved__count
+              Неподтвержеднных отзывов
+        / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        / End Tile with progress bar (Comments)
+      .col-md-4.col-lg-4
+        / Tile with progress bar (New Orders)
+        / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        .panel.panel-purple.panel-colorful
+          .pad-all.media
+            .media-left
+              %span.icon-wrap.icon-wrap-xs
+                %i.fa.fa-file-text.fa-fw.fa-3x
+            .media-body
+              %p.h3.text-thin.media-heading=@pages_count
+              %small.text-uppercase Обьявлений
+          .progress.progress-xs.progress-dark-base.mar-no
+            .progress-bar.progress-bar-light{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "75", :role => "progressbar", :style => "width: 75%"}
+          .pad-all.text-right
+            %small
+              %span.text-semibold
+                %i.fa.fa-shopping-cart.fa-fw
+                =@pages_unactive_count
+              Неактивных за сегодня
+        / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        / Tile with progress bar (New Orders)
+      .col-md-4.col-lg-4
+        / Tile with progress bar (Comments)
+        / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        .panel.panel-danger.panel-colorful
+          .pad-all.media
+            .media-left
+              %span.icon-wrap.icon-wrap-xs
+                %i.fa.fa-user.fa-3x
+            .media-body
+              %p.h3.text-thin.media-heading=@users_count
+              %small.text-uppercase Пользователей
+          .progress.progress-xs.progress-dark-base.mar-no
+            .progress-bar.progress-bar-light{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "45.9", :role => "progressbar", :style => "width: 45.9%"}
+          .pad-all.text-right
+            %small
+              %span.text-semibold
+                %i.fa.fa-unlock-alt.fa-fw
+                =@users_count_this_month
+              За последний месяц
