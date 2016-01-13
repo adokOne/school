@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   include ActionView::Helpers::FormTagHelper
   include Liqpay::LiqpayHelper
 
-  before_filter :require_login, except: [:signin, :forgot, :registration, :login, :create, :create_message,:index ]
+  before_filter :require_login, except: [:signin, :forgot, :registration, :login, :create, :create_message,:index, :restore, :show ]
 
   before_filter :is_own?, only: [:update,:edit]
 
@@ -65,6 +65,7 @@ class UsersController < ApplicationController
       user.save
       token = user.signin( request.remote_ip, request.referer, request.user_agent)
       cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
+      MailManager.registration( user, login_params[:password] )
       redirect_to edit_user_path(current_user)
     else
       flash[:errors] = user.errors.messages
@@ -154,6 +155,18 @@ class UsersController < ApplicationController
   def registration
     redirect_to  user_path(current_user) and return if current_user
     @login = Login.new
+  end
+
+  def restore
+    if user = User.find_by_email(login_params[:email])
+      password = User.password
+      user.update_attributes(password: password)
+      MailManager.restore( user, password)
+      flash[:error] = t('uex.password_send_to_email')
+    else
+      flash[:error] = t('b1_admin.wrong_credentials')
+    end
+    redirect_to forgot_users_path
   end
 
   private

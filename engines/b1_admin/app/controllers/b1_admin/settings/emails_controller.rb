@@ -12,14 +12,12 @@ module B1Admin
       end
 
       def allowed_params
-        params.require(:item).permit(:id,:agent_id,:seo_name,:active,{text_translations:I18n.available_locales},{subject_translations:I18n.available_locales}, {available_tags:[]})
+        params.require(:item).permit(:id,:seo_name,:active,:text_ru,:text_uk,:text_en,:subject_en, :subject_uk, :subject_ru)
       end
 
 
       # Set data for CRUD module
       @model            = ::EmailTemplate
-
-      @additional_permissions = [:add_tags]
 
       # Include CRUD module
       include B1Admin::Concerns::Crud

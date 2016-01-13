@@ -296,6 +296,9 @@ module B1Admin
       # @raise  [B1Admin::Exception] if log row is not found
       ##
       def check_item
+        p params[:id].to_s
+        p self.class.model
+        p "/"*800
         raise B1Admin::Exception.new(7,{text:"Item #{self.class.model.class.name} with id #{params['id']} not found"}) unless @item = self.class.model.find(params[:id].to_s)
       end
 

@@ -13,6 +13,7 @@ module B1Admin
 
       def update
         @item.update_attribute( :moderated, true)
+        MailManager.accept_review( @item )
         render json: success_update_response
       end
 

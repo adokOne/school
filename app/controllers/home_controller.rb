@@ -158,6 +158,7 @@ class HomeController < ApplicationController
           token = user.signin( request.remote_ip, request.referer, request.user_agent)
           cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
           order.create_real
+          MailManager.order( user, order.product.name)
           cookies[:new_order] = { value: true, expires:  1.hour.from_now  }
           flash[:message] = I18n.t("uex.order_was_created")
         end
@@ -217,6 +218,7 @@ class HomeController < ApplicationController
       if transaction = Transaction.find_by_tnx_id(@liqpay_response.order_id)
         if transaction.amount == @liqpay_response.amount.to_f
           transaction.update_attribute(status: Transaction::STATUS_SUCCESS, transaction_id: @liqpay_response.transaction_id )
+          MailManager.payment(transaction.user, transaction.amount)
         end
       end
     else

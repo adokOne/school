@@ -1,5 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: "info@example.ua"
+  default from: "it@uex.link"
 
   def send_mail( template, to_email, attachments, from_email )
     mail_options = {

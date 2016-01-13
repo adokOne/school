@@ -11,7 +11,7 @@ module Localizable
 
   end
 
-  %w(name title desc anons meta_title meta_desc meta_keys).each do |meth|
+  %w(name title desc anons meta_title meta_desc meta_keys subject text).each do |meth|
     define_method meth do
       read_attribute("#{meth}_#{I18n.locale}")
     end

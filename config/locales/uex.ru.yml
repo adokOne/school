@@ -1,5 +1,6 @@
 ru:
   uex:
+    password_send_to_email: "Новый пароль отправлен Вам на почту"
     image_missing_add: "Прикрепить банер"
     add_baner: "Добавить банер"
     anons_plc: "Анонс"

@@ -46,8 +46,10 @@ Rails.application.routes.draw do
         post "login"
         get "forgot"
         get "registration"
+        post "restore"
       end
       member do
+
         post "create_message"
         post "create_transaction"
         get "messages/:reciver_id", to: "users#messages", as: "user_messages"
