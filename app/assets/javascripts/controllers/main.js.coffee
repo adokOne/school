@@ -64,9 +64,10 @@ $.Controller "Main",
     el = $(ev.target)
     el = if el.hasClass("js-link") then el else el.parents(".js-link")
     cls = el.data("cls")
+    console.log(cls)
     @element.find('.course-description').show()
     $('html, body').animate({scrollTop: $('.course-description').offset().top}, 800);
-    idx = @element.find('.cycle-slideshow .s-item').index(@element.find(".cycle-slideshow .#{cls}"))
+    idx = @element.find('.cycle-slideshow .s-item').index(@element.find(".cycle-slideshow .#{cls}")) - 1
     console.log(".cycle-slideshow .#{cls}")
     console.log(idx)
     @element.find('.cycle-slideshow').cycle(idx);
@@ -75,6 +76,11 @@ $.Controller "Main",
   "#blog_subscribe -> click": (ev) ->
     ev.preventDefault()
     @blog_subscribe = $("#blog_subscribe_popup").controller()
+    @blog_subscribe.open()
+
+  "#call_back -> click": (ev) ->
+    ev.preventDefault()
+    @blog_subscribe = $("#call_subscribe_popup").controller()
     @blog_subscribe.open()
 
   ".vacancy_subscribe -> click": (ev) ->
@@ -86,6 +92,7 @@ $.Controller "Main",
       data: {id: $(ev.target).data("id")}
       success: (resp) ->
         if resp.success
+          $("body").find("#vacancy_desc_popup").remove()
           $("body").append(resp.html)
           ctrl = $("#vacancy_desc_popup").attachForm().controller()
           ctrl.open()
@@ -120,10 +127,12 @@ $.Controller "Main",
     ev.preventDefault();
     el = if $(ev.target).hasClass("fc-calendar-event") then $(ev.target) else $(ev.target).parents(".fc-calendar-event")
     @selected_course_id =  el.find(".lesson_box").data("course-id")
-    console.log(el.find(".fc-starttime"))
-    date = el.find(".fc-starttime").attr("datetime").split("T")[0]
-    console.log(date)
-
+    @curse_dates = Object.keys(@lessons[@selected_course_id])
+    date = el.find(".lesson_box").data("date")
+    @selected_date = date;
+    @course_subscribe = $("#lesson_subscribe_popup").controller()
+    @course_subscribe.open()
+    $("#subscriber_date").change()
   "#course -> change": (ev) ->
     id = $(ev.target).val()
     if 0 == Number(id)
@@ -145,8 +154,8 @@ $.Controller "Main",
     @element.find('#subscriber_date').datepicker('refresh');
 
   "#subscriber_date -> change": (ev) ->
-    old = $(ev.target).val()
-    $(ev.target).val("#{old}, #{$('#group-selector option:selected').text()}")
+    old = @selected_date#$(ev.target).val()
+    $(ev.target).val("#{old}, #{courses_names[@selected_course_id]}")
 
   init_datepicker: ->
     self = @
@@ -154,6 +163,7 @@ $.Controller "Main",
     @element.find('#subscriber_date').datepicker
       dateFormat: 'dd.mm.yy'
       onSelect: (date) ->
+        self.selected_date = date
         $("#subscriber_date").change()
         #self.curse_dates = []
       beforeShowDay: (date) ->
@@ -183,6 +193,7 @@ $.Controller "Main",
 
   unavailable: (date) ->
     dmy = ("0" + (date.getMonth() + 1)).slice(-2)  + '-' + ("0" + date.getDate()).slice(-2)  + '-' + date.getFullYear()
+    console.log @curse_dates
     if @curse_dates.length != 0 && !($.inArray(dmy, @curse_dates) < 0)
       return [true,"yellow",""]
     else

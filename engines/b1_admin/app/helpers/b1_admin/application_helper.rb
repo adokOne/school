@@ -28,6 +28,15 @@ module B1Admin
       Rails.application.class.routes.url_helpers
     end
 
+    def create_hours(parameters)
+      start_time = parameters[:start_time] ? parameters[:start_time] : 0
+      end_time = parameters[:end_time] ? parameters[:end_time] : 24.hours
+      increment = parameters[:increment] ? parameters[:increment] : 30.minutes
+      Array.new(1 + (end_time - start_time)/increment) do |i|
+        (Time.now.midnight + (i*increment) + start_time).to_formatted_s(:time)
+      end
+    end
+
     # def method_missing method, *args, &block
     #   puts "LOOKING FOR ROUTES #{method}"
     #   if method.to_s.end_with?('_path') or method.to_s.end_with?('_url')

@@ -1,5 +1,6 @@
 <script type="text/javascript">
   var courses   = <%= raw courses.map{|c|  {id: c.id, name: c.name} }.to_json%>;
+  var courses_names   = <%= raw courses.inject({}){|hash,c|  hash[c.id] = c.name; hash  }.to_json%>;
 </script>
 <div class="courses-block" id="courses">
   <div class="container">
@@ -54,7 +55,7 @@
               <a data-id="<%= course.id %>" href="#" class="schedule"><%= t("school.month_schedule")%></a>
             </div>
             <a href="#" data-id="<%= course.id %>" class="subscribe course_subscribe"><%= t("school.subscribe_to_earning")%></a>
-            <% if course.fb_link.present? || true %>
+            <% if course.fb_link.present? %>
               <div class="fb-group">
               <a href="#" class="social-icon"><%= image_tag "fb-icon.png" %></a>
               <%= t("school.fb_course_link",link: course.fb_link).html_safe%>
@@ -70,8 +71,8 @@
     <h2><%= t("school.calendar")%></h2>
     <div class="group-select">
       <select name="course" id="course">
-        <option disabled ><%= t("school.choose_group")%></option>
-        <option value="0" ><%= t("school.all_groups")%></option>
+        <option disabled ><%= t("school.#{is_club ? 'choose_group' : 'choose_course'}")%></option>
+        <option value="0" ><%= t("school.#{is_club ? 'all_groups' : 'all_courses'}")%></option>
         <%= courses.each do |course| %>
           <option value="<%= course.id%>" ><%= course.name %></option>
         <% end %>

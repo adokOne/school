@@ -51,8 +51,8 @@
             <span></span>
           </a>
           <ul class="open-menu">
-            <% @top_menu.each_pair do |link, text|%>
-              <li><a href="#<%= link %>"><%= text %></a></li>
+            <% @top_menu.each_pair do |link, element|%>
+              <li><a href="#<%= link %>" data-offset="<%= element[:offset] %>"><%= element[:text] %></a></li>
             <% end %>
           </ul>
         </div>
@@ -117,15 +117,15 @@
             <li><a target="_blank" href="<%= Settings.send("#{@links_type}_links")["vk_link"]%>" class="vk"></a></li>
           </ul>
           <div class="clear"></div>
-          <ul class="contacts">
+          <ul class="contacts vacancy">
             <li><h3><%= t("school.our_contacts")%></h3></li>
             <% addresses.each do |address| %>
-              <li><%= address.name %></li>
+              <!-- <li><%= address.name %></li> -->
               <% address.phones.split(",").each do |phone| %>
-                <li><h3><%=phone %></h3></li>
+                <li style="margin-bottom:3px"><a><%=phone %></a></li>
               <% end %>
               <% if address.email.present? %>
-                <li><%= t("school.send_mail_here")%> <a href="mailto:<%= address.email %>"><%= address.email %></a></li>
+                <li><%= t("school.send_mail_here")%> <a href="mailto:<%= address.email %>" style="font-size: 12px;"><%= address.email %></a></li>
               <% end %>
             <% end %>
           </ul>
@@ -138,7 +138,7 @@
   <%= render partial: "shared/success_form" %>
   <%= render partial: "shared/blog_subscribe_form" %>
   <%= render partial: "shared/vacancy_subscribe_form" %>
-
+  <%= render partial: "shared/call_subscribe_form" %>
   <% if @links_type == "school" %>
     <%= render partial: "shared/school_subscribe_form" %>
   <% else %>

@@ -37,7 +37,7 @@ module Test::SurveysHelper
     fields = f.fields_for(association, new_object,:child_index => "new_#{association}") do |builder|
       render(association.to_s.singularize + "_fields", :f => builder)
     end
-    __link_to_function(name, "addField(this, \"#{association}\", \"#{escape_javascript(fields)}\")",
+    __link_to_function(name, "addField(this, \"#{association}\", \"#{escape_javascript(fields)}\");return false;",
     :id=>"add-attach",
     :class=>"btn btn-small btn-info")
   end

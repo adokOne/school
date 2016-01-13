@@ -324,7 +324,7 @@ strong {
 }
 .baloon {
   position: absolute;
-  top: -50%;
+  top: -42%;
   left: -16%;
 }
 .baloon .bobble-green {
@@ -523,7 +523,7 @@ label {
   text-transform: uppercase;
   font-size: 18px;
   color: #13514f;
-  font-family: 'robotobold';
+  font-family: 'robotoregular';
 }
 .header .top-menu a:hover,
 .header .top-menu a.active {
@@ -1089,6 +1089,9 @@ label {
 .footer .social li a.pin {
   background-position: 0 0;
 }
+.footer .social li a:hover {
+  margin-top: -5px;
+}
 .footer .social li a.gp {
   background-position: -44px 0;
 }
@@ -1218,7 +1221,7 @@ label {
   padding: 0 10px;
   color: #fff;
   outline: none;
-  text-transform: uppercase;
+  // text-transform: uppercase;
   border: none;
   background: #00aa92;
   -webkit-border-radius: 7px;

@@ -15,6 +15,8 @@ class Page < ActiveRecord::Base
   delegate :title, to: :category, prefix: true, allow_nil: true
   delegate :seo_name, to: :category, prefix: true, allow_nil: true
 
+  scope :active, -> { where(active: true) }
+
   def seos
     [self.category.seos,self.seo_name].flatten
   end

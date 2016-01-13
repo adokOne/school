@@ -36,9 +36,10 @@ $.Controller "Blog",
   show_success_owl: ->
     @success_popup = $("#success_popup").controller()
     self = @
-
+    html= I18n.blog_reg
+    self.success_popup.element.find(".bobble").html(html)
     self.success_popup.open()
-    $('html, body').scrollTop self.success_popup.element.offset().top
+    $('html, body').scrollTop self.success_popup.element.find(".form-block").offset().top
 
   submit_form:(form) ->
     self = @

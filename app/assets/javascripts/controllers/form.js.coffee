@@ -3,6 +3,7 @@ $.Controller "Form",
     @init_validation()
     @error_owl = @element.find(".owl.error")
     @success_popup = $("#success_popup").controller()
+    @type = @element.data("type")
   open: ->
     @element.show()
     $('html, body').scrollTop(@element.find(".form-block").offset().top);
@@ -20,15 +21,18 @@ $.Controller "Form",
         ignore: ""
         highlight: (el, e_cls) ->
           self.error_owl.removeClass("hidden")
-          # $(el).addClass e_cls
+          if $(el).parents(".new_survey_attempt").size() > 0
+            $(el).addClass e_cls
           if $(el).parents(".table").size() > 0
             $(el).parents(".table").find("p").addClass e_cls
         unhighlight: (el, e_cls) ->
-          # $(el).removeClass e_cls
+          if $(el).parents(".new_survey_attempt").size() > 0
+            $(el).removeClass e_cls
           if $(el).parents(".table").size() > 0
             $(el).parents(".table").find("p").removeClass e_cls
 
         errorPlacement: (err, el) ->
+          console.log(self.error_owl)
           self.error_owl.removeClass("hidden")
 
         invalidHandler: (event, validator) ->
@@ -84,8 +88,10 @@ $.Controller "Form",
 
   show_success_owl: ->
     self = @
+    html= I18n["#{@type}_reg"]
+    self.success_popup.element.find(".bobble").html(html)
     self.success_popup.open()
-    $('html, body').scrollTop($("#success_popup").offset().top - 200);
+    $('html, body').scrollTop($("#success_popup").find(".form-block").offset().top - 200);
     # setTimeout (->
     #   self.success_popup.hide()
     #   return

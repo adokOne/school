@@ -45,7 +45,7 @@
                   {{day.format('ddd')}}
           %tbody
             %tr{ng_repeat: 'item in courses'}
-              %td{ng_repeat: 'day in month.days', 'ng-init' => 'curr_day=day.format("<%= Lesson::JS_DATE_FORMAT%>");lesson=lesson_for_day_and_course(curr_day, item)', 'ng-class' => '{weekend: is_weekend(day)}'}
+              %td{ng_repeat: 'day in month.days', 'ng-init' => 'curr_day=day.format("DD.MM.YYYY");lesson=lesson_for_day_and_course(curr_day, item)', 'ng-class' => '{weekend: is_weekend(day)}'}
                 .tariff.cell{'data-item' =>  '{{lesson}}',ng_mousedown: "#{user_can?(:create) ? 'mousedown($event, day)' : ''};",ng_mouseover: 'mouseover($event);'}
                   %div{'ng-class' => '{"text-bold": lesson.id}'}
                     {{lesson.id && lesson.time || ""}}

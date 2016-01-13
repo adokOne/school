@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151118195346) do
+ActiveRecord::Schema.define(version: 20151123133527) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "",    null: false
@@ -152,6 +152,13 @@ ActiveRecord::Schema.define(version: 20151118195346) do
     t.string   "document_content_type", limit: 255
     t.integer  "document_file_size",    limit: 4
     t.datetime "document_updated_at"
+  end
+
+  create_table "email_templates", force: :cascade do |t|
+    t.string  "subject",  limit: 255
+    t.string  "seo_name", limit: 255
+    t.boolean "active",   limit: 1,          default: true
+    t.text    "desc",     limit: 4294967295
   end
 
   create_table "groups", force: :cascade do |t|

@@ -3,14 +3,15 @@ class BlogController < ApplicationController
   before_action :set_manifest
 
   def index
-    @similar = Page.limit(3).order(id: :desc)
+    @similar = Page.active.limit(3).order(id: :desc)
     @items   = Category.where(parent_id:0).all
-    @top_menu = @items.inject({}){|hash, item| hash[item.seo_name] = item.title; hash }
+    top_menu
   end
 
   def category
+    top_menu
     @item    = Category.find_by_seo(params[:seo_name].split("/"))
-    @similar = Page.limit(3).where("category_id != ?",@item.id).order(id: :desc)
+    @similar = Page.active.limit(3).where("category_id != ?",@item.id).order(id: :desc)
     if @item.parent.present?
       only_photos = @item.parent.only_photos
     else
@@ -20,16 +21,17 @@ class BlogController < ApplicationController
   end
 
   def item
-
-    @item = Page.find_by_seo(params[:seo_name].split("/"))
-    @similar = Page.limit(3).where("category_id != ?",@item.category_id).order(id: :desc)
+    top_menu
+    @item = Page.active.find_by_seo(params[:seo_name].split("/"))
+    @similar = Page.active.limit(3).where("category_id != ?",@item.category_id).order(id: :desc)
   end
 
   def search
+    top_menu
     @similar = Page.limit(3).order(id: :desc)
     @items = []
     @count = 0
-    Page.where("`title` LIKE :search AND category_id IS NOT NULL OR `anons` LIKE :search AND category_id IS NOT NULL OR `desc` LIKE :search AND category_id IS NOT NULL",{search: "%#{params[:search]}%"}).includes(:category).all.map do |page|
+    Page.active.where("`title` LIKE :search AND category_id IS NOT NULL OR `anons` LIKE :search AND category_id IS NOT NULL OR `desc` LIKE :search AND category_id IS NOT NULL",{search: "%#{params[:search]}%"}).includes(:category).all.map do |page|
       @items[page.category_id] = {category: page.category, pages:[]} if @items[page.category_id].nil?
       @items[page.category_id][:pages] << page
       @count +=1
@@ -40,6 +42,9 @@ class BlogController < ApplicationController
   def subscribe
     item = Subscriber.check!(allowed_params)
     if item.valid?
+      [item.email, Settings.notification_mail].each do |mail|
+        ApplicationMailer.send_mail(Settings.email_templates['blog_subscribe'], mail , {:EMAIL => item.email, :USERNAME=> item.name, :PHONE => item.phone }  ).deliver_later
+      end
       json = { success: true }
     else
       json = { success: false, errors: item.errors }
@@ -56,6 +61,10 @@ class BlogController < ApplicationController
   def allowed_params
     params.require(:subscriber).permit(:name,:email,:blog_subscribe)
 
+  end
+
+  def top_menu
+    @top_menu = Category.where(parent_id:0).all.inject({}){|hash, item| hash[item.seo_name] = {text: item.title}; hash }
   end
 
 

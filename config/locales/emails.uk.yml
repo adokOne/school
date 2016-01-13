@@ -1,0 +1,14 @@
+uk:
+  emails:
+    translates:
+      guest_amount: "%{count} гостей"
+    tags:
+      domain: "Домен агента"
+      username: Имя пользователя
+      email: "Електронная почта пользователя"
+      phone: "Телефон"
+      group_name: "Назва групи"
+      group_date: "Дата групи"
+      vacancy_name: "Назва вакансії"
+      test_result_count: "Результат тесту (в балах)"
+
