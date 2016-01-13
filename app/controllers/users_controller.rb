@@ -104,7 +104,6 @@ class UsersController < ApplicationController
       end
     end
 
-    p stat_data
 
     @graph_data_2 = {}
     current_user.pages.get_stat_graph_unique(current_user.id).group_by{ |item| item[:date] }.each_pair do |date, item|

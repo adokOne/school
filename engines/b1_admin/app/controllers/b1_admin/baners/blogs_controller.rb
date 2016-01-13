@@ -4,7 +4,7 @@ module B1Admin
 
 
       def allowed_params
-        params.require(:item).permit(:id,:active,:seo_name,:anons,:desc,:title)
+        params.require(:item).permit(:id,:active,:seo_name,:anons,:desc,:title,:meta_is_generated, :meta_title, :meta_desc,:meta_keys)
       end
 
       # Set data for CRUD module

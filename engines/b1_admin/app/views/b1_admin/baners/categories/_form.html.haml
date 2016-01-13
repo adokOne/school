@@ -9,21 +9,23 @@
         .panel
           .panel-heading
             .panel-control
+              = render "shared/lang_selector"
             %h3.panel-title=t("b1_admin.faq_cat_manage")
           = form_tag baners_categories_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
-              .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}",class: "lang"  }
-                = label_tag :"title", t("b1_admin.title"), class:"col-sm-1 control-label"
-                .col-sm-5
-                  = text_field_tag :"title","" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.title"
-              .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang lang" }
-                = label_tag :"desc", t("b1_admin.desc"), class:"col-sm-1 control-label"
-                .col-sm-10
-                  = text_area_tag :"desc","" ,class:"form-control",required: true, "ng-model"=>"editedItem.desc"
-              .form-group{"ng-class" => "{'has-error': itemForm.only_photos.$invalid && itemForm.$submitted}"}
-                = label_tag :only_photos, "Тільки фото", class:"col-sm-1 control-label"
-                .col-sm-7
-                  %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"only_photos", "ng-model"=>"editedItem.only_photos"}
+              - I18n.available_locales.each do |l|
+                .form-group{"ng-class" => "{'has-error': itemForm.title_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}" }
+                  = label_tag :"title_#{l}", t("b1_admin.title"), class:"col-sm-1 control-label"
+                  .col-sm-7
+                    = text_field_tag :"title_#{l}","" ,class:"form-control", "ng-minlength"=>3, "ng-model"=>"editedItem.title_#{l}"
+
+                .form-group{"ng-class" => "{'has-error': itemForm.desc_#{l}.$invalid && itemForm.$submitted}",class: "lang lang_#{l}" ,style: "#{(B1Config.get_const.default_lang == l ? '' : 'display:none')}" }
+                  = label_tag :"desc_#{l}", t("b1_admin.desc"), class:"col-sm-1 control-label"
+                  .col-sm-7
+                    = text_area_tag :"desc_#{l}","" ,class:"form-control",required: true, "ng-model"=>"editedItem.desc_#{l}"
+
+
+
               .form-group{"ng-class" => "{'has-error': itemForm.parent_id.$invalid && itemForm.$submitted}"}
                 = label_tag :parent_id, t("b1_admin.parent_cat"), class:"col-sm-1 control-label"
                 .col-sm-7
