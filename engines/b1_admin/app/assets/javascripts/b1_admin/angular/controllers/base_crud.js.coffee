@@ -39,6 +39,12 @@ angular.module("B1Admin").controller "CrudController", [
       $scope.status.opened = true
 
 
+    $scope.accept = (item) ->
+      $scope.Item.update {id:item.id},{item:item}, (resp) ->
+        loadItems() if resp.success
+      , ->
+        $rootScope.error(alertSelector,$rootScope.server_error)
+
     $scope.Item = $resource("#{$element.data("url")}/:id.json",{},{query:{isArray:false},update:{ method:'PUT' }})
     if angular.element("#itemsTable").length
       $scope.itemsTable = new ngTableParams(

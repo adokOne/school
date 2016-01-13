@@ -58,7 +58,6 @@ class MailManager
 
 
   def accept_review( review )
-    raise ArgumentError, "Param must be an instance of User" unless user.kind_of?( User )
     check_template( "review_published" )
     @email = review.email
     data = {
@@ -70,11 +69,13 @@ class MailManager
     set_body( data )
     send_mail( review.email )
 
+    if user_mail =  review.page.try(:user).try(:email)
+      check_template( "has_review" )
+      @email = user_mail
+      set_body( data )
+      send_mail( user_mail )
+    end
 
-    check_template( "has_review" )
-    @email = review.page.try(:user).try(:email).email
-    set_body( data )
-    send_mail( review.page.try(:user).try(:email) )
 
   end
 
@@ -115,9 +116,9 @@ class MailManager
       if MailManager.method_defined?(name.to_sym)
         begin
           mailer = MailManager.new.send(name,*args)
-          AppLogger.success(:application, 18, mailer.template, mailer.email  )
+         # AppLogger.success(:application, 18, mailer.template, mailer.email  )
         rescue EmailNotFoundException => e
-          AppLogger.error(:application, 18, [e.message,e.backtrace].join("||") )
+         # AppLogger.error(:application, 18, [e.message,e.backtrace].join("||") )
         end
       else
         super

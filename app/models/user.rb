@@ -140,10 +140,6 @@ class User < ActiveRecord::Base
     end
   end
 
-  def is_vip
-    [true,false].sample
-  end
-
   private
 
   def clear_cache
