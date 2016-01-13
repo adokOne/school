@@ -126,3 +126,33 @@
 time {
 	display: none;
 }
+
+.fc-calendar .fc-row > div.fc-content a {
+	text-decoration: none;
+	color: #fff;
+}
+
+.fc-calendar .fc-row > div.fc-content.multiple a {
+	font-size: 11px;
+}
+
+.fc-calendar .fc-row > div.fc-content.multiple span {
+	line-height: 30px;
+}
+
+.fc-calendar .fc-row > div.fc-content.multiple p {
+	margin-bottom: 0;
+}
+
+.fc-calendar .fc-row > div.fc-content a:hover {
+	text-decoration: underline;
+}
+
+.fc-calendar .fc-row > div.fc-content.multiple .fc-calendar-event {
+	padding-bottom: 1px;
+}
+
+.fc-calendar .fc-row > div.fc-content.multiple .fc-calendar-event:nth-child(2) {
+	padding-top: 1px;
+	border-top: 1px solid #f7eb13;
+}

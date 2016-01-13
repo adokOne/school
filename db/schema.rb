@@ -26,12 +26,6 @@ ActiveRecord::Schema.define(version: 20151123133527) do
 
   add_index "addresses", ["active"], name: "index_addresses_on_active", using: :btree
 
-  create_table "answers", force: :cascade do |t|
-    t.integer "question_id", limit: 4
-    t.boolean "is_correct",  limit: 1,   default: false
-    t.string  "text",        limit: 255
-  end
-
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
     t.integer  "parent_id",    limit: 4,  default: 0,         null: false
@@ -233,15 +227,6 @@ ActiveRecord::Schema.define(version: 20151123133527) do
 
   add_index "photos", ["is_in_club"], name: "index_photos_on_is_in_club", using: :btree
   add_index "photos", ["is_in_school"], name: "index_photos_on_is_in_school", using: :btree
-
-  create_table "questions", force: :cascade do |t|
-    t.integer "quiz_id", limit: 4
-    t.string  "text",    limit: 255
-  end
-
-  create_table "quizzes", force: :cascade do |t|
-    t.string "name", limit: 255
-  end
 
   create_table "signins", force: :cascade do |t|
     t.integer  "signinable_id",   limit: 4,                null: false
