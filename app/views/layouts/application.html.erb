@@ -149,10 +149,10 @@
 
     var lessons = {};
     <% @lessons.each do |lesson| %>
-      if(!lessons['<%= lesson.course_id %>']){
-        lessons['<%= lesson.course_id %>'] = {};
+      if(!lessons['<%= lesson.formated_date %>']){
+        lessons['<%= lesson.formated_date %>'] = {};
       }
-      lessons['<%= lesson.course_id %>']['<%= lesson.formated_date %>'] = '<%= lesson.formated_html.html_safe %>';
+      lessons['<%= lesson.formated_date %>']['<%= lesson.course_id  %>'] = '<%= lesson.formated_html.html_safe %>';
     <% end %>
   </script>
 </body>

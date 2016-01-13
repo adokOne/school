@@ -22,8 +22,9 @@ $.Controller "Main",
     return if @is_blog
     lessons = {}
     Object.keys(@lessons).map((key) ->
-      $.extend(lessons,@lessons[key])
+      lessons[key] = Object.values(@lessons[key])
     )
+
     @calendar = @element.find('#calendar').calendario(
       onDayClick: ($el, $contentEl, dateProperties) ->
         lesson = $el.find(".lesson_box")
@@ -36,7 +37,7 @@ $.Controller "Main",
       monthabbrs: I18n.monthabbrs
     )
     @month = @element.find('#custom-month').html(@calendar.getMonthName())
-
+    @check_cls()
   updateMonthYear: ->
     @month.html @calendar.getMonthName()
 
@@ -64,7 +65,6 @@ $.Controller "Main",
     el = $(ev.target)
     el = if el.hasClass("js-link") then el else el.parents(".js-link")
     cls = el.data("cls")
-    console.log(cls)
     @element.find('.course-description').show()
     $('html, body').animate({scrollTop: $('.course-description').offset().top}, 800);
     idx = @element.find('.cycle-slideshow .s-item').index(@element.find(".cycle-slideshow .#{cls}")) - 1
@@ -138,12 +138,18 @@ $.Controller "Main",
     if 0 == Number(id)
       data = {}
       Object.keys(@lessons).map((key) ->
-        $.extend(data,@lessons[key])
+        data[key] = Object.values(@lessons[key])
       )
     else
-      data = @lessons[id]
-      data = if data then data else {}
+      data = {}
+      Object.keys(@lessons).map((key) ->
+        Object.keys(@lessons[key]).map((l_id) ->
+          if l_id == id
+            data[key] =  @lessons[key][id]
+        )
+      )
     @calendar.setData(data,data)
+    @check_cls()
 
   "#group-selector -> change":(ev) ->
     ev.preventDefault()
@@ -156,6 +162,13 @@ $.Controller "Main",
   "#subscriber_date -> change": (ev) ->
     old = @selected_date#$(ev.target).val()
     $(ev.target).val("#{old}, #{courses_names[@selected_course_id]}")
+
+  check_cls: ->
+    @element.find(".fc-future.fc-content").each ->
+      if $(this).find(".fc-calendar-event").size() > 1
+        $(this).addClass("multiple")
+      else
+        $(this).removeClass("multiple")
 
   init_datepicker: ->
     self = @
