@@ -13,13 +13,8 @@ defaults: &defaults
     pint_link: https://www.pinterest.com/englishspea0490/
     inst_link: https://instagram.com/speak_english_lviv
 
-#<<<<<<< Updated upstream
-  #domain: "http://0.0.0.0:4000"
-  #fb_token: "CAACEdEose0cBALZBnWnQmuClF2IZBPKJT8gB55AM9xpxmbHO5zXYCYOHPK8Fo9Nm33tOXufuAhtPGw2ntZAfopnomZBnY58hWDDgodAjo7Bu9cFt0mLvVBp1yVp5WOK2hIXB5H9dx9GmE7ppnp4ExQwZALbaaN2NHAjonrhRUHpT3DrLHTFP0HHUfromrVgoZD"
-#=======
-  #domain: "http://0.0.0.0:3000"
-  #fb_token: "230258430429159|t-jmyqCxomGNW5jT6K2n23HEdfE"
-#>>>>>>> Stashed changes
+  domain: "http://0.0.0.0:4000"
+  fb_token: "CAACEdEose0cBALZBnWnQmuClF2IZBPKJT8gB55AM9xpxmbHO5zXYCYOHPK8Fo9Nm33tOXufuAhtPGw2ntZAfopnomZBnY58hWDDgodAjo7Bu9cFt0mLvVBp1yVp5WOK2hIXB5H9dx9GmE7ppnp4ExQwZALbaaN2NHAjonrhRUHpT3DrLHTFP0HHUfromrVgoZD"
   hotelier_langs:
     - en
     - ru
