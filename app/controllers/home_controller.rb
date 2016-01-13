@@ -132,10 +132,13 @@ class HomeController < ApplicationController
   end
 
   def review
-    review = Review.create(review_params.merge(moderated: false))
-    flash[:message] = I18n.t("uex.review_moderate")
+    review = Review.new(review_params.merge(moderated: false))
+    if review.valid?
+      flash[:message] = I18n.t("uex.review_moderate")
+    else
+      flash[:message] = [t("uex.form.#{order.errors.messages.keys.first}"), order.errors.messages[order.errors.messages.keys.first].first].join(" ")
+    end
     redirect_to request.referer + "#comments"
-
   end
 
   def product
