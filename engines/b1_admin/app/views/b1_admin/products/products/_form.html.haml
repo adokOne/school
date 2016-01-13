@@ -20,10 +20,28 @@
                       = label_tag :"name_#{l}", t("b1_admin.title"), class:"col-sm-3 control-label"
                       .col-sm-8
                         = text_field_tag :"name_#{l}","" ,class:"form-control", "ng-minlength"=>3, "ng-model"=>"editedItem.name_#{l}"
-                  .form-group{"ng-class" => "{'has-error': itemForm.show_in_top.$invalid && itemForm.$submitted}"}
-                    = label_tag :show_in_top, "Пакет, отображать сверху", class:"col-sm-3 control-label"
+                  .form-group{"ng-class" => "{'has-error': itemForm.show_on_landing.$invalid && itemForm.$submitted}"}
+                    = label_tag :show_on_landing, "Отображать для заказа на сайте", class:"col-sm-3 control-label"
                     .col-sm-7
-                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"show_in_top", "ng-model"=>"editedItem.show_in_top"}
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"show_on_landing", "ng-model"=>"editedItem.show_on_landing"}
+
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.show_in_cabinet.$invalid && itemForm.$submitted}"}
+                    = label_tag :show_in_cabinet, "Отображать для заказа в кабинете", class:"col-sm-3 control-label"
+                    .col-sm-7
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"show_in_cabinet", "ng-model"=>"editedItem.show_in_cabinet"}
+
+
+
+
+
+
+
+
+
+
+
+
                   .form-group{"ng-class" => "{'has-error': itemForm.price.$invalid && itemForm.$submitted}"}
                     = label_tag :price, "Цена $", class:"col-sm-3 control-label"
                     .col-sm-7
@@ -37,16 +55,16 @@
                     .col-sm-7
                       = text_field_tag :sale_price, "" ,class:"form-control", "ng-maxlength"=>6, "ng-model"=>"editedItem.sale_price"
 
-                  .form-group{"ng-show"=>"!editedItem.show_in_top","ng-class" => "{'has-error': itemForm.is_one_time.$invalid && itemForm.$submitted}"}
+                  .form-group{"ng-class" => "{'has-error': itemForm.is_one_time.$invalid && itemForm.$submitted}"}
                     = label_tag :is_one_time, "Одноразовая услуга?", class:"col-sm-3 control-label"
                     .col-sm-7
                       %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"is_one_time", "ng-model"=>"editedItem.is_one_time"}
 
-                  .form-group{"ng-show"=>"!editedItem.show_in_top && !editedItem.is_one_time","ng-class" => "{'has-error': itemForm.has_second_price.$invalid && itemForm.$submitted}"}
+                  .form-group{"ng-show"=>"!editedItem.is_one_time","ng-class" => "{'has-error': itemForm.has_second_price.$invalid && itemForm.$submitted}"}
                     = label_tag :has_second_price, "Есть цена за два месяца?", class:"col-sm-3 control-label"
                     .col-sm-7
                       %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"has_second_price", "ng-model"=>"editedItem.has_second_price"}
-                  .form-group{"ng-show"=>"!editedItem.show_in_top && editedItem.has_second_price && !editedItem.is_one_time", "ng-class" => "{'has-error': itemForm.second_price.$invalid && itemForm.$submitted}"}
+                  .form-group{"ng-show"=>"editedItem.has_second_price && !editedItem.is_one_time", "ng-class" => "{'has-error': itemForm.second_price.$invalid && itemForm.$submitted}"}
                     = label_tag :second_price, "Цена за два месяца $", class:"col-sm-3 control-label"
                     .col-sm-7
                       = text_field_tag :second_price, "" ,class:"form-control", "ng-maxlength"=>6, "ng-model"=>"editedItem.second_price"

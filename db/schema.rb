@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113141406) do
+ActiveRecord::Schema.define(version: 20160113171052) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -461,6 +461,8 @@ ActiveRecord::Schema.define(version: 20160113141406) do
     t.boolean  "has_main_top",      limit: 1,        default: false
     t.boolean  "has_adwords_stat",  limit: 1,        default: false
     t.integer  "period_of_service", limit: 4,        default: 0
+    t.boolean  "show_in_cabinet",   limit: 1,        default: false
+    t.boolean  "show_on_landing",   limit: 1,        default: false
   end
 
   create_table "reviews", force: :cascade do |t|

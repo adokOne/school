@@ -45,7 +45,7 @@
                          <td>Месяц</td>
                          <td>2 Месяца</td>
                       </tr>
-                      <% Product.active.each_with_index do |item,idx|%>
+                      <% Product.active.for_cabinet.each_with_index do |item,idx|%>
                       <tr>
                         <td class="prod_name">
                         <span class="material-design-verification24 list-icon" style="color: #00bbd3;"></span>

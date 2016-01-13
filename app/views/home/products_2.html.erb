@@ -83,61 +83,82 @@
         </div>
 
         <div class="tariff-block">
-          <div class="content">
-            <div class="container">
-              <div class="heading">
-                <h3><%= t("uex.our_tarrifs")%></h3>
-              </div>
-              <div class="col-lg-12">
-                <table>
-                  <tr class="white-block">
-                     <th><%= t("uex.service_type")%></td>
-                     <th><%= t("uex.service_period")%></td>
-                     <th colspan="3"><%= t("uex.service_amount")%></td>
-                  </tr>
-                  <tr >
-                     <th colspan="2"></td>
-                     <th><%= t("uex.one_time")%></td>
-                     <th><%= t("uex.one_month")%></td>
-                     <th><%= t("uex.two_month")%></td>
-                  </tr>
-                  <% @products.each do |item|%>
-                  <tr>
-                    <td >
-                      <%= item.name %>
-                    </td>
-                    <td><%= item.period %></td>
-                    <% if item.is_one_time %>
-                      <td>
-                        <%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH
-                      </td>
-                    <% else %>
-                      <td>—</td>
-                    <% end %>
+                <div class="row row-edge  ">
+                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 box_3">
+                      <div class=" ">
+                         <div class="inner" style="background-color:#ffffff;">
+                            <div class="row row-edge  ">
+                              <table class="table products">
+                                 <tbody>
+                                    <tr class="">
+                                       <td>Вид услуги</td>
+                                       <td>Срок выполнения</td>
+                                       <td colspan="3">Стоимость услуги</td>
+                                    </tr>
+                                    <tr >
+                                       <td colspan="2"></td>
+                                       <td>Разово</td>
+                                       <td>Месяц</td>
+                                       <td>2 Месяца</td>
+                                    </tr>
+                                    <% @products.each do |item|%>
+                                    <tr>
+                                      <td class="prod_name">
+                                      <span class="material-design-verification24 list-icon" style="color: #00bbd3;"></span>
+                                        <b><%= item.name %></b>
+                                      </td>
+                                      <td><%= item.period %></td>
+                                      <% if item.is_one_time %>
+                                        <td>
+                                          <b><%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH</b>
+                                          <br/>
+                                          <a href="<%= url(item.link)%>">
+                                            <%= t("uex.do_order")%>
+                                            <i class="fa fa-shopping-cart"></i>
+                                          </a>
+                                        </td>
+                                      <% else %>
+                                        <td>—</td>
+                                      <% end %>
 
 
-                    <% if !item.is_one_time %>
-                      <td>
-                        <%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH
-                      </td>
-                    <% else %>
-                      <td>—</td>
-                    <% end %>
+                                      <% if !item.is_one_time %>
+                                        <td>
+                                          <b><%= item.price.to_i %> $ / <%= Product.covert_to_uah(item.price)  %> UAH</b>
+                                          <br/>
+                                          <a href="<%= url(item.link)%>">
+                                            <%= t("uex.do_order")%>
+                                            <i class="fa fa-shopping-cart"></i>
+                                          </a>
+                                        </td>
+                                      <% else %>
+                                        <td>—</td>
+                                      <% end %>
 
 
-                    <% if !item.is_one_time && item.has_second_price %>
-                      <td>
-                        <%= item.second_price.to_i %> $ / <%= Product.covert_to_uah(item.second_price)  %> UAH
-                      </td>
-                    <% else %>
-                      <td>—</td>
-                    <% end %>
-                  </tr>
-                  <% end %>
-                </table>
-              </div>
-            </div>
-          </div>
+                                      <% if !item.is_one_time && item.has_second_price %>
+                                        <td>
+                                          <b><%= item.second_price.to_i %> $ / <%= Product.covert_to_uah(item.second_price)  %> UAH</b>
+                                          <br/>
+                                          <a href="<%= url(item.link)%>">
+                                            <%= t("uex.do_order")%>
+                                            <i class="fa fa-shopping-cart"></i>
+                                          </a>
+                                        </td>
+                                      <% else %>
+                                        <td>—</td>
+                                      <% end %>
+
+
+                                    </tr>
+                                    <% end %>
+                                 </tbody>
+                              </table>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
         </div>
 
         <div class="form-block" id="order" data-ctrl="Form">

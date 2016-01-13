@@ -18,7 +18,8 @@ class Product < ActiveRecord::Base
   has_many :orders
   scope :active, -> { where(active: true) }
   scope :for_top, -> { where(show_in_top: true) }
-  scope :for_table, -> { where(show_in_top: false) }
+  scope :for_cabinet, -> { where(show_in_cabinet: true) }
+  scope :for_table, -> { where(show_on_landing: true) }
 
 
   def self.covert_to_uah( amount )
