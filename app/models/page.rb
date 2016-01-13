@@ -215,7 +215,7 @@ class Page < ActiveRecord::Base
   end
 
 
-  def self.get_stat_graph
+  def self.get_stat_graph(id)
     sql =
     "SELECT
         DATE(`impressions`.`created_at`) AS `date`,
@@ -223,7 +223,7 @@ class Page < ActiveRecord::Base
         SUM(`impressions`.`impressionable_id`) AS `count`
 
     FROM `impressions`
-    WHERE `impressions`.`created_at` BETWEEN '2015-12-01 00:00:00' AND '2015-12-31 23:59:59'
+    WHERE `impressions`.`created_at` BETWEEN '2016-01-01 00:00:00' AND '2016-12-31 23:59:59 AND user_id = #{id.to_i}'
     GROUP BY `date`, `impressionable_id`
     ORDER BY `date`
     "
@@ -237,7 +237,7 @@ class Page < ActiveRecord::Base
   end
 
 
-  def self.get_stat_graph_unique
+  def self.get_stat_graph_unique(id)
     sql =
     "SELECT
         DATE(`impressions`.`created_at`) AS `date`,
@@ -245,7 +245,7 @@ class Page < ActiveRecord::Base
         COUNT(DISTINCT ip_address) as count
 
     FROM `impressions`
-    WHERE `impressions`.`created_at` BETWEEN '2015-12-01 00:00:00' AND '2015-12-31 23:59:59'
+    WHERE `impressions`.`created_at` BETWEEN '2016-01-01 00:00:00' AND '2016-12-31 23:59:59 AND user_id = #{id.to_i}'
     GROUP BY `date`, `impressionable_id`
     ORDER BY `date`
     "
