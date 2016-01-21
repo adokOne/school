@@ -12,12 +12,12 @@
                              <div class="row row-edge  ">
                                 <div class="col-xs-12 col-sm-2 col-md-4 col-lg-4">
                                   <div class="media-content">
-                                    <img class="image croped-image" src="<%= current_user.avatar %>" alt="paeg1-img1" width="336" height="336">
+                                    <img class="image croped-image" src="<%= @user.avatar %>" alt="paeg1-img1" width="336" height="336">
                                   </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4 extra_indent">
                                    <h2><%= @user.name %></h2>
-                                   <p><%= @user.desc.present? ? current_user.desc : t("uex.not_indicated") %></p>
+                                   <p><%= @user.desc.present? ? @user.desc : t("uex.not_indicated") %></p>
                                 </div>
                                 <div class="col-xs-12 col-sm-5 col-md-4 col-lg-4">
                                    <h2><%= t("uex.contact_data")%></h2>
