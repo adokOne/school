@@ -2,7 +2,7 @@ module B1Admin
   module Baners
     module Review
       class ListSerializer < ::B1Admin::BaseSerializer
-        attributes :name,:moderated, :email, :comment,:id, :link, :page
+        attributes :name,:moderated, :email, :comment,:id, :link, :page, :created_at
 
         def link
           self.object.page.link

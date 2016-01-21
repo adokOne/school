@@ -15,6 +15,21 @@
                 = label_tag :"title", t("b1_admin.title"), class:"col-sm-1 control-label"
                 .col-sm-10
                   = text_field_tag :"title","" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.title"
+
+              .form-group{"ng-class" => "{'has-error': itemForm.email.$invalid && itemForm.$submitted}",class: "lang lang" }
+                = label_tag :"email", t("b1_admin.email"), class:"col-sm-1 control-label"
+                .col-sm-10
+                  = text_field_tag :"email","" ,class:"form-control", "ng-model"=>"editedItem.email"
+              .form-group{"ng-class" => "{'has-error': itemForm.site.$invalid && itemForm.$submitted}",class: "lang lang" }
+                = label_tag :"site", t("b1_admin.site"), class:"col-sm-1 control-label"
+                .col-sm-10
+                  = text_field_tag :"site","" ,class:"form-control", "ng-model"=>"editedItem.site"
+              .form-group{"ng-class" => "{'has-error': itemForm.phone.$invalid && itemForm.$submitted}",class: "lang lang" }
+                = label_tag :"phone", t("b1_admin.phone"), class:"col-sm-1 control-label"
+                .col-sm-10
+                  = text_field_tag :"phone","" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.phone"
+
+
               .form-group{"ng-class" => "{'has-error': itemForm.user_id.$invalid && itemForm.$submitted}"}
                 = label_tag :user_id, "Пользователь", class:"col-sm-1 control-label"
                 .col-sm-10

@@ -12,7 +12,7 @@ class HomeController < ApplicationController
     if params[:search].present?
       @pages = @pages.where("`anons` LIKE :search OR `desc` LIKE :search OR `title` LIKE :search",{search: "%#{params[:search]}%"})
     end
-    @pages = @pages.by_main_top.includes(:reviews,:city,:category).page(params[:page] )
+    @pages = @pages.by_main_top.includes(:reviews,:city,:category).paginate(:page => params[:page], :per_page => PER_PAGE)
   end
 
   def contacts
@@ -66,9 +66,9 @@ class HomeController < ApplicationController
       redirect_to :root and return
     end
     if @city
-      @pages = Page.published.by_rating.by_category(@item.id).by_city(@city.id).page(params[:page])
+      @pages = Page.published.by_rating.by_category(@item.id).by_city(@city.id).paginate(:page => params[:page], :per_page => PER_PAGE)
     else
-      @pages = Page.published.by_rating.by_category(@item.id).page(params[:page])
+      @pages = Page.published.by_rating.by_category(@item.id).paginate(:page => params[:page], :per_page => PER_PAGE)
     end
 
     @breadcrumbs_items = @item.prepare_breadcrumbs( true, @city )
@@ -134,6 +134,7 @@ class HomeController < ApplicationController
   def review
     review = Review.new(review_params.merge(moderated: false))
     if review.valid?
+      review.save
       flash[:message] = I18n.t("uex.review_moderate")
     else
       flash[:message] = [t("uex.form.#{order.errors.messages.keys.first}"), order.errors.messages[order.errors.messages.keys.first].first].join(" ")
@@ -196,7 +197,7 @@ class HomeController < ApplicationController
         flash[:error] = I18n.t("uex.user_exist_on_order", login_path: signin_users_path, forgot_path: forgot_users_path)
         redirect_to(request.referer + "#notice") and return
       else
-        user = User.create(email: baner.email, name: baner.name, password: User.password)
+        user = User.create(email: baner.email, name: baner.name, password: User.password , phone: baner.phone)
         token = user.signin( request.remote_ip, request.referer, request.user_agent)
         cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
         baner = baner.create_real(baner_params[:logo])

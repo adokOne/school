@@ -179,7 +179,7 @@ class UsersController < ApplicationController
   end
 
   def login_params
-    params.require(:login).permit(:name,:email,:password)
+    params.require(:login).permit(:phone,:name,:email,:password)
   end
 
   def message_params

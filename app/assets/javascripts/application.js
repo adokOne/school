@@ -24,7 +24,7 @@
 
 //= require icheck
 //= require jquery.selectbox-0.2.min
-
+//= require jquery.mask
 
 //= require ./summernote
 //= require jquery.validate
@@ -57,3 +57,4 @@ Array.prototype.list = function()
         while(orphans-- > this.length) scope[arguments[orphans]] = null;
     }
 }
+$(".wpcf7-phone").mask("+38(999) 999 99 99");

@@ -98,3 +98,4 @@ $(document).ready ->
     $(this).find('ul').removeClass 'active-sub'
     return
 
+  $(".wpcf7-phone").mask("+38(999) 999 99 99");

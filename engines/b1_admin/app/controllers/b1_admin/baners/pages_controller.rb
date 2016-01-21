@@ -13,11 +13,12 @@ module B1Admin
         items = items.where(id: v.to_i)   if "id" == k
         items = items.where(slug: v.to_s)   if "slug" == k
         items = items.where(meta_is_generated: v.to_i.to_bool)   if "meta_is_generated" == k
+        items = items.by_text(v) if k == "title"
         return items
       end
 
       def allowed_params
-        params.require(:item).permit(:city_is_canonical, :id,:active,:seo_name,:category_id,:anons,:desc,:title, :city_id, :meta_is_generated, :meta_title, :meta_desc,:meta_keys, :user_id, :country_id)
+        params.require(:item).permit(:email,:phone,:site,  :city_is_canonical, :id,:active,:seo_name,:category_id,:anons,:desc,:title, :city_id, :meta_is_generated, :meta_title, :meta_desc,:meta_keys, :user_id, :country_id)
       end
 
       def set_data

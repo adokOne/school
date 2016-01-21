@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160113171052) do
+ActiveRecord::Schema.define(version: 20160121095422) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -399,6 +399,9 @@ ActiveRecord::Schema.define(version: 20160113171052) do
     t.date     "has_main_top_db_date"
     t.date     "has_city_top_db_date"
     t.date     "has_category_top_db_date"
+    t.string   "phone",                    limit: 255
+    t.string   "site",                     limit: 255
+    t.string   "email",                    limit: 255
   end
 
   add_index "pages", ["active"], name: "index_pages_on_active", using: :btree
@@ -466,12 +469,13 @@ ActiveRecord::Schema.define(version: 20160113171052) do
   end
 
   create_table "reviews", force: :cascade do |t|
-    t.integer "page_id",   limit: 4
-    t.integer "rating",    limit: 4
-    t.string  "email",     limit: 255
-    t.string  "name",      limit: 255
-    t.text    "comment",   limit: 65535
-    t.boolean "moderated", limit: 1,     default: false
+    t.integer  "page_id",    limit: 4
+    t.integer  "rating",     limit: 4
+    t.string   "email",      limit: 255
+    t.string   "name",       limit: 255
+    t.text     "comment",    limit: 65535
+    t.boolean  "moderated",  limit: 1,     default: false
+    t.datetime "created_at"
   end
 
   create_table "signins", force: :cascade do |t|
@@ -541,6 +545,7 @@ ActiveRecord::Schema.define(version: 20160113171052) do
     t.text     "desc",                    limit: 65535
     t.boolean  "is_vip_db",               limit: 1,     default: false
     t.date     "is_vip_db_date"
+    t.string   "phone",                   limit: 255
   end
 
   create_table "vacancies", force: :cascade do |t|

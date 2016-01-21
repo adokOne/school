@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
   signinable expiration: ::B1Config.get_const.sign_in_expiration
 
   #Validates
-  validates :name,:email, presence: true
+  validates :name,:email, :phone, presence: true
   validates :password, presence: true, on: :create
   validates :name,     length: { in: 3..50 }, format: {with:/\A^[^0-9`!@#\$%\^&*+_=]+\z/i}
   validates :email,    length: { in: 6..50 }, uniqueness: true,format:{with:/\A^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}

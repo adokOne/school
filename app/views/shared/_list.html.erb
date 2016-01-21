@@ -1,8 +1,8 @@
 <%# cache [pages, I18n.locale] do %>
-<div class="container">
+<div class="container list-ads">
    <div id="primary" class="content-area">
       <main id="main" class="site-main" role="main">
-         <article class="clearfix post-5 page type-page status-publish " id="post-5">
+         <article class="clearfix post-5 page type-page status-publish">
             <div class="entry-meta entry-meta-top"></div>
             <div class="entry-content">
                <div class="row  " >
@@ -18,9 +18,9 @@
                                  <div id="primary" class="content-area">
                                     <main id="main" class="site-main" role="main">
                                       <% pages.each do |page|%>
-                                        <article class="cherry-has-entry-date cherry-has-entry-author cherry-has-entry-comments clearfix post-22 post type-post status-publish format-standard has-post-thumbnail category-allergyasthma baner-article" style="position: relative;">
+                                        <article class="cherry-has-entry-date cherry-has-entry-author cherry-has-entry-comments clearfix post-22 post type-post status-publish format-standard has-post-thumbnail category-allergyasthma baner-article" style="position: relative;padding-bottom:5px">
                                           <header class="entry-header">
-                                             <h2 class="entry-title"><a href="<%= url(page.link) %>" rel="bookmark"><%= page.title %></a></h2>
+                                             <h2 style="font: 17px/25px 'Roboto', sans-serif;" class="entry-title"><a href="<%= url(page.link) %>" rel="bookmark"><%= page.title %></a></h2>
                                           </header>
                                           <div class="entry-meta entry-meta-top">
                                              <span class="posted-on"><time class="entry-date published" datetime="<%= page.created_at %>"><%= l(page.created_at, format: :uex) %></time></span>
@@ -35,13 +35,13 @@
                                             <% end %>
 
                                             <a href="<%= url(page.link) %>" title="<%= page.title %>">
-                                              <img   width="1088" height="387" src="<%= page.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="<%= page.title %>"/>
+                                              <img   width="1088" height="387" src="<%= ( page.logo.exists?(:home) ? page.logo(:home) : page.logo ) %>" class="attachment-cherry-thumb-l wp-post-image" alt="<%= page.title %>"/>
                                             </a>
                                           </figure>
                                           <% end %>
                                           <div class="entry-content">&nbsp&nbsp</div>
                                           <div class="entry-permalink pull-right">
-                                            <a href="<%= url(page.link) %>" class="cherry-btn cherry-btn-primary cherry-btn-extra-large"><%= t("uex.read_more")%></a>
+                                            <a style="padding: 6px 15px 6px;" href="<%= url(page.link) %>" class="cherry-btn cherry-btn-primary cherry-btn-extra-large"><%= t("uex.read_more")%></a>
                                           </div>
                                           <div class="entry-meta entry-meta-bottom"></div>
                                         </article>

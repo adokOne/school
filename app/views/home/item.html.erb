@@ -12,6 +12,28 @@
             <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
               <img width="1088" height="387" src="<%= @item.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="post-1"/>
             </figure>
+            <div class="entry-meta entry-meta-top contacts">
+               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col">
+                  <i class="material-design-phone370"></i>
+                  <%= @item.phone.present? ? @item.phone : "-------" %>
+               </div>
+               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col">
+                <i class="material-design-black402"></i>
+                <% if @item.email.present?%>
+                  <a href="mailto:<%=@item.email%>" rel="nofollow"><%=@item.email%></a>
+                <% else %>
+                  -------
+                <% end %>
+               </div>
+               <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col">
+                <i class="material-design-world96"></i>
+                <% if @item.site.present?%>
+                  <a href="<%=@item.site%>" rel="nofollow"><%=@item.site%></a>
+                <% else %>
+                  -------
+                <% end %>
+               </div>
+            </div>
             <div class="entry-content">
                <%= @item.desc.html_safe %>
             </div>

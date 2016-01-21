@@ -390,6 +390,10 @@ address {
     width: auto;
     max-width: 1200px;
 }
+.site-content.boxed .container.list-ads {
+    width: auto;
+    max-width: 980px;
+}
 .site-footer.boxed .container {
     width: auto;
     max-width: 1200px;
@@ -842,4 +846,17 @@ input[type="reset"]:hover, input[type="submit"]:hover {
 }
 #back-top a:hover {
     background: #fec006;
+}
+
+.entry-meta.entry-meta-top.contacts, .entry-meta.entry-meta-top.contacts a{
+    font-size: 20px;
+    color: #4D3636;
+    line-height: 1.4;
+}
+.entry-meta.entry-meta-top.contacts i{
+    color: #2b91d8;
+    font-size: 30px;
+}
+.entry-meta.entry-meta-top.contacts .col{
+    text-align: center;
 }

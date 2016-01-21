@@ -1,10 +1,11 @@
 class Page < ActiveRecord::Base
+
   before_validation :generate_seo
   belongs_to :category
 
   has_paper_trail on: [:update, :destroy]
 
-  @attachment_sizes =  { home: "760x270#",thumb: "100x100#", big: "800x300#" }
+  @attachment_sizes =  { home: "760x270>",thumb: "100x100#", big: "800x300#" }
 
   class << self
      attr_accessor :attachment_sizes
