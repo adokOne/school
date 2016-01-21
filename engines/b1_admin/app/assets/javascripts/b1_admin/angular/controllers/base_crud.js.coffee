@@ -144,11 +144,11 @@ angular.module("B1Admin").controller "CrudController", [
         item = angular.element(item)
         if Config.with_locales || $scope.withLocales
           if $scope.editedItem && $scope.editedItem.is_mongoid_localize
-            $scope.editedItem["#{text_area_name}_translations"]["#{item.data("lang")}"] = item.code()
+            $scope.editedItem["#{text_area_name}_translations"]["#{item.data("lang")}"] = item.summernote( "code" )
           else
-            $scope.editedItem["#{text_area_name}_#{item.data("lang")}"] = item.code()
+            $scope.editedItem["#{text_area_name}_#{item.data("lang")}"] = item.summernote( "code" )
         else
-          $scope.editedItem[text_area_name] = item.code()
+          $scope.editedItem[text_area_name] = item.summernote( "code" )
       )
     setToEditor = ->
       text_area_name = if $scope.editedItem && $scope.editedItem.text_area_name then $scope.editedItem.text_area_name else text_area_name
@@ -156,11 +156,11 @@ angular.module("B1Admin").controller "CrudController", [
         item = angular.element(item)
         if Config.with_locales || $scope.withLocales
           if $scope.editedItem.is_mongoid_localize
-            item.code($scope.editedItem["#{text_area_name}_translations"]["#{item.data("lang")}"]) unless $scope.editedItem is undefined
+            item.summernote( "code", $scope.editedItem["#{text_area_name}_translations"]["#{item.data("lang")}"]) unless $scope.editedItem is undefined
           else
-            item.code($scope.editedItem["#{text_area_name}_#{item.data("lang")}"]) unless $scope.editedItem is undefined
+            item.summernote( "code", $scope.editedItem["#{text_area_name}_#{item.data("lang")}"]) unless $scope.editedItem is undefined
         else
-          item.code($scope.editedItem[text_area_name]) unless $scope.editedItem is undefined
+          item.summernote( "code", $scope.editedItem[text_area_name]) unless $scope.editedItem is undefined
       )
     $rootScope.initTextRedactor()
     $timeout (->

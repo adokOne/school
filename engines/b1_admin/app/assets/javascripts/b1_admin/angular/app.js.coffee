@@ -39,7 +39,7 @@ AdminApp.run [
         $rootScope.updateSelect()
         angular.forEach angular.element("[data-switchery]"), (elem) -> new Switchery(elem)
 
-      sendFile = (file, editor, welEditable) ->
+      sendFile = (file, editor ) ->
         data = new FormData
         data.append 'file', file
         $.ajax
@@ -52,7 +52,8 @@ AdminApp.run [
           contentType: false
           processData: false
           success: (data) ->
-            editor.insertImage welEditable, data.url
+            console.log(editor)
+            editor.summernote('insertNode',$('<img>').attr('src', data.url)[0]);
             return
         return
 
@@ -115,11 +116,14 @@ AdminApp.run [
           loadPluguns()
 
       $rootScope.initTextRedactor = ->
-        angular.element(".summernote").summernote
-          height: 500
-          onImageUpload: (files, editor, welEditable) ->
-            sendFile files[0], editor, welEditable
-            return
+        angular.element(".summernote").each ->
+          summernote = $(this)
+          summernote.summernote
+            height: 500
+            callbacks:
+              onImageUpload: (files, editor, welEditable) ->
+                sendFile files[0], summernote
+                return
 
       $rootScope.changeLang = (lang) ->
         lang_element_header = angular.element(".langs-dropdown .lang-li-#{lang}")
