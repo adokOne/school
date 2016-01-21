@@ -257,7 +257,8 @@ header{
 	margin-bottom: 50px;
 }
 .site-title small{
-	    font-weight: 100;
+	    font-weight: 400;
+        font-size: 50%;
 }
 /*.user-contancts .list-icon{
 	visibility: hidden;
