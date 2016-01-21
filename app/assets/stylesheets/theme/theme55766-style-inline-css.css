@@ -859,4 +859,5 @@ input[type="reset"]:hover, input[type="submit"]:hover {
 }
 .entry-meta.entry-meta-top.contacts .col{
     text-align: center;
+    padding: 0;
 }
