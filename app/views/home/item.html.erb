@@ -6,7 +6,7 @@
                <h2 class="entry-title"><%= @item.title %></h2>
             </header>
             <div class="entry-meta entry-meta-top">
-               <span class="posted-on"><time class="entry-date published" datetime="<%= @item.created_at %>"><%= l(@item.created_at, format: :uex) %></time></span>
+               <span class="posted-on"><time class="entry-date published" datetime="<%= @item.created_at %>"><%= l(@item.created_at.present? ? @item.created_at : Time.now , format: :uex) %></time></span>
                <span class="comments-link"><a href="#comments"><%= @item.reviews_count %>  отзыва</a></span>
             </div>
             <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
@@ -42,7 +42,7 @@
          <nav class="navigation post-navigation" role="navigation">
             <div class="paging-navigation">
                <div class="nav-links">
-                  <div class="nav-previous"><a href="<%= @item.category.link( @item.city_is_canonical ? @item.city : nil ) %>" rel="prev"><%= t("uex.back_to_category",name: @item.category_title)%></a></div>
+                  <div class="nav-previous"><a href="<%= ( @item.category.present? ? @item.category.link( @item.city_is_canonical ? @item.city : nil ) : "" ) %>" rel="prev"><%= t("uex.back_to_category",name: @item.category_title)%></a></div>
                </div>
             </div>
          </nav>

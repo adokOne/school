@@ -13,6 +13,7 @@ Rails.application.routes.draw do
 
     root to: "home#main"
     post "/", to: "home#main"
+    post "/previev", to: "home#previev"
 
     get 'page/:page', to: "home#index"
 

@@ -183,7 +183,7 @@ class Page < ActiveRecord::Base
   end
 
   def seos( city = nil )
-    [self.category.seos( city )].flatten
+    self.category.present? ? [self.category.seos( city )].flatten : [self.seo_name]
   end
 
   def self.find_by_seo seo
@@ -200,15 +200,20 @@ class Page < ActiveRecord::Base
   end
 
   def canonical_link
-    if self.city_is_canonical
+    if self.city_is_canonical && self.city.present?
       "/#{seos(self.city).join('/')}/advert/#{self.id}.html"
     else
       "/#{seos.join('/')}/advert/#{self.id}.html"
     end
   end
 
-  def prepare_breadcrumbs
-    self.category.prepare_breadcrumbs( false, self.city_is_canonical ? self.city : nil )
+  def prepare_breadcrumbs( with_category = true)
+    if with_category
+      self.category.prepare_breadcrumbs( false, self.city_is_canonical ? self.city : nil )
+    else
+      {d: self.title}
+    end
+
   end
 
   def generate_seo

@@ -9,7 +9,7 @@
         .panel
           .panel-heading
             %h3.panel-title Создание/редактирование обьявления
-          = form_tag baners_pages_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+          = form_tag "/previev" ,class: "form-horizontal",novalidate: true,name: :itemForm, target: "_blank"  do
             .panel-body
               .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}",class: "lang lang" }
                 = label_tag :"title", t("b1_admin.title"), class:"col-sm-1 control-label"
@@ -88,26 +88,28 @@
                         %input{:style => "visibility: hidden; position: absolute;", :type => "file"}/
                       %span.btn.btn-danger.ng-hide{:"ng-click" => "$flow.cancel()", :"ng-show" => "$flow.files.length"}
                         Удалить
-              .form-group{"ng-class" => "{'has-error': itemForm.country_id.$invalid && itemForm.$submitted}"}
-                = label_tag :country_id, "Страна", class:"col-sm-1 control-label"
-                .col-sm-5
-                  %select.form-control{"ng-model" => "editedItem.country_id", "ng-options" => "continent.id as continent.name for continent in #{@countries.to_json}",required: true}
-
               .row
-                .col-md-6
-                  %h4 Категория
+                .col-md-4
+                  .form-group{"ng-class" => "{'has-error': itemForm.country_id.$invalid && itemForm.$submitted}"}
+                    = label_tag :country_id, "Страна", class:"col-sm-2 control-label"
+                    .col-sm-8
+                      %select.form-control{"ng-model" => "editedItem.country_id", "ng-options" => "continent.id as continent.name for continent in #{@countries.to_json}",required: true}
+                .col-md-4
                   .form-group{"ng-class" => "{'has-error': itemForm.city_id.$invalid && itemForm.$submitted}"}
-                    = label_tag :city_id, "Категория", class:"col-sm-1 control-label"
-                    .col-sm-5
-                      %select.form-control{"ng-model" => "editedItem.category_id", "ng-options" => "continent.id as continent.name for continent in #{@categories.to_json}",required: true}
-                .col-md-6
-                  %h4 Город
-                  .form-group{"ng-class" => "{'has-error': itemForm.city_id.$invalid && itemForm.$submitted}"}
-                    = label_tag :city_id, "Город", class:"col-sm-1 control-label"
-                    .col-sm-5
+                    = label_tag :city_id, "Город", class:"col-sm-2 control-label"
+                    .col-sm-8
                       %select.form-control{"ng-model" => "editedItem.city_id", "ng-options" => "continent.id as continent.name for continent in #{@cities.to_json}",required: true}
+
+                .col-md-4
+                  .form-group{"ng-class" => "{'has-error': itemForm.city_id.$invalid && itemForm.$submitted}"}
+                    = label_tag :city_id, "Категория", class:"col-sm-2 control-label"
+                    .col-sm-8
+                      %select.form-control{"ng-model" => "editedItem.category_id", "ng-options" => "continent.id as continent.name for continent in #{@categories.to_json}",required: true}
+
 
               .mar-top.clearfix
                 %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
                   %i.fa.fa-pencil.fa-fw
                   =t("b1_admin.save")
+                %a.btn.btn-sm.btn-success.pull-right{"ng-click" => "previev()"}
+                  Предпросмотр

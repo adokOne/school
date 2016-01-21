@@ -172,4 +172,8 @@ angular.module("B1Admin").controller "CrudController", [
         loadMedia()
       ), 150
 
+
+    $scope.previev = ->
+      angular.element("#desc").val($(".summernote").summernote("code"))
+      angular.element("form").submit()
 ]

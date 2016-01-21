@@ -102,6 +102,10 @@
     transform: rotate(135deg);
 }
 
+.single-post .entry-content table td{
+    border: 1px solid;
+}
+
 
 .categories_block .sub{
       display: none;

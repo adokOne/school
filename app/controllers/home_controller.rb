@@ -86,22 +86,17 @@ class HomeController < ApplicationController
         redirect_to( page.link, status: 301 ) and return
       end
     end
-
     @item = Page.find(params[:id])
-    @item.impressions.create(ip_address: request.remote_ip,user_id: current_user ? current_user.id : 0)
-    @breadcrumbs_items = @item.prepare_breadcrumbs
-    @breadcrumbs_last = @item.title
+    set_baner_params
+  end
 
+  def previev
+    @item = Page.new(preview_params)
+    p @item
+    p "*"*2000
 
-    @meta_desc  = @item.meta_is_generated ? @item.title  : @item.meta_desc
-    @meta_title = @item.meta_is_generated ? @item.title  : @item.meta_title
-    @meta_keys  = @item.meta_is_generated ? @meta_keys  : @item.meta_keys
-
-    @section_name = "#{@item.category.title} #{@item.city.name}"
-    @image = @item.logo
-    @published_at = @item.created_at
-    @og_type = "article"
-    @canonical = url(@item.canonical_link)
+    set_baner_params( true )
+    render :item
   end
 
   def cities
@@ -249,6 +244,10 @@ class HomeController < ApplicationController
     params.require(:anonim_page).permit(:name,:email,:phone,:title,:anons,:logo,:category_id,:city_id, :country_id, :desc)
   end
 
+  def preview_params
+    params.permit(:name,:email,:phone,:title,:anons,:logo,:category_id,:city_id, :country_id, :desc, :site, :meta_title, :meta_desc, :meta_keys)
+  end
+
   def feedback_params
     params.require(:feedback).permit(:name,:email,:phone,:message)
   end
@@ -264,5 +263,21 @@ class HomeController < ApplicationController
     @has_search = true
   end
 
+  def set_baner_params( is_preview = false )
+    @item.impressions.create(ip_address: request.remote_ip,user_id: current_user ? current_user.id : 0) unless is_preview
+    @breadcrumbs_items = @item.prepare_breadcrumbs( !is_preview )
+    @breadcrumbs_last = @item.title
+
+
+    @meta_desc  = @item.meta_is_generated ? @item.title  : @item.meta_desc
+    @meta_title = @item.meta_is_generated ? @item.title  : @item.meta_title
+    @meta_keys  = @item.meta_is_generated ? @meta_keys  : @item.meta_keys
+
+    @section_name = is_preview ? @item.title : "#{@item.category.title} #{@item.city.name}"
+    @image = @item.logo
+    @published_at = @item.created_at
+    @og_type = "article"
+    @canonical = url(@item.canonical_link)
+  end
 
 end
