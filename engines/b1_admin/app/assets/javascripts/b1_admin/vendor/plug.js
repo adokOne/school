@@ -1708,7 +1708,7 @@
       var options = hasInitOptions ? list.head(arguments) : {};
 
       options = $.extend({}, $.summernote.options, options);
-      options.langInfo = $.extend(true, {}, $.summernote.lang['en-US'], $.summernote.lang[options.lang]);
+      options.langInfo = $.extend(true, {}, $.summernote.lang['ru-RU'], $.summernote.lang[options.lang]);
 
       this.each(function (idx, note) {
         var $note = $(note);
@@ -2095,6 +2095,126 @@
         documentStyle: 'Document Style',
         extraKeys: 'Extra keys'
       },
+
+      history: {
+        undo: 'Undo',
+        redo: 'Redo'
+      },
+      specialChar: {
+        specialChar: 'SPECIAL CHARACTERS',
+        select: 'Select Special characters'
+      }
+    }
+  });
+
+  $.extend($.summernote.lang, {
+    'ru-RU': {
+      font: {
+        bold: 'Полужирный',
+        italic: 'Курсив',
+        underline: 'Подчёркнутый',
+        clear: 'Убрать стили шрифта',
+        height: 'Высота линии',
+        name: 'Шрифт',
+        strikethrough: 'Зачёркнутый',
+        subscript: 'Нижний индекс',
+        superscript: 'Верхний индекс',
+        size: 'Размер шрифта'
+      },
+      image: {
+        image: 'Картинка',
+        insert: 'Вставить картинку',
+        resizeFull: 'Восстановить размер',
+        resizeHalf: 'Уменьшить до 50%',
+        resizeQuarter: 'Уменьшить до 25%',
+        floatLeft: 'Расположить слева',
+        floatRight: 'Расположить справа',
+        floatNone: 'Расположение по-умолчанию',
+        shapeRounded: 'Форма: Закругленная',
+        shapeCircle: 'Форма: Круг',
+        shapeThumbnail: 'Форма: Миниатюра',
+        shapeNone: 'Форма: Нет',
+        dragImageHere: 'Перетащите сюда картинку',
+        dropImage: 'Перетащите картинку',
+        selectFromFiles: 'Выбрать из файлов',
+        url: 'URL картинки',
+        remove: 'Удалить картинку'
+      },
+      video: {
+        video: 'Видео',
+        videoLink: 'Ссылка на видео',
+        insert: 'Вставить видео',
+        url: 'URL видео',
+        providers: '(YouTube, Vimeo, Vine, Instagram, DailyMotion или Youku)'
+      },
+      link: {
+        link: 'Ссылка',
+        insert: 'Вставить ссылку',
+        unlink: 'Убрать ссылку',
+        edit: 'Редактировать',
+        textToDisplay: 'Отображаемый текст',
+        url: 'URL для перехода',
+        openInNewWindow: 'Открывать в новом окне'
+      },
+      table: {
+        table: 'Таблица'
+      },
+      hr: {
+        insert: 'Вставить горизонтальную линию'
+      },
+      style: {
+        style: 'Стиль',
+        normal: 'Нормальный',
+        blockquote: 'Цитата',
+        pre: 'Код',
+        h1: 'Заголовок 1',
+        h2: 'Заголовок 2',
+        h3: 'Заголовок 3',
+        h4: 'Заголовок 4',
+        h5: 'Заголовок 5',
+        h6: 'Заголовок 6'
+      },
+      lists: {
+        unordered: 'Маркированный список',
+        ordered: 'Нумерованный список'
+      },
+      options: {
+        help: 'Помощь',
+        fullscreen: 'На весь экран',
+        codeview: 'Исходный код'
+      },
+      paragraph: {
+        paragraph: 'Параграф',
+        outdent: 'Уменьшить отступ',
+        indent: 'Увеличить отступ',
+        left: 'Выровнять по левому краю',
+        center: 'Выровнять по центру',
+        right: 'Выровнять по правому краю',
+        justify: 'Растянуть по ширине'
+      },
+      color: {
+        recent: 'Последний цвет',
+        more: 'Еще цвета',
+        background: 'Цвет фона',
+        foreground: 'Цвет шрифта',
+        transparent: 'Прозрачный',
+        setTransparent: 'Сделать прозрачным',
+        reset: 'Сброс',
+        resetToDefault: 'Восстановить умолчания'
+      },
+      shortcut: {
+        shortcuts: 'Сочетания клавиш',
+        close: 'Закрыть',
+        textFormatting: 'Форматирование текста',
+        action: 'Действие',
+        paragraphFormatting: 'Форматирование параграфа',
+        documentStyle: 'Стиль документа',
+        extraKeys: 'Дополнительные комбинации'
+      },
+      history: {
+        undo: 'Отменить',
+        redo: 'Повтор'
+      },
       help: {
         'insertParagraph': 'Insert Paragraph',
         'undo': 'Undoes the last command',
@@ -2124,18 +2244,8 @@
         'insertHorizontalRule': 'Insert horizontal rule',
         'linkDialog.show': 'Show Link Dialog'
       },
-      history: {
-        undo: 'Undo',
-        redo: 'Redo'
-      },
-      specialChar: {
-        specialChar: 'SPECIAL CHARACTERS',
-        select: 'Select Special characters'
-      }
     }
   });
-
-
   /**
    * @class core.key
    *
@@ -4330,6 +4440,7 @@
      * @param {String} sObjColor.backColor background color
      */
     this.color = this.wrapCommand(function (colorInfo) {
+      colorInfo = colorInfo || $(".note-current-color-button").data("value")
       var foreColor = colorInfo.foreColor;
       var backColor = colorInfo.backColor;
 
@@ -6732,7 +6843,7 @@
 
       buttons: {},
 
-      lang: 'en-US',
+      lang: 'ru-RU',
 
       // toolbar
       toolbar: [
@@ -7484,7 +7595,6 @@
             d.call(b, b.data())
         })
         $( document ).ajaxStop(function() {
-            console.log("wefwe")
             a(".selectpicker").each(function() {
                 var b = a(this);
                 d.call(b, b.data())
