@@ -6737,10 +6737,10 @@
       // toolbar
       toolbar: [
         ['style', ['style']],
-        ['font', ['bold', 'underline', 'clear']],
-        ['fontname', ['fontname']],
+        ['font', ['bold', 'underline', 'clear','strikethrough']],
+        ['fontname', ['fontname','subscript','superscript']],
         ['color', ['color']],
-        ['para', ['ul', 'ol', 'paragraph']],
+        ['para', ['ul', 'ol', 'paragraph','height','indent','outdent','hr']],
         ['table', ['table']],
         ['insert', ['link', 'picture', 'video']],
         ['view', ['fullscreen', 'codeview', 'help']]
