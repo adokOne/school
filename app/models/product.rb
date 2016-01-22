@@ -23,13 +23,20 @@ class Product < ActiveRecord::Base
 
 
   def self.covert_to_uah( amount )
-    (amount * 24.9).to_i
+    (amount * self.usd_exchange).to_i
   end
 
   def link
     "/product/#{self.id}"
   end
 
+
+  def usd_exchange
+    setting = Rails.cache.fetch("usd_exchange", expires_in: 1.day) do
+      Setting.find_by_key("usd_exchange")
+    end
+    setting ? setting.value.to_s.to_i : 25
+  end
 
   def cost
     if self.has_sale

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160121095422) do
+ActiveRecord::Schema.define(version: 20160122080719) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -476,6 +476,13 @@ ActiveRecord::Schema.define(version: 20160121095422) do
     t.text     "comment",    limit: 65535
     t.boolean  "moderated",  limit: 1,     default: false
     t.datetime "created_at"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string   "key",        limit: 255, default: ""
+    t.string   "value",      limit: 255, default: ""
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "signins", force: :cascade do |t|

@@ -1692,6 +1692,7 @@ p {
       margin: 0;
       padding: 0 25px; }
 
+
 /* Shortcodes
 ================================================== */
 /* button */
@@ -2921,3 +2922,8 @@ address {
       width: 100%; }
 
 /*# sourceMappingURL=main.css.map */
+
+
+.list-ads .cherry-btn.cherry-btn-extra-large {
+  font-size: 15px;
+}

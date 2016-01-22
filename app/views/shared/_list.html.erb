@@ -35,13 +35,13 @@
                                             <% end %>
 
                                             <a href="<%= url(page.link) %>" title="<%= page.title %>">
-                                              <img   width="1088" height="387" src="<%= ( page.logo.exists?(:home) ? page.logo(:home) : page.logo ) %>" class="attachment-cherry-thumb-l wp-post-image" alt="<%= page.title %>"/>
+                                              <img style="width:760px;height:270px;"  width="760" height="270" src="<%= ( page.logo ) %>" class="attachment-cherry-thumb-l wp-post-image" alt="<%= page.title %>"/>
                                             </a>
                                           </figure>
                                           <% end %>
                                           <div class="entry-content">&nbsp&nbsp</div>
                                           <div class="entry-permalink pull-right">
-                                            <a style="padding: 6px 15px 6px;" href="<%= url(page.link) %>" class="cherry-btn cherry-btn-primary cherry-btn-extra-large"><%= t("uex.read_more")%></a>
+                                            <a style="padding: 6px 15px 6px;    margin-bottom: 10px;" href="<%= url(page.link) %>" class="cherry-btn cherry-btn-primary cherry-btn-extra-large"><%= t("uex.read_more")%></a>
                                           </div>
                                           <div class="entry-meta entry-meta-bottom"></div>
                                         </article>

@@ -1,0 +1,26 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:settings_settings_path,"ng-click"=>"$root.setRoute('#{settings_settings_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      Настройки
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};",:"data-url"=>settings_settings_path,"data-back-url"=>settings_settings_path}
+    .row
+      .col
+        .panel
+          .panel-heading
+            %h3.panel-title Редактирование настройки
+          = form_tag settings_settings_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .row
+                .col-md-8
+                  .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}"}
+                    = label_tag :key, "Ключ", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :key,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.key"
+                    = label_tag :value, "Значение", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :value,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.value"
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

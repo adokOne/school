@@ -14,7 +14,7 @@ B1Admin::Engine.routes.draw do
   	resources :permissions
   	resources :admins
     resources :emails
-    resources :addresses
+    resources :settings
     namespace :modules do
       post :update_positions
     end
