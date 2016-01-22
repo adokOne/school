@@ -855,9 +855,14 @@ input[type="reset"]:hover, input[type="submit"]:hover {
 }
 .entry-meta.entry-meta-top.contacts i{
     color: #2b91d8;
-    font-size: 30px;
+    font-size: 40px;
+    position: relative;
+    top: 10px;
 }
 .entry-meta.entry-meta-top.contacts .col{
     text-align: center;
     padding: 0;
+}
+.contact-cell{
+    line-height: 1;
 }
