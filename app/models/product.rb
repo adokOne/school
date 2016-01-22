@@ -31,8 +31,8 @@ class Product < ActiveRecord::Base
   end
 
 
-  def usd_exchange
-    setting = Rails.cache.fetch("usd_exchange", expires_in: 1.day) do
+  def self.usd_exchange
+    setting = Rails.cache.fetch("settings", expires_in: 1.day) do
       Setting.find_by_key("usd_exchange")
     end
     setting ? setting.value.to_s.to_i : 25
