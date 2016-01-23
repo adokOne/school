@@ -104,7 +104,6 @@ module B1Admin
           ##
           define_method(:new) do
             @item = self.class.model.new
-            p "#{self.class.name.deconstantize}::#{self.class.serializer}::ItemSerializer"
             @item = "#{self.class.name.deconstantize}::#{self.class.serializer}::ItemSerializer".constantize.new(@item,false)
             render layout: !params.has_key?(:only_template)
           end

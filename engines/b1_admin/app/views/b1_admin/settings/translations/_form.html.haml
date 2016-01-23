@@ -1,0 +1,20 @@
+#content-container
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json}",:"data-url"=>settings_translations_path,:"data-delete-text"=>t("b1_admin.delete_permission_confirm")}
+    .row
+      .col
+        .panel
+          .panel-heading
+            .panel-control
+              %a.btn.btn-success{href:settings_translations_path,"ng-click"=>"$root.setRoute('#{settings_translations_path}')"}=t("b1_admin.back_to_list")
+          = form_tag settings_translations_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .row
+                .col-md-12
+                  .form-group{"ng-class" => "{'has-error': itemForm.value.$invalid && itemForm.$submitted}",class: "lang lang" }
+                    = label_tag :"value", "Перклад", class:"col-sm-1 control-label"
+                    .col-sm-10
+                      = text_field_tag :"value","" ,class:"form-control", ng_required: "true","ng-minlength"=>3, "ng-model"=>"editedItem.value"
+
+          - if user_can?(:create) || user_can?(:update)
+            .panel-footer.text-right
+              = link_to t("b1_admin.save"),"#", class:"btn btn-info","ng-click" => "save()"

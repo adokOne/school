@@ -96,3 +96,5 @@ gem 'capistrano-passenger'
 
 gem 'capistrano3-puma' , group: :development
 gem "koala", "~> 2.2"
+gem 'i18n-tasks'
+ gem 'tolk'

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151123133527) do
+ActiveRecord::Schema.define(version: 20160123083101) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "",    null: false
@@ -25,6 +25,12 @@ ActiveRecord::Schema.define(version: 20151123133527) do
   end
 
   add_index "addresses", ["active"], name: "index_addresses_on_active", using: :btree
+
+  create_table "answers", force: :cascade do |t|
+    t.integer "question_id", limit: 4
+    t.boolean "is_correct",  limit: 1,   default: false
+    t.string  "text",        limit: 255
+  end
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -228,6 +234,15 @@ ActiveRecord::Schema.define(version: 20151123133527) do
   add_index "photos", ["is_in_club"], name: "index_photos_on_is_in_club", using: :btree
   add_index "photos", ["is_in_school"], name: "index_photos_on_is_in_school", using: :btree
 
+  create_table "questions", force: :cascade do |t|
+    t.integer "quiz_id", limit: 4
+    t.string  "text",    limit: 255
+  end
+
+  create_table "quizzes", force: :cascade do |t|
+    t.string "name", limit: 255
+  end
+
   create_table "signins", force: :cascade do |t|
     t.integer  "signinable_id",   limit: 4,                null: false
     t.string   "signinable_type", limit: 255,              null: false
@@ -316,6 +331,14 @@ ActiveRecord::Schema.define(version: 20151123133527) do
 
   add_index "teachers", ["is_in_club"], name: "index_teachers_on_is_in_club", using: :btree
   add_index "teachers", ["is_in_school"], name: "index_teachers_on_is_in_school", using: :btree
+
+  create_table "translations", force: :cascade do |t|
+    t.string  "locale",         limit: 255
+    t.string  "key",            limit: 255
+    t.text    "value",          limit: 65535
+    t.text    "interpolations", limit: 65535
+    t.boolean "is_proc",        limit: 1,     default: false
+  end
 
   create_table "upload_images", force: :cascade do |t|
     t.datetime "created_at",                    null: false
