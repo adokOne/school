@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160122080719) do
+ActiveRecord::Schema.define(version: 20160125100854) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -105,6 +105,10 @@ ActiveRecord::Schema.define(version: 20160122080719) do
     t.integer  "admin_id",          limit: 4
     t.integer  "admin_update_id",   limit: 4
     t.string   "slug",              limit: 255
+    t.boolean  "meta_is_generated", limit: 1,          default: true
+    t.text     "meta_desc",         limit: 65535
+    t.text     "meta_keys",         limit: 65535
+    t.text     "meta_title",        limit: 65535
   end
 
   create_table "categories", force: :cascade do |t|

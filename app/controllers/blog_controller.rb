@@ -14,8 +14,9 @@ class BlogController < ApplicationController
     @item = BlogPage.find_by_seo_name!(params[:seo_name])
     @breadcrumbs_items = {"blog": I18n.t("uex.blog")}
     @breadcrumbs_last = @item.title
-    @meta_desc  = @item.anons.truncate(170)
-    @meta_title = @item.title
+    @meta_desc  = @item.meta_is_generated ? @item.anons.truncate(170) : @item.meta_desc
+    @meta_title = @item.meta_is_generated ? @item.title : @item.meta_title
+    @meta_keys  = @item.meta_is_generated ? @item.anons.truncate(50)  : @item.meta_keys
   end
 
   def search
