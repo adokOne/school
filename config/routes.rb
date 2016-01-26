@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  mount Tolk::Engine => '/tolk', :as => 'tolk'
   mount B1Admin::Engine => "/admin"
   root to: "home#index"
 

@@ -15,7 +15,7 @@ window.init_selectbox = (elements) ->
 
 window.init_icheck = (element) ->
   # input[type="radio"],
-  element.find('input[type="checkbox"]').iCheck('destroy').iCheck(
+  element.find('input[type="checkbox"]:not(.test)').iCheck('destroy').iCheck(
     cursor: true
     checkboxClass: 'icheckbox_minimal'
     radioClass: 'iradio_minimal'

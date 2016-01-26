@@ -127,7 +127,19 @@ $.Controller "Main",
     ev.preventDefault();
     el = if $(ev.target).hasClass("fc-calendar-event") then $(ev.target) else $(ev.target).parents(".fc-calendar-event")
     @selected_course_id =  el.find(".lesson_box").data("course-id")
-    @curse_dates = Object.keys(@lessons[@selected_course_id])
+    data = []
+    id = @selected_course_id
+    Object.keys(@lessons).map((key) ->
+      Object.keys(@lessons[key]).map((l_id) ->
+        if Number(l_id) == Number(id)
+          data.push key
+      )
+    )
+
+
+
+
+    @curse_dates = data#Object.keys(@lessons[@selected_course_id])
     date = el.find(".lesson_box").data("date")
     @selected_date = date;
     @course_subscribe = $("#lesson_subscribe_popup").controller()
@@ -144,7 +156,7 @@ $.Controller "Main",
       data = {}
       Object.keys(@lessons).map((key) ->
         Object.keys(@lessons[key]).map((l_id) ->
-          if l_id == id
+          if Number(l_id) == Number(id)
             data[key] =  @lessons[key][id]
         )
       )

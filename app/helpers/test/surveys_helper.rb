@@ -1,7 +1,7 @@
 module Test::SurveysHelper
   def link_to_remove_field(name, f)
     f.hidden_field(:_destroy) +
-    __link_to_function(raw(name), "removeField(this)", :id =>"remove-attach")
+    __link_to_function(raw(name), "removeField(this)", :id =>"remove-attach", style:"float: right;")
   end
 
   def new_survey
