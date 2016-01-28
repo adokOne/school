@@ -120,7 +120,11 @@ class User < ActiveRecord::Base
   end
 
   def balance
-    [self.transactions.for_balance.map(&:amount).sum, "UAH"].join(" ")
+    [_balance, "UAH"].join(" ")
+  end
+
+  def _balance
+    self.transactions.for_balance.map(&:amount).sum
   end
 
   def total_payed

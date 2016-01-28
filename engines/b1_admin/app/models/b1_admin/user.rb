@@ -2,6 +2,7 @@ module B1Admin
   class User < ActiveRecord::Base
 
     after_save :clear_cache
+    after_update :clear_cache
 
     COOKIE_NAME = :admin_token
     has_secure_password

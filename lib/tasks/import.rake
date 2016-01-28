@@ -345,6 +345,21 @@ namespace :import do
   end
 
 
+  translations = {}
+  desc "Import i18n"
+  task :i18n => :environment do
+    data = []
+    Tolk::Phrase.where("`key` LIKE 'uex%' ").all.each do |item|
 
+      _item = {key: item.key, value: I18n.t(item.key) }
+
+      I18n.available_locales.each do |l|
+        I18n.locale = l
+        _item[:"value_#{l}"] = I18n.t(item.key)
+      end
+      data << _item
+    end
+    Translation.create(data)
+  end
 
 end

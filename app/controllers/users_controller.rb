@@ -56,7 +56,19 @@ class UsersController < ApplicationController
 
 
   def create_order
-
+    order = Order.new(order_params)
+    order.status = Order::STATUS_CREATED
+    order.save
+    json = {success: true}
+    if current_user._balance >= order.get_amount
+      Order.transaction do
+        order.update_attribute(:status, Order::STATUS_SUCCESS )
+        Transaction.create(status: Transaction::STATUS_DEBITED, product_id: order.product_id, user_id: current_user.id ,amount: order.amount, currency: "UAH", description: order.product.name)
+      end
+    else
+      json = {success: false}
+    end
+    render json: json
   end
 
   def create
@@ -176,6 +188,10 @@ class UsersController < ApplicationController
     unless current_user.id == params[:id].to_i
       redirect_to root_path
     end
+  end
+
+  def order_params
+    params.require(:order).permit(:page_id,:product_id)
   end
 
   def login_params

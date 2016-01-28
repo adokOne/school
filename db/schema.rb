@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160125100854) do
+ActiveRecord::Schema.define(version: 20160128144438) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -513,6 +513,32 @@ ActiveRecord::Schema.define(version: 20160125100854) do
     t.datetime "updated_at"
   end
 
+  create_table "tolk_locales", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tolk_locales", ["name"], name: "index_tolk_locales_on_name", unique: true, using: :btree
+
+  create_table "tolk_phrases", force: :cascade do |t|
+    t.text     "key",        limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tolk_translations", force: :cascade do |t|
+    t.integer  "phrase_id",       limit: 4
+    t.integer  "locale_id",       limit: 4
+    t.text     "text",            limit: 65535
+    t.text     "previous_text",   limit: 65535
+    t.boolean  "primary_updated", limit: 1,     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tolk_translations", ["phrase_id", "locale_id"], name: "index_tolk_translations_on_phrase_id_and_locale_id", unique: true, using: :btree
+
   create_table "transactions", force: :cascade do |t|
     t.integer  "payment_system", limit: 4
     t.float    "amount",         limit: 24
@@ -528,6 +554,16 @@ ActiveRecord::Schema.define(version: 20160125100854) do
   end
 
   add_index "transactions", ["tnx_id"], name: "index_transactions_on_tnx_id", unique: true, using: :btree
+
+  create_table "translations", force: :cascade do |t|
+    t.string   "key",        limit: 255
+    t.text     "value",      limit: 4294967295
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.text     "value_en",   limit: 4294967295
+    t.text     "value_ru",   limit: 4294967295
+    t.text     "value_uk",   limit: 4294967295
+  end
 
   create_table "upload_images", force: :cascade do |t|
     t.datetime "created_at",                    null: false

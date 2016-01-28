@@ -62,7 +62,9 @@ $.Controller "Cabinet",
       data: form.serialize()
       success: (resp) ->
         if resp.success
-          console.log(resp)
+          alert("Спасибо за оплату услуги, на протяжении 30 минут она начнет дествовать")
+        else
+          alert("У вас недостаточно средств на балансе")
       error: (resp) ->
 
 

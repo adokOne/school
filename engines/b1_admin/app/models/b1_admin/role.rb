@@ -1,6 +1,7 @@
 module B1Admin
   class Role < ActiveRecord::Base
     after_save :clear_cache
+    after_update :clear_cache
 
     includes :modules
     #Relations

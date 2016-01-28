@@ -26,6 +26,11 @@ class Order < ActiveRecord::Base
     end
   end
 
+  def get_amount
+    self.amount = self.product.cost
+    return self.amount
+  end
+
   def update_cache
     if self.page.present?
       self.page.touch
