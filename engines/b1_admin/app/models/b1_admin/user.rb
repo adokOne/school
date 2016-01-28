@@ -141,6 +141,11 @@ module B1Admin
     end
 
     def clear_cache
+
+      require 'rake'
+      Core::Application.load_tasks
+      Rake::Task['tmp:clear'].invoke
+
       Rails.cache.delete("user_modules_#{self.id}")
       Rails.cache.delete("all_user_modules_#{self.id}")
       Rails.cache.delete("permissions_#{self.id}")

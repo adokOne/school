@@ -1,6 +1,6 @@
 module B1Admin
   class Role < ActiveRecord::Base
-    after_update :update_users
+    after_save :clear_cache
 
     includes :modules
     #Relations
@@ -26,8 +26,12 @@ module B1Admin
       self.modules.where(parent_id:0)
     end
 
-    def update_users
-      self.users.each &:save
+    def clear_cache
+
+      require 'rake'
+      Core::Application.load_tasks
+      Rake::Task['tmp:clear'].invoke
+
     end
   end
 end
