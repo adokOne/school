@@ -20,7 +20,7 @@
           / Brand logo & name
           / ================================
           .navbar-header
-            %a.navbar-brand{href:root_path}
+            %a.navbar-brand.disable{href:root_path,"a-disabled"=>"true"}
               = image_tag "b1_admin/logo.png", class: "brand-icon", alt: ::B1Config.get_const.company_name
               .brand-title
                 %span.brand-text=::B1Config.get_const.company_name

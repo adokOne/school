@@ -6,10 +6,10 @@
                            <h2 class="entry-title"><%= @item.title %></h2>
                         </header>
                         <div class="entry-meta entry-meta-top">
-                           <span class="posted-on"><time class="entry-date published" datetime="<%= @item.created_at %>"><%= l(@item.created_at, format: :uex) %></time></span>
+                           <span class="posted-on"><time class="entry-date published" datetime="<%= @item.created_at %>">><%= l(@item.created_at.present? ? @item.created_at : Time.now , format: :uex) %></time></span>
                         </div>
                         <figure class="entry-thumbnail cherry-thumb-l aligncenter large">
-                          <img width="1088" height="387" src="<%= @item.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="post-1"/>
+                          <img  src="<%= @item.logo %>" class="attachment-cherry-thumb-l wp-post-image" alt="post-1"/>
                         </figure>
                         <div class="entry-content">
                            <%= @item.desc.html_safe %>

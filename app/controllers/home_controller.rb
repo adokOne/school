@@ -3,7 +3,7 @@ class HomeController < ApplicationController
   PER_PAGE= 10
 
 
-  before_action :set_search_data, only: [:main, :category, :city]
+  before_action :set_search_data, only: [:main, :category, :city, :item]
 
 
 
@@ -81,23 +81,24 @@ class HomeController < ApplicationController
   end
 
   def item
+    @cls= "one-post"
     unless params[:is_new]
       if page = Page.find_by_slug(params[:id])
         redirect_to( page.link, status: 301 ) and return
       end
     end
+    @has_search = true
     @item = Page.find(params[:id])
     set_baner_params
   end
 
   def previev
     @item = Page.new(preview_params)
-    p @item
-    p "*"*2000
-
     set_baner_params( true )
     render :item
   end
+
+
 
   def cities
     @cities    = City.where(country_id: Country::UKRAINE_ID )
@@ -196,6 +197,7 @@ class HomeController < ApplicationController
         token = user.signin( request.remote_ip, request.referer, request.user_agent)
         cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
         baner = baner.create_real(baner_params[:logo])
+        MailManager.new_baner( baner )
         flash[:message] = I18n.t("uex.page_on_moder")
         cookies[:new_page] = { value: true, expires:  1.hour.from_now  }
         redirect_to edit_user_baner_path(current_user, baner) and return

@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  mount B1Admin::Engine => "/admin"
+  mount B1Admin::Engine => "/akvarium"
 
   scope "(:locale)", :locale => /ru|uk|en/ do
 
@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     root to: "home#main"
     post "/", to: "home#main"
     post "/previev", to: "home#previev"
+    post "/previev_blog", to: "blog#previev_blog"
 
     get 'page/:page', to: "home#index"
 
@@ -44,10 +45,11 @@ Rails.application.routes.draw do
       resources :baners ,only: [:update, :create, :edit, :new]
       collection do
         get "signin"
-        post "login"
+
         get "forgot"
         get "registration"
         post "restore"
+        post "do_login"
       end
       member do
 

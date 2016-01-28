@@ -225,7 +225,7 @@ header{
     width: 100%;
 
     z-index: 17;
-    overflow-y: auto;
+    overflow-y: auto!important;
 }
 .wpcf7-text.error, .wpcf7-textarea.error, .note-editor.error ,img.error, .sbHolder.error{
 	border: 1px solid red!important;

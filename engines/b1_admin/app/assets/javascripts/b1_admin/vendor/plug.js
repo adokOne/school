@@ -6851,6 +6851,7 @@
         ['font', ['bold', 'underline', 'clear','strikethrough']],
         ['fontname', ['fontname','subscript','superscript']],
         ['color', ['color']],
+        ['fontsize', ['fontsize']],
         ['para', ['ul', 'ol', 'paragraph','height','indent','outdent','hr']],
         ['table', ['table']],
         ['insert', ['link', 'picture', 'video']],

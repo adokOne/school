@@ -15,24 +15,51 @@
             <hr/>
             <div class="entry-meta entry-meta-top contacts">
                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col">
-                  <i class="material-design-phone370"></i>
-                  <span class="contact-cell" ><%= @item.phone.present? ? @item.phone : "-------" %></span>
+                  <i class="material-design-"></i>
+
+                  <% if @item.phone.present?%>
+                    <% @item.phone.split("|").each do |phone|%>
+                      <i class="material-design-phone370"></i>
+                      <span class="contact-cell" ><%= phone %></span>
+                      <br/>
+                    <% end %>
+                  <% else %>
+                    <i class="material-design-phone370"></i>
+                    -------
+                  <% end %>
+
+
+
+
                </div>
                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col">
-                <i class="material-design-black402"></i>
+
                 <% if @item.email.present?%>
-                  <a class="contact-cell" href="mailto:<%=@item.email%>" rel="nofollow"><%=@item.email%></a>
+                  <% @item.email.split("|").each do |email|%>
+                    <i class="material-design-black402"></i>
+                    <a class="contact-cell" href="mailto:<%= email%>" rel="nofollow"><%= email%></a>
+                    <br/>
+                  <% end %>
                 <% else %>
+                  <i class="material-design-black402"></i>
                   -------
                 <% end %>
                </div>
                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 col">
-                <i class="material-design-world96"></i>
+
+
                 <% if @item.site.present?%>
-                  <a class="contact-cell" target="_blank" href="http://<%=@item.site%>" rel="nofollow"><%=@item.site%></a>
+                  <% @item.site.split("|").each do |site|%>
+                    <i class="material-design-world96"></i>
+                     <a class="contact-cell" target="_blank" href="http://<%=site%>" rel="nofollow"><%= site%></a>
+                    <br/>
+                  <% end %>
                 <% else %>
+                  <i class="material-design-world96"></i>
                   -------
                 <% end %>
+
+
                </div>
             </div>
             <div class="entry-content">

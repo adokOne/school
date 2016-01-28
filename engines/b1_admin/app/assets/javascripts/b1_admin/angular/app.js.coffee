@@ -47,7 +47,7 @@ AdminApp.run [
           type: 'POST'
           xhr: ->
             $.ajaxSettings.xhr()
-          url: '/admin/content/uploads'
+          url: '/akvarium/content/uploads'
           cache: false
           contentType: false
           processData: false
@@ -184,3 +184,24 @@ $(document).ready ->
 
   $('body').on 'click', '.filter-toggler', (ev)->
     $('#content-container, aside').toggleClass('collapse_aside')
+
+AdminApp.directive 'aDisabled', ->
+  { compile: (tElement, tAttrs, transclude) ->
+    #Disable ngClick
+
+    tAttrs['ngClick'] = '!(' + tAttrs['aDisabled'] + ') && (' + tAttrs['ngClick'] + ')'
+    #return a link function
+    (scope, iElement, iAttrs) ->
+      #Toggle "disabled" to class when aDisabled becomes true
+      scope.$watch iAttrs['aDisabled'], (newValue) ->
+        if newValue != undefined
+          iElement.toggleClass 'disabled', newValue
+        return
+      #Disable href on click
+      iElement.on 'click', (e) ->
+        window.location.href = iAttrs.href
+        if scope.$eval(iAttrs['aDisabled'])
+          e.preventDefault()
+        return
+      return
+ }

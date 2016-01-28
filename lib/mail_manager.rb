@@ -7,12 +7,26 @@ class MailManager
     check_template( "registration" )
     @email = user.email
     data = {
-      :USER_PASWORD => password,
+      :USER_PASSWORD => password,
       :USER_LOGIN    => user.email,
       :USER_NAME     => user.name
     }
     set_body( data )
     send_mail( user.email )
+  end
+
+
+  def new_baner( baner )
+    raise ArgumentError, "Param must be an instance of P{age" unless baner.kind_of?( Page )
+    check_template( "new_baner" )
+    @email = baner.try(:user).try(:email)
+    data = {
+      :TITLE        => baner.title,
+      :URL          => baner.link,
+      :USER_NAME    => baner.try(:user).try(:name)
+    }
+    set_body( data )
+    send_mail( @email )
   end
 
 

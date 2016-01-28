@@ -1,7 +1,7 @@
 module B1Admin
   module ApplicationHelper
   	def namespace
-  		"admin" #request.fullpath.split("/").reject(&:empty?).first
+  		"akvarium" #request.fullpath.split("/").reject(&:empty?).first
   	end
     def url path
       path = path.to_s

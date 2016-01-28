@@ -19,6 +19,13 @@ class BlogController < ApplicationController
     @meta_keys  = @item.meta_is_generated ? @item.anons.truncate(50)  : @item.meta_keys
   end
 
+
+  def previev_blog
+    @item = BlogPage.new(preview_params)
+    #set_baner_params( true )
+    render :item
+  end
+
   def search
     @similar = BlogPage.limit(3).order(id: :desc)
     @items = []
@@ -40,5 +47,7 @@ class BlogController < ApplicationController
     end
     render json: json
   end
-
+  def preview_params
+    params.permit(:name,:email,:phone,:title,:anons,:logo,:category_id,:city_id, :country_id, :desc, :site, :meta_title, :meta_desc, :meta_keys)
+  end
 end

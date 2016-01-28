@@ -1573,6 +1573,29 @@ p {
 /* simple menu mobile style in init/css/dynamic-style.css */
 /* breadcrumbs
 ================================================== */
+.single-post .cherry-breadcrumbs{
+  padding:0;
+  background: transparent;
+}
+.one-post .cherry-breadcrumbs_item_link, .single-post .cherry-breadcrumbs_item_target, .single-post .cherry-breadcrumbs_browse, .single-post .cherry-breadcrumbs_item_sep{
+  color: #2cabfa;
+}
+.one-post .cherry-breadcrumbs_item_target{
+  color: rgb(51, 51, 51);
+}
+.one-post .site-branding{
+  margin-bottom: 5px;
+}
+.one-post #static-area-header-bottom{
+  padding: 0;
+}
+.one-post .site-content{
+  padding-top: 5px;
+}
+.one-post .search-row{
+  margin-bottom: 5px;
+  padding-bottom: 0;
+}
 .cherry-breadcrumbs {
   padding: 21px 0 20px 0; }
   .cherry-breadcrumbs .page-title {

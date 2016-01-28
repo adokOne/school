@@ -19,7 +19,7 @@ class Page < ActiveRecord::Base
 
   validates_attachment :logo,
     content_type: { content_type: /\Aimage/ },
-    size: { in: 0.megabytes..10.megabytes }
+    size: { in: 0.megabytes..15.megabytes }
 
   delegate :title, to: :category, prefix: true, allow_nil: true
   delegate :name, to: :city, prefix: true, allow_nil: true
@@ -221,7 +221,8 @@ class Page < ActiveRecord::Base
   end
 
 
-  def self.get_stat_graph(id)
+  def self.get_stat_graph(ids)
+    return [] unless ids.any?
     sql =
     "SELECT
         DATE(`impressions`.`created_at`) AS `date`,
@@ -229,7 +230,7 @@ class Page < ActiveRecord::Base
         SUM(`impressions`.`impressionable_id`) AS `count`
 
     FROM `impressions`
-    WHERE `impressions`.`created_at` BETWEEN '2016-01-01 00:00:00' AND '2016-12-31 23:59:59 AND user_id = #{id.to_i}'
+    WHERE `impressions`.`created_at` BETWEEN '2016-01-01 00:00:00' AND '2016-12-31 23:59:59 AND impressionable_id IN #{ids.join(",")}'
     GROUP BY `date`, `impressionable_id`
     ORDER BY `date`
     "
@@ -243,7 +244,8 @@ class Page < ActiveRecord::Base
   end
 
 
-  def self.get_stat_graph_unique(id)
+  def self.get_stat_graph_unique(ids)
+    return [] unless ids.any?
     sql =
     "SELECT
         DATE(`impressions`.`created_at`) AS `date`,
@@ -251,7 +253,7 @@ class Page < ActiveRecord::Base
         COUNT(DISTINCT ip_address) as count
 
     FROM `impressions`
-    WHERE `impressions`.`created_at` BETWEEN '2016-01-01 00:00:00' AND '2016-12-31 23:59:59 AND user_id = #{id.to_i}'
+    WHERE `impressions`.`created_at` BETWEEN '2016-01-01 00:00:00' AND '2016-12-31 23:59:59 AND impressionable_id IN #{ids.join(",")}'
     GROUP BY `date`, `impressionable_id`
     ORDER BY `date`
     "

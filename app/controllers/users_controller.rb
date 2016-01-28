@@ -4,7 +4,7 @@ class UsersController < ApplicationController
   include ActionView::Helpers::FormTagHelper
   include Liqpay::LiqpayHelper
 
-  before_filter :require_login, except: [:signin, :forgot, :registration, :login, :create, :create_message,:index, :restore, :show ]
+  before_filter :require_login, except: [:signin, :forgot, :registration, :login, :create, :create_message,:index, :restore, :show, :do_login ]
 
   before_filter :is_own?, only: [:update,:edit]
 
@@ -13,14 +13,14 @@ class UsersController < ApplicationController
     @users = User.active.by_rating.paginate(page: params[:page], per_page: 5)
   end
 
-  def login
+  def do_login
     if user = User.where(email: login_params[:email]).take
       if user.blocked
         flash[:error] = (t('b1_admin.admin_blocked') + (user.blocked_until ? t('b1_admin.admin_blocked_until') % [user.blocked_until.strftime("%d.%m.%Y %H:%M:%S")] : ""))
-        redirect_to login_users_path
+        redirect_to signin_users_path
       elsif !user.active
         flash[:error] = t('b1_admin.admin_not_active')
-        redirect_to login_users_path
+        redirect_to signin_users_path
       else
         if (token = user.sign_in(login_params[:password], request.remote_ip, request.referer, request.user_agent))
           cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
@@ -28,16 +28,16 @@ class UsersController < ApplicationController
         else
           if (attempts_left = (::B1Config.get_const.max_password_attempts - user.wrong_password_attempts)) > 0
             flash[:error] = t('b1_admin.wrong_password') + (t('b1_admin.attempts_left') % [attempts_left])
-            redirect_to login_users_path
+            redirect_to signin_users_path
           else
            flash[:error] = t('b1_admin.wrong_password') + (t('b1_admin.admin_blocked') + (user.blocked_until ? t('b1_admin.admin_blocked_until') % [user.blocked_until.strftime("%d.%m.%Y %H:%M:%S")] : ""))
-           redirect_to login_users_path
+           redirect_to signin_users_path
           end
         end
       end
     else
       flash[:error] = t('b1_admin.wrong_credentials')
-      redirect_to login_users_path
+      redirect_to signin_users_path
     end
   end
 
@@ -93,7 +93,7 @@ class UsersController < ApplicationController
   end
 
   def edit
-    stat_data = current_user.pages.get_stat_graph(current_user.id)
+    stat_data = current_user.pages.get_stat_graph(current_user.pages.pluck(:id))
     @page_ids = stat_data.group_by{ |item| item[:page_id] }.keys
     data = @page_ids.dup.fill(0)
     @graph_data = {}
@@ -106,7 +106,7 @@ class UsersController < ApplicationController
 
 
     @graph_data_2 = {}
-    current_user.pages.get_stat_graph_unique(current_user.id).group_by{ |item| item[:date] }.each_pair do |date, item|
+    current_user.pages.get_stat_graph_unique(current_user.pages.pluck(:id)).group_by{ |item| item[:date] }.each_pair do |date, item|
       @graph_data_2[date] = data.dup if @graph_data_2[date].nil?
       item.each do |i|
         @graph_data_2[date][@page_ids.index(i[:page_id])] = i[:count]

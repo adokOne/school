@@ -3,7 +3,7 @@
     %a.btn.btn-success.pull-right{href:baners_pages_path,"ng-click"=>"$root.setRoute('#{baners_pages_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
       Обьявления
-  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};",:"data-url"=>baners_pages_path,"data-back-url"=>baners_pages_path}
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"clonerTypes={phones:'phone',emails:'email', sites:'site' };editedItem=#{@item.serializable_hash.to_json};",:"data-url"=>baners_pages_path,"data-back-url"=>baners_pages_path}
     .row
       .col
         .panel
@@ -15,20 +15,39 @@
                 = label_tag :"title", t("b1_admin.title"), class:"col-sm-1 control-label"
                 .col-sm-10
                   = text_field_tag :"title","" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.title"
-
-              .form-group{"ng-class" => "{'has-error': itemForm.email.$invalid && itemForm.$submitted}",class: "lang lang" }
+              .form-group{"ng-repeat"=>"item in editedItem.emails track by $index","ng-class" => "{'has-error': itemForm.emails[$index].$invalid && itemForm.$submitted}",class: "lang lang" }
                 = label_tag :"email", t("b1_admin.email"), class:"col-sm-1 control-label"
-                .col-sm-10
-                  = text_field_tag :"email","" ,class:"form-control", "ng-model"=>"editedItem.email"
-              .form-group{"ng-class" => "{'has-error': itemForm.site.$invalid && itemForm.$submitted}",class: "lang lang" }
-                = label_tag :"site", t("b1_admin.site"), class:"col-sm-1 control-label"
-                .col-sm-10
-                  = text_field_tag :"site","" ,class:"form-control", "ng-model"=>"editedItem.site"
-              .form-group{"ng-class" => "{'has-error': itemForm.phone.$invalid && itemForm.$submitted}",class: "lang lang" }
+                .col-sm-8
+                  = text_field_tag :"email","" ,class:"form-control", "ng-model"=>"editedItem.emails[$index]"
+                .col-sm-3{"ng-show"=>"!$index"}
+                  %a.btn.btn-primary{"ng-click"=>"clone_row($event,'emails',$index)"}
+                    Добавить
+                    %i.fa-plus.fa
+                  %a.btn.btn-danger{"ng-click"=>"delete_cloned_row($event,'emails',$index)"}
+                    Удалить
+                    %i.fa-minus.fa
+              .form-group{"ng-repeat"=>"item in editedItem.phones track by $index","ng-class" => "{'has-error': itemForm.phones[$index].$invalid && itemForm.$submitted}",class: "lang lang" }
                 = label_tag :"phone", t("b1_admin.phone"), class:"col-sm-1 control-label"
-                .col-sm-10
-                  = text_field_tag :"phone","" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.phone"
-
+                .col-sm-8
+                  = text_field_tag :"phones","" ,class:"form-control", "ng-model"=>"editedItem.phones[$index]"
+                .col-sm-3{"ng-show"=>"!$index"}
+                  %a.btn.btn-primary{"ng-click"=>"clone_row($event,'phones',$index)"}
+                    Добавить
+                    %i.fa-plus.fa
+                  %a.btn.btn-danger{"ng-click"=>"delete_cloned_row($event,'phones',$index)"}
+                    Удалить
+                    %i.fa-minus.fa
+              .form-group{"ng-repeat"=>"item in editedItem.sites track by $index","ng-class" => "{'has-error': itemForm.sites[$index].$invalid && itemForm.$submitted}",class: "lang lang" }
+                = label_tag :"email", t("b1_admin.site"), class:"col-sm-1 control-label"
+                .col-sm-8
+                  = text_field_tag :"email","" ,class:"form-control", "ng-model"=>"editedItem.sites[$index]"
+                .col-sm-3{"ng-show"=>"!$index"}
+                  %a.btn.btn-primary{"ng-click"=>"clone_row($event,'sites',$index)"}
+                    Добавить
+                    %i.fa-plus.fa
+                  %a.btn.btn-danger{"ng-click"=>"delete_cloned_row($event,'sites',$index)"}
+                    Удалить
+                    %i.fa-minus.fa
 
               .form-group{"ng-class" => "{'has-error': itemForm.user_id.$invalid && itemForm.$submitted}"}
                 = label_tag :user_id, "Пользователь", class:"col-sm-1 control-label"

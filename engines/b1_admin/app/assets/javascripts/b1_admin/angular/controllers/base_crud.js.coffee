@@ -8,7 +8,8 @@ angular.module("B1Admin").controller "CrudController", [
   "$anchorScroll"
   "$http"
   "$timeout"
-  ($scope,ngTableParams,$resource,$element,Config,$rootScope,$anchorScroll,$http,$timeout) ->
+  "$compile"
+  ($scope,ngTableParams,$resource,$element,Config,$rootScope,$anchorScroll,$http,$timeout,$compile) ->
 
     window.CrudController = $scope
     alertSelector = "#content-container"
@@ -16,6 +17,8 @@ angular.module("B1Admin").controller "CrudController", [
     $scope.trueFalseArr = [{id:true, name:'Да'}, {id:false, name:'Нет'}]
     filtersClone = angular.copy $scope.filters
     text_area_name = "desc"
+    $scope.cloned_rows = {}
+    $scope.maximum_cloned_rows = 4
     $scope.statusColors =
       0: "#FF0101"
       1: "#4EAE32"
@@ -101,7 +104,7 @@ angular.module("B1Admin").controller "CrudController", [
           $rootScope.info(alertSelector,resp.msg)
           $anchorScroll()
       )
-    $scope.beforeSave = ->
+    #$scope.beforeSave = ->
     $scope.save = ->
       setFromEditor()
       $scope.beforeSave()
@@ -176,4 +179,24 @@ angular.module("B1Admin").controller "CrudController", [
     $scope.previev = ->
       angular.element("#desc").val($(".summernote").summernote("code"))
       angular.element("form").submit()
+      return false
+
+
+    $scope.clone_row = ($event,type,key) ->
+      console.log($scope.editedItem[type])
+      $scope.editedItem[type].push("") if $scope.editedItem[type].length <= $scope.maximum_cloned_rows
+
+
+    $scope.delete_cloned_row = ($event,type, key) ->
+      $scope.editedItem[type].pop() if $scope.editedItem[type].length > 1
+
+
+    $scope.beforeSave = ->
+      unless $scope.clonerTypes is undefined
+        angular.forEach $scope.clonerTypes, ((k,v) ->
+          $scope.editedItem[k] = $scope.editedItem[v].join("|")
+        )
+
+
+
 ]

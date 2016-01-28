@@ -14,6 +14,7 @@ class BanersController < ApplicationController
     baner =  current_user.pages.new(allowed_params)
     if baner.valid?
       baner.save
+      MailManager.new_baner( baner )
       cookies[:new_page] = { value: true, expires:  1.hour.from_now  }
       redirect_to user_path(current_user)
     else
