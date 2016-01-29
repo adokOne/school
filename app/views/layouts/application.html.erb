@@ -7,6 +7,7 @@
       <meta name="keywords" content="<%= @meta_keys%>"/>
       <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
+
       <link rel='stylesheet' id='font-awesome-css' href='//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css?ver=4.4.0' type='text/css' media='all'/>
       <link rel='stylesheet' id='cherry-google-fonts-css' href='//fonts.googleapis.com/css?family=Roboto%3A500%2Cregular%2C100%7CAbril+Fatface%3Aitalic&#038;subset=latin%2Clatin-ext&#038;ver=4.3.1' type='text/css' media='all'/>
 
@@ -65,6 +66,7 @@
       <% end %>
       <% if  @image %>
          <meta property="og:image" content="<%= Settings.domain + @image.to_s%>" />
+         <link rel="image_src" href="<%=  @image%>" />
       <% end %>
 
 

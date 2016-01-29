@@ -17,6 +17,7 @@ class BlogController < ApplicationController
     @meta_desc  = @item.meta_is_generated ? @item.anons.truncate(170) : @item.meta_desc
     @meta_title = @item.meta_is_generated ? @item.title : @item.meta_title
     @meta_keys  = @item.meta_is_generated ? @item.anons.truncate(50)  : @item.meta_keys
+    @image = @item.logo
   end
 
 
