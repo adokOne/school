@@ -48,15 +48,25 @@
       <link href="/favicon.ico" sizes="114x114" rel="apple-touch-icon-precomposed">
       <link href="/favicon.ico" sizes="144x144" rel="apple-touch-icon-precomposed">
 
-      <meta property="og:locale" content="<%= Settings.languages[I18n.locale.to_s] %>" />
+
+
+
+
+
+
+
+      <meta property="og:title" content="<%=@meta_title%>" />
       <% if @og_type %>
          <meta property="og:type" content="<%= @og_type %>" />
       <% end %>
-      <meta property="og:title" content="<%=@meta_title%>" />
+      <% if  @image %>
+         <meta property="og:image" content="<%= Settings.domain + @image.to_s%>" />
+         <link rel="image_src" href="<%=  Settings.domain +  @image.to_s%>" />
+      <% end %>
       <meta property="og:description" content="<%=@meta_desc%>" />
       <meta property="og:url" content="<%= Settings.domain + request.fullpath %>" />
+      <meta property="og:locale" content="<%= Settings.languages[I18n.locale.to_s] %>" />
       <meta property="og:site_name" content="UEX" />
-
       <% if  @section_name %>
          <meta property="article:section" content="<%= @section_name%>" />
       <% end %>
@@ -65,12 +75,6 @@
          <meta property="article:modified_time" content="<%= @published_at%>" />
          <meta property="og:updated_time" content="<%= @published_at%>" />
       <% end %>
-      <% if  @image %>
-         <meta property="og:image" content="<%= Settings.domain + @image.to_s%>" />
-         <link rel="image_src" href="<%=  Settings.domain +  @image.to_s%>" />
-      <% end %>
-
-
 
       <% if @has_editor %>
          <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.css" />
