@@ -66,7 +66,7 @@
       <% end %>
       <% if  @image %>
          <meta property="og:image" content="<%= Settings.domain + @image.to_s%>" />
-         <link rel="image_src" href="<%=  @image%>" />
+         <link rel="image_src" href="<%=  Settings.domain +  @image%>" />
       <% end %>
 
 
