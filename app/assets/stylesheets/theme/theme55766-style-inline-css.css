@@ -105,7 +105,7 @@ a:hover {
 .cherry-breadcrumbs {
     background-color: rgb(240, 240, 240);
 }
-.cherry-breadcrumbs_item_link, .cherry-breadcrumbs_item_target, .cherry-breadcrumbs_browse, .cherry-breadcrumbs_item_sep {
+.one-post .cherry-breadcrumbs_item_link, .one-post .cherry-breadcrumbs_item_target, .one-post .cherry-breadcrumbs_browse, .one-post .cherry-breadcrumbs_item_sep {
     color: #ffffff;
     font: 15px/24px 'Roboto', sans-serif;
 }

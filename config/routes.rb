@@ -21,7 +21,7 @@ Rails.application.routes.draw do
 
     get "blog", to: "blog#index"
     get "blog/*seo_name", to: "blog#item"
-    get "blog/:seo_name.html", to: "blog#item"
+    get "blog/:seo_name.:format", to: "blog#item"
     get "blog/category/*seo_name", to: "blog#category"
 
     get "*path/advert/(:id).:format", to: "home#item", is_new: true
