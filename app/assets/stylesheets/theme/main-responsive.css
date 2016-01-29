@@ -299,6 +299,9 @@ Version:     1.0.0
     height: auto!important;
     width: auto!important;
   }
+  .entry-meta.entry-meta-top{
+     font: 10px/14px 'Roboto', sans-serif!important;
+  }
 }
 
 @media print {
