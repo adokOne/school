@@ -1,11 +1,12 @@
 class BlogController < ApplicationController
 
   def index
+    @og_type = "object"
     @items = BlogPage.published.by_rating.paginate(page: params[:page], per_page: 5)
   end
 
   def item
-
+    @og_type = "article"
     if page = BlogPage.find_by_slug(params[:seo_name])
       redirect_to( page.link, status: 301 ) and return
     end
