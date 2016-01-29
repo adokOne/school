@@ -1580,7 +1580,7 @@ p {
 .one-post .cherry-breadcrumbs_item_link, .single-post .cherry-breadcrumbs_item_target, .single-post .cherry-breadcrumbs_browse, .single-post .cherry-breadcrumbs_item_sep{
   color: #2cabfa;
 }
-.one-post .cherry-breadcrumbs_item_target{
+.cherry-breadcrumbs_item_target{
   color: rgb(51, 51, 51);
 }
 .one-post .site-branding{

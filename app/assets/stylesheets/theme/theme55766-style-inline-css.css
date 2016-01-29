@@ -105,9 +105,9 @@ a:hover {
 .cherry-breadcrumbs {
     background-color: rgb(240, 240, 240);
 }
-.one-post .cherry-breadcrumbs_item_link, .one-post .cherry-breadcrumbs_item_target, .one-post .cherry-breadcrumbs_browse, .one-post .cherry-breadcrumbs_item_sep {
-    color: #ffffff;
-    font: 15px/24px 'Roboto', sans-serif;
+.cherry-breadcrumbs_item_link,  .cherry-breadcrumbs_item_target, .cherry-breadcrumbs_browse,  .cherry-breadcrumbs_item_sep {
+
+    font: 14px/24px 'Roboto', sans-serif;
 }
 .post-gallery_prev, .post-gallery_next {
     background-color: #f62e46;
