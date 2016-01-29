@@ -302,6 +302,10 @@ Version:     1.0.0
   .entry-meta.entry-meta-top{
      font: 10px/14px 'Roboto', sans-serif!important;
   }
+  .cherry-btn.cherry-btn-primary.cherry-btn-extra-large{
+    padding: 0px 7px 0px!important;
+    font-size: 11px!important;
+  }
 }
 
 @media print {
