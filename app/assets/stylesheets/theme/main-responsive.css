@@ -291,6 +291,16 @@ Version:     1.0.0
     .visible-print-inline-block {
       display: inline-block !important; } }
 
+@media (max-width: 600px) {
+  .entry-title{
+    font: 10px/14px 'Roboto', sans-serif!important;
+  }
+  .entry-thumbnail img{
+    height: auto!important;
+    width: auto!important;
+  }
+}
+
 @media print {
   .hidden-print {
     display: none !important; } }
