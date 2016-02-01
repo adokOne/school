@@ -18,13 +18,16 @@ module B1Admin
         end
 
         def phones
-          self.object.phone.to_s.split("|")
+          _items = self.object.phone.to_s.split("|")
+          _items.any? ? _items : [""]
         end
         def sites
-          self.object.site.to_s.split("|")
+          items = self.object.site.to_s.split("|")
+          _items.any? ? _items : [""]
         end
         def emails
-          self.object.email.to_s.split("|")
+          items = self.object.email.to_s.split("|")
+          _items.any? ? _items : [""]
         end
 
       end
