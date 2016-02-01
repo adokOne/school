@@ -17,7 +17,7 @@
                            <div class="entry-content">
 
 
-                           <div class="share42init" data-description="<%= @meta_desc%>" data-title="<%= @meta_title%>" data-image="<%= Settings.domain + @image.to_s %>" ></div>
+                           <div class="share42init" data-url="<%= url(@item.link) %>" data-description="<%= @meta_desc%>" data-title="<%= @meta_title%>" data-image="<%= Settings.domain + @image.to_s %>" ></div>
                            <script type="text/javascript" src="/js/share42.js"></script>
 
 
