@@ -22,11 +22,11 @@ module B1Admin
           _items.any? ? _items : [""]
         end
         def sites
-          items = self.object.site.to_s.split("|")
+          _items = self.object.site.to_s.split("|")
           _items.any? ? _items : [""]
         end
         def emails
-          items = self.object.email.to_s.split("|")
+          _items = self.object.email.to_s.split("|")
           _items.any? ? _items : [""]
         end
 
