@@ -4,7 +4,6 @@ module ApplicationHelper
     lang_url = I18n.default_locale == I18n.locale ? [""] : ["",I18n.locale]
 
     path = (lang_url + path.split("/").reject(&:empty?)).reject(&:empty?).join("/")
-
     url = path.empty? ? "/" : "/#{path}"
     Settings.domain + url
   end
@@ -27,7 +26,17 @@ module ApplicationHelper
 
   def locale_url( locale )
     return "#" if I18n.locale == locale
-    url_for( locale: locale )
+    if I18n.default_locale == locale
+      url = url_for( locale: nil  )
+      params[:locale] = locale
+      if url == "/"
+        ""
+      else
+        url
+      end
+    else
+      url_for( locale: locale )
+    end
   end
 
   def render_categories(categories,active,base_text= "choose category", city = nil )
