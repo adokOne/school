@@ -18,7 +18,7 @@ angular.module("B1Admin").controller "CrudController", [
     filtersClone = angular.copy $scope.filters
     text_area_name = "desc"
     $scope.cloned_rows = {}
-    $scope.maximum_cloned_rows = 4
+    $scope.maximum_cloned_rows = 6
     $scope.statusColors =
       0: "#FF0101"
       1: "#4EAE32"

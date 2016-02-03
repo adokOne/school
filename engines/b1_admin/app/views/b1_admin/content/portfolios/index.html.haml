@@ -19,7 +19,7 @@
               %table.table.table-hover.table-striped.table-vcenter#itemsTable{"ng-table"=>"itemsTable"}
                 %tr{"ng-repeat" => "item in data"}
                   %td{"data-title" => "'#{t('b1_admin.title')}'"}
-                    {{item.name}}
+                    {{item.title}}
                   %td{"data-title" => "'#{t('b1_admin.active')}'"}
                     %span.label.text-lg{"ng-class"=>"{'label-danger':!item.active,'label-success': item.active }"}
                       %span{"ng-switch" => "", :on => "item.active"}

@@ -30,9 +30,9 @@
         <div class="preview">
         <ul class ="light-slider">
             <% item.portfolio_images.each do |img| %>
-              <li data-thumb="<%= img.logo(:medium) %>">
+              <li data-thumb="<%= img.logo %>">
                 <a href="<%= img.logo %>" data-lightbox="vj">
-                  <%= image_tag img.logo%>
+                  <%= image_tag img.logo(:medium)%>
                 </a>
               </li>
             <% end %>
@@ -43,16 +43,19 @@
         <p class="caption"><%= item.title.html_safe %></p>
         <p class="category"><%= item.category %> </p>
         <p><%= item.anons %></p>
+        <p><b><%= item.main_type %></b></p>
         <p><%= item.desc.html_safe %></p>
-        <p><a target="_blank" href="<%= item.site %>"><%= item.site %></a></p>
+        <p>Подробнее <a target="_blank" href="<%= item.site %>"><%= item.site %></a></p>
       </div>
 
     </div>
+    <hr/>
     <% end %>
   </div>
 </section>
 <script>
   $(document).ready(function() {
+    console.log("Wefwefwe")
     $(".light-slider").lightSlider({
       gallery: true,
       item: 1,

@@ -3,7 +3,7 @@
     %a.btn.btn-success.pull-right{href:content_portfolios_path,"ng-click"=>"$root.setRoute('#{content_portfolios_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
       Портфолио
-  #page-content{:"ng-controller"=>"WithImagesCtrl","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};",:"data-url"=>content_portfolios_path,"data-back-url"=>content_portfolios_path}
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};",:"data-url"=>content_portfolios_path,"data-back-url"=>content_portfolios_path}
     .row
       .col
         .panel
@@ -37,7 +37,10 @@
 
 
 
-
+                  .form-group{"ng-class" => "{'has-error': itemForm.main_type.$invalid && itemForm.$submitted}"}
+                    = label_tag :main_type, "Основной тип", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :main_type,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.main_type"
 
                   .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
                     = label_tag :desc, t("b1_admin.desc"), class:"col-sm-3 control-label"
@@ -56,6 +59,7 @@
                 %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
                   %i.fa.fa-pencil.fa-fw
                   =t("b1_admin.save")
+- if params[:action] =~ /edit/
   #page-content2{:"ng-controller"=>"WithImagesCtrl", 'ng-init' => "item_id = editedItem.id; getImages();", "data-image-upload"=>upload_content_portfolio_path,"data-image-url"=>images_content_portfolio_path, :"data-delete-text"=>t("b1_admin.delete_media_confirm")}
     .panel
       .panel-body

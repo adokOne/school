@@ -3,7 +3,7 @@ module B1Admin
     class PortfoliosController < B1Admin::ApplicationController
 
       def allowed_params
-        params.require(:item).permit(:title,:category,:anons, :desc, :site,:id, :active)
+        params.require(:item).permit(:title,:category,:anons, :desc, :site,:id, :active, :main_type)
       end
 
       def images

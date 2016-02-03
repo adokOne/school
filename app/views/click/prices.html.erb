@@ -23,7 +23,7 @@
 </header>
 <section class="price-content">
   <div class="container">
-    <% @items.in_groups_of( (@items.count.to_f/4).ceil, true ).each do |row|%>
+    <% @items.in_groups_of( 4, true ).each do |row|%>
       <div class="row">
         <% row.each do |item|%>
           <div class="col-md-3">
