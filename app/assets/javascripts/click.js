@@ -24,7 +24,7 @@
 //= require ./click/jquery.validate.min
 //= require ./controllers/jquery.mvc
 //= require ./controllers/click
-//= require self
+//= require_self
 
 $(document).ready(function() {
   return $("*[data-ctrl]").each(function() {
