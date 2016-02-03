@@ -15,9 +15,9 @@
 
 
 //= require ./click/jquery-1.11.3.min
+//= require ./click/jquery-migrate-1.2.1.min
 //= require ./click/bootstrap
 //= require ./click/lightslider
-//= require ./click/lightbox
 //= require ./click/script
 //= require ./click/jquery.mb.YTPlayer
 //= require ./click/jquery.slicknav.min

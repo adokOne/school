@@ -28,11 +28,11 @@
       </div>
       <div class="col-sm-4">
         <div class="preview">
-        <ul class ="light-slider">
+        <ul class="light-slider">
             <% item.portfolio_images.each do |img| %>
-              <li data-thumb="<%= img.logo %>">
-                <a href="<%= img.logo %>" data-lightbox="vj">
-                  <%= image_tag img.logo(:medium)%>
+              <li data-thumb="<%= img.logo(:thumb) %>">
+                <a href="<%= img.logo %>" data-lightbox="vj_<%= img.id %>">
+                  <img src="<%= img.logo(:medium)%>"  href="<%= img.logo %>" data-lightbox="vj_<%= img.id %>" >
                 </a>
               </li>
             <% end %>
@@ -53,9 +53,9 @@
     <% end %>
   </div>
 </section>
+<script src="/js/lightbox.js"></script>
 <script>
   $(document).ready(function() {
-    console.log("Wefwefwe")
     $(".light-slider").lightSlider({
       gallery: true,
       item: 1,
@@ -63,8 +63,7 @@
       slideMargin: 0,
       thumbItem: 5,
     });
-    var slider = $('#lightslider').lightSlider();
-    var newEl = ' <li class="lslide" style="width:300px;"> <a href="javascript:void(0)"><img src="img/cS-1.jpg" /></a> </li>';
+    var newEl = ' <li class="lslide" style="width:300px;"> <a href="javascript:void(0)"><img src="/img/cS-1.jpg" /></a> </li>';
     $('#lightslider').prepend(newEl);
     lightbox.option({
       'resizeDuration': 200,

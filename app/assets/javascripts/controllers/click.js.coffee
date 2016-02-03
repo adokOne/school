@@ -1,6 +1,5 @@
 $.Controller "Click",
   init: ->
-    console.log("wefwefw")
     @init_validation()
     @error_owl = @element.find(".owl.error")
     @success_popup = $("#success_popup")
