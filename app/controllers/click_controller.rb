@@ -23,19 +23,19 @@ class ClickController < ApplicationController
   end
 
   def kontekst
-
+    @title = t("click.kontekst_title")
   end
 
   def marketing
-
+    @title = t("click.marketing_title")
   end
 
   def create_site
-
+    @title = t("click.create_site_title")
   end
 
   def seo
-
+    @title = t("click.seo_title")
   end
 
 end

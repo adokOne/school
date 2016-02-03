@@ -434,20 +434,24 @@
           <div class="col-md-9 col-md-offset-2">
             <div class="contact-page">
               <div class="col-md-5">
-                <form action="sendform.php" method="POST" id="contact-form">
+                <%= form_for Feedback.new, url: feedback_path, id:"contact-form" do |f| %>
                   <div class="row">
-                    <input type="text" name="name" placeholder="ИМЯ">
+                    <%=f.text_field :name, class:"name", placeholder: t("uex.name_plc"), required:true %>
                   </div>
                   <div class="row">
-                    <input type="text" name="email" placeholder="EMAIL">
+                    <%=f.email_field :email, class:"wpcf7-email", placeholder: t("uex.email_plc"), required:true %>
                   </div>
                   <div class="row">
-                    <textarea name="message" placeholder="СООБЩЕНИЕ"></textarea>
+                    <%=f.text_field :phone, class:"phone wpcf7-phone", placeholder: t("uex.phone_plc"), required:true %>
+                  </div>
+
+                  <div class="row">
+                    <%=f.text_area :message, class:"wpcf7-form-control wpcf7-textarea", placeholder: t("uex.message_plc"), required:true %>
                   </div>
                   <div class="row">
                     <input type="submit" value="ОТПРАВИТЬ">
                   </div>
-                </form>
+                <% end %>
               </div>
               <div class="col-md-1 hidden-xs">
                 <img src="/img/vertical-line.png" alt="img">

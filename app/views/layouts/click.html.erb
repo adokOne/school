@@ -32,6 +32,24 @@
     <![endif]-->
   </head>
   <body class="<%= @body_cls%>" data-ctrl="Click">
+    <header>
+    <% if flash[:error].present? %>
+      <div id="alert">
+      <h2 style="color:red"><%=  flash[:error].html_safe    %></h2>
+      </div>
+      <script type="text/javascript">
+        setTimeout(function(){ $("#alert").remove() }, 2000)
+      </script>
+    <% end%>
+    <% if flash[:message].present? %>
+      <div id="alert">
+        <h2 style="color:green"><%=  flash[:message].html_safe    %></h2>
+      </div>
+      <script type="text/javascript">
+        setTimeout(function(){ $("#alert").remove() }, 2000)
+      </script>
+    <% end%>
+    </header>
     <%= yield %>
 
     <footer>

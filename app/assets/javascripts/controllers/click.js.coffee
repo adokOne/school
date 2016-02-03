@@ -26,7 +26,7 @@ $.Controller "Click",
         focusInvalid: false
         minlength: 3
 
-  "#modal-form submit -> click": (ev) ->
+  "#modal-form input[type=submit] -> click": (ev) ->
     ev.preventDefault();
     form = $(ev.target).parents("form")
     if form.valid()

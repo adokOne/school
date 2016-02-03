@@ -8,19 +8,25 @@
         </div>
         <div class="modal-body">
           <p class="caption">Оставить заявку</p>
-          <form action="/send_feedback" method="POST" id="modal-form">
+          <%= form_for Feedback.new, url: feedback_path, id:"modal-form" do |f| %>
+          <form action="/feedback" method="POST" id="">
             <div class="row">
-              <p>Введите имя:</p>
-              <input type="text" name="name" class="name" placeholder="ИМЯ">
+<!--               <p>Введите имя:</p> -->
+              <%=f.text_field :name, class:"name", placeholder: t("uex.name_plc"), required:true %>
             </div>
             <div class="row">
-              <p>Введите номер телефона:</p>
-              <input type="text" name="phone"   placeholder="ТЕЛЕФОН">
+<!--               <p>Введите номер телефона:</p> -->
+              <%=f.text_field :phone, class:"phone wpcf7-phone", placeholder: t("uex.phone_plc"), required:true %>
             </div>
+            <div class="row">
+<!--               <p>Введите Email:</p> -->
+              <%=f.email_field :email, class:"wpcf7-email", placeholder: t("uex.email_plc"), required:true %>
+            </div>
+
             <div class="row">
               <input type="submit" value="отправить">
             </div>
-          </form>
+          <% end %>
         </div>
         <div class="modal-footer">
           <div class="col-md-6 col-md-offset-3">

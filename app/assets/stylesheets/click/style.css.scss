@@ -1006,6 +1006,7 @@ section.contact .contact-page form {
   margin: 60px 20px;
 }
 section.contact .contact-page form input[type="text"],
+section.contact .contact-page form input[type="email"],
 section.contact .contact-page form textarea {
   border: 0px;
   background: rgba(0, 0, 0, 0);
@@ -1014,38 +1015,47 @@ section.contact .contact-page form textarea {
   margin: 15px 0px;
 }
 section.contact .contact-page form input[type="text"]::-webkit-input-placeholder,
+section.contact .contact-page form input[type="email"]::-webkit-input-placeholder,
 section.contact .contact-page form textarea::-webkit-input-placeholder {
   color: black;
 }
 section.contact .contact-page form input[type="text"]::-moz-placeholder,
+section.contact .contact-page form input[type="email"]::-moz-placeholder,
 section.contact .contact-page form textarea::-moz-placeholder {
   color: black;
 }
 section.contact .contact-page form input[type="text"]:-moz-placeholder,
+section.contact .contact-page form input[type="email"]:-moz-placeholder,
 section.contact .contact-page form textarea:-moz-placeholder {
   color: black;
 }
 section.contact .contact-page form input[type="text"]:-ms-input-placeholder,
+section.contact .contact-page form input[type="email"]:-ms-input-placeholder,
 section.contact .contact-page form textarea:-ms-input-placeholder {
   color: black;
 }
 section.contact .contact-page form input[type="text"]:focus,
+section.contact .contact-page form input[type="email"]:focus,
 section.contact .contact-page form textarea:focus {
   outline: none;
 }
 section.contact .contact-page form input[type="text"]:focus::-webkit-input-placeholder,
+section.contact .contact-page form input[type="email"]:focus::-webkit-input-placeholder,
 section.contact .contact-page form textarea:focus::-webkit-input-placeholder {
   visibility: hidden;
 }
 section.contact .contact-page form input[type="text"]:focus::-moz-placeholder,
+section.contact .contact-page form input[type="email"]:focus::-moz-placeholder,
 section.contact .contact-page form textarea:focus::-moz-placeholder {
   visibility: hidden;
 }
 section.contact .contact-page form input[type="text"]:focus:-moz-placeholder,
+section.contact .contact-page form input[type="email"]:focus:-moz-placeholder,
 section.contact .contact-page form textarea:focus:-moz-placeholder {
   visibility: hidden;
 }
 section.contact .contact-page form input[type="text"]:focus:-ms-input-placeholder,
+section.contact .contact-page form input[type="email"]:focus:-ms-input-placeholder,
 section.contact .contact-page form textarea:focus:-ms-input-placeholder {
   visibility: hidden;
 }
@@ -4742,7 +4752,7 @@ section.portfolio-content hr {
 .modal .modal-content form {
   text-align: center;
 }
-.modal .modal-content form input[type="text"] {
+.modal .modal-content form input[type="text"], .modal .modal-content form input[type="email"] {
   border-radius: 50px;
   margin: 10px 0px;
   border: 0px;
@@ -4751,7 +4761,7 @@ section.portfolio-content hr {
   background: rgba(57, 57, 57, 0.5);
   color: white;
 }
-.modal .modal-content form input[type="text"]:focus {
+.modal .modal-content form input[type="text"]:focus, .modal .modal-content form input[type="email"] {
   outline: none;
 }
 .modal .modal-content form input[type="submit"] {
@@ -4785,4 +4795,7 @@ section.portfolio-content hr {
 .modal .modal-content .btn-default {
   background-color: rgba(0, 0, 0, 0);
   color: white;
+}
+#alert{
+  background: white;position: fixed;left: 25%;right: 25%;top: 5%;min-height: 100px;padding: 0px;text-align: center;z-index: 100;box-shadow: black 0px 0px 20px 5px;
 }
