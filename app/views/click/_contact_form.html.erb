@@ -1,0 +1,36 @@
+<div class="modal-contact">
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+          <h4 class="modal-title" id="myModalLabel">Обратная связь</h4>
+        </div>
+        <div class="modal-body">
+          <p class="caption">Оставить заявку</p>
+          <form action="/send_feedback" method="POST" id="modal-form">
+            <div class="row">
+              <p>Введите имя:</p>
+              <input type="text" name="name" class="name" placeholder="ИМЯ">
+            </div>
+            <div class="row">
+              <p>Введите номер телефона:</p>
+              <input type="text" name="phone"   placeholder="ТЕЛЕФОН">
+            </div>
+            <div class="row">
+              <input type="submit" value="отправить">
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <div class="col-md-6 col-md-offset-3">
+            <p class="action">Спасибо</p>
+          </div>
+          <div class="col-md-3">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Закрыть</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

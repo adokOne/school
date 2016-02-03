@@ -8,6 +8,15 @@ module ApplicationHelper
     Settings.domain + url
   end
 
+  def click_url path
+    path = path.to_s
+    lang_url = I18n.default_locale == I18n.locale ? [""] : ["",I18n.locale]
+
+    path = (lang_url + path.split("/").reject(&:empty?)).reject(&:empty?).join("/")
+    url = path.empty? ? "/" : "/#{path}"
+    Settings.click_domain + url
+  end
+
   def url_is_current?( url, cls = "active", action = false )
     if action
       /#{params[:controller]}/ =~ url && /#{params[:action]}/ =~ action ? cls : ""

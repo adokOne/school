@@ -1,0 +1,72 @@
+<header class="portfolio-header">
+  <%= render "menu"%>
+  <div class="container">
+    <div class="row">
+      <div class="menu-a">
+        <nav id="navbar">
+          <p class="menu-caption"><%=t("click.menu")%></p>
+          <div id="c-menu" class="c-menu c-menu--htx">
+            <span class="label-menu"><%=t("click.menu")%></span>
+          </div>
+        </nav>
+      </div>
+    </div>
+    <div class="row">
+      <div class="logo">
+        <img src="/img/logo-portfolio.png" alt="img">
+        <h1><%=t("click.menu_portfolio").upcase%></h1>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="portfolio-content">
+  <div class="container">
+    <% @items.each_with_index do |item,idx|%>
+    <div class="row">
+      <div class="col-sm-2">
+        <p class="count-slide"><%= "%02d" % (idx + 1) %></p>
+      </div>
+      <div class="col-sm-4">
+        <div class="preview">
+        <ul class ="light-slider">
+            <% item.portfolio_images.each do |img| %>
+              <li data-thumb="<%= img.logo(:medium) %>">
+                <a href="<%= img.logo %>" data-lightbox="vj">
+                  <%= image_tag img.logo%>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <p class="caption"><%= item.title.html_safe %></p>
+        <p class="category"><%= item.category %> </p>
+        <p><%= item.anons %></p>
+        <p><%= item.desc.html_safe %></p>
+        <p><a target="_blank" href="<%= item.site %>"><%= item.site %></a></p>
+      </div>
+
+    </div>
+    <% end %>
+  </div>
+</section>
+<script>
+  $(document).ready(function() {
+    $(".light-slider").lightSlider({
+      gallery: true,
+      item: 1,
+      loop:false,
+      slideMargin: 0,
+      thumbItem: 5,
+    });
+    var slider = $('#lightslider').lightSlider();
+    var newEl = ' <li class="lslide" style="width:300px;"> <a href="javascript:void(0)"><img src="img/cS-1.jpg" /></a> </li>';
+    $('#lightslider').prepend(newEl);
+    lightbox.option({
+      'resizeDuration': 200,
+      'wrapAround': true
+    });
+  });
+</script>
+

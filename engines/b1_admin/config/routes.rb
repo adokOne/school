@@ -64,10 +64,18 @@ B1Admin::Engine.routes.draw do
       post "update_positions", on: :collection
     end
   end
+
   namespace :content do
+    delete "portfolios/:portfolio_id/images/:image_id.:format",  to: "portfolios#delete_image"
     resources :vacancies
     resources :uploads
     resources :feedbacks
+    resources :portfolios do
+      get "images", on: :member
+      post "upload", on: :member
+    end
+    resources :prices
+    resources :portfolios
     resources :photos do
       post "upload", on: :member
     end

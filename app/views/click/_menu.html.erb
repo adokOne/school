@@ -1,0 +1,48 @@
+<div id="menu-nav" style="display: none;">
+  <a href="#" id="btn-close"><img src="/img/close.png" alt="close"></a>
+  <ul id="menu">
+    <li>
+      <%= link_to t("click.menu_main"), click_url("/") %>
+    </li>
+    <li>
+      <%= link_to t("click.menu_about"), click_url("about.html") %>
+    </li>
+
+
+    <li id="sub-menu-link">
+      <a href="#"><%=t("click.menu_products") %></a>
+      <ul id="sub-menu" style="display:none;">
+        <li>
+          <%= link_to t("click.menu_kontekst"), click_url("kontekst-reklama.html") %>
+        </li>
+
+        <li>
+          <%= link_to t("click.menu_marketing"), click_url("marketing.html") %>
+        </li>
+
+        <li>
+          <%= link_to t("click.menu_create"), click_url("create-site.html") %>
+        </li>
+
+        <li>
+          <%= link_to t("click.menu_seo"), click_url("seo.html") %>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <%= link_to t("click.menu_portfolio"), click_url("portfolio.html") %>
+    </li>
+    <li>
+      <%= link_to t("click.menu_price"), click_url("price.html") %>
+    </li>
+  </ul>
+  <div class="social">
+    <ul>
+      <li><a href="https://www.facebook.com/groups/404791709706822/" target="_blank"><img src="/img/fb-icon.png" alt="img"></a></li>
+      <li><a href="https://plus.google.com/115549792327453895516/about?_ga=1.8457525.1225794480.1447747094" target="_blank"><img src="/img/g-plus-icon.png" alt="img"></a></li>
+      <li><a href="https://vk.com/uex_team" target="_blank"><img src="/img/vk-icon.png" alt="img"></a></li>
+      <li><a href="#" target="_blank"><img src="/img/tw-icon.png" alt="img"></a></li>
+      <li><a href="#" target="_blank"><img src="/img/instag-icon.png" alt="img"></a></li>
+    </ul>
+  </div>
+</div>

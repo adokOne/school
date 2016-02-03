@@ -183,7 +183,6 @@ angular.module("B1Admin").controller "CrudController", [
 
 
     $scope.clone_row = ($event,type,key) ->
-      console.log($scope.editedItem[type])
       $scope.editedItem[type].push("") if $scope.editedItem[type].length <= $scope.maximum_cloned_rows
 
 

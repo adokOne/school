@@ -1,0 +1,476 @@
+    <header class="home">
+    <a id="bgndVideo" class="player" data-property="{videoURL:'https://www.youtube.com/watch?v=BL0BPbCLS1s',containment:'.home',autoPlay:true, mute:true,startAt:0, opacity:0.2}"></a>
+      <div class="container">
+        <div class="info-block">
+          <div class="row">
+            <div class="col-md-5 col-md-offset-7">
+              <div class="number">
+                <p>+38(067) 574 21 88</p>
+              </div>
+              <div class="lang">
+                <a href="#"><%= I18n.locale.to_s.upcase %></a>
+                <ul>
+                  <% I18n.available_locales.each do |locale|%>
+                    <li><a href="<%= locale_url(locale)  %>/" data-title="<%= locale.to_s.upcase %>"><%= locale.to_s.upcase %></a></li>
+                  <% end %>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="caption">
+          <div class="row">
+            <%= render "menu" %>
+            <div class="col-md-2 hidden-xs">
+              <nav id="navbar">
+                <p class="menu-caption"><%=t("click.menu")%></p>
+                <div id="c-menu" class="c-menu c-menu--htx">
+                  <span class="label-menu"><%=t("click.menu")%></span>
+                </div>
+              </nav>
+            </div>
+            <div class="col-md-6 col-md-offset-1">
+              <div class="logo-name-first animated bounceInLeft">
+                <p>Uex</p>
+              </div>
+              <div class="logo-name-two animated bounceInRight">
+                <p>Click</p>
+              </div>
+              <div class="logo-name-caption animated fadeIn">
+                <p>разработка сайтов, реклама, продвижение в интернете</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="services">
+      <div class="caption">
+        <div class="container">
+          <div class="row">
+            <p class="zagolovok">УСЛУГИ</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 block">
+            <div class="col-md-7">
+              <a href="<%= click_url('kontekst-reklama.html') %>"><img src="/img/service-img-1.jpg" alt="img"></a>
+            </div>
+            <div class="col-md-5 text">
+            <a href="<%= click_url('kontekst-reklama.html') %>">
+                <p class="service-caption">
+                  РЕКЛАМА В ИНТЕРНЕТЕ
+                </p>
+                <hr class="small">
+                <p>контекстная реклама</p>
+                <p>реклама в соц. сетях</p>
+                <p>баннерная реклама</p>
+              </a>
+                <div class="btn-more">
+                  <a href="<%= click_url('kontekst-reklama.html') %>">ДЕТАЛЬНЕЕ</a>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-6 block">
+            <div class="col-md-7">
+            <a href="<%= click_url('create-site.html') %> ">
+              <img src="/img/service-img-2.jpg" alt="img">
+            </a>
+            </div>
+            <div class="col-md-5 text">
+            <a href="<%= click_url('create-site.html') %>">
+                <p class="service-caption">
+                  СОЗДАНИЕ САЙТОВ
+                </p>
+                <hr class="small">
+                <p>разработка интернет магазина</p>
+                <p>многостраничный сайт</p>
+                <p>landing page</p>
+            </a>
+                <div class="btn-more">
+                  <a href="<%= click_url('create-site.html') %>">ДЕТАЛЬНЕЕ</a>
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 block">
+            <div class="col-md-7">
+            <a href="<%= click_url('seo.html') %>">
+              <img src="/img/service-img-3.jpg" alt="img">
+            </a>
+            </div>
+            <div class="col-md-5 text">
+            <a href="<%= click_url('seo.html') %>">
+                <p class="service-caption">
+                  ПРОДВИЖЕНИЕ САЙТОВ
+                </p>
+                <hr class="small">
+                <p>SEO оптимизация</p>
+                <p>продвижение в соц.cетях</p>
+                <p>медиа контент</p>
+            </a>
+                <div class="btn-more">
+                  <a href="<%= click_url('seo.html') %>">ДЕТАЛЬНЕЕ</a>
+                </div>
+            </div>
+          </div>
+          <div class="col-md-6 block">
+            <div class="col-md-7">
+            <a href="<%= click_url('marketing.html') %>">
+              <img src="/img/service-img-4.jpg" alt="img">
+            </a>
+            </div>
+            <div class="col-md-5 text">
+              <a href="<%= click_url('marketing.html') %>">
+                <p class="service-caption">
+                  ИНТЕРНЕТ МАРКЕТИНГ
+                </p>
+                <hr class="small">
+                <p>анализ рынка</p>
+                <p>создание контента</p>
+                <p>повышение конверсии сайта</p>
+              </a>
+                <div class="btn-more">
+                  <a href="<%= click_url('marketing.html') %>">ДЕТАЛЬНЕЕ</a>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="reklama">
+      <div class="container">
+        <div class="row">
+          <div class="caption">
+            <a href="<%= click_url('kontekst-reklama.html') %>"><img src="/img/reklama-icon.png" alt="img"><p>Реклама в интернете</p></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="contekst-reklama">
+            <div class="col-sm-1 col-md-offset-1">
+              <img src="/img/context-icon.png" alt="img">
+            </div>
+            <div class="col-md-5">
+              <p class="zag">
+                КОНТЕКСТНА РЕКЛАМА
+              </p>
+              <p>Хотите увеличить уровень продаж Вашего товара? Контекстная реклама – правильная ветвь развития. Благодаря новым технологиям те, кто ежедневно пользуется интернетом, будут занать о Вас. Контекстная реклама (Google и Яндекс) позволяет Вам открыть новые возможности для собственного бизнеса. Эффективная контекстная реклама от UEX – Ваш путь к успеху!</p>
+            </div>
+            <div class="col-md-5">
+              <div id="wmyCarousel" class="carousel">
+                  <a class="carousel-control left" href="#wmyCarousel" data-slide="prev"><img src="/img/prev-icon.png" alt="perv"></a>
+                  <div class="carousel-inner">
+                      <div class="item active">
+                        <img src="/img/slide-1.jpg" alt="slide-img">
+                      </div>
+                      <div class="item">
+                        <img src="/img/slide-1.jpg" alt="slide-img">
+                      </div>
+                      <div class="item">
+                        <img src="/img/slide-1.jpg" alt="slide-img">
+                      </div>
+                  </div>
+                  <a class="carousel-control right" href="#wmyCarousel" data-slide="next"><img src="/img/next-icon.png" alt="next"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="social-reklama">
+            <div class="col-sm-1 col-md-offset-1">
+              <img src="/img/social-icon.png" alt="img">
+            </div>
+            <div class="col-md-5">
+              <p class="zag">
+                РЕКЛАМА В СОЦ. СЕТЯХ
+              </p>
+              <p>Продвижение в социальных сетях Вашего бизнеса – это отличный способ привлечь новых клиентов. Мы, как никто другой, знаем, сколько времени ежедневно человек проводит в интернете. Так почему бы не быть в нужном месте в нужное время? Качественный трафик и узнаваемость – основные преимущества раскрутки и продвижения в сети. </p>
+            </div>
+            <div class="col-md-5">
+              <img src="/img/social-img.jpg" alt="img" class="mob-size">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="banner-reklama">
+            <div class="col-sm-1 col-md-offset-1">
+              <img src="/img/social-icon.png" alt="img">
+            </div>
+            <div class="col-md-5">
+              <p class="zag"> БАННЕРНАЯ РЕКЛАМА <img src="/img/icon-0.jpg" alt="img"></p>
+              <p>Баннерная реклама  в интернете – один из самых популярных маркетинговых ходов. Новый бренд или уже существующий, Ваш логотип или слоган станет популярным и узнаваемым в два счета. Привлекает как тех покупателей, которые уже заинтересовались, так и тех, кто заинтересуется в будущем. Лучшая баннерная реклама от UEX – специально для Вас!</p>
+            </div>
+            <div class="col-md-5">
+            <div class="st-img">
+              <img src="/img/right-st-icon.png" alt="img">
+            </div>
+              <div id="wmyCarousel2" class="carousel">
+                <div class="col-md-1">
+                  <a class="carousel-control left" href="#wmyCarousel2" data-slide="prev"><img src="/img/prev-icon.png" alt="perv"></a>
+                </div>
+                  <div class="col-md-10">
+                    <div class="carousel-inner">
+                      <div class="item active">
+                        <img src="/img/slide-2.jpg" alt="slide-img">
+                      </div>
+                      <div class="item">
+                        <img src="/img/2.jpg" alt="slide-img">
+                      </div>
+                      <div class="item">
+                        <img src="/img/3.jpg" alt="slide-img">
+                      </div>
+                  </div>
+                  </div>
+                <div class="col-md-1">
+                  <a class="carousel-control right" href="#wmyCarousel2" data-slide="next"><img src="/img/next-icon.png" alt="next"></a>
+                </div>
+              </div>
+              <div class="st-img">
+                <img src="/img/left-st-icon.png" class="right" alt="img">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="create-site">
+      <div class="container">
+        <div class="caption">
+          <a href="<%= click_url('create-site.html') %>"><img src="/img/icon-4.png" alt="img"><p>Создание сайтов</p></a>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="block-create">
+              <a href="<%= click_url('create-site.html') %>#internet-magazin">
+                <div class="label-text">
+                  <p>ИНТЕРНЕТ МАГАЗИН</p>
+                </div>
+              </a>
+              <img src="/img/create-int-mag-img.jpg" alt="img">
+              <p class="text">
+                Создание сайта интернет-магазина – ответственное дело. Профессиональный подход позволяет увеличить конверсию по максимуму. Доверьте это дело знающим, доверьте это дело нам.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="block-create">
+              <a href="<%= click_url('create-site.html') %>#site">
+                <div class="label-text">
+                  <p>МНОГОСТРАНИЧНЫЙ САЙТ</p>
+                </div>
+              </a>
+              <img src="/img/site-img.jpg" alt="img">
+              <p class="text">
+                Многостраничный сайт позволит Вам рассказать обо всех услугах и товарах. Много интересной и качественной информации. Дайте клиенту возможность узнать всё сразу, не отходя от кассы.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="block-create">
+              <a href="<%= click_url('create-site.html') %>#landing-page">
+                <div class="label-text">
+                  <p>LANDING PAGE</p>
+                </div>
+              </a>
+              <img src="/img/landing-page-icon.jpg" alt="img">
+              <p class="text">
+                Краткость - сестра таланта. Продвигайте бизнес в интернете талантливо. Лэндинг позволит клиенту быстро сориентироваться и найти то, что его интересует. Продающий лэндинг – мечта успешного бизнесмена.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="seo">
+      <div class="container">
+        <div class="row">
+          <div class="caption">
+            <a href="<%= click_url('seo.html') %>"><img src="/img/Shape7.png" alt="img"><p>Продвижение сайтов</p></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="block-containener">
+              <img src="/img/seo-img.jpg" alt="img">
+              <div class="text">
+                <p class="zagolovok">
+                  SEO ОПТИМИЗАЦИЯ
+                </p>
+                <p>У Вас есть собственный сайт? Вам просто необходимо знать о SEO. Оптимизация информации и всех ресурсов под клиента сделает Вашу страничку  удобной и популярной.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="block-containener">
+              <img src="/img/smm-img.jpg" alt="img">
+              <div class="text">
+                <p class="zagolovok">
+                  ПРОДВИЖЕНИЕ В СОЦ.СЕТЯХ
+                </p>
+                <p>Smm продвижение или продвижение в социальной сети позволит расширить аудиторию и превратить пользователей сети в клиентов.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="block-containener">
+              <img src="/img/media-content.jpg" alt="img">
+              <div class="text">
+                <p class="zagolovok">
+                  МЕДИА КОНТЕНТ
+                </p>
+                <p>Яркие видеоролики, интересная визуализация Ваших идей. 80% информации воспринимается именно через визуальные каналы. Создайте качественный медиа-контент вместе с нами.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="block-containener">
+              <img src="/img/copy-writing.jpg" alt="img">
+              <div class="text">
+                <p class="zagolovok">
+                  КОПИРАЙТИНГ
+                </p>
+                <p>Если 80% информации воспринимают через медиа, то пора охватить и остальные 20. Качественный продающий текст, постоянное обновление данных – станьте интересны клиенту. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="marketing">
+      <div class="container">
+        <div class="row">
+          <div class="caption">
+            <a href="<%= click_url('marketing.html') %>"><img src="/img/Shape7.png" alt="img"><p>Интернет маркетинг</p></a>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <img src="/img/imgtag.jpg" alt="img">
+          </div>
+          <div class="col-md-6">
+            <p><b>Анализ Рынка</b></p>
+            <p>Первым делом следует проанализировать рынок, на котором Вы работаете Качественный анализ рынка позволит построить правильную стратегию развития, создать то, чего ещё не было и уверенно идти к успеху.</p>
+            <p><b>Контент стратегия</b></p>
+            <p>Проанализировав рынок, мы начинаем создавать тот самый уникальный продукт. Мы знаем от чего отталкиваться, мы знаем о чем писать. Подарите гостю что-то новое, интересное и он точно станет Вашим клиентом.</p>
+            <p><b>Повышение конверсии</b></p>
+            <p>Профессиональный подход к интернет маркетингу даёт свои плоды, а именно повышение конверсии. Максимальное количество «прохожих» пользователей переходят в разряд «клиентов». </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="price">
+            <p class="capt">Скорее заказывай</p>
+            <img src="/img/left-ts-price.png" alt="img" class="left">
+            <div class="topup">
+              <a href="#" class="btn-contact "  data-toggle="modal" data-target="#myModal">связаться</a>
+            </div>
+            <img src="/img/right-ts-price.png" alt="img" class="right">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="profit">
+      <div class="container">
+        <div class="row">
+          <div class="caption">
+            <p>ВАША <b>ПРИБЫЛЬ</b></p>
+          </div>
+        </div>
+        <div class="row">
+        <div class="col-md-6">
+          <div class="text">
+            <p>Хотите зарабатывать в два, а то и в три раза больше? UEX знает как это сделать. Наша команда готова разработать для Вас уникальную стратегию развития Вашего дела в интернете. </p>
+            <p>Не упустите свой шанс идти в ногу со временем. Воспользуйтесь качественной рекламой, пока Ваши конкуренты отдыхают. Быть первым – просто!</p>
+            <p>Запустить свою рекламу прямо сейчас > > <a href="#" class="btn-pink"  data-toggle="modal" data-target="#myModal">Больше</a></p>
+          </div>
+        </div>
+        </div>
+      </div>
+    </section>
+    <section class="cooperation">
+      <div class="container">
+        <div class="row">
+          <div class="caption">
+            <p>СОТРУДНИЧЕСТВО С НАМИ</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4">
+            <img src="/img/tree-logo.jpg" alt="img">
+          </div>
+          <div class="col-md-1 hidden-xs">
+            <img src="/img/vertical-line.png" alt="img">
+          </div>
+          <div class="col-md-7">
+            <div class="row">
+              <img src="/img/1.png" alt="img" class="left"><p>Индивидуальный подход к <br> каждому заказу</p><img src="/img/logo-1.png" alt="img" class="right">
+            </div>
+            <div class="row">
+              <img src="/img/2.png" alt="img" class="left"><p>Качественная и быстрая работа <br> профессионалов</p><img src="/img/logo-2.png" alt="img" class="right">
+            </div>
+            <div class="row">
+              <img src="/img/3.png" alt="img" class="left"><p>Развитие бизнеса по <br> современным технологиям</p><img src="/img/logo-3.png" alt="img" class="right">
+            </div>
+            <div class="row">
+              <img src="/img/4.png" alt="img" class="left"><p>Гарантированное увеличение<br> количества клиентов </p><img src="/img/logo-4.png" alt="img" class="right">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="contact">
+      <div class="container">
+        <div class="row">
+          <div class="caption">
+            <p>СВЯЗАТЬСЯ С НАМИ</p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-9 col-md-offset-2">
+            <div class="contact-page">
+              <div class="col-md-5">
+                <form action="sendform.php" method="POST" id="contact-form">
+                  <div class="row">
+                    <input type="text" name="name" placeholder="ИМЯ">
+                  </div>
+                  <div class="row">
+                    <input type="text" name="email" placeholder="EMAIL">
+                  </div>
+                  <div class="row">
+                    <textarea name="message" placeholder="СООБЩЕНИЕ"></textarea>
+                  </div>
+                  <div class="row">
+                    <input type="submit" value="ОТПРАВИТЬ">
+                  </div>
+                </form>
+              </div>
+              <div class="col-md-1 hidden-xs">
+                <img src="/img/vertical-line.png" alt="img">
+              </div>
+              <div class="col-md-5 block-adress">
+                <p class="address">
+                  г. Львов, <br>ул. Дж.Вашингтона 7 <br>
+                  офисный центр “Вулик”
+                </p>
+                <hr class="small">
+                <p class="address">
+                  тел: +38(067) 574 21 88 <br>
+                  +38(093) 170 05 96
+                </p>
+
+                <div class="label-content">
+                  Свяжитесь с нами! <br>
+                  И мы ответим на все <br>
+                  Ваши вопросы!
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

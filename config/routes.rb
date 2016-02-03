@@ -4,6 +4,24 @@ Rails.application.routes.draw do
 
   scope "(:locale)", :locale => /ru|uk|en/ do
 
+    get "click", to: "click#index"
+    get "price.html", to: "click#prices"
+    get "portfolio.html", to: "click#portfolio"
+    get "about.html", to: "click#about"
+    get "kontekst-reklama.html", to: "click#kontekst"
+    get "marketing.html", to: "click#marketing"
+    get "create-site.html", to: "click#create_site"
+    get "seo.html", to: "click#seo"
+    get "about.html", to: "click#about"
+
+
+
+
+
+
+
+
+
 
     %W{add contacts products cities logout payment_success}.each do |item|
       get item, to: "home##{item}"

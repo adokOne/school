@@ -1,0 +1,18 @@
+ru:
+  click:
+    index_title: UEX
+    portfolio_title: UEX
+    prices_title: UEX
+    about_title: UEX
+    menu: МЕНЮ
+    menu_main: Главная
+    menu_about: О Нас
+    menu_portfolio: Портфолио
+    menu_price: Цены
+    menu_products: Услуги
+    menu_kontekst: Реклама в интернете
+    menu_marketing: Маркетинг
+    menu_create: Создание сайта
+    menu_seo: SEO продвижение
+    do_order: ЗАКАЗАТЬ
+    price_from: от %{price} грн

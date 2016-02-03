@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128144438) do
+ActiveRecord::Schema.define(version: 20160203140947) do
 
   create_table "b1_admin_modules", force: :cascade do |t|
     t.string   "ico",          limit: 20, default: "fa-file", null: false
@@ -209,6 +209,17 @@ ActiveRecord::Schema.define(version: 20160128144438) do
   create_table "city_aliases", force: :cascade do |t|
     t.integer "city_id",  limit: 4
     t.string  "seo_name", limit: 255
+  end
+
+  create_table "click_prices", force: :cascade do |t|
+    t.string   "plus",       limit: 255
+    t.string   "desc",       limit: 255
+    t.string   "title",      limit: 255
+    t.text     "bullet",     limit: 65535
+    t.integer  "price",      limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.boolean  "active",     limit: 1
   end
 
   create_table "contacts", force: :cascade do |t|
@@ -434,6 +445,28 @@ ActiveRecord::Schema.define(version: 20160128144438) do
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
+  end
+
+  create_table "portfolio_images", force: :cascade do |t|
+    t.boolean  "is_main",           limit: 1,   default: false
+    t.integer  "portfolio_id",      limit: 4
+    t.datetime "created_at",                                    null: false
+    t.datetime "updated_at",                                    null: false
+    t.string   "logo_file_name",    limit: 255
+    t.string   "logo_content_type", limit: 255
+    t.integer  "logo_file_size",    limit: 4
+    t.datetime "logo_updated_at"
+  end
+
+  create_table "portfolios", force: :cascade do |t|
+    t.string   "title",      limit: 255,   null: false
+    t.string   "category",   limit: 255,   null: false
+    t.text     "anons",      limit: 65535, null: false
+    t.text     "desc",       limit: 65535, null: false
+    t.string   "site",       limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.boolean  "active",     limit: 1
   end
 
   create_table "products", force: :cascade do |t|

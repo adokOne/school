@@ -22,6 +22,8 @@ module Core
     config.autoload_paths += Dir[Rails.root.join('app', 'models', '{**}')]
     config.autoload_paths += Dir["#{config.root}/app/models/**/","#{config.root}/lib", "#{config.root}/lib/**/"]
     config.assets.paths << config.root.join("app", "assets", "fonts")
+    Rails.application.config.assets.precompile += %w( click.js )
+    Rails.application.config.assets.precompile += %w( click.css )
     # config.i18n.default_locale = :de
     config.i18n.available_locales = [:en, :uk, :ru ]
     # config.i18n.available_locales = %w(en en-GB en-AU de zh-CN ru tr en-CA en-NZ en-IE en-SG en-IN es fr it th)

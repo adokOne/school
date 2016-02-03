@@ -1,0 +1,52 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:content_prices_path,"ng-click"=>"$root.setRoute('#{content_prices_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      Цены
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"clonerTypes={bullets:'bullet' };editedItem=#{@item.serializable_hash.to_json};",:"data-url"=>content_prices_path,"data-back-url"=>content_prices_path}
+    .row
+      .col
+        .panel
+          .panel-heading
+            %h3.panel-title Управление ценой
+          = form_tag content_prices_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .row
+                .col-md-8
+                  .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}"}
+                    = label_tag :title, t("b1_admin.title"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.title"
+                  .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}"}
+                    = label_tag :desc, t("b1_admin.desc"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :desc,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.desc"
+                  .form-group{"ng-class" => "{'has-error': itemForm.plus.$invalid && itemForm.$submitted}"}
+                    = label_tag :plus, "ПЛЮС", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :plus,"" ,class:"form-control","ng-maxlength"=>255, "ng-model"=>"editedItem.plus"
+                  .form-group{"ng-class" => "{'has-error': itemForm.price.$invalid && itemForm.$submitted}"}
+                    = label_tag :price,  "Цена", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :price,"" ,class:"form-control",required: true,"ng-maxlength"=>255, "ng-model"=>"editedItem.price"
+                  .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                    = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
+
+                  .form-group{"ng-repeat"=>"item in editedItem.bullets track by $index","ng-class" => "{'has-error': itemForm.bullets[$index].$invalid && itemForm.$submitted}",class: "lang lang" }
+                    = label_tag :"email", "Опция {{$index + 1}}", class:"col-sm-3 control-label"
+                    .col-sm-6
+                      = text_field_tag :"bullet","" ,class:"form-control", "ng-model"=>"editedItem.bullets[$index]"
+                    .col-sm-3{"ng-show"=>"!$index"}
+                      %a.btn.btn-primary{"ng-click"=>"clone_row($event,'bullets',$index)"}
+                        Добавить
+                        %i.fa-plus.fa
+                      %a.btn.btn-danger{"ng-click"=>"delete_cloned_row($event,'bullets',$index)"}
+                        Удалить
+                        %i.fa-minus.fa
+
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

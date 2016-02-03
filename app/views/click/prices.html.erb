@@ -1,0 +1,56 @@
+<header class="header-price">
+  <div class="green-line"></div>
+  <%= render "menu"%>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-2">
+        <div class="menu-a">
+          <nav id="navbar">
+            <p class="menu-caption"><%=t("click.menu")%></p>
+            <div id="c-menu" class="c-menu c-menu--htx">
+              <span class="label-menu"><%=t("click.menu")%></span>
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="zag">
+          <p><%=t("click.menu_price").upcase%></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<section class="price-content">
+  <div class="container">
+    <% @items.in_groups_of( (@items.count.to_f/4).ceil, true ).each do |row|%>
+      <div class="row">
+        <% row.each do |item|%>
+          <div class="col-md-3">
+            <div class="page">
+              <div class="caption">
+                <h3><%=item.title %></h3>
+                <p>(<%=item.desc %>)</p>
+              </div>
+              <div class="text">
+                <ul>
+                  <% item.bullets.each do |bul| %>
+                  <li><span><%=bul %></span></li>
+                  <% end %>
+                </ul>
+                <% if item.plus.present?%>
+                  <p>+ <%=item.plus %></p>
+                <% end %>
+                <p class="price"><%= t("click.price_from",price: item.price)%></p>
+              </div>
+            </div>
+            <div class="btn-order">
+              <a href="#" data-toggle="modal" data-target="#myModal"><%= t("click.do_order")%></a>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</section>
+<div class="prefooter"></div>
