@@ -23,6 +23,11 @@ $.Controller "Form",
           self.error_owl.removeClass("hidden")
           if $(el).parents(".new_survey_attempt").size() > 0
             $(el).addClass e_cls
+            unless self.scroller
+              self.scroller = true
+              $('html, body').animate
+                  scrollTop: $(".error:first").offset().top
+              , 2000
           if $(el).parents(".table").size() > 0
             $(el).parents(".table").find("p").addClass e_cls
         unhighlight: (el, e_cls) ->
@@ -32,7 +37,6 @@ $.Controller "Form",
             $(el).parents(".table").find("p").removeClass e_cls
 
         errorPlacement: (err, el) ->
-          console.log(self.error_owl)
           self.error_owl.removeClass("hidden")
 
         invalidHandler: (event, validator) ->
@@ -73,6 +77,7 @@ $.Controller "Form",
 
   ".js-submit -> click": (ev) ->
     ev.preventDefault();
+    @scroller = false
     form = $(ev.target).parents("form")
     if form.valid()
       if $(ev.target).hasClass("not-ajax")

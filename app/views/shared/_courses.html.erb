@@ -51,7 +51,44 @@
           <div class="s-item <%= course.seo %>">
             <div class="container_small">
               <h2><%= course.name %></h2>
+              <% if is_club %>
               <p><%= course.desc.to_s.html_safe %></p>
+              <% else %>
+                <%if course.heading.present? %>
+                  <p class="yellow"><%= course.heading %></p>
+                <%end %>
+                <%if course.desc.present? %>
+                  <p><%= course.desc %></p>
+                <%end %>
+                <%if course.period.present? %>
+                  <strong><%= course.period %></strong>
+                <%end %>
+
+
+
+                <div class="text-left">
+                  <%if course.detail_desc.present? %>
+                    <span class="yellow">Опис курсу:</span>
+                    <ul class="list">
+                      <% course.detail_desc.split("|||").each do |text|%>
+                      <li><%= text%></li>
+                      <% end %>
+                    </ul>
+                  <%end %>
+                  <%if course.learn_desc.present? %>
+                    <span class="yellow">Опис заняття:</span>
+                    <ul class="list">
+                      <% course.learn_desc.split("|||").each do |text|%>
+                      <li><%= text%></li>
+                      <% end %>
+                    </ul>
+                   <%end %>
+                  <%if course.price.present? %>
+                    <strong class="yellow"><%= course.price %></strong>
+                  <%end %>
+                </div>
+
+              <% end %>
               <a data-id="<%= course.id %>" href="#" class="schedule"><%= t("school.month_schedule")%></a>
             </div>
             <a href="#" data-id="<%= course.id %>" class="subscribe course_subscribe"><%= t("school.subscribe_to_earning")%></a>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160123083101) do
+ActiveRecord::Schema.define(version: 20160128153438) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "",    null: false
@@ -125,21 +125,40 @@ ActiveRecord::Schema.define(version: 20160123083101) do
   add_index "categories", ["position"], name: "index_categories_on_position", using: :btree
   add_index "categories", ["seo_name"], name: "index_categories_on_seo_name", using: :btree
 
+  create_table "course_details", force: :cascade do |t|
+    t.integer  "course_id",  limit: 4
+    t.text     "value",      limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
+  create_table "course_learns", force: :cascade do |t|
+    t.integer  "course_id",  limit: 4
+    t.text     "value",      limit: 65535
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+  end
+
   create_table "courses", force: :cascade do |t|
-    t.string   "name",              limit: 255,   default: "",   null: false
-    t.string   "course_type",       limit: 255,                  null: false
-    t.boolean  "active",            limit: 1,     default: true, null: false
+    t.string   "name",              limit: 255,      default: "",   null: false
+    t.string   "course_type",       limit: 255,                     null: false
+    t.boolean  "active",            limit: 1,        default: true, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "logo_file_name",    limit: 255
     t.string   "logo_content_type", limit: 255
     t.integer  "logo_file_size",    limit: 4
     t.datetime "logo_updated_at"
-    t.string   "seo",               limit: 255,   default: "",   null: false
+    t.string   "seo",               limit: 255,      default: "",   null: false
     t.string   "title",             limit: 255
     t.text     "desc",              limit: 65535
     t.date     "date_start"
     t.string   "fb_link",           limit: 255
+    t.string   "price",             limit: 255
+    t.string   "period",            limit: 255
+    t.string   "heading",           limit: 255
+    t.text     "learn_desc",        limit: 16777215
+    t.text     "detail_desc",       limit: 16777215
   end
 
   add_index "courses", ["course_type"], name: "index_courses_on_course_type", using: :btree
@@ -331,6 +350,32 @@ ActiveRecord::Schema.define(version: 20160123083101) do
 
   add_index "teachers", ["is_in_club"], name: "index_teachers_on_is_in_club", using: :btree
   add_index "teachers", ["is_in_school"], name: "index_teachers_on_is_in_school", using: :btree
+
+  create_table "tolk_locales", force: :cascade do |t|
+    t.string   "name",       limit: 255
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tolk_locales", ["name"], name: "index_tolk_locales_on_name", unique: true, using: :btree
+
+  create_table "tolk_phrases", force: :cascade do |t|
+    t.text     "key",        limit: 65535
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tolk_translations", force: :cascade do |t|
+    t.integer  "phrase_id",       limit: 4
+    t.integer  "locale_id",       limit: 4
+    t.text     "text",            limit: 65535
+    t.text     "previous_text",   limit: 65535
+    t.boolean  "primary_updated", limit: 1,     default: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tolk_translations", ["phrase_id", "locale_id"], name: "index_tolk_translations_on_phrase_id_and_locale_id", unique: true, using: :btree
 
   create_table "translations", force: :cascade do |t|
     t.string  "locale",         limit: 255

@@ -24,4 +24,7 @@ class Course < ActiveRecord::Base
   scope :for_club, -> { where(course_type: CLUB_TYPE) }
   scope :active, -> { where(active: true) }
 
+  has_many :course_details
+  has_many :course_learns
+
 end

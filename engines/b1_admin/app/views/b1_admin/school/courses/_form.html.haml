@@ -3,7 +3,7 @@
     %a.btn.btn-success.pull-right{href:school_courses_path,"ng-click"=>"$root.setRoute('#{school_courses_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
       Курси
-  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};editedItem.course_type='#{Course::SCHOOL_TYPE}'", :"data-url"=>school_courses_path}
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"clonerTypes={detail_descs: 'detail_desc', learn_descs: 'learn_desc'};editedItem=#{@item.serializable_hash.to_json};editedItem.course_type='#{Course::SCHOOL_TYPE}'", :"data-url"=>school_courses_path}
     .row
       .col
         .panel
@@ -12,23 +12,87 @@
           = form_tag school_courses_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .row
-                .col-md-8
+                .col-md-12
                   .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
                     = hidden_field_tag :course_type, Course::SCHOOL_TYPE, "ng-model" => "editedItem.course_type"
-                    = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
-                    .col-sm-7
+                    = label_tag :name, t("b1_admin.title"), class:"col-sm-2 control-label"
+                    .col-sm-9
                       = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
-                    / = label_tag :title, "Повна назва", class:"col-sm-3 control-label"
-                    / .col-sm-7
-                    /   = text_field_tag :title,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.title"
-                    = label_tag :seo, "Ідентифкатор фонової картинки", class:"col-sm-3 control-label"
+
+
+
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.heading.$invalid && itemForm.$submitted}"}
+                    = label_tag :heading, "Заголовок", class:"col-sm-2 control-label"
+                    .col-sm-9
+                      = text_field_tag :heading,"" ,class:"form-control","ng-maxlength"=>255, "ng-model"=>"editedItem.heading"
+
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang lang" }
+                    = label_tag :"desc", "Опис", class:"col-sm-2 control-label"
+                    .col-sm-9
+                      = text_area_tag :"desc","" ,class:"form-control",required: true, "ng-model"=>"editedItem.desc"
+
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.period.$invalid && itemForm.$submitted}"}
+                    = label_tag :period, "Період", class:"col-sm-2 control-label"
+                    .col-sm-9
+                      = text_field_tag :period,"" ,class:"form-control","ng-maxlength"=>255, "ng-model"=>"editedItem.period"
+
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.price.$invalid && itemForm.$submitted}"}
+                    = label_tag :price, "Вартість", class:"col-sm-2 control-label"
+                    .col-sm-9
+                      = text_field_tag :price,"" ,class:"form-control","ng-maxlength"=>255, "ng-model"=>"editedItem.price"
+
+                  .form-group{"ng-repeat"=>"item in editedItem.learn_descs track by $index","ng-class" => "{'has-error': itemForm.learn_descs[$index].$invalid && itemForm.$submitted}",class: "lang lang" }
+                    = label_tag :"email", "Ви навчитесь", class:"col-sm-2 control-label"
                     .col-sm-7
-                      = text_field_tag :seo,"" ,class:"form-control",required: true,"ng-minlength"=>2,"ng-maxlength"=>255, "ng-model"=>"editedItem.seo"
-                    = label_tag :fb_link, "Ссилка на групу у Faceebook", class:"col-sm-3 control-label"
-                    .col-sm-8
+                      = text_field_tag :"email","" ,class:"form-control", "ng-model"=>"editedItem.learn_descs[$index]"
+                    .col-sm-3{"ng-show"=>"!$index"}
+                      %a.btn.btn-primary{"ng-click"=>"clone_row($event,'learn_descs',$index)"}
+                        Добавить
+                        %i.fa-plus.fa
+                      %a.btn.btn-danger{"ng-click"=>"delete_cloned_row($event,'learn_descs',$index)"}
+                        Удалить
+                        %i.fa-minus.fa
+
+
+
+                  .form-group{"ng-repeat"=>"item in editedItem.detail_descs track by $index","ng-class" => "{'has-error': itemForm.detail_descs[$index].$invalid && itemForm.$submitted}",class: "lang lang" }
+                    = label_tag :"email", "Деталі курсу", class:"col-sm-2 control-label"
+                    .col-sm-7
+                      = text_field_tag :"email","" ,class:"form-control", "ng-model"=>"editedItem.detail_descs[$index]"
+                    .col-sm-3{"ng-show"=>"!$index"}
+                      %a.btn.btn-primary{"ng-click"=>"clone_row($event,'detail_descs',$index)"}
+                        Добавить
+                        %i.fa-plus.fa
+                      %a.btn.btn-danger{"ng-click"=>"delete_cloned_row($event,'detail_descs',$index)"}
+                        Удалить
+                        %i.fa-minus.fa
+
+
+
+
+
+
+
+
+
+
+
+
+                  / .form-group{"ng-class" => "{'has-error': itemForm.seo.$invalid && itemForm.$submitted}"}
+                  /   = label_tag :seo, "Ідентифкатор фонової картинки", class:"col-sm-2 control-label"
+                  /   .col-sm-9
+                  /     = text_field_tag :seo,"" ,class:"form-control",required: true,"ng-minlength"=>2,"ng-maxlength"=>255, "ng-model"=>"editedItem.seo"
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.fb_link.$invalid && itemForm.$submitted}"}
+                    = label_tag :fb_link, "Ссилка на групу у Faceebook", class:"col-sm-2 control-label"
+                    .col-sm-9
                       = text_field_tag :fb_link,"" ,class:"form-control","ng-maxlength"=>255, "ng-model"=>"editedItem.fb_link"
                   .form-group{"ng-class" => "{'has-error': itemForm.date_end.$invalid && itemForm.$submitted}"}
-                    = label_tag :name,"Дата початку", class:"col-sm-3 control-label"
+                    = label_tag :name,"Дата початку", class:"col-sm-2 control-label"
                     .col-sm-7
                       .input-group
                         %input.form-control{"ng-focus"=>"status.opened = true",'close-text' => 'Close', 'type' => 'date', 'datepicker-popup' => '{{format}}', 'datepicker-options' => 'dateOptions', 'is-open' => 'status.opened', 'max-date' => 'end_year', name: 'date_start', 'ng-model' => 'editedItem.date_start', type: 'text', required: true, "show-weeks"=>'false'}
@@ -36,18 +100,13 @@
                           %button.btn.btn-default{'ng-click' => 'open($event)', :type => 'button'}
                             %i.glyphicon.glyphicon-calendar
                   .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
-                    = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
+                    = label_tag :active, t("b1_admin.active"), class:"col-sm-2 control-label"
                     .col-sm-7
                       %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
-                  .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang lang" }
-                    = label_tag :"desc", t("b1_admin.desc"), class:"col-sm-3 control-label"
-                    .col-sm-7
-                      .summernote{class: "summernote lang",:"data-lang"=>"uk"}
-                      = text_area_tag :"desc","" ,class:"form-control hidden",required: true, "ng-model"=>"editedItem.desc"
 
 
                   .form-group
-                    = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-3 control-label"
+                    = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-2 control-label"
                     .col-md-7
                       .ng-scope{:"flow-name"=>"logo", :"flow-file-added" => "!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]", :"flow-init" => "{singleFile:true,target:'#{namespace}/school/courses/'+editedItem.id + '/upload',testChunks:false}" ,:"flow-files-submitted"=>"$flow.upload()",:"ng-show" => "editedItem.id"}
                         .thumbnail{"ng-show" => "!$flow.files.length"}

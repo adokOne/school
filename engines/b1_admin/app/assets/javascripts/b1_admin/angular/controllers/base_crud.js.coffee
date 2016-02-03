@@ -32,12 +32,10 @@ angular.module("B1Admin").controller "CrudController", [
     $scope.status =
       opened: false
     $scope.format = 'dd.MM.yyyy'
-
+    $scope.maximum_cloned_rows = 10
     $scope.open = ($event)->
       $event.preventDefault(); $event.stopPropagation();
       $scope.status.opened = true
-
-
 
 
     $scope.Item = $resource("#{$element.data("url")}/:id.json",{},{query:{isArray:false},update:{ method:'PUT' }})
@@ -96,7 +94,7 @@ angular.module("B1Admin").controller "CrudController", [
           $rootScope.info(alertSelector,resp.msg)
           $anchorScroll()
       )
-    $scope.beforeSave = ->
+
     $scope.save = ->
       setFromEditor()
       $scope.beforeSave()
@@ -161,5 +159,19 @@ angular.module("B1Admin").controller "CrudController", [
       $timeout (->
         loadMedia()
       ), 150
+
+    $scope.clone_row = ($event,type,key) ->
+      $scope.editedItem[type].push("") if $scope.editedItem[type].length <= $scope.maximum_cloned_rows
+
+
+    $scope.delete_cloned_row = ($event,type, key) ->
+      $scope.editedItem[type].pop() if $scope.editedItem[type].length > 1
+
+
+    $scope.beforeSave = ->
+      unless $scope.clonerTypes is undefined
+        angular.forEach $scope.clonerTypes, ((k,v) ->
+          $scope.editedItem[k] = $scope.editedItem[v].join("|||")
+        )
 
 ]
