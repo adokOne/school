@@ -44,7 +44,7 @@
 
               <div class="text">
                 <h5><%= page.title%></h5>
-                <p><%= truncate(page.anons, length: 150,omission: '...') %> <a href="<%= url("blog/item/#{page.seos.join('/')}")%>"><%=t("school.show_more")%></a></p>
+                <p><%= truncate(page.anons, length: 300,omission: '...') %> <a href="<%= url("blog/item/#{page.seos.join('/')}")%>"><%=t("school.show_more")%></a></p>
               </div>
             </div>
           <% end %>

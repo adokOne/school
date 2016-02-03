@@ -30,6 +30,10 @@ class Page < ActiveRecord::Base
     item
   end
 
+  def not_foto
+    self.category.present? && !self.category.only_photo
+  end
+
   def generate_seo
     self.seo_name = self.title.russian_translit if self.respond_to?(:seo_name) && !self.title.nil? && self.seo_name.nil?
   end

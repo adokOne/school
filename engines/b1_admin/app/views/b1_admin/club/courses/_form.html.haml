@@ -1,4 +1,8 @@
 #content-container
+  :css
+    .note-editable.panel-body{
+      background-color: #9F9F9F;
+    }
   #page-title
     %a.btn.btn-success.pull-right{href:club_courses_path,"ng-click"=>"$root.setRoute('#{club_courses_path}')"}=t("b1_admin.back_to_list")
     %h1.page-header.text-overflow
@@ -12,36 +16,34 @@
           = form_tag club_courses_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .row
-                .col-md-8
+                .col-md-12
                   .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
                     = hidden_field_tag :course_type, Course::CLUB_TYPE, "ng-model" => "editedItem.course_type"
-                    = label_tag :name, t("b1_admin.title"), class:"col-sm-3 control-label"
-                    .col-sm-8
+                  .form-group{"ng-class" => "{'has-error': itemForm.name.$invalid && itemForm.$submitted}"}
+                    = label_tag :name, t("b1_admin.title"), class:"col-sm-2 control-label"
+                    .col-sm-9
                       = text_field_tag :name,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.name"
-                    / = label_tag :title, "Повна назва", class:"col-sm-3 control-label"
-                    / .col-sm-8
-                    /   = text_field_tag :title,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.title"
-
-
-                    = label_tag :seo, "Ідентифкатор фонової картинки", class:"col-sm-3 control-label"
-                    .col-sm-8
-                      = text_field_tag :seo,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.seo"
-                    = label_tag :fb_link, "Ссилка на групу у Faceebook", class:"col-sm-3 control-label"
-                    .col-sm-8
+                  / .form-group{"ng-class" => "{'has-error': itemForm.seo.$invalid && itemForm.$submitted}"}
+                  /   = label_tag :seo, "Ідентифкатор фонової картинки", class:"col-sm-2 control-label"
+                  /   .col-sm-9
+                  /     = text_field_tag :seo,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.seo"
+                  .form-group{"ng-class" => "{'has-error': itemForm.fb_link.$invalid && itemForm.$submitted}"}
+                    = label_tag :fb_link, "Ссилка на групу у Faceebook", class:"col-sm-2 control-label"
+                    .col-sm-9
                       = text_field_tag :fb_link,"" ,class:"form-control","ng-maxlength"=>255, "ng-model"=>"editedItem.fb_link"
                   .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
-                    = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
-                    .col-sm-7
+                    = label_tag :active, t("b1_admin.active"), class:"col-sm-2 control-label"
+                    .col-sm-9
                       %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
                   .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang lang" }
-                    = label_tag :"desc", t("b1_admin.desc"), class:"col-sm-3 control-label"
-                    .col-sm-7
+                    = label_tag :"desc", t("b1_admin.desc"), class:"col-sm-2 control-label"
+                    .col-sm-9
                       .summernote{class: "summernote lang lang",:"data-lang"=>"uk"}
                       = text_area_tag :"desc","" ,class:"form-control hidden",required: true, "ng-model"=>"editedItem.desc"
 
                   .form-group
-                    = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-3 control-label"
-                    .col-md-7
+                    = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-2 control-label"
+                    .col-md-9
                       .ng-scope{:"flow-name"=>"logo", :"flow-file-added" => "!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]", :"flow-init" => "{singleFile:true,target:'#{namespace}/club/courses/'+editedItem.id + '/upload',testChunks:false}" ,:"flow-files-submitted"=>"$flow.upload()",:"ng-show" => "editedItem.id"}
                         .thumbnail{"ng-show" => "!$flow.files.length"}
                           %img{:"ng-src" => "{{editedItem.logo_file_name && ('/system/courses/' + editedItem.id + '/medium.png') || 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image'}}"}/
