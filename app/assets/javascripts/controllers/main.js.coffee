@@ -40,6 +40,7 @@ $.Controller "Main",
     @check_cls()
   updateMonthYear: ->
     @month.html @calendar.getMonthName()
+    @check_cls()
 
   updateCourse: (id) ->
     el = @element.find("#course")
@@ -175,7 +176,7 @@ $.Controller "Main",
     $(ev.target).val("#{old}, #{courses_names[@selected_course_id]}")
 
   check_cls: ->
-    @element.find(".fc-future.fc-content").each ->
+    @element.find(".fc-content").each ->
       if $(this).find(".fc-calendar-event").size() > 1
         $(this).addClass("multiple")
       else

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160128153438) do
+ActiveRecord::Schema.define(version: 20160203092318) do
 
   create_table "addresses", force: :cascade do |t|
     t.string   "name",       limit: 255, default: "",    null: false
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 20160128153438) do
   end
 
   add_index "addresses", ["active"], name: "index_addresses_on_active", using: :btree
+
+  create_table "ads", force: :cascade do |t|
+    t.text     "desc",               limit: 65535
+    t.string   "color",              limit: 255
+    t.boolean  "active",             limit: 1,     default: false
+    t.datetime "created_at",                                       null: false
+    t.datetime "updated_at",                                       null: false
+    t.string   "image_file_name",    limit: 255
+    t.string   "image_content_type", limit: 255
+    t.integer  "image_file_size",    limit: 4
+    t.datetime "image_updated_at"
+  end
 
   create_table "answers", force: :cascade do |t|
     t.integer "question_id", limit: 4

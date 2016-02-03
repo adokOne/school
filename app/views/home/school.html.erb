@@ -1,11 +1,11 @@
 <div class="about skool">
-  <div class="advertising">
+  <div class="advertising" style="color:<%= random_ad.color%>">
   <a href="#" class="close"></a>
     <div class="container_small">
 
-      <h1>рекламний <br>банер!!!</h1>
+      <h1><%= random_ad.desc.html_safe%></h1>
       <div class="image-holder">
-        <%= image_tag "one.png" %>
+        <%= image_tag random_ad.image %>
       </div>
       <div class="clear"></div>
     </div>

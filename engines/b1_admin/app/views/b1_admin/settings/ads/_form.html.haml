@@ -1,0 +1,52 @@
+#content-container
+  #page-title
+    %a.btn.btn-success.pull-right{href:settings_ads_path,"ng-click"=>"$root.setRoute('#{settings_ads_path}')"}=t("b1_admin.back_to_list")
+    %h1.page-header.text-overflow
+      Реклама
+  #page-content{:"ng-controller"=>"CrudController","ng-init"=>"editedItem=#{@item.serializable_hash.to_json};",:"data-url"=>settings_ads_path,"data-back-url"=>settings_ads_path}
+    .row
+      .col
+        .panel
+          .panel-heading
+            %h3.panel-title Керування рекламою
+          = form_tag settings_ads_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
+            .panel-body
+              .row
+                .col-md-12
+                  .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}"}
+                    = label_tag :desc, "Текст", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :desc,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.desc"
+                  .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+                    = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
+                    .col-sm-8
+                      %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
+
+                  .form-group{"ng-class" => "{'has-error': itemForm.color.$invalid && itemForm.$submitted}"}
+                    = label_tag :color, "Код коліру", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :color,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.color"
+
+
+              .form-group
+                = label_tag :image_file_name, t("b1_admin.logo_file_name"), class:"col-sm-2 control-label"
+                .col-md-7
+                  .ng-scope{:"flow-name"=>"logo", :"flow-file-added" => "!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]", :"flow-init" => "{singleFile:true,target:'#{namespace}/settings/ads/'+editedItem.id + '/upload',testChunks:false}" ,:"flow-files-submitted"=>"$flow.upload()",:"ng-show" => "editedItem.id"}
+                    .thumbnail{"ng-show" => "!$flow.files.length"}
+                      %img{:"ng-src" => "{{editedItem.image_file_name && ('/system/ads/' + editedItem.id + '/medium.png') || 'http://www.placehold.it/200x150/EFEFEF/AAAAAA&text=no+image'}}"}/
+                    .thumbnail.ng-hide{:"ng-show" => "$flow.files.length"}
+                      %img{"flow-img" => "$flow.files[0]"}/
+                    %div
+                      %span.btn.btn-primary{:"flow-btn" => "", :"ng-show" => "!$flow.files.length"}
+                        Выбрать
+                        %input{:style => "visibility: hidden; position: absolute;", :type => "file"}/
+                      %span.btn.btn-info.ng-hide{:"flow-btn" => "", :"ng-show" => "$flow.files.length"}
+                        Изменить
+                        %input{:style => "visibility: hidden; position: absolute;", :type => "file"}/
+                      %span.btn.btn-danger.ng-hide{:"ng-click" => "$flow.cancel()", :"ng-show" => "$flow.files.length"}
+                        Удалить
+
+              .mar-top.clearfix
+                %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
+                  %i.fa.fa-pencil.fa-fw
+                  =t("b1_admin.save")

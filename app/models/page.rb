@@ -31,7 +31,7 @@ class Page < ActiveRecord::Base
   end
 
   def not_foto
-    self.category.present? && !self.category.only_photo
+    self.category.present? && !self.category.only_photos
   end
 
   def generate_seo

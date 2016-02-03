@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   before_action :set_link_type_ands_subscriber
   protect_from_forgery with: :exception
 
-  helper_method :addresses, :vacancies
+  helper_method :addresses, :vacancies, :random_ad
 
   def addresses
     Address.active.where(is_main: true).all
@@ -21,5 +21,9 @@ class ApplicationController < ActionController::Base
     @cv = Cv.new
     @lessons = []
     @top_menu = {}
+  end
+
+  def random_ad
+    @ad ||= Ad.where(active: true).all.sample
   end
 end

@@ -12,7 +12,7 @@
           = form_tag blog_pages_path ,class: "form-horizontal",novalidate: true,name: :itemForm do
             .panel-body
               .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}",class: "lang lang" }
-                = label_tag :"title", t("b1_admin.title"), class:"col-sm-2 control-label"
+                = label_tag :"title", t("b1_admin.title"), required: true, class:"col-sm-2 control-label"
                 .col-sm-8
                   = text_field_tag :"title","" ,class:"form-control","ng-minlength"=>3, "ng-model"=>"editedItem.title"
               .form-group{"ng-class" => "{'has-error': itemForm.author.$invalid && itemForm.$submitted}",class: "lang lang" }
@@ -30,12 +30,12 @@
               .form-group{"ng-class" => "{'has-error': itemForm.anons.$invalid && itemForm.$submitted}",class: "lang lang" }
                 = label_tag :"anons", t("b1_admin.desc"), class:"col-sm-2 control-label"
                 .col-sm-8
-                  = text_area_tag :"anons","" ,class:"form-control",required: true, "ng-model"=>"editedItem.anons"
+                  = text_area_tag :"anons","" ,class:"form-control", "ng-model"=>"editedItem.anons"
               .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}",class: "lang lang" }
                 = label_tag :"desc", "Анонс", class:"col-sm-2 control-label"
                 .col-sm-8
                   .summernote{class: "summernote lang lang",:"data-lang"=>"uk"}
-                  = text_area_tag :"desc","" ,class:"form-control hidden",required: true, "ng-model"=>"editedItem.desc"
+                  = text_area_tag :"desc","" ,class:"form-control hidden", "ng-model"=>"editedItem.desc"
               .form-group
                 = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-2 control-label"
                 .col-md-7

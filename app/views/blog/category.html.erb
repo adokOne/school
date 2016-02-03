@@ -6,7 +6,9 @@
         <% @item.pages.each do |page|%>
           <div class="theme-item">
             <div class="image-block">
-              <img src="<%= page.logo(:medium)%>" alt="<%= page.title%>">
+                <a href="<%= url("blog/item/#{page.seos.join('/')}")%>">
+                  <img src="<%= page.logo(:medium)%>" alt="<%= page.title%>">
+                </a>
             </div>
 
             <div class="text">
