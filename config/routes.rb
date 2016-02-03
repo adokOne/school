@@ -3,15 +3,7 @@ Rails.application.routes.draw do
   mount B1Admin::Engine => "/akvarium"
 
   scope "(:locale)", :locale => /ru|uk|en/ do
-      get "price.html", to: "click#prices"
-      get "portfolio.html", to: "click#portfolio"
-      get "about.html", to: "click#about"
-      get "kontekst-reklama.html", to: "click#kontekst"
-      get "marketing.html", to: "click#marketing"
-      get "create-site.html", to: "click#create_site"
-      get "seo.html", to: "click#seo"
-      get "about.html", to: "click#about"
-      get "click", to: "click#index"
+
     constraints DomainConstraint.new('uex.click') do
       root to: 'click#index', as: "click_root"
       get "price.html", to: "click#prices"
