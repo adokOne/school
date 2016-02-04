@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   mount Tolk::Engine => '/tolk', :as => 'tolk'
   mount B1Admin::Engine => "/akvarium"
 
-  scope "(:locale)", :locale => /ru|uk|en/ do
     constraints DomainConstraint.new('uex.click') do
       root to: 'click#index', as: "click_root"
       get "price.html", to: "click#prices"
@@ -14,6 +13,10 @@ Rails.application.routes.draw do
       get "seo.html", to: "click#seo"
       get "about.html", to: "click#about"
     end
+
+  scope "(:locale)", :locale => /ru|uk|en/ do
+
+
 
     %W{add contacts products cities logout payment_success}.each do |item|
       get item, to: "home##{item}"
