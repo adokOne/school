@@ -62,3 +62,25 @@
                 %i.fa.fa-unlock-alt.fa-fw
                 =@users_count_this_month
               За последний месяц
+    .row
+      .col-md-4.col-lg-4
+        / Tile with progress bar (Comments)
+        / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        .panel.panel-primary.panel-colorful
+          .pad-all.media
+            .media-left
+              %span.icon-wrap.icon-wrap-xs
+                %i.fa.fa-comment.fa-3x
+            .media-body
+              %p.h3.text-thin.media-heading=@feedbacks_count
+              %small.text-uppercase Заявок с формы
+          .progress.progress-xs.progress-dark-base.mar-no
+            .progress-bar.progress-bar-light{"aria-valuemax" => "100", "aria-valuemin" => "0", "aria-valuenow" => "45.9", :role => "progressbar", :style => "width: 45.9%"}
+          .pad-all.text-right
+            %small
+              %span.text-semibold
+                %i.fa.fa-unlock-alt.fa-fw
+                =@feedbacks_unaproved__count
+              Непрочитаные заявок
+        / ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        / End Tile with progress bar (Comments)

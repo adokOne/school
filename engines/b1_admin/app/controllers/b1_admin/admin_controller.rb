@@ -9,6 +9,8 @@ module B1Admin
       @pages_count = Page.count
       @users_count = ::User.count
       @users_count_this_month = ::User.by_this_month.count
+      @feedbacks_unaproved__count =  Feedback.not_active.count
+      @feedbacks_count = Feedback.count
   	end
 
   	def login
