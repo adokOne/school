@@ -59,25 +59,24 @@
                 %a.btn.btn-sm.btn-primary.pull-right{"ng-click" => "save()"}
                   %i.fa.fa-pencil.fa-fw
                   =t("b1_admin.save")
-- if params[:action] =~ /edit/
-  #page-content2{:"ng-controller"=>"WithImagesCtrl", 'ng-init' => "item_id = editedItem.id; getImages();", "data-image-upload"=>upload_content_portfolio_path,"data-image-url"=>images_content_portfolio_path, :"data-delete-text"=>t("b1_admin.delete_media_confirm")}
-    .panel
-      .panel-body
-        .col-md-12
-          .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
-            = label_tag :image, "Фото", class:"col-sm-3 control-label"
-            .col-md-9
-              .row
-                .col-md-4.well.my-drop-zone{'nv-file-drop' => '', 'nv-file-over' => '', 'uploader' => 'hotel_image_uploader', 'ng-click' => 'click_image_upload();'}
-                  %input.hide{type: 'file', id:'hidden-file-input', 'nv-file-select' => '', 'uploader' => 'hotel_image_uploader'}
-                  Зереместите сюда фотографии вашей работы
-              .row.well.well-sm
-                .col-md-3.col-xs-3{'ng-repeat' => 'image in images track by $index'}
-                  .thumbnail
-                    %img{'ng-src' => '{{image.image_url}}',
-                         'ng-click' => 'image_click($index, image)',
-                         'style' => 'cursor:pointer;height:230px;width:340px'}
-                    .caption
-                      %p
-                        %a.btn.btn-danger{'ng-click' => 'delete($event, image)'}
-                          %span.fa.fa-trash-o
+    - if params[:action] =~ /edit/
+      .panel{:"ng-controller"=>"WithImagesCtrl", 'ng-init' => "item_id = editedItem.id; getImages();", "data-image-upload"=>upload_content_portfolio_path,"data-image-url"=>images_content_portfolio_path, :"data-delete-text"=>t("b1_admin.delete_media_confirm")}
+        .panel-body
+          .col-md-12
+            .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
+              = label_tag :image, "Фото", class:"col-sm-3 control-label"
+              .col-md-9
+                .row
+                  .col-md-4.well.my-drop-zone{'nv-file-drop' => '', 'nv-file-over' => '', 'uploader' => 'hotel_image_uploader', 'ng-click' => 'click_image_upload();'}
+                    %input.hide{type: 'file', id:'hidden-file-input', 'nv-file-select' => '', 'uploader' => 'hotel_image_uploader'}
+                    Зереместите сюда фотографии вашей работы
+                .row.well.well-sm
+                  .col-md-3.col-xs-3{'ng-repeat' => 'image in images track by $index'}
+                    .thumbnail
+                      %img{'ng-src' => '{{image.image_url}}',
+                           'ng-click' => 'image_click($index, image)',
+                           'style' => 'cursor:pointer;height:230px;width:340px'}
+                      .caption
+                        %p
+                          %a.btn.btn-danger{'ng-click' => 'delete($event, image)'}
+                            %span.fa.fa-trash-o
