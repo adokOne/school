@@ -1,0 +1,159 @@
+@charset "utf-8";
+body, html {
+
+	background-color: #fff;
+	font-family:Arial;
+	font-size: 18px;
+	margin:10px; 
+	padding:0; 
+	width:100%; 
+	height:100%;
+} 
+.block-l {
+	position:relative; 
+	float:left; 
+	margin:0; 
+	padding:0;
+} 
+.block-r {
+	position:relative; 
+	float:right; 
+	margin:0; 
+	padding:0;
+} 
+.centre {
+	text-align: center;
+	position: relative;
+	width: 1000px;
+	margin: 0 auto;
+	background-color: #fff;
+	padding: 1px 20px;
+}
+footer, header, section {
+	width:100%;
+	display:block; 
+	position:relative; 
+	float:left;
+} 
+img {
+	vertical-align:middle;
+} 
+header.header, section.section, section.section2,
+footer.footer{
+	width:100%; 
+	height:auto;
+}
+h1,h2{
+	text-align: center;
+	margin-bottom: 20px; 
+}
+p{
+	text-align: justify;
+	word-spacing: 0.7ex;
+	padding: 15px 45px;
+	margin-bottom: 45px;
+}
+.partners {
+    position: fixed;
+  	z-index: 10;
+	margin: 160px -185px;
+	-ms-transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	transform: rotate(-90deg);
+}
+.partners img{
+	width: 75%;
+}
+.preview p, .banner, .info, .copyright, .info_text_wi p{
+	text-align: center;
+}
+.banner img{
+	margin-top: 20px;
+	width: 100%;
+}
+.link{
+	padding: 15px 20px;
+}
+.link a{
+	text-align: center;
+	margin: 30px;
+	font-size: 25px;
+	color: navy;
+}
+.link a:hover{
+	color: red;
+}
+.info{
+	display: inline-block;
+}
+.info_img{
+	width: 25%;
+}
+.info_img img{
+	width: 100%;
+}
+.info_text_wi{
+	width: 100%;
+}
+.info_text{
+	    text-align: center;
+    width: 100%;
+}
+.info_text ul{
+	list-style-type: none;
+	font-size: 24px;
+}
+.info_text ul li{
+	    margin: 10px 0px;
+}
+.info_text ul li a{
+	text-decoration: none;
+	}
+.mab p{
+	margin: 0;
+}
+.contacts ul{
+	margin: -5px 0 15px -25px;
+}
+.contacts li{
+	text-align: center;
+	list-style: none;
+}
+.footerblock a{
+	font-weight: bold;
+	text-decoration: none;
+	color: #418cc4;
+}
+.copyright{
+	margin: 5px 0px 15px;
+}
+.info{
+	width: 100%;
+}
+.info table{
+	width: 100%;
+}
+.info table tr{
+	height: 380px;
+}
+.info table tr td{
+	width: 250px;
+}
+.info table tr td p{
+	text-align: center;
+}
+.info table a{
+	text-decoration: none;
+}
+.contats{
+	text-align: center;
+}
+.contats p{
+	padding: 0px 0px;
+    margin-bottom: 0px;
+    text-align: center;
+    margin: 0; 
+}
+table p span{
+	color: red;
+}
