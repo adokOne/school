@@ -1,0 +1,464 @@
+.title_h2 {
+  text-align: center;
+  margin: -2px 0 0 0;
+  background: url(images/bg_h2.png) center center no-repeat;
+  padding-bottom: 5px;
+  font-family: "Times New Roman";
+  font-size: 20px;
+  color: #fff;
+  line-height: 27px;
+  border-bottom: 4px solid #aaaaaa; }
+
+body {
+  background: url(images/bg_body.png) no-repeat;
+  background-size: cover;
+  position: relative; }
+  body .bg_content {
+    background-color: #fff;
+    position: absolute;
+    width: 1170px;
+    height: 100%;
+    left: 0;
+    right: 0;
+    margin: 0 auto; }
+  body header .bg_logo {
+    background: url(images/bg_logo.png) no-repeat;
+    width: 404px;
+    height: 166px; }
+    body header .bg_logo .logo {
+      background: url(images/logo.png) no-repeat;
+      width: 356px;
+      height: 131px;
+      display: block;
+      margin-top: 20px; }
+  body header .slogon {
+    margin-top: 60px;
+    width: 330px; }
+    body header .slogon h1 {
+      font-size: 18px;
+      text-align: center;
+      font-family: "Times New Roman";
+      color: #575759; }
+    body header .slogon p {
+      font-style: italic;
+      text-align: center;
+      color: #575759;
+      font-family: "Times New Roman";
+      font-size: 17px; }
+  body header .bg_telephone {
+    background: url(images/bg_header_telephone.png) no-repeat;
+    background-position: 0px -11px;
+    height: 166px;
+    float: right; }
+    body header .bg_telephone .phone_block {
+      margin: 30px 0px 10px 74px; }
+      body header .bg_telephone .phone_block .icon_phone {
+        background: url(images/icon_telephone.png) no-repeat;
+        width: 59px;
+        height: 59px;
+        display: inline-block;
+        position: relative;
+        top: 7px; }
+      body header .bg_telephone .phone_block .numbers {
+        display: inline-block; }
+        body header .bg_telephone .phone_block .numbers span {
+          display: block;
+          font-family: "Times New Roman";
+          font-size: 27px;
+          font-weight: bold;
+          line-height: 30px; }
+      body header .bg_telephone .phone_block .header_adress {
+        background: url(images/bg_adress_header.png) no-repeat;
+        padding-right: 34px;
+        margin: 30px -15px 0 0; }
+        body header .bg_telephone .phone_block .header_adress span {
+          display: block;
+          text-align: right;
+          font-family: "Times New Roman";
+          font-size: 15px; }
+  body #slider_block .slide_1 img {
+    margin: 0 -30px;
+    position: relative;
+    z-index: 2;
+    width: 632px; }
+  body #slider_block .slide_1 .arrow_img {
+    background: url(images/arrow_img.png) no-repeat;
+    width: 127px;
+    height: 249px;
+    position: relative;
+    z-index: 1;
+    top: 40px;
+    left: 25px; }
+  body #slider_block .slide_1 .description {
+    width: 390px;
+    margin-left: -20px; }
+    body #slider_block .slide_1 .description h5 {
+      font-family: "Times New Roman";
+      font-size: 18px;
+      font-style: italic;
+      font-weight: bold;
+      text-align: center; }
+    body #slider_block .slide_1 .description p {
+      font-family: "Arial";
+      line-height: 14px;
+      font-size: 13px;
+      text-indent: 30px;
+      text-align: justify; }
+    body #slider_block .slide_1 .description .read_more {
+      text-indent: 0px;
+      float: left;
+      color: #9e9e9e;
+      font-style: italic;
+      margin: 0;
+      position: relative;
+      font-family: "Times New Roman";
+      font-size: 14px;
+      top: 4px;
+      left: -27px; }
+    body #slider_block .slide_1 .description .read_more_a {
+      font-family: "Times New Roman";
+      font-size: 15px;
+      font-weight: bold;
+      position: relative;
+      right: -35px;
+      color: #529fdd; }
+  body #nav .bg_nav {
+    background: #efefef;
+    position: relative; }
+    body #nav .bg_nav ul {
+      padding: 0;
+      margin: 0; }
+      body #nav .bg_nav ul li:first-child {
+        width: 178px; }
+      body #nav .bg_nav ul li {
+        display: inline-block;
+        width: 153px;
+        vertical-align: top;
+        border-right: 2px solid #bdbdbd; }
+        body #nav .bg_nav ul li .icon_1 {
+          background: url(images/icon_1.png) no-repeat;
+          width: 92px;
+          height: 105px;
+          display: block;
+          margin: 25px auto 30px; }
+        body #nav .bg_nav ul li .icon_2 {
+          background: url(images/icon_2.png) no-repeat;
+          width: 92px;
+          height: 100px;
+          display: block;
+          margin: 30px auto 30px; }
+        body #nav .bg_nav ul li .icon_3 {
+          background: url(images/icon_3.png) no-repeat;
+          width: 124px;
+          height: 100px;
+          display: block;
+          margin: 30px auto 30px; }
+        body #nav .bg_nav ul li .icon_4 {
+          background: url(images/icon_4.png) no-repeat;
+          width: 70px;
+          height: 100px;
+          display: block;
+          margin: 30px auto 30px; }
+        body #nav .bg_nav ul li p {
+          text-align: center;
+          color: #000;
+          font-size: 13px;
+          font-family: "Tahoma"; }
+    body #nav .bg_nav .form_block {
+      background: url(images/bg_form.png) no-repeat;
+      width: 404px;
+      height: 176px;
+      float: right;
+      margin-top: 15px; }
+      body #nav .bg_nav .form_block h6 {
+        text-align: center;
+        font-weight: bold;
+        color: #fff;
+        font-size: 20px;
+        margin: 5px 0px 0px 0px; }
+      body #nav .bg_nav .form_block form input {
+        display: block;
+        width: 70%;
+        margin: 10px auto;
+        border-radius: 20px;
+        height: 37px;
+        border: 0;
+        outline: none;
+        padding: 0 15px; }
+      body #nav .bg_nav .form_block form input[type="submit"] {
+        font-size: 20px;
+        font-weight: bold;
+        border-radius: 10px;
+        width: 40%;
+        background: #8a8a8a;
+        background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iIzhhOGE4YSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUyJSIgc3RvcC1jb2xvcj0iIzNmM2YzZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUyJSIgc3RvcC1jb2xvcj0iIzNmM2YzZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjUyJSIgc3RvcC1jb2xvcj0iIzNmM2YzZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiM4YThhOGEiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+        background: -moz-linear-gradient(top, #8a8a8a 0%, #3f3f3f 52%, #3f3f3f 52%, #3f3f3f 52%, #8a8a8a 100%);
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #8a8a8a), color-stop(52%, #3f3f3f), color-stop(52%, #3f3f3f), color-stop(52%, #3f3f3f), color-stop(100%, #8a8a8a));
+        background: -webkit-linear-gradient(top, #8a8a8a 0%, #3f3f3f 52%, #3f3f3f 52%, #3f3f3f 52%, #8a8a8a 100%);
+        background: -o-linear-gradient(top, #8a8a8a 0%, #3f3f3f 52%, #3f3f3f 52%, #3f3f3f 52%, #8a8a8a 100%);
+        background: -ms-linear-gradient(top, #8a8a8a 0%, #3f3f3f 52%, #3f3f3f 52%, #3f3f3f 52%, #8a8a8a 100%);
+        background: linear-gradient(to bottom, #8a8a8a 0%, #3f3f3f 52%, #3f3f3f 52%, #3f3f3f 52%, #8a8a8a 100%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8a8a8a', endColorstr='#8a8a8a',GradientType=0 );
+        color: #fff;
+        outline: none;
+        text-transform: uppercase; }
+  body #offer_block {
+    position: relative; }
+    body #offer_block .container {
+      background-color: #fff8e5; }
+    body #offer_block .offer {
+      padding: 30px; }
+      body #offer_block .offer ul {
+        padding: 0;
+        margin: 0; }
+        body #offer_block .offer ul li {
+          display: inline-block; }
+          body #offer_block .offer ul li img {
+            width: 100%; }
+          body #offer_block .offer ul li p {
+            text-align: center;
+            margin: 20px 0;
+            color: #414040;
+            font-size: 16px;
+            font-family: "Tahoma"; }
+  body footer {
+    position: relative; }
+    body footer .bg_footer {
+      background: url(images/bg_footer.png) no-repeat;
+      padding-bottom: 40px; }
+      body footer .bg_footer h2 {
+        padding-left: 40px;
+        border-bottom: 2px solid #b1b1b1;
+        width: 40%;
+        padding-bottom: 10px; }
+      body footer .bg_footer .contact {
+        display: inline-block; }
+        body footer .bg_footer .contact ul {
+          margin: 0; }
+          body footer .bg_footer .contact ul li:first-child {
+            font-style: italic;
+            font-weight: 100;
+            font-family: "Times New Roman";
+            font-size: 20px; }
+          body footer .bg_footer .contact ul li {
+            font-weight: bold;
+            list-style-type: none;
+            font-family: "Times New Roman";
+            font-size: 20px; }
+  body #bottom_footer {
+    background: #1a7da3;
+    width: 100%;
+    position: relative;
+    z-index: 3; }
+    body #bottom_footer .partn_uslugi {
+      text-align: right; }
+      body #bottom_footer .partn_uslugi a {
+        color: #3bbdf1;
+        display: inline-block;
+        position: relative;
+        top: 10px;
+        vertical-align: top; }
+      body #bottom_footer .partn_uslugi span {
+        background: url(images/catalog_icon.png) no-repeat;
+        width: 34px;
+        height: 35px;
+        display: inline-block;
+        position: relative;
+        top: 4px; }
+    body #bottom_footer .creat_site {
+      text-align: center;
+      color: #fff;
+      font-size: 15px;
+      font-family: "Tahoma";
+      margin: 8px 0 0; }
+      body #bottom_footer .creat_site a {
+        font-size: 18px;
+        color: #fff343;
+        font-family: "Tahoma"; }
+    body #bottom_footer .uslugi {
+      text-align: left !important; }
+
+@media (min-width: 480px) {
+  body .bg_content {
+    width: 100%; }
+
+  body header .bg_logo {
+    background: none;
+    width: 100%;
+    height: auto; }
+
+  body header .bg_logo .logo {
+    margin: 0px auto 0; }
+
+  body header .slogon {
+    margin: 0 auto; }
+
+  body header .bg_telephone {
+    background: none; }
+
+  body header .bg_telephone .phone_block {
+    display: block;
+    margin: 0 auto;
+    width: 275px; }
+
+  body #slider_block .slide_1 img {
+    width: 100%;
+    margin: 0; }
+
+  body #slider_block .slide_1 .description {
+    width: auto;
+    margin-left: 0px; }
+
+  body #nav .bg_nav ul {
+    width: 180px;
+    margin: 0 auto;
+    text-align: center; }
+
+  body #nav .bg_nav ul li {
+    border: none; }
+
+  body #nav .bg_nav .form_block {
+    float: none;
+    margin: 15px auto 15px; } }
+@media (min-width: 768px) {
+  body .bg_content {
+    width: 750px; }
+
+  body header .bg_logo {
+    background: none;
+    width: 100%;
+    height: auto; }
+
+  body header .bg_logo .logo {
+    margin: 0px auto 0; }
+
+  body header .slogon {
+    margin-top: 40px; }
+
+  body header .bg_telephone {
+    background: none; }
+
+  body header .bg_telephone .phone_block {
+    margin: 30px 0px 10px 74px;
+    width: auto; }
+
+  body header .bg_telephone .phone_block .header_adress {
+    margin: 30px -15px 0 0; }
+
+  body #slider_block .slide_1 img {
+    width: 100%;
+    margin: 0; }
+
+  body #slider_block .slide_1 .description {
+    width: auto;
+    margin-left: 0px; }
+
+  body #nav .bg_nav ul {
+    width: 655px;
+    margin: 0 auto; }
+
+  body #nav .bg_nav ul li:last-child {
+    border-right: none; }
+
+  body #nav .bg_nav ul li {
+    border-right: 2px solid #bdbdbd; }
+
+  body #nav .bg_nav .form_block {
+    float: none;
+    margin: 15px auto 15px; } }
+@media (min-width: 992px) {
+  body .bg_content {
+    width: 970px; }
+
+  body header .slogon {
+    width: auto;
+    margin-top: 37px; }
+
+  body header .bg_logo {
+    background: url(images/bg_logo.png) no-repeat;
+    width: 404px;
+    height: 166px; }
+
+  body header .bg_logo .logo {
+    margin-top: 20px; }
+
+  body header .bg_telephone {
+    background: url(images/bg_header_telephone.png) no-repeat; }
+
+  body header .bg_telephone .phone_block {
+    margin: 30px 0px 10px 74px; }
+
+  body header .bg_telephone .phone_block .header_adress {
+    margin: 27px -15px 0 0; }
+
+  body header .bg_telephone .phone_block .numbers span {
+    font-size: 20px; }
+
+  body #slider_block .slide_1 img {
+    width: 100%;
+    margin: 0 -30px; }
+
+  body #slider_block .slide_1 .description {
+    width: auto;
+    margin-left: -20px; }
+
+  body #nav .bg_nav ul {
+    width: 655px;
+    margin: 0 auto; }
+
+  body #nav .bg_nav ul li:last-child {
+    border-right: none; }
+
+  body #nav .bg_nav ul li {
+    border-right: 2px solid #bdbdbd; }
+
+  body #nav .bg_nav .form_block {
+    float: none;
+    margin: 15px auto 15px; } }
+@media (min-width: 1200px) {
+  body .bg_content {
+    width: 1170px; }
+
+  body header .bg_telephone .phone_block .numbers span {
+    font-size: 27px; }
+
+  body header .bg_logo {
+    background: url(images/bg_logo.png) no-repeat;
+    width: 404px;
+    height: 166px; }
+
+  body header .bg_logo .logo {
+    margin-top: 20px; }
+
+  body header .slogon {
+    margin-top: 60px;
+    width: 330px; }
+
+  body header .bg_telephone {
+    background: url(images/bg_header_telephone.png) no-repeat; }
+
+  body header .bg_telephone .phone_block {
+    margin: 30px 0px 10px 74px; }
+
+  body header .bg_telephone .phone_block .header_adress {
+    margin: 30px -15px 0 0; }
+
+  body #slider_block .slide_1 img {
+    width: 632px;
+    margin: 0 -30px; }
+
+  body #nav .bg_nav ul li:last-child {
+    border-right: 2px solid #bdbdbd; }
+
+  body #slider_block .slide_1 .description {
+    width: 390px;
+    margin-left: -20px; }
+
+  body #nav .bg_nav ul li {
+    border-right: 2px solid #bdbdbd; }
+
+  body #nav .bg_nav .form_block {
+    float: right;
+    margin: 15px auto 0; } }
+
+/*# sourceMappingURL=style.css.map */
