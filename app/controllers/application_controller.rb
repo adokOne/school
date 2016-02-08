@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_user
   helper_method :logged_in?
+  helper_method :liqpay_form
   before_filter :set_current_locale
 
   def set_breadcrumbs
@@ -47,7 +48,20 @@ class ApplicationController < ActionController::Base
     { :locale => I18n.locale }
   end
 
-
+  def liqpay_form(liqpay_request, options={}, &block)
+    id = options.fetch(:id, 'liqpay_form')
+    title = options.fetch(:title, 'Pay with LiqPAY')
+    content_tag(:form, :id => id, :action => Liqpay::LIQPAY_ENDPOINT_URL, :method => :post) do
+      liqpay_request.form_fields.each do |name, value|
+        concat hidden_field_tag(name, value)
+      end
+      if block_given?
+        yield
+      else
+        concat submit_tag(title, :name => nil)
+      end
+    end
+  end
 
 
   private

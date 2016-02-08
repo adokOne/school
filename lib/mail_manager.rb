@@ -22,7 +22,7 @@ class MailManager
     @email = baner.try(:user).try(:email)
     data = {
       :TITLE        => baner.title,
-      :URL          => baner.link,
+      :URL          => Settings.domain + baner.link,
       :USER_NAME    => baner.try(:user).try(:name)
     }
     set_body( data )
@@ -30,6 +30,19 @@ class MailManager
   end
 
 
+  def page_is_published( baner )
+    raise ArgumentError, "Param must be an instance of P{age" unless baner.kind_of?( Page )
+    check_template( "page_is_published" )
+    @email = baner.try(:user).try(:email)
+    data = {
+      :TITLE        => baner.title,
+      :NAME         => baner.try(:user).try(:name),
+      :URL          => Settings.domain + baner.link,
+      :USER_NAME    => baner.try(:user).try(:name)
+    }
+    set_body( data )
+    send_mail( @email )
+  end
 
   def restore( user ,password )
     raise ArgumentError, "Param must be an instance of User" unless user.kind_of?( User )
@@ -77,7 +90,7 @@ class MailManager
     data = {
       :NAME         => review.name,
       :TITLE        => review.page.title,
-      :URL          => review.page.link,
+      :URL          => Settings.domain + review.page.link,
       :USER_NAME    => review.page.try(:user).try(:name)
     }
     set_body( data )

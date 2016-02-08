@@ -6,6 +6,11 @@ module ActionView
 
         #if my overrides contain the key
         if value = Translation.get["#{key}"]
+          if a[1].kind_of?(Hash)
+            a[1].each_pair do |k,v|
+              value.to_s.gsub!("%{#{k.to_s}}", v.to_s)
+            end
+          end
           return value # return the overrided value
         end
 
@@ -22,6 +27,12 @@ module I18n
     key = a.first     # just want to override behaviour based on the key
     #if my overrides contain the key
     if value = Translation.get["#{key}"]
+      if a[1].kind_of?(Hash)
+        a[1].each_pair do |k,v|
+          value.to_s.gsub!("%{#{k.to_s}}", v.to_s)
+        end
+      end
+
       return value # return the overrided value
     end
 

@@ -88,12 +88,14 @@ class HomeController < ApplicationController
       end
     end
     @has_search = true
+    @is_post = true
     @item = Page.find(params[:id])
     set_baner_params
   end
 
   def previev
     @item = Page.new(preview_params)
+
     set_baner_params( true )
     render :item
   end
@@ -193,7 +195,9 @@ class HomeController < ApplicationController
         flash[:error] = I18n.t("uex.user_exist_on_order", login_path: signin_users_path, forgot_path: forgot_users_path)
         redirect_to(request.referer + "#notice") and return
       else
-        user = User.create(email: baner.email, name: baner.name, password: User.password , phone: baner.phone)
+        password = User.password
+        user = User.create(email: baner.email, name: baner.name, password: password , phone: baner.phone)
+        MailManager.registration( user, password )
         token = user.signin( request.remote_ip, request.referer, request.user_agent)
         cookies[User::COOKIE_NAME] = { value: token, expires: false ? 4.hour.from_now : 2.week.from_now }
         baner = baner.create_real(baner_params[:logo])
@@ -247,7 +251,7 @@ class HomeController < ApplicationController
   end
 
   def preview_params
-    params.permit(:name,:email,:phone,:title,:anons,:logo,:category_id,:city_id, :country_id, :desc, :site, :meta_title, :meta_desc, :meta_keys)
+    params.permit(:name,:email,:phone,:title,:anons,:file,:category_id,:city_id, :country_id, :desc, :site, :meta_title, :meta_desc, :meta_keys)
   end
 
   def feedback_params

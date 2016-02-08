@@ -1,30 +1,58 @@
+
 <div class="search-row clearfix" data-ctrl="Search">
   <div role="form" class="wpcf7" id="wpcf7-f180-p47-o1" lang="en-US" dir="ltr">
     <%= form_for Search.new, url: search_path do %>
-    <form class="new_search" id="new_search" action="/search" accept-charset="UTF-8" method="post">
-       <div class="row">
-          <% cache [@cities,I18n.locale,@city] do %>
-            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-              <%= render_cities(@cities,@city && @city.kind_of?(City) ? @city : nil, t("uex.city"))%>
+      <% if @is_post%>
+         <div class="row">
+            <% cache [@cities,I18n.locale,@city,@is_post] do %>
+              <div class="col col-lg-2 col-md-2 col-sm-12 col-xs-12">
+                <%= render_cities(@cities,@city && @city.kind_of?(City) ? @city : nil, t("uex.city"))%>
+              </div>
+            <% end %>
+            <% cache [@categories,I18n.locale,@city,@item,@is_post] do %>
+              <div class="col col-lg-3 col-md-3 col-sm-12 col-xs-12">
+               <%= render_categories(@categories,@item && @item.kind_of?(Category) ? @item : nil, t("uex.category"), @city ? @city : nil) %>
+              </div>
+            <% end %>
+            <div class="col col-lg-6 col-md-6 col-sm-11 col-xs-11">
+               <span class="wpcf7-form-control-wrap your-name">
+                  <input class="wpcf7-form-control wpcf7-text search-field" placeholder="Найти" type="text" value="<%= params[:search]%>" name="search[text]" id="search_text">
+               </span>
             </div>
-          <% end %>
-          <% cache [@categories,I18n.locale,@city,@item] do %>
-            <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-             <%= render_categories(@categories,@item && @item.kind_of?(Category) ? @item : nil, t("uex.category"), @city ? @city : nil) %>
+            <div class=" col-lg-1 col-md-1 col-sm-1 col-xs-1">
+               <span class="wpcf7-form-control-wrap">
+                  <a href="#" class="js-submit" style="font-size: 40px;line-height: 1.4;">
+                    <i class="material-design-search100" ></i>
+                  </a>
+                  <!-- <input type="submit" value="" class="wpcf7-form-control wpcf7-submit js-submit"> -->
+               </span>
             </div>
-          <% end %>
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-             <span class="wpcf7-form-control-wrap your-name">
-                <input class="wpcf7-form-control wpcf7-text search-field" placeholder="Поиск" type="text" value="<%= params[:search]%>" name="search[text]" id="search_text">
-             </span>
           </div>
-          <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
-             <span class="wpcf7-form-control-wrap">
-                <input type="submit" value="найти" class="wpcf7-form-control wpcf7-submit js-submit">
-             </span>
+        <% else%>
+         <div class="row">
+            <% cache [@cities,I18n.locale,@city,@is_post] do %>
+              <div class="col col-lg-3 col-md-3 col-sm-12 col-xs-12">
+                <%= render_cities(@cities,@city && @city.kind_of?(City) ? @city : nil, t("uex.city"))%>
+              </div>
+            <% end %>
+            <% cache [@categories,I18n.locale,@city,@item,@is_post] do %>
+              <div class="col col-lg-3 col-md-3 col-sm-12 col-xs-12">
+               <%= render_categories(@categories,@item && @item.kind_of?(Category) ? @item : nil, t("uex.category"), @city ? @city : nil) %>
+              </div>
+            <% end %>
+            <div class="col col-lg-3 col-md-3 col-sm-12 col-xs-12">
+               <span class="wpcf7-form-control-wrap your-name">
+                  <input class="wpcf7-form-control wpcf7-text search-field" placeholder="Поиск" type="text" value="<%= params[:search]%>" name="search[text]" id="search_text">
+               </span>
+            </div>
+            <div class="col col-lg-3 col-md-3 col-sm-12 col-xs-12">
+               <span class="wpcf7-form-control-wrap">
+                  <input type="submit" value="найти" class="wpcf7-form-control wpcf7-submit js-submit">
+               </span>
+            </div>
           </div>
-        </div>
-      </div>
+        <% end %>
     <%end%>
   </div>
 </div>
+

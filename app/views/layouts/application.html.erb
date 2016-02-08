@@ -119,10 +119,14 @@
                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 static-header-menu">
                         <nav id="menu-primary" class="menu-primary menu" role="navigation">
 <!--                            <label class="cherry-mega-menu-mobile-trigger" for="trigger-menu-primary-items">Menu</label><input class="cherry-mega-menu-mobile-trigger-box" id="trigger-menu-primary-items" type="checkbox"> -->
-                           <ul style="<%= logged_in? ? 'width: 990px;' : ''%>" id="menu-primary-items" class="menu-items cherry-mega-no-js cherry-mega-menu mega-menu-direction-horizontal total-columns-12" data-event="hover" data-effect="slide-top" data-direction="horizontal" data-mobile-trigger="768" data-parent-selector=".cherry-mega-menu">
-
+                           <ul  id="menu-primary-items" class="menu-items cherry-mega-no-js cherry-mega-menu mega-menu-direction-horizontal total-columns-12" data-event="hover" data-effect="slide-top" data-direction="horizontal" data-mobile-trigger="768" data-parent-selector=".cherry-mega-menu">
+                           <li class=" menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
+                                                               <% if @is_post %>
+                                    <%= image_tag "logo.png", style:"width: 100px;" %>
+                                 <% end %>
+                           </li>
                               <% if !logged_in? %>
-                              <li class="current-menu-item menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                              <li class="current-menu-item menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">&nbsp;&nbsp;&nbsp;&nbsp;</li>
                               <% end %>
 
                               <li class="<%= url_is_current?("main","current-menu-item")%> menu-item menu-item-type-post_type menu-item-object-page menu-item-33 cherry-mega-menu-top-item item-submenu-position-fullwidth item-align-top-left menu-item-standard">
@@ -192,7 +196,9 @@
                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 static-header-logo">
                         <div class="site-branding">
                            <h1 class="site-title image-logo">
-                                 <%= image_tag "logo.png", style:"width: 176px;" %>
+                                 <% unless @is_post %>
+                                    <%= image_tag "logo.png", style:"width: 176px;" %>
+                                 <% end %>
                                  <span>
                                     <%= t("uex.lozung").html_safe%>
                                  </span>

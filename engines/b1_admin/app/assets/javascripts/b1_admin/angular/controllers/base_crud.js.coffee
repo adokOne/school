@@ -19,6 +19,7 @@ angular.module("B1Admin").controller "CrudController", [
     text_area_name = "desc"
     $scope.cloned_rows = {}
     $scope.maximum_cloned_rows = 6
+    $scope.opened = false
     $scope.statusColors =
       0: "#FF0101"
       1: "#4EAE32"
@@ -32,6 +33,57 @@ angular.module("B1Admin").controller "CrudController", [
       formatYear: 'yy',
       startingDay: 1
 
+
+    $scope.readfile = (input) ->
+      console.log(input.files)
+      if input.files and input.files[0]
+        reader = new FileReader
+
+        reader.onload = (e) ->
+          $(".thumbnail img").attr 'src', e.target.result
+          $scope.editedItem.file = e.target.result
+          $(input.target).val(e.target.result)
+          return
+
+        reader.readAsDataURL input.files[0]
+
+        # reader = new FileReader
+
+        # reader.onload = (e) ->
+        #   $scope.editedItem.file = btoa(e.target.result)
+        #   return
+
+
+        # reader.readAsBinaryString(input.files[0]);
+
+        console.log( $scope.editedItem )
+
+    $scope.upload =($flow,id) ->
+      if id
+        $flow.upload()
+      else
+        #
+        console.log($flow)
+
+    $scope.startupload = ($event)->
+
+      if $scope.opened
+        $event.stopPropagation();
+        $event.preventDefault()
+      else
+        $scope.opened = true
+        $timeout (->
+          $scope.opened = false
+        ), 500
+
+
+    $scope.openupload = ->
+      $timeout (->
+        angular.element("#file").click()
+      ), 200
+
+
+      return false
 
     $scope.status =
       opened: false

@@ -1,0 +1,31 @@
+<div class="portfolio-wrap ">
+  <div class="portfolio-container masonry-layout loading-animation-move-up" >
+     <div class="portfolio-list">
+        <div class="portfolio-item item-1 odd  masonry-layout-item custom-hover clearfix" >
+          <div class="row">
+            <% similar.each do |item|%>
+              <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+
+                 <div class="inner-wrap" style="margin: 15px;">
+                    <div class="media-content">
+                       <img src="<%= item.logo %>" class="grid-image wp-post-image" alt="post-6">
+                       <div class="rollover-content ">
+                          <div class="table-display">
+                             <div class="links-container custom-links custom-hover-slide table-cell"><a class="item-link permalink" href="<%= url(item.link) %>"></a></div>
+                          </div>
+                       </div>
+                    </div>
+                    <div class="item-content">
+                       <h3><a href="<%= url(item.link) %>"><%= item.title %></a></h3>
+                       <%= item.anons %>
+                    </div>
+                 </div>
+
+              </div>
+            <% end%>
+
+          </div>
+        </div>
+     </div>
+  </div>
+</div>

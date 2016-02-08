@@ -19,6 +19,11 @@ class BlogController < ApplicationController
     @meta_title = @item.meta_is_generated ? @item.title : @item.meta_title
     @meta_keys  = @item.meta_is_generated ? @item.anons.truncate(50)  : @item.meta_keys
     @image = @item.logo
+
+    offset = rand(BlogPage.count)
+
+
+    @similar = BlogPage.offset(offset).limit(3).all
   end
 
 

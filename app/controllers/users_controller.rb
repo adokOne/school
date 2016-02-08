@@ -51,7 +51,8 @@ class UsersController < ApplicationController
       :server_url     => [Settings.domain, check_transaction_path].join("/") ,
       :result_url     => [Settings.domain, edit_user_path(current_user,anchor: "paymnets")].join("/")
     )
-    render json: {success: true, form: liqpay_button(liqpay) }
+    @form = liqpay_form(liqpay)
+   # render json: {success: true, form:  }
   end
 
 

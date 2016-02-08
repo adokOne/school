@@ -11,6 +11,10 @@ class Page < ActiveRecord::Base
      attr_accessor :attachment_sizes
   end
 
+  attr_accessor :file
+
+  after_update :send_mail
+
   has_attached_file :logo,
                     styles: Proc.new { |clip| clip.instance.class.attachment_sizes ; clip.instance.class.attachment_sizes; },
                     default_url:  "http://dummyimage.com/800x300/f5f5f5/000000.png&text=#{I18n.t("uex.image_missing")}",#   URI.unescape("https://placeholdit.imgix.net/~text?" + {txtsize: 33, w:800, h:300, text: }.to_query),
@@ -221,16 +225,23 @@ class Page < ActiveRecord::Base
   end
 
 
+  def send_mail
+    if (self.active_changed? && self.active == true)
+      MailManager.page_is_published(self)
+    end
+  end
+
+
   def self.get_stat_graph(ids)
     return [] unless ids.any?
     sql =
     "SELECT
         DATE(`impressions`.`created_at`) AS `date`,
         impressionable_id,
-        SUM(`impressions`.`impressionable_id`) AS `count`
+        COUNT(`impressions`.`impressionable_id`) AS `count`
 
     FROM `impressions`
-    WHERE `impressions`.`created_at` BETWEEN '2016-01-01 00:00:00' AND '2016-12-31 23:59:59 AND impressionable_id IN #{ids.join(",")}'
+    WHERE `impressions`.`created_at` BETWEEN '2016-01-01 00:00:00' AND '2016-12-31 23:59:59' AND impressionable_id IN (#{ids.join(",")})
     GROUP BY `date`, `impressionable_id`
     ORDER BY `date`
     "
@@ -253,7 +264,7 @@ class Page < ActiveRecord::Base
         COUNT(DISTINCT ip_address) as count
 
     FROM `impressions`
-    WHERE `impressions`.`created_at` BETWEEN '2016-01-01 00:00:00' AND '2016-12-31 23:59:59 AND impressionable_id IN #{ids.join(",")}'
+    WHERE `impressions`.`created_at` BETWEEN '2016-01-01 00:00:00' AND '2016-12-31 23:59:59' AND impressionable_id IN (#{ids.join(",")})
     GROUP BY `date`, `impressionable_id`
     ORDER BY `date`
     "

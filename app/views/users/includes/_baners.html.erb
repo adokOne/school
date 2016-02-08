@@ -16,9 +16,9 @@
          <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-5">
             <div class="entry-meta entry-meta-top">
-              <span class="posted-on"><time class="entry-date published" datetime="<%= item.created_at %>"><%= l(item.created_at, format: "%d.%m.%Y") %></time></span>
-              <span class="material-design-visibility1"><a href="#" title="<%= item.views%>" rel="author"><%= item.views%></a></span>
-              <span class="comments-link"><a title="3 Отзыва" target="_blank" href="<%= url(item.link + "#commnets")%>">3 Отзыва</a></span>
+              <span style="margin-right:0"  class="posted-on"><time class="entry-date published" datetime="<%= item.created_at %>"><%= l(item.created_at, format: "%d.%m.%Y") %></time></span>
+              <span  class="material-design-visibility1"><a href="#" title="<%= item.views%>" rel="author"><%= item.views%></a></span>
+              <span style="margin-right:0" class="comments-link"><a title="Отзывов: <%= item.reviews_count %>" target="_blank" href="<%= url(item.link + "#commnets")%>">Отзывов: <%= item.reviews_count %></a></span>
             </div>
           </div>
           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-7">

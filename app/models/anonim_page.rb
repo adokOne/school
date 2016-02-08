@@ -23,7 +23,7 @@ class AnonimPage
 
   validates :email, :name, :email, :category_id, :country_id, :city_id, :title, :presence => true
   validates :email,    length: { in: 6..50 }, format:{with:/\A^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i}
-  validates :name, length: { in: 5..100 }
+  validates :name, length: { in: 3..100 }
   validates :phone, length: { in: 5..20 }
   validates :title, length: { in: 5..255 }
   validates :desc, length: { in: 0..255000 }
@@ -54,7 +54,9 @@ class AnonimPage
       anons: self.anons,
       desc: self.desc,
       logo: logo,
-      user_id: user.id
+      user_id: user.id,
+      phone: user.phone,
+      email: user.email
     }
     page = user.pages.create(data)
   end

@@ -22,7 +22,13 @@
         color: #2b91d8!important;
 }
 
-
+.one-post #header{
+    border: none;
+}
+.one-post #static-area-header-bottom{
+    box-shadow: none;
+    -webkit-box-shadow:none;
+}
 .products #header{
     padding: 0;
 }
@@ -199,8 +205,15 @@ header{
 	    color: rgb(51, 51, 51);
 }
 
-.new_search .col-lg-3{
+.new_search .col{
 	padding: 0;
+}
+.one-post #content{
+    max-width: 980px;
+}
+.one-post .search-row div.wpcf7, .one-post .cherry-breadcrumbs {
+    max-width: 980px;
+    margin: 0 auto;
 }
 .sbSelector {
     display: block;

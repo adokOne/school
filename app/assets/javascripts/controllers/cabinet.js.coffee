@@ -4,14 +4,26 @@ $.Controller "Cabinet",
     @form = @element.find("form")
     @init_validation()
     @init_dialog()
+    @openned = false
 
   "input[type=file] -> change": (ev) ->
     el = $(ev.target)
     window.read_url(ev.target, "##{el.data('img-id')}")
 
+  "input[type=file] -> click": (ev) ->
+    if @openned
+      ev.preventDefault()
+    else
+      @openned = true
+
+      setTimeout (->
+        self.openned = false
+        return
+      ), 100
+
   ".zoomlink -> click": (ev) ->
     ev.preventDefault()
-    @element.find("input[type=file]").click()
+    @element.find("input[type=file]").trigger("click")
     @element.find(".image").removeClass "error"
 
   "select -> change": (ev) ->
@@ -36,19 +48,20 @@ $.Controller "Cabinet",
     $('html, body').animate({scrollTop: $('#respond').offset().top}, 800);
 
 
-  "#new_transaction input[type=submit] -> click": (ev) ->
-    ev.preventDefault()
-    self = @
-    form = $(ev.target).parents("form")
-    $.ajax
-      type: "POST"
-      url: form.attr("action")
-      data: form.serialize()
-      success: (resp) ->
-        if resp.success
-          $("body").append($(resp.form))
-          $("form:last").submit()
-      error: (resp) ->
+  # "#new_transaction input[type=submit] -> click": (ev) ->
+  #   ev.preventDefault()
+  #   self = @
+  #   form = $(ev.target).parents("form")
+  #   form.submit()
+  #   $.ajax
+  #     type: "POST"
+  #     url: form.attr("action")
+  #     data: form.serialize()
+  #     success: (resp) ->
+  #       if resp.success
+  #         $("body").append($(resp.form))
+  #         $("form:last").submit()
+  #     error: (resp) ->
 
 
 

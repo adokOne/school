@@ -45,7 +45,7 @@
    </div>
 </div>
 <div id="dialog" title="<%= t("uex.amount_to_pay")%>" style="    width: 500px;" data-ctrl="Cabinet">
-  <%= form_for Transaction.new, url: create_transaction_user_path(current_user), class: "comment-form"  do |f| %>
+  <%= form_for Transaction.new, url: create_transaction_user_path(current_user), class: "comment-form", html: {target: "_blank"}  do |f| %>
      <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
            <p class="comment-form-author">
