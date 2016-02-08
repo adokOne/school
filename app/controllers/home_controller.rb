@@ -94,7 +94,14 @@ class HomeController < ApplicationController
   end
 
   def previev
-    @item = Page.new(preview_params)
+    if @item = Page.where(id: params[:id]).take
+      preview_params.each_pair do |k,v|
+        @item.send("#{k}=",v) if @item.respond_to?(k)
+      end
+    else
+      @item = Page.new(preview_params)
+    end
+
 
     set_baner_params( true )
     render :item

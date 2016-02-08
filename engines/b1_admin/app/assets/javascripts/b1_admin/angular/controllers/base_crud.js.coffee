@@ -42,7 +42,7 @@ angular.module("B1Admin").controller "CrudController", [
         reader.onload = (e) ->
           $(".thumbnail img").attr 'src', e.target.result
           $scope.editedItem.file = e.target.result
-          $(input.target).val(e.target.result)
+          $("#file").val(e.target.result)
           return
 
         reader.readAsDataURL input.files[0]
@@ -79,7 +79,7 @@ angular.module("B1Admin").controller "CrudController", [
 
     $scope.openupload = ->
       $timeout (->
-        angular.element("#file").click()
+        angular.element("#logo").click()
       ), 200
 
 

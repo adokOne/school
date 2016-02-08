@@ -35,6 +35,32 @@ module B1Admin
         end
       end
 
+      def after_create
+        base_64 = params.dup[:item].delete("file")
+        content_type = base_64.match(/data:(.*);base64,/)[1]
+        image_data = base_64.gsub(/data:.*;base64,/,"")
+
+        if image_data && content_type
+          decoded_data = Base64.decode64(image_data)
+
+          data = StringIO.new(decoded_data)
+          data.class_eval do
+            attr_accessor :content_type, :original_filename
+          end
+
+          data.content_type = content_type
+          data.original_filename = File.basename(User.password)
+
+          @item.logo = data
+          @item.save
+        end
+
+      end
+
+
+      def decode_base64_image
+
+      end
 
       def reviews
 

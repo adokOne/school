@@ -10,6 +10,7 @@
           .panel-heading
             %h3.panel-title Создание/редактирование обьявления
           = form_tag "/previev" ,class: "form-horizontal",novalidate: true,name: :itemForm, target: "_blank"  do
+            = hidden_field_tag :id, "{{editedItem.id}}",  "ng-model" => "editedItem.id"
             .panel-body
               .form-group{"ng-class" => "{'has-error': itemForm.title.$invalid && itemForm.$submitted}",class: "lang lang" }
                 = label_tag :"title", t("b1_admin.title"), class:"col-sm-1 control-label"
@@ -93,7 +94,8 @@
               .form-group
                 - if params[:action] =~ /new/
                   %div{style: "display:none"}
-                    = file_field_tag :file,  "ng-model" => "editedItem.file", style: "display:none", "ng-click" => "startupload($event)", "ng-change"=>"readfile($event)",  "onchange"=>"angular.element(this).scope().readfile(this)"
+                    = file_field_tag :logo, style: "display:none", "ng-click" => "startupload($event)",  "onchange"=>"angular.element(this).scope().readfile(this)"
+                    = hidden_field_tag :file, "",  "ng-model" => "editedItem.file"
                 = label_tag :logo_file_name, t("b1_admin.logo_file_name"), class:"col-sm-1 control-label"
                 .col-md-10
                   .ng-scope{:"flow-name"=>"logo", :"flow-file-added" => "!!{png:1,gif:1,jpg:1,jpeg:1}[$file.getExtension()]", :"flow-init" => "{singleFile:true,target:'#{namespace}/baners/pages/'+editedItem.id + '/upload',testChunks:false}" ,:"flow-files-submitted"=>"upload($flow, editedItem.id)"}
