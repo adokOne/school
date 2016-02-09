@@ -2,17 +2,17 @@ Rails.application.routes.draw do
   mount Tolk::Engine => '/tolk', :as => 'tolk'
   mount B1Admin::Engine => "/akvarium"
 
-    constraints DomainConstraint.new('uex.click') do
-      root to: 'click#index', as: "click_root"
-      get "price.html", to: "click#prices"
-      get "portfolio.html", to: "click#portfolio"
-      get "about.html", to: "click#about"
-      get "kontekst-reklama.html", to: "click#kontekst"
-      get "marketing.html", to: "click#marketing"
-      get "create-site.html", to: "click#create_site"
-      get "seo.html", to: "click#seo"
-      get "about.html", to: "click#about"
-    end
+  constraints DomainConstraint.new('uex.click') do
+    root to: 'click#index', as: "click_root"
+    get "price.html", to: "click#prices"
+    get "portfolio.html", to: "click#portfolio"
+    get "about.html", to: "click#about"
+    get "kontekst-reklama.html", to: "click#kontekst"
+    get "marketing.html", to: "click#marketing"
+    get "create-site.html", to: "click#create_site"
+    get "seo.html", to: "click#seo"
+    get "about.html", to: "click#about"
+  end
 
   scope "(:locale)", :locale => /ru|uk|en/ do
 
