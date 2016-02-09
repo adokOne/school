@@ -50,7 +50,9 @@
               </div>
               <% unless category.only_photos %>
                 <div class="text">
-                  <h5><%= page.title%></h5>
+                  <a href="<%= url("blog/item/#{page.seos.join('/')}")%>">
+                    <h5><%= page.title%></h5>
+                  </a>
                   <p><%= truncate(page.anons, length: 300,omission: '...') %> <a href="<%= url("blog/item/#{page.seos.join('/')}")%>"><%=t("school.show_more")%></a></p>
                 </div>
               <% end%>

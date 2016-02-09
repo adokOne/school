@@ -22,7 +22,7 @@
         </div>
 
         <div class="social-buttons">
-          <a href="<%= url("blog/item/#{@item.seos.join('/')}") %>" class="fb-like" onclick="TShare.facebook(this,event,'','<%= URI.escape @item.title %>')">Like</a>
+          <a href="<%= url("blog/item/#{@item.seos.join('/')}") %>" class="f-like" onclick="TShare.facebook(this,event,'','<%= URI.escape @item.title %>')">Like</a>
           <a href="<%= url("blog/item/#{@item.seos.join('/')}") %>" class="gp-like" onclick="TShare.googleplus(this,event,'','<%= URI.escape @item.title %>')">Like</a>
           <a href="<%= url("blog/item/#{@item.seos.join('/')}") %>" class="vk-like" onclick="TShare.vkontakte(this,event,'','<%= URI.escape @item.title %>')">Like</a>
         </div>
