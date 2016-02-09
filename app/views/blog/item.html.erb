@@ -6,13 +6,15 @@
           <li class="date"><%= l(@item.created_at,format: :blog) %> 17.01/2015</li>
         </ul>
         <h2><%= @item.title%></h2>
-        <% if @item.author.present? && @item.not_foto %>
+        <% if @item.author.present? &&  %>
           <div class="author"><%= t("school.page_author") %> <%= @item.author%></div>
         <% end %>
 
         <div class="text">
           <div class="image-block">
-            <img src="<%= @item.logo(:big)%>" alt="<%= @item.title%>">
+            <a href="<%= @item.logo%>" class="image-link">
+              <img src="<%= @item.logo(:big)%>" alt="<%= @item.title%>">
+            </a>
           </div>
           <% if @item.desc.present? && @item.not_foto %>
             <p><%= @item.desc.html_safe%></p>
@@ -28,6 +30,22 @@
       </div>
     </div>
   </div>
+  <% unless @item.not_foto %>
+  <script type="text/javascript">
+    (function($) {
+        $(window).load(function () {
+            $.magnificPopup.open({
+                items: {
+                    src: '<%= @item.logo%>'
+                },
+                showCloseBtn: false,
+                type: 'image'
+            }, 0);
+        });
+    })(jQuery);
+
+  </script>
+  <% end %>
   <% if @similar.any? %>
     <%= render partial: "shared/similar", locals:{similar: @similar} %>
   <% end %>
