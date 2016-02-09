@@ -6,8 +6,8 @@
     <div class="ad_text">
         <h1>
 
-            <a target="_blank" href="<%= random_ad.link%>"><%= random_ad.desc.html_safe%></a>
-            <a target="_blank" class="desc" href="<%= random_ad.link%>"><%= random_ad.text.html_safe%></a>
+            <a target="_blank" href="<%= random_ad.link%>"><%= random_ad.desc.to_s.html_safe%></a>
+            <a target="_blank" class="desc" href="<%= random_ad.link%>"><%= random_ad.text.to_s.html_safe%></a>
 
         </h1>
     </div>
