@@ -52,7 +52,7 @@
           </a>
           <ul class="open-menu">
             <% @top_menu.each_pair do |link, element|%>
-              <li><a href="#<%= link %>" data-offset="<%= element[:offset] %>"><%= element[:text] %></a></li>
+              <li><a href="<%= @is_href ? url("blog/category/#{link}") : "##{link}"  %>" data-offset="<%= element[:offset] %>"><%= element[:text] %></a></li>
             <% end %>
           </ul>
         </div>
