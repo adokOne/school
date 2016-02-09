@@ -14,14 +14,22 @@
               .row
                 .col-md-12
                   .form-group{"ng-class" => "{'has-error': itemForm.desc.$invalid && itemForm.$submitted}"}
-                    = label_tag :desc, "Текст", class:"col-sm-3 control-label"
+                    = label_tag :desc, "Заголовок", class:"col-sm-3 control-label"
                     .col-sm-8
                       = text_field_tag :desc,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.desc"
+                  .form-group{"ng-class" => "{'has-error': itemForm.text.$invalid && itemForm.$submitted}"}
+                    = label_tag :text, "Опис", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_area_tag :text,"" ,class:"form-control", "ng-model"=>"editedItem.text"
+                  .form-group{"ng-class" => "{'has-error': itemForm.link.$invalid && itemForm.$submitted}"}
+                    = label_tag :link, "Посилання", class:"col-sm-3 control-label"
+                    .col-sm-8
+                      = text_field_tag :link,"" ,class:"form-control",required: true,"ng-minlength"=>3,"ng-maxlength"=>255, "ng-model"=>"editedItem.link"
+
                   .form-group{"ng-class" => "{'has-error': itemForm.active.$invalid && itemForm.$submitted}"}
                     = label_tag :active, t("b1_admin.active"), class:"col-sm-3 control-label"
                     .col-sm-8
                       %input.js-switch{"ui-switch" => "true", type: "checkbox",id:"active", "ng-model"=>"editedItem.active"}
-
                   .form-group{"ng-class" => "{'has-error': itemForm.color.$invalid && itemForm.$submitted}"}
                     = label_tag :color, "Код коліру", class:"col-sm-3 control-label"
                     .col-sm-8

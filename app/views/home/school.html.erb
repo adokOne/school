@@ -3,8 +3,16 @@
   <div class="advertising" style="color:<%= random_ad.color%>">
   <a href="#" class="close"></a>
     <div class="container_small">
+    <div class="ad_text">
+        <h1>
 
-      <h1><%= random_ad.desc.html_safe%></h1>
+            <a target="_blank" href="<%= random_ad.link%>"><%= random_ad.desc.html_safe%></a>
+            <a target="_blank" class="desc" href="<%= random_ad.link%>"><%= random_ad.text.html_safe%></a>
+
+        </h1>
+    </div>
+
+
       <div class="image-holder">
         <%= image_tag random_ad.image %>
       </div>

@@ -3,7 +3,7 @@ module B1Admin
     class AdsController < B1Admin::ApplicationController
 
       def allowed_params
-        params.require(:item).permit(:desc,:color,:active,:id)
+        params.require(:item).permit(:desc,:color,:active,:id, :text, :link)
       end
 
       # Set data for CRUD module
