@@ -10,9 +10,6 @@
             .panel-title
               .btn.btn-mint{"ng-click"=>"collapse()"}=t("b1_admin.collapse")
               .btn.btn-purple{"ng-click"=>"expand()"}=t("b1_admin.uncollapse")
-              - if user_can?(:update_positions)
-                .btn.btn-success{"ng-click"=>"updatePositions()"}=t("b1_admin.update_positions")
-                .btn.btn-info{"ng-click"=>"revert()"}=t("b1_admin.revert_positions")
               - if user_can?(:new)
                 %a.btn.btn-primary{href:new_blog_category_path,"ng-click"=>"$root.setRoute('#{new_blog_category_path}')"}=t("b1_admin.add")
           .panel-body
