@@ -14,7 +14,7 @@ module ApplicationHelper
 
     path = (lang_url + path.split("/").reject(&:empty?)).reject(&:empty?).join("/")
     url = path.empty? ? "/" : "/#{path}"
-    Settings.click_domain + lang_url
+    Settings.click_domain + url
   end
 
   def url_is_current?( url, cls = "active", action = false )
