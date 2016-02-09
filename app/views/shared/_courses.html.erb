@@ -67,22 +67,25 @@
 
 
                 <div class="text-left">
-                  <%if course.detail_desc.present? %>
-                    <span class="yellow">Опис курсу:</span>
-                    <ul class="list">
-                      <% course.detail_desc.split("|||").each do |text|%>
-                      <li><%= text%></li>
-                      <% end %>
-                    </ul>
-                  <%end %>
                   <%if course.learn_desc.present? %>
-                    <span class="yellow">Опис заняття:</span>
+                    <span class="yellow">Ви навчитеся:</span>
                     <ul class="list">
                       <% course.learn_desc.split("|||").each do |text|%>
                       <li><%= text%></li>
                       <% end %>
                     </ul>
                    <%end %>
+
+
+
+                  <%if course.detail_desc.present? %>
+                    <span class="yellow">Деталі курсу:</span>
+                    <ul class="list">
+                      <% course.detail_desc.split("|||").each do |text|%>
+                      <li><%= text%></li>
+                      <% end %>
+                    </ul>
+                  <%end %>
                   <%if course.price.present? %>
                     <strong class="yellow"><%= course.price %></strong>
                   <%end %>
