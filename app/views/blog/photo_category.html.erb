@@ -11,6 +11,15 @@
         </ul>
         <div class="clear"></div>
 
+        <% if @item.parent && @item.parent.only_photos %>
+          <ul class="subcategories">
+            <% @item.parent.childrens.each do |sub|%>
+              <li><a href="<%= url("blog/category/#{sub.seos.join("/")}") %>"><%= sub.title%></a></li>
+            <% end %>
+          </ul>
+          <div class="clear"></div>
+        <% end%>
+
         <div class="follow">
           <ul>
             <li><% t("school.follow_us") %></li>
