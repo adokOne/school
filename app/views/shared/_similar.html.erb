@@ -7,7 +7,9 @@
     <div class="row">
       <% similar.each do |page|%>
         <div class="item">
-          <img src="<%= page.logo(:medium)%>" alt="<%= page.title%>">
+          <a href="<%= url("blog/category/#{page.category_seo_name}") %>">
+            <img src="<%= page.logo(:medium)%>" alt="<%= page.title%>">
+          </a>
           <h5><a href="<%= url("blog/category/#{page.category_seo_name}") %>"><%= page.category_title%></a></h5>
 
           <p><strong><%= page.title%></strong></p>
