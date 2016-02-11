@@ -4,7 +4,7 @@
       <div class="blog-themes open" id="<%= @item.seo_name%>">
         <h2><%= @item.title%></h2>
 
-        <% if @item.only_photos %>
+        <% if @item.parent && @item.parent.only_photos %>
           <ul class="subcategories">
             <% @item.parent.childrens.each do |sub|%>
               <li><a href="<%= url("blog/category/#{sub.seos.join("/")}") %>"><%= sub.title%></a></li>
