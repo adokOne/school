@@ -168,7 +168,21 @@ $.Controller "Main",
     id = Number($(ev.target).val())
     @selected_course_id = id
     @element.find("#subscriber_course_id").val(id).change()
-    @curse_dates = Object.keys(@lessons[id])
+    if 0 == Number(id)
+      data = {}
+      Object.keys(@lessons).map((key) ->
+        data[key] = Object.values(@lessons[key])
+      )
+    else
+      data = {}
+      Object.keys(@lessons).map((key) ->
+        Object.keys(@lessons[key]).map((l_id) ->
+          if Number(l_id) == Number(id)
+            data[key] =  @lessons[key][id]
+        )
+      )
+
+    @curse_dates = Object.keys(data)
     @element.find('#subscriber_date').datepicker('refresh');
 
   "#subscriber_date -> change": (ev) ->
@@ -218,7 +232,6 @@ $.Controller "Main",
 
   unavailable: (date) ->
     dmy = ("0" + (date.getMonth() + 1)).slice(-2)  + '-' + ("0" + date.getDate()).slice(-2)  + '-' + date.getFullYear()
-    console.log @curse_dates
     if @curse_dates.length != 0 && !($.inArray(dmy, @curse_dates) < 0)
       return [true,"yellow",""]
     else
