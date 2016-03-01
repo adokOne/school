@@ -69,7 +69,7 @@ $.Controller "Main",
     @element.find('.course-description').show()
     $('html, body').animate({scrollTop: $('.course-description').offset().top}, 800);
     idx = @element.find('.cycle-slideshow .s-item').index(@element.find(".cycle-slideshow .#{cls}")) - 1
-
+    idx = if idx < 0 then 0 else idx
     @element.find('.cycle-slideshow').cycle(idx);
 
 
