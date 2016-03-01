@@ -25,7 +25,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def _prepare_template( template , vars)
     vars.each_pair do |key,text|
-      template.gsub!("%#{key.to_s.upcase}%",text)
+      template.to_s.gsub!("%#{key.to_s.upcase}%",text)
     end
     template
   end
