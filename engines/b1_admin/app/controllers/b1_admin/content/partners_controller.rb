@@ -3,8 +3,17 @@ module B1Admin
     class PartnersController < B1Admin::ApplicationController
 
         def allowed_params
-          params.require(:item).permit(:name,:id,:active, :first_desc_line, :second_desc_line)
+          params.require(:item).permit(:name,:active, :first_desc_line, :second_desc_line)
         end
+
+      def after_create
+        base_64 = params.dup[:item].delete("file")
+        if base_64.present?
+          @item.reload
+          @item.image_data = base_64
+          @item.save
+        end
+      end
 
         # Set data for CRUD module
         @model            = ::Partner

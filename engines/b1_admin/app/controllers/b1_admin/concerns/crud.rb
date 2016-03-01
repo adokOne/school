@@ -149,20 +149,28 @@ module B1Admin
           end
         end
 
+
+
         unless methods.include?(:create)
           ##
           # Create new item
           # @render [JSON]
           ##
           define_method(:create) do
-            params_to_create = allowed_params
-            params_to_create.delete("id")
-            item  = self.class.model.new(params_to_create)
-            response = success_update_response
-            unless item.valid? && item.save
-              response = fail_update_response item
+            @params_to_create = allowed_params.dup
+            @item  = self.class.model.new(@params_to_create)
+            before_create
+            if @item.respond_to?(:admin_id)
+              @item.admin_id = current_admin.id
             end
 
+
+
+            response = success_update_response
+            unless @item.valid? && @item.save
+              response = fail_update_response @item
+            end
+            after_create
             render json: response
           end
         end
@@ -213,6 +221,14 @@ module B1Admin
           end
         end
 
+        unless methods.include?(:after_create)
+          ##
+          # After model update callback
+          ##
+          define_method(:after_create) do
+          end
+        end
+
         unless methods.include?(:filter)
           ##
           # Filter
@@ -226,6 +242,13 @@ module B1Admin
           # Before model update callback
           ##
           define_method(:before_update) do
+          end
+        end
+        unless methods.include?(:before_create)
+          ##
+          # Before model update callback
+          ##
+          define_method(:before_create) do
           end
         end
         unless methods.include?(:after_update)
@@ -255,7 +278,9 @@ module B1Admin
         self.send :private, :allowed_params
         self.send :private, :set_data
         self.send :private, :filter
+        self.send :private, :after_create
         self.send :private, :before_update
+        self.send :private, :before_create
         self.send :private, :after_update
         self.send :private, :partner_access_prefilter
         self.send :private, :owner_access_prefilter

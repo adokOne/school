@@ -18,4 +18,20 @@ class UploadImage < ActiveRecord::Base
       Paperclip.run("ffmpeg", " -y -i #{img_path} #{img_path}")
     end
   end
+
+  def image_data=(base_64)
+
+    content_type = base_64.match(/data:(.*);base64,/)[1]
+    image_data = base_64.gsub(/data:.*;base64,/,"")
+
+    StringIO.open(Base64.strict_decode64(image_data)) do |data|
+      data.class.class_eval { attr_accessor :original_filename, :content_type }
+      data.original_filename = "temp#{DateTime.now.to_i}.#{content_type.split("/").last}"
+      data.content_type = content_type
+      self.file = data
+    end
+  end
+
+
+
 end

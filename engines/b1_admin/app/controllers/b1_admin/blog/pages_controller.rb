@@ -12,11 +12,20 @@ module B1Admin
       end
 
       def allowed_params
-        params.require(:item).permit(:id,:active,:seo_name,:category_id,:anons,:desc,:title,:author)
+        params.require(:item).permit(:active,:seo_name,:category_id,:anons,:desc,:title,:author)
       end
 
       def set_data
         @categories = ::Category.all.map{|c| {title: c.title,id: c.id} }
+      end
+
+      def after_create
+        base_64 = params.dup[:item].delete("file")
+        if base_64.present?
+          @item.reload
+          @item.image_data = base_64
+          @item.save
+        end
       end
 
       # Set data for CRUD module

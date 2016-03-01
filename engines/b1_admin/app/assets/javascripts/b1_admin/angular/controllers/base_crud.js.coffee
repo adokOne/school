@@ -62,6 +62,34 @@ angular.module("B1Admin").controller "CrudController", [
     loadItems = ->
       $scope.itemsTable.reload()
 
+    $scope.openupload = ->
+      $timeout (->
+        angular.element("#logo").click()
+      ), 200
+
+    $scope.readfile = (input) ->
+      console.log(input.files)
+      if input.files and input.files[0]
+        reader = new FileReader
+
+        reader.onload = (e) ->
+          $(".thumbnail img").attr 'src', e.target.result
+          $scope.editedItem.file = e.target.result
+          $("#file").val(e.target.result)
+          return
+
+        reader.readAsDataURL input.files[0]
+
+        # reader = new FileReader
+
+        # reader.onload = (e) ->
+        #   $scope.editedItem.file = btoa(e.target.result)
+        #   return
+
+
+        # reader.readAsBinaryString(input.files[0]);
+
+        console.log( $scope.editedItem )
 
     saveCallback = (resp,clear) ->
       if resp.success

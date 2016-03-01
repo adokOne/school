@@ -38,4 +38,17 @@ class Page < ActiveRecord::Base
     self.seo_name = self.title.russian_translit if self.respond_to?(:seo_name) && !self.title.nil? && self.seo_name.nil?
   end
 
+  def image_data=(base_64)
+
+    content_type = base_64.match(/data:(.*);base64,/)[1]
+    image_data = base_64.gsub(/data:.*;base64,/,"")
+
+    StringIO.open(Base64.strict_decode64(image_data)) do |data|
+      data.class.class_eval { attr_accessor :original_filename, :content_type }
+      data.original_filename = "temp#{DateTime.now.to_i}.#{content_type.split("/").last}"
+      data.content_type = content_type
+      self.logo = data
+    end
+  end
+
 end
