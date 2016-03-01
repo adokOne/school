@@ -7,7 +7,7 @@ class ApplicationMailer < ActionMailer::Base
       to: to_email,
       subject: template.subject
     }
-    html = _prepare_template(template.desc, vars)
+    html = _prepare_template(template.desc.to_s, vars)
 
     mail(mail_options) do |format|
       format.html {render html: html.html_safe}
