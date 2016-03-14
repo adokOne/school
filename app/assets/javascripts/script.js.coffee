@@ -51,6 +51,14 @@ window.show_msg = (msg) ->
 
 
 $(document).ready ->
+  cls = window.location.hash.replace("#","")
+  if cls
+    $(".course-description").show()
+    idx = $('.cycle-slideshow .s-item').index($(".cycle-slideshow .#{cls}")) - 1
+    idx = if idx < 0 then 0 else idx
+    $('.cycle-slideshow').cycle(idx);
+
+
   $('.cycle-slideshow').cycle slides: '.s-item'
   # Enable controllers for elements
   $("*[data-ctrl]").each ->
