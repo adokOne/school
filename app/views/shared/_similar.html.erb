@@ -13,8 +13,9 @@
           <h5><a href="<%= url("blog/category/#{page.category_seo_name}") %>"><%= page.category_title%></a></h5>
 
           <p><strong><%= page.title%></strong></p>
-
-          <p><%= truncate(page.anons, length: 150,omission: '...') %> <a href="<%= url("blog/item/#{page.seos.join('/')}")%>"><%=t("school.show_more")%></a></p>
+          <% if page.anons.present?  %>
+            <p><%= truncate(page.anons, length: 150,omission: '...') %> <a href="<%= url("blog/item/#{page.seos.join('/')}")%>"><%=t("school.show_more")%></a></p>
+          <% end %>
         </div>
       <% end %>
     </div>
