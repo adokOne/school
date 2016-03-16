@@ -3,7 +3,7 @@
       <div class="open-topic">
         <ul class="publish-date">
           <li><a href="<%= url("blog/category/#{@item.category_seo_name}") %>"><%= @item.category_title%></a></li>
-          <li class="date"><%= l(@item.created_at,format: :blog) %> 17.01/2015</li>
+          <li class="date"><%= l(@item.created_at,format: :blog) %></li>
         </ul>
         <h2><%= @item.title%></h2>
         <% if @item.author.present? &&  %>
