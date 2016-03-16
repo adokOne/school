@@ -127,6 +127,7 @@ $.Controller "Main",
     ev.preventDefault();
     el = if $(ev.target).hasClass("fc-calendar-event") then $(ev.target) else $(ev.target).parents(".fc-calendar-event")
     @selected_course_id =  el.find(".lesson_box").data("course-id")
+    @element.find("#subscriber_course_id").val(@selected_course_id).change()
     data = []
     id = @selected_course_id
     Object.keys(@lessons).map((key) ->

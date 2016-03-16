@@ -8,6 +8,7 @@ class Subscriber < ActiveRecord::Base
   validates :school_subscribe,:club_subscribe,:blog_subscribe, inclusion:{ in: [true,false] }
   validates :active, inclusion:{ in: [true,false] }
 
+  #validates :course, presence: true, if: -> { |o| o.school_subscribe || o.club_subscribe }
 
   belongs_to :course
   delegate :name, to: :course, prefix: true, allow_nil: true
