@@ -13,7 +13,7 @@
         <div class="text">
           <div class="image-block">
             <a href="<%= @item.logo%>" class="image-link">
-              <img width="730" height="365" src="<%= @item.logo(:big)%>" alt="<%= @item.title%>">
+              <img src="<%= @item.logo%>" alt="<%= @item.title%>">
             </a>
           </div>
           <% if @item.desc.present? && @item.not_foto %>
