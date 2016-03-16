@@ -41,3 +41,7 @@ ul.table-settings li {
   top: auto;
   cursor: pointer;
 }
+
+.note-toolbar.panel-heading{
+      height: 100px!important ;
+}
