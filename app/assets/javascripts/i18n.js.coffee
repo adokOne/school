@@ -2,7 +2,7 @@ window.I18n =
     school_reg: "<span>Дякуємо за реєстрацію!</span> Ми зателефонуємо Вам найближчим часом."
     call_reg: "<span>ДЯКУЄМО!</span> Ми зателефонуємо Вам найближчим часом"
     vacancy_reg: "<span>ВІТАЄМО!</span> ваше резюме успішно відправлено"
-    blog_reg: "<span>ВИ ПІДПИСАНІ!</span> На новини від школи SPEAK"
+    blog_reg: "<span>ВИ ПІДПИСАНІ!</span> На новини від SPEAK"
     club_reg: "<span>Дякуємо за  реєстрацію!</span> See you soon :)"
     weeks: [
       'Неділя'

@@ -5,7 +5,9 @@ defaults: &defaults
     club_registration: "club_registration"
     test_results: "test_results"
     blog_subscribe: "blog_subscribe"
-
+    test_results_admin: "test_results_admin"
+    school_registration_admin: "school_registration_admin"
+    club_registration_admin: "club_registration_admin"
 
 
 

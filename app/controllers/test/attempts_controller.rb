@@ -30,9 +30,8 @@ class Test::AttemptsController < ApplicationController
 
     if @attempt.valid? && @attempt.save
       flash[:alert] = I18n.t("school.test_completed", count: @attempt.correct_answers.count)
-      [params[:email], Settings.notification_mail].each do |mail|
-        ApplicationMailer.send_mail(Settings.email_templates['test_results'], mail, {:EMAIL => params[:email], :USERNAME => params[:name], :PHONE => params[:phone], :TEST_RESULT_COUNT => @attempt.correct_answers.count  }  ).deliver_later
-      end
+      ApplicationMailer.send_mail(Settings.email_templates['test_results'], params[:email], {:EMAIL => params[:email], :USERNAME => params[:name], :PHONE => params[:phone], :TEST_RESULT_COUNT => @attempt.correct_answers.count  }  ).deliver_later
+      ApplicationMailer.send_mail(Settings.email_templates['test_results_admin'], Settings.notification_mail, {:EMAIL => params[:email], :USERNAME => params[:name], :PHONE => params[:phone], :TEST_RESULT_COUNT => @attempt.correct_answers.count  }  ).deliver_later
 
       redirect_to view_context.new_attempt
     else

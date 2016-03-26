@@ -7,8 +7,14 @@ $.Controller "Main",
     @init_calendar();
     @init_datepicker()
     @selected_course_id = 0;
+    @check_hash()
 
-
+  check_hash: ->
+    hash = window.location.hash.replace("#","")
+    if hash
+      el = @element.find('[data-cls="'+hash+'"]')
+      if el
+        @go_to_course(hash)
   init_slideshow: ->
     @element.find('.cycle-slideshow').cycle slides: '.s-item'
     @element.find('.image-link').magnificPopup
@@ -49,6 +55,13 @@ $.Controller "Main",
     el.change()
     el.selectbox("attach")
 
+  go_to_course: (cls) ->
+    @element.find('.course-description').show()
+    $('html, body').animate({scrollTop: $('.course-description').offset().top}, 800);
+    idx = @element.find('.cycle-slideshow .s-item').index(@element.find(".cycle-slideshow .#{cls}")) - 1
+    idx = if idx < 0 then 0 else idx
+    @element.find('.cycle-slideshow').cycle(idx);
+
   '#custom-next -> click': (ev) ->
     ev.preventDefault()
     @calendar.gotoNextMonth @updateMonthYear
@@ -66,11 +79,7 @@ $.Controller "Main",
     el = $(ev.target)
     el = if el.hasClass("js-link") then el else el.parents(".js-link")
     cls = el.data("cls")
-    @element.find('.course-description').show()
-    $('html, body').animate({scrollTop: $('.course-description').offset().top}, 800);
-    idx = @element.find('.cycle-slideshow .s-item').index(@element.find(".cycle-slideshow .#{cls}")) - 1
-    idx = if idx < 0 then 0 else idx
-    @element.find('.cycle-slideshow').cycle(idx);
+    @go_to_course(cls)
 
 
   "#blog_subscribe -> click": (ev) ->
