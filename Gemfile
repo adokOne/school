@@ -58,7 +58,6 @@ group :development do
   gem 'quiet_assets'
   gem 'rails_layout'
   gem 'spring-commands-rspec'
-  gem 'capistrano-rbenv', '~> 2.0'
 end
 
 group :development, :test do
